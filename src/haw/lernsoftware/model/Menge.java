@@ -26,6 +26,13 @@ public class Menge {
 				vereinigteMenge.add(e);
 		return new Menge(möglicheEreignisse, vereinigteMenge);
 	}
+	public Menge geschnitten(Menge m) {
+		List<Elementarereignis> schnittMenge = new ArrayList<>();
+		for(Elementarereignis e : m.getEreignisse())
+			if(ereignisse.contains(e))
+				schnittMenge.add(e);
+		return new Menge(möglicheEreignisse, schnittMenge);
+	}
 	public Menge negiert() {
 		List<Elementarereignis> negierteMenge = new ArrayList<>(möglicheEreignisse.getEreignisse());
 		for(Elementarereignis e : ereignisse)
@@ -36,6 +43,9 @@ public class Menge {
 		return m.negiert();
 	}
 	
+	/*
+	 * *** Getter und Setter ***
+	 */
 	public JSONObject toJSON() {
 		JSONObject element = new JSONObject(this);
 		return element;
