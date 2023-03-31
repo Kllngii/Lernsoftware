@@ -7,6 +7,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import haw.lernsoftware.model.Elementarereignis;
+import haw.lernsoftware.model.Ereignismenge;
+import haw.lernsoftware.resources.ResourceProvider;
+
 public class Lernsoftware extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 8769057448432932551L;
@@ -15,12 +22,17 @@ public class Lernsoftware extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280, 720);
 		getContentPane().setLayout(new BorderLayout());
+		super.setTitle("Lernsoftware");
 		
 		setVisible(true);
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
+		
+		Ereignismenge eMenge = Ereignismenge.fromJSON(ResourceProvider.getFileContentAsString("würfel.em").replace(" ", ""));
+		
+		System.out.println("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
 		
 		EventQueue.invokeLater(() -> {
 			new Lernsoftware();
