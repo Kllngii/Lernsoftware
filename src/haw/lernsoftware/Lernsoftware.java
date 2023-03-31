@@ -8,8 +8,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import haw.lernsoftware.view.GUI;
-=======
+
 import org.json.JSONArray;
+import org.json.JSONObject;
+
+import haw.lernsoftware.model.Elementarereignis;
+import haw.lernsoftware.model.Ereignismenge;
+import haw.lernsoftware.resources.ResourceProvider;
 
 public class Lernsoftware extends JFrame implements ActionListener {
 
