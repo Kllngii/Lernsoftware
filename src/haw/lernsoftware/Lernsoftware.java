@@ -7,24 +7,23 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import haw.lernsoftware.view.GUI;
+
 public class Lernsoftware extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 8769057448432932551L;
+	
+	public static GUI Plotter;
 
 	public Lernsoftware() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1280, 720);
-		getContentPane().setLayout(new BorderLayout());
 		
-		setVisible(true);
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
 		
-		EventQueue.invokeLater(() -> {
-			new Lernsoftware();
-		});
+		Plotter = new GUI();
+		
 	}
 
 	@Override
