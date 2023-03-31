@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import haw.lernsoftware.view.GUI;
+=======
+import org.json.JSONArray;
 
 public class Lernsoftware extends JFrame implements ActionListener {
 
@@ -16,6 +18,10 @@ public class Lernsoftware extends JFrame implements ActionListener {
 	public static GUI Plotter;
 
 	public Lernsoftware() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(1280, 720);
+		getContentPane().setLayout(new BorderLayout());
+		super.setTitle("Lernsoftware");
 		
 	}
 
@@ -24,6 +30,13 @@ public class Lernsoftware extends JFrame implements ActionListener {
 		
 		Plotter = new GUI();
 		
+		Ereignismenge eMenge = Ereignismenge.fromJSON(ResourceProvider.getFileContentAsString("würfel.em").replace(" ", ""));
+		
+		System.out.println("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
+		
+		EventQueue.invokeLater(() -> {
+			new Lernsoftware();
+		});
 	}
 
 	@Override
