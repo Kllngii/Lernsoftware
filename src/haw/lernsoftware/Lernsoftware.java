@@ -35,8 +35,10 @@ public class Lernsoftware extends JFrame implements ActionListener {
 		
 		System.out.println("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
 		
-		Menge menge123 = new Menge(eMenge, eMenge.getEreignisse().subList(0, 3));
-		System.out.println(menge123.toJSON());
+		Menge mengeA = new Menge(eMenge, eMenge.getEreignisse().subList(0, 3));
+		Menge mengeB = new Menge(eMenge, eMenge.getEreignisse().subList(1, 4));
+		System.out.println(mengeA.vereinigt(mengeB).negiert().toJSON().toString(3));
+		
 		EventQueue.invokeLater(() -> {
 			new Lernsoftware();
 		});

@@ -21,7 +21,9 @@ public class Menge {
 
 	public Menge vereinigt(Menge m) {
 		List<Elementarereignis> vereinigteMenge = new ArrayList<>(ereignisse);
-		vereinigteMenge.addAll(m.getEreignisse());
+		for(Elementarereignis e : m.getEreignisse())
+			if(!vereinigteMenge.contains(e))
+				vereinigteMenge.add(e);
 		return new Menge(möglicheEreignisse, vereinigteMenge);
 	}
 	public Menge negiert() {
