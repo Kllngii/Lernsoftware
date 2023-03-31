@@ -7,14 +7,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-import haw.lernsoftware.view.GUI;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import haw.lernsoftware.model.Elementarereignis;
 import haw.lernsoftware.model.Ereignismenge;
+import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
+import haw.lernsoftware.view.GUI;
 
 public class Lernsoftware extends JFrame implements ActionListener {
 
@@ -39,6 +35,8 @@ public class Lernsoftware extends JFrame implements ActionListener {
 		
 		System.out.println("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
 		
+		Menge menge123 = new Menge(eMenge, eMenge.getEreignisse().subList(0, 3));
+		System.out.println(menge123.toJSON());
 		EventQueue.invokeLater(() -> {
 			new Lernsoftware();
 		});
