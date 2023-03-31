@@ -11,6 +11,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import haw.lernsoftware.Lernsoftware;
+
 public class GUI extends JPanel implements ActionListener{
 	
 	private JMenuBar menuBar = new JMenuBar();
@@ -26,12 +28,11 @@ public class GUI extends JPanel implements ActionListener{
 	private JMenuItem exercise2 = new JMenuItem("Element 3");
 
 	
-	public GUI() {
-		JFrame frame = new JFrame("Funktionsplotter");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationByPlatform(true);
-		frame.setResizable(true);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	public GUI(Lernsoftware lernsoftware) {
+		lernsoftware.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		lernsoftware.setLocationByPlatform(true);
+		lernsoftware.setResizable(true);
+		lernsoftware.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		menuBar.add(menuFile1);
 		menuFile1.add(file0);
@@ -43,14 +44,14 @@ public class GUI extends JPanel implements ActionListener{
 		menuFile2.add(exercise1);
 		menuFile2.add(exercise2);
 		
-		frame.setJMenuBar(menuBar);
+		lernsoftware.setJMenuBar(menuBar);
 		
 		JPanel panel1 = new JPanel();
-		Container contentPane = frame.getContentPane();
+		Container contentPane = lernsoftware.getContentPane();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 		contentPane.add(panel1);
 		
-		frame.setVisible(true);
+		lernsoftware.setVisible(true);
 	}
 	
 	@Override
