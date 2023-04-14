@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 
 import org.apache.log4j.Logger;
 
-import haw.lernsoftware.Lernsoftware;
 import haw.lernsoftware.model.Ereignismenge;
 import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
@@ -18,7 +17,6 @@ public class LinienDiagramm extends HAWView {
 	Logger log = Logger.getLogger(getClass());
 	
 	public LinienDiagramm() {
-		Logger log = Logger.getLogger(Lernsoftware.class);
 		Ereignismenge eMenge = Ereignismenge.fromJSON(ResourceProvider.getFileContentAsString("würfel.em").replace(" ", ""));
 
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
