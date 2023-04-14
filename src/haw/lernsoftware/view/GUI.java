@@ -1,5 +1,6 @@
 package haw.lernsoftware.view;
 
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,12 +14,12 @@ import javax.swing.JPanel;
 
 import haw.lernsoftware.Lernsoftware;
 
-public class GUI extends JPanel implements ActionListener{
+public class GUI extends JPanel implements ActionListener {
 	
 	private JMenuBar menuBar = new JMenuBar();
 	
-	private JMenu menuFile1 = new JMenu("Datei");
-	private JMenuItem file0 = new JMenuItem("Element 1");
+	private JMenu dateiMenü = new JMenu("Datei");
+	private JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
 	private JMenuItem file1 = new JMenuItem("Element 2");
 	private JMenuItem file2 = new JMenuItem("Element 3");
 	
@@ -26,37 +27,63 @@ public class GUI extends JPanel implements ActionListener{
 	private JMenuItem exercise0 = new JMenuItem("Element 1");
 	private JMenuItem exercise1 = new JMenuItem("Element 2");
 	private JMenuItem exercise2 = new JMenuItem("Element 3");
+	
+	private JMenu fensterMenü = new JMenu("Fenster");
+	private JMenuItem menuItemLinienGraph = new JMenuItem("Liniengraph (Lasses Spielbereich)");
+	private JMenuItem menuItemAufgabentext = new JMenuItem("Aufgabentext (Oles Spielbereich)");
+
+	private JFrame frame;
+	
+	private LinienDiagramm liniendiagrammView;
+
+	private JPanel currentPanel;
 
 	
-	public GUI(Lernsoftware lernsoftware) {
-		lernsoftware.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		lernsoftware.setLocationByPlatform(true);
-		lernsoftware.setResizable(true);
-		lernsoftware.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	public GUI(JFrame frame) {
+		this.frame = frame;
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationByPlatform(true);
+		frame.setResizable(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
-		menuBar.add(menuFile1);
-		menuFile1.add(file0);
-		menuFile1.add(file1);
-		menuFile1.add(file2);
+		menuBar.add(dateiMenü);
+		dateiMenü.add(menuItemSpeichern);
+		dateiMenü.add(file1);
+		dateiMenü.add(file2);
+		menuItemSpeichern.setActionCommand("speichern");
+		menuItemSpeichern.addActionListener(this);
+		dateiMenü.addActionListener(this);
 		
 		menuBar.add(menuFile2);
 		menuFile2.add(exercise0);
 		menuFile2.add(exercise1);
 		menuFile2.add(exercise2);
 		
-		lernsoftware.setJMenuBar(menuBar);
+		menuBar.add(fensterMenü);
+		fensterMenü.add(menuItemLinienGraph);
+		menuItemLinienGraph.addActionListener(this);
+		fensterMenü.add(menuItemAufgabentext);
+		menuItemAufgabentext.addActionListener(this);
 		
-		JPanel panel1 = new JPanel();
-		Container contentPane = lernsoftware.getContentPane();
+		frame.setJMenuBar(menuBar);
+		
+		
+		Container contentPane = frame.getContentPane();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
-		contentPane.add(panel1);
-		
-		lernsoftware.setVisible(true);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getSource() == menuItemSpeichern) {
+			System.out.println("Speichere!");
+		} else if(e.getSource() == menuItemLinienGraph) {
+			System.out.println("Wechsle zum LinienGraph");
+			frame.getContentPane().add(liniendiagrammView);
+			frame.getContentPane().remove(currentPanel);
+			currentPanel = liniendiagrammView;
+		} else if(e.getSource() == menuItemAufgabentext) {
+			System.out.println("Wechsle zum Aufgabentext");
+		}
 	}
 	
 }
