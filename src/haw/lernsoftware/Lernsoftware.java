@@ -17,7 +17,7 @@ import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.GUI;
 import haw.lernsoftware.view.HAWView;
-
+//test
 public class Lernsoftware extends HAWView {
 
 	private final Logger log = Logger.getLogger(getClass());
