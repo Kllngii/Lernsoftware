@@ -32,6 +32,7 @@ public class Hilfe extends HAWView {
 		JLabel authorField = title("Title");
 		JLabel priceField = title("Title");
 		return FormBuilder.create()
+				.debug(true)                                 // Rote Linien zeichnen
 				.columns("left:90dlu, 3dlu, 200dlu")
 				.rows("p, $lg, p, $lg, p")
 				.padding(Paddings.DIALOG)
@@ -42,6 +43,7 @@ public class Hilfe extends HAWView {
 				.add("_Price:")  .xy(1, 5)
 				.add(priceField) .xy(3, 5)
 				.build();
+
 	}
 
 	public static void main(String[] args) {
