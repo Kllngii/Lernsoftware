@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
+import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
+
 public class GUI implements ActionListener {
 	
 	Logger log = Logger.getLogger(getClass());
