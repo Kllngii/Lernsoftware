@@ -3,10 +3,20 @@ package haw.lernsoftware.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * Die Ereignismenge enthält alle möglichen Elementarereignisse zur späteren Verwendung
+ * 
+ * @author Lasse Kelling
+ *
+ */
 public class Ereignismenge {
+	
+	Logger log = Logger.getLogger(getClass());
+	
 	private List<Elementarereignis> ereignisse = new ArrayList<>();
 
 	public Ereignismenge(List<Elementarereignis> ereignisse) {
@@ -63,12 +73,13 @@ public class Ereignismenge {
 	}
 
 	public static Ereignismenge fromJSON(String jsonString) {
+		Logger log = Logger.getLogger(Ereignismenge.class);
 		JSONObject json = new JSONObject(jsonString);
 		JSONArray arr = json.getJSONArray("ereignisse");
 		List<Elementarereignis> eList = new ArrayList<>();
 		
 		arr.forEach(a -> {
-			System.out.println("Lese ein: " + a);
+			log.debug("Lese ein: " + a);
 			if(a instanceof JSONObject j) {
 				eList.add(Elementarereignis.fromJSON(j.toString()));
 			}

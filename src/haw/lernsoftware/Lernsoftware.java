@@ -16,7 +16,12 @@ import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.GUI;
 import haw.lernsoftware.view.HAWView;
-//test
+
+/**
+ * Die Hauptklasse und der Einstiegpunkt des Programms
+ * @author Lasse Kelling
+ *
+ */
 public class Lernsoftware extends HAWView {
 
 	private final Logger log = Logger.getLogger(getClass());
@@ -40,13 +45,15 @@ public class Lernsoftware extends HAWView {
 		frame.setLocation((screensize.width - size.width) / 2, (screensize.height - size.height) / 2);
 		log.info("Baue jetzt den Frame");
 		long timestart = System.currentTimeMillis();
-		log.info(System.getProperty("os.name"));
+		log.info("Ich werde heute auf " + System.getProperty("os.name") + " ausgeführt. " + (System.getProperty("os.name").startsWith("Mac") ? "Welch eine Freude!" : "Ist ganz ok..."));
 		
 		//Plattformspezifischer Code
 		if(System.getProperty("os.name").startsWith("Mac OS X")) { //MacOS
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
 		    System.setProperty("apple.awt.graphics.UseQuartz", "true");
 		    //TODO Icon hinzufügen und setzen?
+		} else if(System.getProperty("os.name").startsWith("Windows")) { //Windows
+			//TODO Icon hinzufügen und setzen?
 		}
 		
 		plotter = new GUI(frame);
@@ -57,7 +64,7 @@ public class Lernsoftware extends HAWView {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
-			new Lernsoftware();
+			new Lernsoftware(); //Lernsoftware aus dem richtigen Thread starten
 		});
 
 		//FIXME Testcode später entfernen

@@ -8,6 +8,7 @@ import javax.swing.JTextArea;
 
 import org.apache.log4j.Logger;
 
+//<<<<<<< HEAD
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
@@ -16,6 +17,11 @@ import haw.lernsoftware.model.Ereignismenge;
 import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
 
+//=======
+/**
+ * Die Startseite des Programms.
+ */
+//>>>>>>> bb58b5a08b76894a64ffd29f95e630b4f5ce36dd
 public class Startseite extends HAWView {
 	
 	Logger log = Logger.getLogger(getClass());

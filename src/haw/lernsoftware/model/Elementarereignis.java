@@ -3,6 +3,12 @@ package haw.lernsoftware.model;
 import org.json.JSONObject;
 import org.json.JSONPropertyIgnore;
 
+/**
+ * Ein Elementarereignis ist das Abbild eines möglichen Ausgangs. Alle dazu benötigten Daten werden hier gespeichert
+ * 
+ * @author Lasse Kelling
+ *
+ */
 public class Elementarereignis {
 	private String name;
 	private double probability;

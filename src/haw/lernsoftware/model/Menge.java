@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
-import org.json.JSONPropertyIgnore;
 
+/**
+ * Eine Menge enthält einen Anteil der Ereignismenge und stellt eine Reihe im Liniendiagramm da.
+ * 
+ * @author Lasse Kelling
+ *
+ */
 public class Menge {
 	//Für die JSON-(Re)konstrunktion
 	private int möglicheEreignisseID;

@@ -10,7 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.log4j.Logger;
+/**
+ * Verwaltet (lesende) Dateizugriffe auf die Dateien im resources-Package. Hier sollen bspw. Aufgabendateien abgelegt werden.
+ * @author Lasse Kelling
+ *
+ */
 public class ResourceProvider {
+	static Logger log = Logger.getLogger(ResourceProvider.class);
 	/**
 	 * Liest eine Datei ein und gibt den Inhalt <b>aller Zeilen</b> zu einem String verbunden aus
 	 * @param path Der Pfad der Datei
@@ -35,7 +42,7 @@ public class ResourceProvider {
 		Objects.requireNonNull(path);
 		URI pathURL = ResourceProvider.class.getResource(path).toURI();
 		Path p = Paths.get(pathURL);
-		System.out.println("Suche nach der Datei " + path + " unter " + p.toAbsolutePath().toString());
+		log.debug("Suche nach der Datei " + path + " unter " + p.toAbsolutePath().toString());
 		
 		return Files.readAllLines(p);
 		} catch(NullPointerException e) { //Falls reqireNonNull fehlschlägt

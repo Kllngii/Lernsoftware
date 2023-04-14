@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 /**
- * Oberklasse für alle anzeigbaren Klassen
+ * Oberklasse für alle anzeigbaren Klassen. Enthält viele praktische Funktionen für den Umgang mit Java.awt und Javax.swing GUIs
  * @author Lasse Kelling
  *
  */
@@ -59,26 +59,64 @@ public class HAWView {
         return comp;
     }
 
+    /**
+     * Fügt nur links ein Padding ein. Alle anderen werden auf 0 gesetzt.
+     * @see #padding(JComponent, int, int, int, int)
+     * @see #paddingRight(JComponent, int)
+     * @see #paddingTop(JComponent, int)
+     * @see #paddingBottom(JComponent, int)
+     */
     protected JComponent paddingLeft(JComponent comp, int left) {
         return padding(comp, 0, 0, 0, left);
     }
 
+    /**
+     * Fügt nur rechts ein Padding ein. Alle anderen werden auf 0 gesetzt.
+     * @see #padding(JComponent, int, int, int, int)
+     * @see #paddingLeft(JComponent, int)
+     * @see #paddingTop(JComponent, int)
+     * @see #paddingBottom(JComponent, int)
+     */
     protected JComponent paddingRight(JComponent comp, int right) {
         return padding(comp, 0, right, 0, 0);
     }
-
+    
+    /**
+     * Fügt nur oben ein Padding ein. Alle anderen werden auf 0 gesetzt.
+     * @see #padding(JComponent, int, int, int, int)
+     * @see #paddingLeft(JComponent, int)
+     * @see #paddingRight(JComponent, int)
+     * @see #paddingBottom(JComponent, int)
+     */
     protected JComponent paddingTop(JComponent comp, int top) {
         return padding(comp, top, 0, 0, 0);
     }
 
+    /**
+     * Fügt nur unten ein Padding ein. Alle anderen werden auf 0 gesetzt.
+     * @see #padding(JComponent, int, int, int, int)
+     * @see #paddingLeft(JComponent, int)
+     * @see #paddingRight(JComponent, int)
+     * @see #paddingTop(JComponent, int)
+     */
     protected JComponent paddingBottom(JComponent comp, int bottom) {
         return padding(comp, 0, 0, bottom, 0);
     }
     
+    /**
+     * Fügt ein symmetrisches Padding ein, bei dem oben und unten sowie links und rechts jeweils gleich groß sind.
+     * @see #padding(JComponent, int, int, int, int)
+     * @see #padding(JComponent, int)
+     */
     protected JComponent padding(JComponent comp, int topAndBottom, int leftAndRight) {
             return padding(comp, topAndBottom, leftAndRight, topAndBottom, leftAndRight);
     }
 
+    /**
+     * Fügt ein rundherum gleiches Padding ein.
+     * @see #padding(JComponent, int, int, int, int)
+     * @see #padding(JComponent, int, int)
+     */
     protected JComponent padding(JComponent comp, int allSides) {
         return padding(comp, allSides, allSides, allSides, allSides);
     }
