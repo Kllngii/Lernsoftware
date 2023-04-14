@@ -14,6 +14,12 @@ import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.HAWView;
 
+/**
+ * Zeichnet ein Liniendiagramm
+ * @author Lasse Kelling, Ole Schweim
+ *
+ * @see HAWView
+ */
 public class LinienDiagramm extends HAWView {
 	
 	Logger log = Logger.getLogger(getClass());

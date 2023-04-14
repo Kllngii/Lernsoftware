@@ -4,6 +4,9 @@ import javax.swing.JLabel;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Die Startseite des Programms.
+ */
 public class Startseite extends HAWView {
 	
 	Logger log = Logger.getLogger(getClass());

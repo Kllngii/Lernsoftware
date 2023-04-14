@@ -5,32 +5,32 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
 import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
+/**
+ * Die GUI-Klasse definiert den äußersten Container des Fensters
+ * @author Lasse Kelling
+ *
+ */
 public class GUI implements ActionListener {
 	
 	Logger log = Logger.getLogger(getClass());
 
 	private JFrame frame;
+	
 	private JMenuBar menuBar = new JMenuBar();
-	JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
-	JMenuItem menuItemLaden = new JMenuItem("Laden");
-	JMenuItem file2 = new JMenuItem("Element 3");
-	JMenuItem exercise0 = new JMenuItem("Element 1");
-	JMenuItem exercise1 = new JMenuItem("Element 2");
-	JMenuItem exercise2 = new JMenuItem("Element 3");
-	JMenuItem menuItemStartseite = new JMenuItem("Startseite");
-	JMenuItem menuItemLiniendiagramm = new JMenuItem("Liniengraph");
-	JMenuItem menuItemAufgabentext = new JMenuItem("Aufgabentext");
+	private JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
+	private JMenuItem menuItemLaden = new JMenuItem("Laden");
+	private JMenuItem menuItemStartseite = new JMenuItem("Startseite");
+	private JMenuItem menuItemLiniendiagramm = new JMenuItem("Liniengraph");
+	private JMenuItem menuItemAufgabentext = new JMenuItem("Aufgabentext");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite();
@@ -48,25 +48,20 @@ public class GUI implements ActionListener {
 		constructContentPanel();
 	}
 
+	/**
+	 * Erstellt die Menubar des Fensters.
+	 */
 	private void constructMenubar() {
 		JMenu dateiMenü = new JMenu("Datei");
-		JMenu menuFile2 = new JMenu("Aufgaben");
 		JMenu fensterMenü = new JMenu("Fenster");
 
 		menuBar.add(dateiMenü);
-		menuBar.add(menuFile2);
 		menuBar.add(fensterMenü);
 		
 		dateiMenü.add(menuItemSpeichern);
 		dateiMenü.add(menuItemLaden);
-		dateiMenü.add(file2);
 		menuItemSpeichern.addActionListener(this);
 		menuItemLaden.addActionListener(this);
-		file2.addActionListener(this);
-
-		menuFile2.add(exercise0);
-		menuFile2.add(exercise1);
-		menuFile2.add(exercise2);
 
 		fensterMenü.add(menuItemStartseite);
 		fensterMenü.add(menuItemLiniendiagramm);
@@ -76,6 +71,9 @@ public class GUI implements ActionListener {
 		menuItemAufgabentext.addActionListener(this);
 	}
 	
+	/**
+	 * Erstellt das ContentPanel des Fensters.
+	 */
 	private void constructContentPanel() {
 		Container contentPane = frame.getContentPane();
 		contentPane.setLayout(new CardLayout());
@@ -89,6 +87,8 @@ public class GUI implements ActionListener {
 		CardLayout layout = (CardLayout) frame.getContentPane().getLayout();
 		if(e.getSource() == menuItemSpeichern) {
 			log.debug("Speichere!");
+		} else if(e.getSource() == menuItemLaden) {
+			
 		} else if(e.getSource() == menuItemLiniendiagramm) {
 			log.debug("Wechsle zum Liniendiagramm");
 			layout.show(frame.getContentPane(), "liniendiagramm");

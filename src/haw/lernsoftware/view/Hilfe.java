@@ -7,8 +7,9 @@ import javax.swing.JLabel;
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
-
-
+/**
+ * Die Hilfeseite des Programms
+ */
 public class Hilfe extends HAWView {
 
 	public  Hilfe() {
