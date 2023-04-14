@@ -17,6 +17,8 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
  *
  */
 public class HAWView {
+	JPanel panel = new JPanel();
+	
 	protected final DefaultComponentFactory compFactory = new DefaultComponentFactory();
 	
 	/**
@@ -43,7 +45,6 @@ public class HAWView {
         if (comp.getBorder() == null)
             comp.setBorder(outerBorder);
         else {
-
             if (comp instanceof JButton) {
                 JPanel panel = new JPanel();
                 panel.add(comp);

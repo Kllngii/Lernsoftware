@@ -8,6 +8,7 @@ public class Elementarereignis {
 	private double probability;
 	private String probString;
 	private int order;
+	private boolean bedingt = false;
 	
 	public Elementarereignis(String name, String probString, int order) {
 		super();
@@ -46,6 +47,13 @@ public class Elementarereignis {
 	@JSONPropertyIgnore
 	public double getProbability() {
 		return probability;
+	}
+	public boolean isBedingt() {
+		return bedingt;
+	}
+
+	public void setBedingt(boolean bedingt) {
+		this.bedingt = bedingt;
 	}
 
 	@Override
