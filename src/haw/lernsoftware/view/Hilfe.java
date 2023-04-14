@@ -1,19 +1,17 @@
 package haw.lernsoftware.view;
 
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
 /**
- * Die Hilfeseite des Programms
+ * Die Hilfeseite des Programms.
  */
 public class Hilfe extends HAWView {
 
