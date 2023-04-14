@@ -1,6 +1,7 @@
-package haw.lernsoftware.view;
+package haw.lernsoftware.view.liniendiagramm;
 
 import java.awt.EventQueue;
+import java.awt.Graphics;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -8,17 +9,18 @@ import javax.swing.JLabel;
 
 import org.apache.log4j.Logger;
 
-import haw.lernsoftware.Lernsoftware;
 import haw.lernsoftware.model.Ereignismenge;
 import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
+import haw.lernsoftware.view.HAWView;
 
 public class LinienDiagramm extends HAWView {
 	
 	Logger log = Logger.getLogger(getClass());
+	List<Menge> mengen;
 	
 	public LinienDiagramm() {
-		Logger log = Logger.getLogger(Lernsoftware.class);
+		panel = new DrawingPanel(this);
 		Ereignismenge eMenge = Ereignismenge.fromJSON(ResourceProvider.getFileContentAsString("würfel.em").replace(" ", ""));
 
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
@@ -32,7 +34,7 @@ public class LinienDiagramm extends HAWView {
 	
 	private void constructDiagramm(List<Menge> mengen) {
 		panel.add(new JLabel("Hier könnte Ihre Werbung stehen"));
-		
+		this.mengen = mengen;
 	}
 
 	public static void main(String[] args) {
@@ -46,6 +48,10 @@ public class LinienDiagramm extends HAWView {
 			f.setVisible(true);
 		});
 
+	}
+
+	public void paintPanel(Graphics g) {
+		g.drawLine(0, 0, 100, 100);
 	}
 
 }

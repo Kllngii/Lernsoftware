@@ -17,7 +17,7 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
  *
  */
 public class HAWView {
-	JPanel panel = new JPanel();
+	protected JPanel panel = new JPanel();
 	
 	protected final DefaultComponentFactory compFactory = new DefaultComponentFactory();
 	
