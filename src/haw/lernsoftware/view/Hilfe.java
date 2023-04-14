@@ -12,6 +12,7 @@ import com.jgoodies.forms.factories.Paddings;
 
 /**
  * Die Hilfeseite des Programms.
+ * @author Sebastian Holz
  */
 public class Hilfe extends HAWView {
 
