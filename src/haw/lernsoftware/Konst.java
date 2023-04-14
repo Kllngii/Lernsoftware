@@ -8,4 +8,7 @@ package haw.lernsoftware;
 public class Konst {
 	public static final String SO_HEISST_DAS_DING = "Lernsoftware";
 	public static final String PREFERENCES_ROOT_KEY = "/haw/lernsoftware";
+	
+	public static final int borderDistanceX = 10;
+	public static final int borderDistanceY = 10;
 }
