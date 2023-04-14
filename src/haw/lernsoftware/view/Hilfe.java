@@ -3,6 +3,11 @@ package haw.lernsoftware.view;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
@@ -19,7 +24,8 @@ public class Hilfe extends HAWView {
 
 		fenster.getContentPane().add(panel);
 
-		panel.add(buildContent());
+		panel.add(buildContentMenu(), BorderLayout.WEST);
+		panel.add(buildContentText(), BorderLayout.EAST);
 
 		fenster.setVisible(true);
 
@@ -27,21 +33,34 @@ public class Hilfe extends HAWView {
 	}
 
 
-	public JComponent buildContent() {
-		JLabel titleField = title("Title");
-		JLabel authorField = title("Title");
-		JLabel priceField = title("Title");
+	public JComponent buildContentMenu() {
+		JButton Test = new JButton("Test");
+		JButton Test2 = new JButton("Test2");
+		JButton Test3 = new JButton("Test3");
+
 		return FormBuilder.create()
+				.columns("left:90dlu")
+				.rows("p, 3dlu, p, 3dlu, p")
 				.debug(true)                                 // Rote Linien zeichnen
-				.columns("left:90dlu, 3dlu, 200dlu")
-				.rows("p, $lg, p, $lg, p")
 				.padding(Paddings.DIALOG)
-				.add("_Title:")  .xy(1, 1)
-				.add(titleField) .xy(3, 1)
-				.add("_Author:") .xy(1, 3)
-				.add(authorField).xy(3, 3)
-				.add("_Price:")  .xy(1, 5)
-				.add(priceField) .xy(3, 5)
+				.add(Test)  .xy(1, 1)
+				.add(Test2) .xy(1, 3)
+				.add(Test3)  .xy(1, 5)
+				.build();
+
+	}
+
+	public JComponent buildContentText() {
+
+		JLabel text = new JLabel("Werbung wfsfd dsfsf sf sefsdf sdg sfg s");
+		return FormBuilder.create()
+				.columns("left:300dlu")
+				.rows("p,3dlu,p,400dlu")
+				.debug(true)                                 // Rote Linien zeichnen
+				.padding(Paddings.DIALOG)
+				.add("Überschrift") .xy(1, 1)
+				.add("________________") .xy(1, 2)
+				.add(text)  .xy(1, 4)
 				.build();
 
 	}
