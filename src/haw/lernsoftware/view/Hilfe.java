@@ -91,10 +91,10 @@ public class Hilfe extends HAWView implements ActionListener{
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"));
 		}
 		if(e.getSource() == Button2) {
-			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe2.text"));
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text2"));
 		}
 		if(e.getSource() == Button3) {
-			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe3.text"));
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text3"));
 		}
 		panel.repaint();
 	}
