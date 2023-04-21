@@ -1,7 +1,5 @@
 package haw.lernsoftware.view;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -21,8 +19,8 @@ public class Aufgabentext extends HAWView {
 	// fügt dem panel von Aufgabentext einen JComponent zu
 	public Aufgabentext(Model model) {
 		this.model = model;
-		panel.add(buildContentText(), BorderLayout.NORTH);
-		panel.add(buildContentProgressBar(), BorderLayout.CENTER);
+		panel.add(buildContentText());
+//		panel.add(buildContentProgressBar(), BorderLayout.CENTER);
 
 	}
 
@@ -31,34 +29,30 @@ public class Aufgabentext extends HAWView {
 		JLabel titleTaskLabel = new JLabel("Aufgabe X:");
 		JButton nextTaskButton = new JButton("NEXT");
 		JButton previousTaskButton = new JButton("PREVIOUS");
+		JTextArea einleitungText = new JTextArea();
 
 		// gibt einen JComponent zurück, der
 		return FormBuilder.create().debug(true) // Rote Linien zeichnen
 				.columns("100dlu, center:200dlu, 100dlu") //
-				.rows("p, $lg, p, $lg, p") //
+				.rows("p, 100dlu, p, $lg, top:300dlu") //
 				.padding(Paddings.DIALOG) //
-				.add("_Title:").xy(1, 1) //
-				.add(titleTaskLabel).xy(3, 1) //
-				.add("_Author:").xy(1, 3) //
-				.add(nextTaskButton).xy(3, 3) //
-				.add("_Price:").xy(1, 5) //
-				.add(previousTaskButton).xy(3, 5) //
+				.add(previousTaskButton).xy(1, 1) //
+				.add(titleTaskLabel).xy(2, 1) //
+				.add(nextTaskButton).xy(3, 1) //
+				.addSeparator("General").xyw(1, 3, 3) //
+				.add(einleitungText).xyw(1, 5, 3) //
 				.build(); //
 	}
 
-	// JTextArea einleitungText = new JTextArea(
-	// ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE,
-	// "startseite.einleitungstext"));
-
-	public JComponent buildContentProgressBar() {
-		JLabel titleField = new JLabel("Title");
-		JLabel authorField = new JLabel("Title");
-		JLabel priceField = new JLabel("Title");
-		JTextArea einleitungText = new JTextArea();
-
-		return FormBuilder.create().columns("left:90dlu, 3dlu, 200dlu").rows("p, $lg, p, $lg, p")
-				.padding(Paddings.DIALOG).add("_Title:").xy(1, 1).add(titleField).xy(3, 1).add("_Author:").xy(1, 3)
-				.add(einleitungText).xy(3, 3).add("_Price:").xy(1, 5).add(priceField).xy(3, 5).build();
-	}
+//	public JComponent buildContentProgressBar() {
+//		JLabel titleField = new JLabel("Title");
+//		JLabel authorField = new JLabel("Title");
+//		JLabel priceField = new JLabel("Title");
+//		
+//
+//		return FormBuilder.create().columns("left:90dlu, 3dlu, 200dlu").rows("p, $lg, p, $lg, p")
+//				.padding(Paddings.DIALOG).add("_Title:").xy(1, 1).add(titleField).xy(3, 1).add("_Author:").xy(1, 3)
+//				.add(einleitungText).xy(3, 3).add("_Price:").xy(1, 5).add(priceField).xy(3, 5).build();
+//	}
 
 }
