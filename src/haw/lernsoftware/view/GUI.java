@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -12,6 +13,8 @@ import javax.swing.JMenuItem;
 
 import org.apache.log4j.Logger;
 
+import haw.lernsoftware.model.Aufgabe;
+import haw.lernsoftware.model.Model;
 import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
 /**
@@ -20,6 +23,8 @@ import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
  *
  */
 public class GUI implements ActionListener {
+	
+	private Model model = new Model(List.of(new Aufgabe("Dummy")));
 	
 	Logger log = Logger.getLogger(getClass());
 
@@ -34,7 +39,7 @@ public class GUI implements ActionListener {
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite();
-	private Aufgabentext aufgabentextView = new Aufgabentext();
+	private Aufgabentext aufgabentextView = new Aufgabentext(model);
 
 	public GUI(JFrame frame) {
 		this.frame = frame;

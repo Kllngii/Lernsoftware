@@ -1,6 +1,7 @@
 package haw.lernsoftware.view;
 
 import java.awt.BorderLayout;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -10,13 +11,16 @@ import org.apache.log4j.Logger;
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
-public class Aufgabentext extends HAWView {
+import haw.lernsoftware.model.Aufgabe;
+import haw.lernsoftware.model.Model;
 
-	Logger log = Logger.getLogger(getClass());
+public class Aufgabentext extends HAWView {
+	private Model model;
+	private Logger log = Logger.getLogger(getClass());
 
 	// fügt dem panel von Aufgabentext einen JComponent zu
-	public Aufgabentext() {
-
+	public Aufgabentext(Model model) {
+		this.model = model;
 		panel.add(buildContentText(), BorderLayout.NORTH);
 		panel.add(buildContentProgressBar(), BorderLayout.SOUTH);
 
@@ -47,7 +51,8 @@ public class Aufgabentext extends HAWView {
 
 	// main
 	public static void main(String[] args) {
-		new Aufgabentext();
+		Model testModel = new Model(List.of(new Aufgabe("Aufgabentext A"), new Aufgabe("Aufgabentext B"), new Aufgabe("Aufgabentext C")));
+		new Aufgabentext(testModel);
 	}
 
 }
