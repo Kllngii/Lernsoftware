@@ -1,5 +1,6 @@
 package haw.lernsoftware.resources;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -9,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 /**
@@ -46,13 +48,27 @@ public class ResourceProvider {
 		
 		return Files.readAllLines(p);
 		} catch(NullPointerException e) { //Falls reqireNonNull fehlschlägt
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (URISyntaxException e) { //Falls die pathURL ungültig ist
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (IOException e) { //Falls readAllLines fehlschlägt
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		
 		return new ArrayList<String>();
+	}
+	
+	public static String loadStringFromProperties(String file, String identifier) {
+		Properties p = new Properties();
+		
+		try(FileInputStream fis = new FileInputStream(Paths.get(ResourceProvider.class.getResource(file).toURI()).toFile())) {
+			p.load(fis);
+		} catch (IOException e) {
+			log.error(e.getMessage());
+		} catch (URISyntaxException e) {
+			log.error(e.getMessage());
+		}
+		
+		return (String) p.getOrDefault(identifier, "ERROR");
 	}
 }

@@ -1,27 +1,20 @@
 package haw.lernsoftware.view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 import org.apache.log4j.Logger;
 
-//<<<<<<< HEAD
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
-import haw.lernsoftware.Lernsoftware;
-import haw.lernsoftware.model.Ereignismenge;
-import haw.lernsoftware.model.Menge;
+import haw.lernsoftware.Konst;
 import haw.lernsoftware.resources.ResourceProvider;
 
-//=======
 /**
  * Die Startseite des Programms.
  */
-//>>>>>>> bb58b5a08b76894a64ffd29f95e630b4f5ce36dd
 public class Startseite extends HAWView {
 	
 	Logger log = Logger.getLogger(getClass());
@@ -40,7 +33,7 @@ public class Startseite extends HAWView {
 	public JComponent buildContent() {
 		// Einfügen der Elemente
 		JLabel ueberschrift = new JLabel("Lernsoftware");
-		JTextArea einleitungText = new JTextArea("Dieser Werkzeugkasten ebnet den Einstieg in das Thema „Freie Software“ in der Schule und stellt einige für die schulische Arbeit geeignete Werkzeuge vor, sodass Lehrkräfte in kurzer Zeit entscheiden können, ob und wie diese ihnen bei ihrer Arbeit helfen können. Die Auswahl erhebt natürlich keinen Anspruch auf Vollständigkeit, präsentiert jedoch eine Übersicht über Software zu allen schulisch relevanten Bereichen und porträtiert detailliert und praxisbezogen sieben wichtige Werkzeuge samt pädagogischer Einschätzung.");
+		JTextArea einleitungText = new JTextArea(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.einleitungstext"));
 		einleitungText.setLineWrap(true);
 		einleitungText.setWrapStyleWord(true);
 		
