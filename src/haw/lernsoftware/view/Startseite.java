@@ -1,36 +1,21 @@
 package haw.lernsoftware.view;
 
-import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
 
-import java.awt.*;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.Toolkit;
-
 import org.apache.log4j.Logger;
 
-//<<<<<<< HEAD
-import com.jgoodies.forms.builder.FormBuilder;
-import com.jgoodies.forms.factories.Paddings;
-import com.jgoodies.forms.layout.Size;
-
-import haw.lernsoftware.Lernsoftware;
-import haw.lernsoftware.model.Ereignismenge;
-import haw.lernsoftware.model.Menge;
-import haw.lernsoftware.resources.ResourceProvider;
-
-//=======
 /**
  * Die Startseite des Programms.
  */
-//>>>>>>> bb58b5a08b76894a64ffd29f95e630b4f5ce36dd
 public class Startseite extends HAWView {
 	
 	Logger log = Logger.getLogger(getClass());
