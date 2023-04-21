@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
+import haw.lernsoftware.Konst;
+import haw.lernsoftware.resources.ResourceProvider;
+
 /**
  * Die Hilfeseite des Programms.
  * @author Sebastian Holz
@@ -20,9 +23,9 @@ import com.jgoodies.forms.factories.Paddings;
 public class Hilfe extends HAWView implements ActionListener{
 
 	
-	private JButton Test = new JButton("Test");
-	private JButton Test2 = new JButton("Test2");
-	private JButton Test3 = new JButton("Test3");	
+	private JButton Button1 = new JButton("Test");
+	private JButton Button2 = new JButton("Test2");
+	private JButton Button3 = new JButton("Test3");	
 	private JLabel text = new JLabel("Werbung wfsfd dsfsf sf sefsdf sdg sfg s");
 
 	public  Hilfe() {
@@ -46,19 +49,17 @@ public class Hilfe extends HAWView implements ActionListener{
 
 	public JComponent buildContentMenu() {		
 		
-		Test.addActionListener(this);
-		Test2.addActionListener(this);
-		Test3.addActionListener(this);
+		Button1.addActionListener(this);
+		Button2.addActionListener(this);
+		Button3.addActionListener(this);
 
 		
 		return FormBuilder.create()
 				.columns("left:90dlu")
-				.rows("p, 3dlu, p, 3dlu, p")
+				.rows("p")
 				.debug(true)                                 // Rote Linien zeichnen
 				.padding(Paddings.DIALOG)
-				.add(Test)  .xy(1, 1)
-				.add(Test2) .xy(1, 3)
-				.add(Test3)  .xy(1, 5)
+				.addStack(Button1, Button2, Button3) .xy(1, 1)
 				.build();
 		
 
@@ -87,14 +88,15 @@ public class Hilfe extends HAWView implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == Test) {
-			text = new JLabel("Werbung 1");
+		if(e.getSource() == Button1) {
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"));
 		}
-		if(e.getSource() == Test2) {
-			text = new JLabel("Werbung 2");
+		if(e.getSource() == Button2) {
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe2.text"));
 		}
-		if(e.getSource() == Test3) {
-			text = new JLabel("Werbung 3");
+		if(e.getSource() == Button3) {
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe3.text"));
 		}
+		panel.repaint();
 	}
 }
