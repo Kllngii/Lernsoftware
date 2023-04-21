@@ -19,7 +19,11 @@ import com.jgoodies.forms.factories.Paddings;
  */
 public class Hilfe extends HAWView implements ActionListener{
 
-	protected int i;
+	
+	private JButton Test = new JButton("Test");
+	private JButton Test2 = new JButton("Test2");
+	private JButton Test3 = new JButton("Test3");	
+	private JLabel text = new JLabel("Werbung wfsfd dsfsf sf sefsdf sdg sfg s");
 
 	public  Hilfe() {
 		
@@ -40,33 +44,12 @@ public class Hilfe extends HAWView implements ActionListener{
 	}
 
 
-	public JComponent buildContentMenu() {
-		JButton Test = new JButton("Test");
-		//Test.setBounds(1, 1, 250, 220);
-		JButton Test2 = new JButton("Test2");
-		JButton Test3 = new JButton("Test3");		
+	public JComponent buildContentMenu() {		
 		
-		
-		Test.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	i = 1;
-            }
-		});
-		
-		Test2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	i = 2;
-            }
-		});
-		
-		Test3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	i = 3;
-            }
-		});
+		Test.addActionListener(this);
+		Test2.addActionListener(this);
+		Test3.addActionListener(this);
+
 		
 		return FormBuilder.create()
 				.columns("left:90dlu")
@@ -82,16 +65,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	}
 
 	public JComponent buildContentText() {
-
-		JLabel text = new JLabel("Werbung wfsfd dsfsf sf sefsdf sdg sfg s");
 		
-		if(i == 1) {
-			text = new JLabel("Werbung 1");
-		}else if (i == 2){
-			text = new JLabel("Werbung 2");
-		}else if (i == 3) {
-			text = new JLabel("Werbung 3");
-		}
 
 		return FormBuilder.create()
 				.columns("left:300dlu")
@@ -113,6 +87,14 @@ public class Hilfe extends HAWView implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource() == Test) {
+			text = new JLabel("Werbung 1");
+		}
+		if(e.getSource() == Test2) {
+			text = new JLabel("Werbung 2");
+		}
+		if(e.getSource() == Test3) {
+			text = new JLabel("Werbung 3");
+		}
 	}
 }
