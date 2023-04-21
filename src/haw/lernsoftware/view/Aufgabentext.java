@@ -13,15 +13,15 @@ import org.apache.log4j.Logger;
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
-<<<<<<< Updated upstream
+<<<<<<<Updated upstream
 import haw.lernsoftware.model.Aufgabe;
-import haw.lernsoftware.model.Model;
-=======
+import haw.lernsoftware.model.Model;=======
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.resources.ResourceProvider;
 
 public class Aufgabentext extends HAWView {
->>>>>>> Stashed changes
+	>>>>>>>
+	Stashed changes
 
 public class Aufgabentext extends HAWView {
 	private Model model;
@@ -48,8 +48,8 @@ public class Aufgabentext extends HAWView {
 				.add("_Price:").xy(1, 5).add(previousTaskButton).xy(3, 5).build();
 	}
 
-	JTextArea einleitungText = new JTextArea(
-			ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.einleitungstext"));
+	//JTextArea einleitungText = new JTextArea(
+	//		ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.einleitungstext"));
 
 	public JComponent buildContentProgressBar() {
 		JLabel titleField = new JLabel("Title");
