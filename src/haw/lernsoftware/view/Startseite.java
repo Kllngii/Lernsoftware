@@ -75,10 +75,12 @@ public class Startseite extends HAWView {
 		c.gridy = 1; 
 		jp.add(einleitungText, c);
 		
-		
-		JTextArea functionText1 = new JTextArea(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
-		functionText1.setLineWrap(true);
-		functionText1.setWrapStyleWord(true);
+		HTMLEditorKit kit = new HTMLEditorKit();
+		JEditorPane functionText1 = new JEditorPane();
+		functionText1.setEditorKit(kit);
+		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
+		//functionText1.setLineWrap(true);
+		//functionText1.setWrapStyleWord(true);
 		functionText1.setEditable(false);
 		//c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipady = 0;      //make this component tall
@@ -89,10 +91,8 @@ public class Startseite extends HAWView {
 		jp.add(functionText1, c);
 		
 		JEditorPane functionText2 = new JEditorPane();
-		HTMLEditorKit kit = new HTMLEditorKit();
 		functionText2.setEditorKit(kit);
 		functionText2.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.aufgaben"));
-		//functionText2.setText("<html><body>In den <b>Aufgaben</b> zeigen wir dir, wie du deine Kenntnisse der Wahrscheinlichkeitstheorie auf die Probe stellen kannst, indem du Aufgaben mit verschiedenen Komplexitätsniveaus löst. Am Ende dieses Teils des Tutorials wirst du in der Lage sein, komplexe Aufgaben in der Wahrscheinlichkeitstheorie zu lösen und dein Wissen auf die nächste Stufe zu bringen.</body></html>");
 		//functionText2.setLineWrap(true);
 		//functionText2.setWrapStyleWord(true);
 		functionText2.setEditable(false);
