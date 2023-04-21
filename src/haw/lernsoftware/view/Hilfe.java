@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
@@ -28,6 +27,8 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton Button3 = new JButton("Test3");	
 	private JLabel text = new JLabel("Werbung wfsfd dsfsf sf sefsdf sdg sfg s");
 
+	private String bla = new String("Test sadgfsafg sdafasfashdflashflasfhsahfsaifhaswiofhsaihfvsoadhjfsaohfdsaodfhasioufhvasdoivhsad9iuhfvas9u");
+	
 	public  Hilfe() {
 		
 		//Fenster erstellen
@@ -36,7 +37,6 @@ public class Hilfe extends HAWView implements ActionListener{
 		fenster.setSize(800, 800);
 		fenster.getContentPane().add(panel);
 		
-		JPanel jpanel = new JPanel();
 
 		panel.add(buildContentMenu(), BorderLayout.WEST);
 		panel.add(buildContentText(), BorderLayout.EAST);
@@ -55,7 +55,7 @@ public class Hilfe extends HAWView implements ActionListener{
 
 		
 		return FormBuilder.create()
-				.columns("left:90dlu")
+				.columns("center:90dlu")
 				.rows("p")
 				.debug(true)                                 // Rote Linien zeichnen
 				.padding(Paddings.DIALOG)
@@ -69,12 +69,11 @@ public class Hilfe extends HAWView implements ActionListener{
 		
 
 		return FormBuilder.create()
-				.columns("left:300dlu")
+				.columns("center:300dlu")
 				.rows("p,3dlu,p,400dlu")
 				.debug(true)                                 // Rote Linien zeichnen
 				.padding(Paddings.DIALOG)
 				.add("Überschrift") .xy(1, 1)
-				.add("________________") .xy(1, 2)
 				.add(text)  .xy(1, 4)
 				.build();
 
