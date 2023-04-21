@@ -24,7 +24,7 @@ import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
  */
 public class GUI implements ActionListener {
 	
-	private Model model = new Model(List.of(new Aufgabe("Dummy")));
+	private Model model = new Model(List.of(new Aufgabe("Aufgabentext A"), new Aufgabe("Aufgabentext B"), new Aufgabe("Aufgabentext C")));
 	
 	Logger log = Logger.getLogger(getClass());
 
