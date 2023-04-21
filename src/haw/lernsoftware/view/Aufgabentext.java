@@ -22,8 +22,10 @@ public class Aufgabentext extends HAWView {
 	// fügt dem panel von Aufgabentext einen JComponent zu
 	public Aufgabentext(Model model) {
 		this.model = model;
+		panel.setAlignmentX(JLabel.CENTER);
+		panel.setAlignmentY(JLabel.NORTH);
 		panel.add(buildContentText(), BorderLayout.NORTH);
-		panel.add(buildContentProgressBar(), BorderLayout.SOUTH);
+		panel.add(buildContentProgressBar(), BorderLayout.CENTER);
 
 	}
 

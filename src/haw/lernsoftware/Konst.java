@@ -10,4 +10,5 @@ public class Konst {
 	public static final String PREFERENCES_ROOT_KEY = "/haw/lernsoftware";
 	
 	public static final String PROPERTIES_STARTSEITE = "startseite.properties";
+	public static final String PROPERTIES_HILFE = "hilfe.properties";
 }
