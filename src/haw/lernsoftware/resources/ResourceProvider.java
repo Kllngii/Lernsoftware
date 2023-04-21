@@ -13,6 +13,8 @@ import java.util.Objects;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+
+import haw.lernsoftware.Konst;
 /**
  * Verwaltet (lesende) Dateizugriffe auf die Dateien im resources-Package. Hier sollen bspw. Aufgabendateien abgelegt werden.
  * @author Lasse Kelling
@@ -58,10 +60,18 @@ public class ResourceProvider {
 		return new ArrayList<String>();
 	}
 	
-	public static String loadStringFromProperties(String file, String identifier) {
+	/**
+	 * Lädt eine {@link Properties}-Datei und gibt den als <code>identifier</code> hinterlegten Wert der {@link Properties} zurück
+	 * @param props Die zu ladene {@link Properties}-Datei vermutlich in der Klasse {@link Konst} zu finden
+	 * @param identifier Der angeforderte Identifier
+	 * @return Der String der Identifiers
+	 * 
+	 * @see Konst
+	 */
+	public static String loadStringFromProperties(String props, String identifier) {
 		Properties p = new Properties();
 		
-		try(FileInputStream fis = new FileInputStream(Paths.get(ResourceProvider.class.getResource(file).toURI()).toFile())) {
+		try(FileInputStream fis = new FileInputStream(Paths.get(ResourceProvider.class.getResource(props).toURI()).toFile())) {
 			p.load(fis);
 		} catch (IOException e) {
 			log.error(e.getMessage());
