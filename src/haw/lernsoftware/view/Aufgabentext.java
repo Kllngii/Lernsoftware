@@ -40,6 +40,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	public JComponent buildContentText() {
 
 		previousTaskButton.setEnabled(false);
+		titleTaskLabel.setText("Aufgabe: 1");
 
 		// Aufgabentext erstellen und formatieren
 		aufgabenText.setText(model.getCurrentAufgabe().getText());
@@ -76,11 +77,13 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			model.setCurrentAufgabe(aufgaben.get(i - 1));
 			i--;
 			aufgabenText.setText(model.getCurrentAufgabe().getText());
+			titleTaskLabel.setText("Aufgabe:" + (i + 1));
 		}
 		if (e.getSource() == nextTaskButton) {
 			model.setCurrentAufgabe(aufgaben.get(i + 1));
 			i++;
 			aufgabenText.setText(model.getCurrentAufgabe().getText());
+			titleTaskLabel.setText("Aufgabe:" + (i + 1));
 		}
 		panel.repaint();
 
