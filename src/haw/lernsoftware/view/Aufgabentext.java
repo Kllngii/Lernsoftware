@@ -1,5 +1,7 @@
 package haw.lernsoftware.view;
 
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -30,16 +32,18 @@ public class Aufgabentext extends HAWView {
 		JButton nextTaskButton = new JButton("NEXT");
 		JButton previousTaskButton = new JButton("PREVIOUS");
 		JTextArea einleitungText = new JTextArea();
+		einleitungText.setLineWrap(true);
+		einleitungText.setPreferredSize(new Dimension(100, 100));
 
 		// gibt einen JComponent zurück, der
 		return FormBuilder.create().debug(true) // Rote Linien zeichnen
 				.columns("100dlu, center:200dlu, 100dlu") //
-				.rows("p, 100dlu, p, $lg, top:300dlu") //
+				.rows("p, 20dlu, p, $lg, top:300dlu") //
 				.padding(Paddings.DIALOG) //
-				.add(previousTaskButton).xy(1, 1) //
+				.add(previousTaskButton).xy(1, 2) //
 				.add(titleTaskLabel).xy(2, 1) //
-				.add(nextTaskButton).xy(3, 1) //
-				.addSeparator("General").xyw(1, 3, 3) //
+				.add(nextTaskButton).xy(3, 2) //
+				.addSeparator("Aufgabentext").xyw(1, 3, 3) //
 				.add(einleitungText).xyw(1, 5, 3) //
 				.build(); //
 	}
