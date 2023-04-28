@@ -1,6 +1,9 @@
 package haw.lernsoftware.model;
 
-public class Aufgabe {
+import java.io.Serializable;
+
+public class Aufgabe implements Serializable {
+	private static final long serialVersionUID = -3727129919178718459L;
 	private String text;
 	
 	public Aufgabe(String text) {

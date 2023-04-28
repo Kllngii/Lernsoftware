@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -15,6 +16,9 @@ import org.apache.log4j.Logger;
 
 import haw.lernsoftware.model.Aufgabe;
 import haw.lernsoftware.model.Model;
+import haw.lernsoftware.model.SpeicherService;
+import haw.lernsoftware.model.SpeicherService.ModelWithErrors;
+import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
 /**
@@ -23,10 +27,10 @@ import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
  *
  */
 public class GUI implements ActionListener {
+	private SpeicherService sp = new SpeicherService();
+	private Model model = new Model(sp.ladeAufgaben());
 	
-	private Model model = new Model(List.of(new Aufgabe("Aufgabentext A"), new Aufgabe("Aufgabentext B"), new Aufgabe("Aufgabentext C")));
-	
-	Logger log = Logger.getLogger(getClass());
+	private Logger log = Logger.getLogger(getClass());
 
 	private JFrame frame;
 	
@@ -92,17 +96,30 @@ public class GUI implements ActionListener {
 		CardLayout layout = (CardLayout) frame.getContentPane().getLayout();
 		if(e.getSource() == menuItemSpeichern) {
 			log.debug("Speichere!");
+			sp.speichereInPreferences(new ModelWithErrors(model, new ArrayList<String>()));
 		} else if(e.getSource() == menuItemLaden) {
-			
+			log.debug("Lade!");
+			ModelWithErrors modelAndErrors = sp.ladeAusPreferences();
+			if(modelAndErrors == null)
+				log.debug("Es war kein Model zum Laden verfügbar.");
+			else {
+				if(modelAndErrors.getErrors().size() != 0)
+					modelAndErrors.getErrors().stream().map(str -> "Es trat ein Fehler beim Speichern/Laden auf: " + str).forEach(log::warn);
+				model = modelAndErrors.getModel();
+				layout.show(frame.getContentPane(), model.getSelectedWindow().getIdentifier());
+			}
 		} else if(e.getSource() == menuItemLiniendiagramm) {
 			log.debug("Wechsle zum Liniendiagramm");
-			layout.show(frame.getContentPane(), "liniendiagramm");
+			layout.show(frame.getContentPane(), WindowSelect.LINIENDIAGRAMM.getIdentifier());
+			model.setSelectedWindow(WindowSelect.LINIENDIAGRAMM);
 		} else if(e.getSource() == menuItemAufgabentext) {
 			log.debug("Wechsle zum Aufgabentext");
-			layout.show(frame.getContentPane(), "aufgabentext");
+			layout.show(frame.getContentPane(), WindowSelect.AUFGABENTEXT.getIdentifier());
+			model.setSelectedWindow(WindowSelect.AUFGABENTEXT);
 		} else if(e.getSource() == menuItemStartseite) {
 			log.debug("Wechsle zur Startseite");
-			layout.show(frame.getContentPane(), "startseite");
+			layout.show(frame.getContentPane(), WindowSelect.STARTSEITE.getIdentifier());
+			model.setSelectedWindow(WindowSelect.STARTSEITE);
 		}
 	}
 

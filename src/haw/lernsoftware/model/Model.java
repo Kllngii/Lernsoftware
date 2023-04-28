@@ -1,5 +1,6 @@
 package haw.lernsoftware.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,9 @@ import java.util.List;
  * @author Lasse Kelling
  *
  */
-public class Model {
+public class Model implements Serializable {
+	private static final long serialVersionUID = 3639339910529002338L;
+	private WindowSelect selectedWindow = WindowSelect.STARTSEITE;
 	private List<Aufgabe> aufgaben;
 	private Aufgabe currentAufgabe;
 	
@@ -33,6 +36,13 @@ public class Model {
 	public void setCurrentAufgabe(Aufgabe currentAufgabe) {
 		this.currentAufgabe = currentAufgabe;
 	}
-	
+
+	public WindowSelect getSelectedWindow() {
+		return selectedWindow;
+	}
+
+	public void setSelectedWindow(WindowSelect selectedWindow) {
+		this.selectedWindow = selectedWindow;
+	}
 	
 }
