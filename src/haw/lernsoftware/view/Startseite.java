@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,8 +17,15 @@ import javax.swing.text.html.HTMLEditorKit;
 
 import org.apache.log4j.Logger;
 
+import com.jgoodies.forms.builder.FormBuilder;
+import com.jgoodies.forms.factories.Paddings;
+
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.resources.ResourceProvider;
+import java.awt.Color;
+import java.awt.Dimension;
 
 /**
  * Die Startseite des Programms.
@@ -37,10 +45,11 @@ public class Startseite extends HAWView {
 	private void constructStartseite() {
 		//panel.add(new JLabel("Das hier ist die Startseite"));
 
-
+		//Panel formatieren
 		jp = new JPanel();
 		jp.setPreferredSize(new java.awt.Dimension(Toolkit.getDefaultToolkit().getScreenSize()));
-		//jp.setLayout(new FlowLayout(1, 100, 100)); // align from left to right, horizantal gap, vertical gap 
+
+		//Layout
 		GridBagLayout gridbag = new GridBagLayout();
 		jp.setLayout(gridbag);
 		jp.setBorder(new EmptyBorder(0,300,0,300));			//Creates an empty border with the specified insets.
@@ -48,15 +57,19 @@ public class Startseite extends HAWView {
 		c.anchor = GridBagConstraints.NORTH;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weighty = 1.0;
-		c.insets = new Insets(5,10,0,10);
+		c.insets = new Insets(5,5,0,5);
 
-		HTMLEditorKit kit = new HTMLEditorKit();
+		//HTMLEditorKit kit = new HTMLEditorKit();
 
+
+		EmptyBorder eBorder = new EmptyBorder(10, 10, 10, 10); // oben, rechts, unten, links
+		LineBorder lBorder = new LineBorder(new Color(100, 100, 100));
+
+
+		//Überschrift
 		JLabel ueberschrift = new JLabel("Lernsoftware Startseite");
 		ueberschrift.setHorizontalAlignment(SwingConstants.CENTER);
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(40f));
-		//c.fill = GridBagConstraints.CENTER;
-
 		c.ipady = 40;      //make this component tall
 		c.weightx = 0.0;
 		c.gridwidth = 3;
@@ -64,75 +77,65 @@ public class Startseite extends HAWView {
 		c.gridy = 0; 
 		jp.add(ueberschrift, c);
 
-		//JEditorPane einleitungText = new JEditorPane();
+		// Einleitungstext einfügen und ausrichten
 		JLabel einleitungText = new JLabel();
-		//einleitungText.TextAttribute.
-		//einleitungText.setBorder(this.border);
-		//einleitungText.setEditorKit(kit);
 		einleitungText.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.einleitungstext"));
-		//einleitungText.setLineWrap(true);
-		//einleitungText.setWrapStyleWord(true);
-		//einleitungText.setEditable(false);
 		c.ipady = 40;      //make this component tall
-		c.weightx = 0.0;
-		c.gridwidth = 3;
-		c.gridx = 0;
-		c.gridy = 1; 
-		jp.add(einleitungText, c);
+		c.weightx = 0.0;	//Gewichtung des Elements in einer Spalte
+		c.gridwidth = 3;	//wie viele Spalten soll  das Element einnehmen
+		c.gridx = 0;		//in welche Spalte beginnt das Element
+		c.gridy = 1; 		//in welcher Zeile beginnt das Element
+		jp.add(einleitungText, c);	//zum Panel hinzufügen
 
 
-		//JEditorPane functionText1 = new JEditorPane();
+		// Beschreibungstexte hinzufügen
+		// Tutorial
 		JLabel functionText1 = new JLabel();
-		//functionText1.setBorder(this.border);
-		//functionText1.setEditorKit(kit);
 		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
-		//functionText1.setLineWrap(true);
-		//functionText1.setWrapStyleWord(true);
-		//functionText1.setEditable(false);
-		//c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipady = 0;      //make this component tall
-		c.weightx = 0.5;
+		c.weightx = 0;
 		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 2;
+		functionText1.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		jp.add(functionText1, c);
 
-		//JEditorPane functionText2 = new JEditorPane();
+		//Aufgaben
 		JLabel functionText2 = new JLabel();
-		//functionText2.setEditorKit(kit);
 		functionText2.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.aufgaben"));
-		//functionText2.setLineWrap(true);
-		//functionText2.setWrapStyleWord(true);
-		//functionText2.setEditable(false);
-		//c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.5;
+		c.weightx = 1;
 		c.gridwidth = 1;
 		c.gridx = 1;
 		c.gridy = 2;
+		functionText2.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		jp.add(functionText2, c);
 
-		//JEditorPane functionText3 = new JEditorPane();
+		//Sandbox 
 		JLabel functionText3 = new JLabel();
-		//functionText3.setEditorKit(kit);
 		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
-		c.weightx = 0.5;
+		c.weightx = 1;
 		c.gridwidth = 1;
 		c.gridx = 2;
 		c.gridy = 2;
+		functionText3.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		jp.add(functionText3, c);
 
 
-
-
-
+		FormBuilder hinzufügen statt gridbagLayout
 		/*
-		jp.add(ueberschrift);
-		jp.add(einleitungText);
-		jp.add(functionText1);
-		jp.add(functionText2);
-		jp.add(functionText3);
+		// gibt einen JComponent zurück, der .debug(true)
+				return FormBuilder.create() // Rote Linien zeichnen
+						.columns("100dlu, center:200dlu, 100dlu") //
+						.rows("p, 20dlu, p, $lg, top:300dlu") //
+						.padding(Paddings.DIALOG) //
+						.add(previousTaskButton).xy(1, 2) //
+						.add(titleTaskLabel).xy(2, 1) //
+						.add(nextTaskButton).xy(3, 2) //
+						.addSeparator("Aufgabentext").xyw(1, 3, 3) //
+						.add(einleitungText).xyw(1, 5, 3) //
+						.build(); //
 
-		 */
+*/
 		panel.add(jp);
 	}
 
