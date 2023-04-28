@@ -8,9 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JEditorPane;
 
-import javax.swing.text.html.HTMLEditorKit;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
@@ -28,9 +26,8 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton Button1 = new JButton("Test");
 	private JButton Button2 = new JButton("Test2");
 	private JButton Button3 = new JButton("Test3");	
-	//private JEditorPane text = new JEditorPane();
 	private JLabel text = new JLabel();
-	private HTMLEditorKit HtmlKit = new HTMLEditorKit();
+
 	
 
 	private String bla = new String("Test sadgfsafg sdafasfashdflashflasfhsahfsaifhaswiofhsaihfvsoadhjfsaohfdsaodfhasioufhvasdoivhsad9iuhfvas9u");
@@ -73,8 +70,7 @@ public class Hilfe extends HAWView implements ActionListener{
 
 	public JComponent buildContentText() {
 		
-		//text.setEditorKit(HtmlKit);
-		//text.setEditable(false);
+
 		return FormBuilder.create()
 				.columns("center:300dlu")
 				.rows("p,3dlu,p,400dlu")
