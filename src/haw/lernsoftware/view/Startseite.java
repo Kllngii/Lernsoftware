@@ -26,7 +26,7 @@ public class Startseite extends HAWView {
 	
 	Logger log = Logger.getLogger(getClass());
 	JPanel jp;
-	
+	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	
 	public Startseite() {
 		constructStartseite();
@@ -43,12 +43,12 @@ public class Startseite extends HAWView {
 		//jp.setLayout(new FlowLayout(1, 100, 100)); // align from left to right, horizantal gap, vertical gap 
 		GridBagLayout gridbag = new GridBagLayout();
 	    jp.setLayout(gridbag);
-	    jp.setBorder(new EmptyBorder(0,300,0,300));
+	    jp.setBorder(new EmptyBorder(0,300,0,300));			//Creates an empty border with the specified insets.
 	    GridBagConstraints c = new GridBagConstraints();
 	    c.anchor = GridBagConstraints.NORTH;
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.weighty = 1.0;
-	    c.insets = new Insets(5,20,0,20);
+	    c.insets = new Insets(5,10,0,10);
 	    
 	    HTMLEditorKit kit = new HTMLEditorKit();
 	    
@@ -64,12 +64,14 @@ public class Startseite extends HAWView {
 		c.gridy = 0; 
 		jp.add(ueberschrift, c);
 	    
-		JEditorPane einleitungText = new JEditorPane();
-		einleitungText.setEditorKit(kit);
+		//JEditorPane einleitungText = new JEditorPane();
+		JLabel einleitungText = new JLabel();
+		einleitungText.setBorder(this.border);
+		//einleitungText.setEditorKit(kit);
 		einleitungText.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.einleitungstext"));
 		//einleitungText.setLineWrap(true);
 		//einleitungText.setWrapStyleWord(true);
-		einleitungText.setEditable(false);
+		//einleitungText.setEditable(false);
 		c.ipady = 40;      //make this component tall
 		c.weightx = 0.0;
 		c.gridwidth = 3;
@@ -78,12 +80,14 @@ public class Startseite extends HAWView {
 		jp.add(einleitungText, c);
 		
 		
-		JEditorPane functionText1 = new JEditorPane();
-		functionText1.setEditorKit(kit);
+		//JEditorPane functionText1 = new JEditorPane();
+		JLabel functionText1 = new JLabel();
+		functionText1.setBorder(this.border);
+		//functionText1.setEditorKit(kit);
 		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
 		//functionText1.setLineWrap(true);
 		//functionText1.setWrapStyleWord(true);
-		functionText1.setEditable(false);
+		//functionText1.setEditable(false);
 		//c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipady = 0;      //make this component tall
 		c.weightx = 0.5;
@@ -92,12 +96,13 @@ public class Startseite extends HAWView {
 		c.gridy = 2;
 		jp.add(functionText1, c);
 		
-		JEditorPane functionText2 = new JEditorPane();
-		functionText2.setEditorKit(kit);
+		//JEditorPane functionText2 = new JEditorPane();
+		JLabel functionText2 = new JLabel();
+		//functionText2.setEditorKit(kit);
 		functionText2.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.aufgaben"));
 		//functionText2.setLineWrap(true);
 		//functionText2.setWrapStyleWord(true);
-		functionText2.setEditable(false);
+		//functionText2.setEditable(false);
 		//c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridwidth = 1;
