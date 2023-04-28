@@ -3,10 +3,13 @@ package haw.lernsoftware;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.PopupMenu;
 import java.awt.Taskbar;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.log4j.Logger;
 
@@ -37,7 +40,6 @@ public class Lernsoftware extends HAWView {
 	}
 
 	private void initialize() {
-		PlasticLookAndFeel.setPlasticTheme(new ExperienceRoyale());
 		frame = new JFrame();
 		frame.setTitle(Konst.SO_HEISST_DAS_DING);
 
@@ -48,27 +50,33 @@ public class Lernsoftware extends HAWView {
 		log.info("Baue jetzt den Frame");
 		long timestart = System.currentTimeMillis();
 		log.info("Ich werde heute auf " + System.getProperty("os.name") + " ausgeführt. " + (System.getProperty("os.name").startsWith("Mac") ? "Welch eine Freude!" : "Ist ganz ok..."));
-		
+
 		Image icon = ResourceProvider.loadImage(Konst.ICON_PATH);
 		if(icon != null)
 			frame.setIconImage(icon);
 		else
 			log.warn("Das Icon konnte nicht geladen werden!");
-		
+
 		//Plattformspezifischer Code
 		if(System.getProperty("os.name").startsWith("Mac OS X")) {
 			//XXX MacOS-spezifisches Setup hier
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
-		    System.setProperty("apple.awt.graphics.UseQuartz", "true");
-		    final Taskbar taskbar = Taskbar.getTaskbar();
-		    taskbar.setIconImage(icon);
-		    //TODO Icon hinzufügen und setzen?
+			System.setProperty("apple.awt.graphics.UseQuartz", "true");
+			final Taskbar taskbar = Taskbar.getTaskbar();
+			taskbar.setIconImage(icon);
+			System.setProperty("com.apple.mrj.application.apple.menu.about.name",Konst.SO_HEISST_DAS_DING);
+			System.setProperty("apple.awt.textantialiasing", "true");
+			System.setProperty("apple.awt.graphics.EnableQ2DX","true");
+			try {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+				log.warn(e);
+			}
 		} else if(System.getProperty("os.name").startsWith("Windows")) {
 			//XXX Windows-spezifisches Setup hier
 		} else {
 			//XXX Linux-spezifisches Setup hier
 		}
-		
 		plotter = new GUI(frame);
 
 		frame.setVisible(true);
