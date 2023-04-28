@@ -1,5 +1,6 @@
 package haw.lernsoftware.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
@@ -31,12 +32,16 @@ public class Aufgabentext extends HAWView {
 		JLabel titleTaskLabel = new JLabel("Aufgabe X:");
 		JButton nextTaskButton = new JButton("NEXT");
 		JButton previousTaskButton = new JButton("PREVIOUS");
-		JTextArea einleitungText = new JTextArea();
+		JTextArea einleitungText = new JTextArea("Test \n wow");
+		// JLabel einleitungText = new JLabel("<html>Test <BR> wow<html>");
 		einleitungText.setLineWrap(true);
 		einleitungText.setPreferredSize(new Dimension(100, 100));
+		einleitungText.setEditable(false);
+		Color color = panel.getBackground();
+		einleitungText.setBackground(color);
 
-		// gibt einen JComponent zurück, der
-		return FormBuilder.create().debug(true) // Rote Linien zeichnen
+		// gibt einen JComponent zurück, der .debug(true)
+		return FormBuilder.create() // Rote Linien zeichnen
 				.columns("100dlu, center:200dlu, 100dlu") //
 				.rows("p, 20dlu, p, $lg, top:300dlu") //
 				.padding(Paddings.DIALOG) //
