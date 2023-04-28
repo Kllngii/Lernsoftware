@@ -1,7 +1,10 @@
 package haw.lernsoftware.resources;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -80,5 +83,18 @@ public class ResourceProvider {
 		}
 		
 		return (String) p.getOrDefault(identifier, "ERROR");
+	}
+	/**
+	 * Lädt ein {@link Image} 
+	 * @param path Der Pfad der Bilddatei relativ zum resources-Package
+	 * @return das Bild
+	 */
+	public static Image loadImage(String path) {
+		try {
+			return Toolkit.getDefaultToolkit().getImage(ResourceProvider.class.getResource(path).toURI().toURL());
+		} catch (MalformedURLException | URISyntaxException e) {
+			log.error(e.getMessage());
+		}
+		return null;
 	}
 }

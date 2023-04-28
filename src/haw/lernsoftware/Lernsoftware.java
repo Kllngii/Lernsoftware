@@ -2,6 +2,8 @@ package haw.lernsoftware;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Taskbar;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -47,13 +49,24 @@ public class Lernsoftware extends HAWView {
 		long timestart = System.currentTimeMillis();
 		log.info("Ich werde heute auf " + System.getProperty("os.name") + " ausgeführt. " + (System.getProperty("os.name").startsWith("Mac") ? "Welch eine Freude!" : "Ist ganz ok..."));
 		
+		Image icon = ResourceProvider.loadImage(Konst.ICON_PATH);
+		if(icon != null)
+			frame.setIconImage(icon);
+		else
+			log.warn("Das Icon konnte nicht geladen werden!");
+		
 		//Plattformspezifischer Code
-		if(System.getProperty("os.name").startsWith("Mac OS X")) { //MacOS
+		if(System.getProperty("os.name").startsWith("Mac OS X")) {
+			//XXX MacOS-spezifisches Setup hier
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
 		    System.setProperty("apple.awt.graphics.UseQuartz", "true");
+		    final Taskbar taskbar = Taskbar.getTaskbar();
+		    taskbar.setIconImage(icon);
 		    //TODO Icon hinzufügen und setzen?
-		} else if(System.getProperty("os.name").startsWith("Windows")) { //Windows
-			//TODO Icon hinzufügen und setzen?
+		} else if(System.getProperty("os.name").startsWith("Windows")) {
+			//XXX Windows-spezifisches Setup hier
+		} else {
+			//XXX Linux-spezifisches Setup hier
 		}
 		
 		plotter = new GUI(frame);
