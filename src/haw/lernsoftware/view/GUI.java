@@ -2,21 +2,26 @@ package haw.lernsoftware.view;
 
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.plaf.IconUIResource;
 
 import org.apache.log4j.Logger;
 
+import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.Model;
 import haw.lernsoftware.model.SpeicherService;
 import haw.lernsoftware.model.SpeicherService.ModelWithErrors;
 import haw.lernsoftware.model.WindowSelect;
+import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
 /**
@@ -38,8 +43,7 @@ public class GUI implements ActionListener {
 	private JMenuItem menuItemStartseite = new JMenuItem("Startseite");
 	private JMenuItem menuItemLiniendiagramm = new JMenuItem("Liniengraph");
 	private JMenuItem menuItemAufgabentext = new JMenuItem("Aufgabentext");
-	
-	private JMenu fensterHilfe = new JMenu("Hilfe");
+	private JMenuItem fensterHilfe = new JMenuItem("Hilfe");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite();
@@ -66,20 +70,23 @@ public class GUI implements ActionListener {
 
 		menuBar.add(dateiMenü);
 		menuBar.add(fensterMenü);
-		menuBar.add(fensterHilfe);
-		fensterHilfe.addActionListener(this);
 		
 		dateiMenü.add(menuItemSpeichern);
 		dateiMenü.add(menuItemLaden);
 		menuItemSpeichern.addActionListener(this);
 		menuItemLaden.addActionListener(this);
+		
+		Image img = ResourceProvider.loadImage("hilfe.png");
+		fensterHilfe.setIcon(new ImageIcon(img.getScaledInstance(16, 16, 0)));
 
 		fensterMenü.add(menuItemStartseite);
 		fensterMenü.add(menuItemLiniendiagramm);
 		fensterMenü.add(menuItemAufgabentext);
+		fensterMenü.add(fensterHilfe);
 		menuItemStartseite.addActionListener(this);
 		menuItemLiniendiagramm.addActionListener(this);
 		menuItemAufgabentext.addActionListener(this);
+		fensterHilfe.addActionListener(this);
 	}
 	
 	/**
@@ -122,8 +129,9 @@ public class GUI implements ActionListener {
 			log.debug("Wechsle zur Startseite");
 			layout.show(frame.getContentPane(), WindowSelect.STARTSEITE.getIdentifier());
 			model.setSelectedWindow(WindowSelect.STARTSEITE);
-		}else if(e.getSource() == fensterHilfe) {
-			
+		} else if(e.getSource() == fensterHilfe) {
+			log.debug("Öffne das Hilfe-Fenster!");
+			new Hilfe();
 		}
 	}
 
