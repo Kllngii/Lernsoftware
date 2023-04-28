@@ -3,11 +3,15 @@ package haw.lernsoftware.view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.BorderFactory;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 
 
 import com.jgoodies.forms.builder.FormBuilder;
@@ -37,7 +41,7 @@ public class Hilfe extends HAWView implements ActionListener{
 		//Fenster erstellen
 		JFrame fenster = new JFrame("Hilfe");
 
-		fenster.setSize(800, 800);
+		fenster.setSize(800, 750);
 		fenster.getContentPane().add(panel);
 		
 
@@ -59,10 +63,13 @@ public class Hilfe extends HAWView implements ActionListener{
 		
 		return FormBuilder.create()
 				.columns("center:90dlu")
-				.rows("p")
-				.debug(true)                                 // Rote Linien zeichnen
+				.rows("p,50dlu,p,50dlu,p,50dlu,p,50dlu,p,50dlu,p,50dlu,p,50dlu,60dlu")
+				//.debug(true)                                 // Rote Linien zeichnen
 				.padding(Paddings.DIALOG)
-				.addStack(Button1, Button2, Button3) .xy(1, 1)
+				.addStack(Button1) .xy(1, 2)
+				.addStack(Button2) .xy(1, 4)
+				.addStack(Button3) .xy(1, 6)
+				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
 				.build();
 		
 
@@ -72,12 +79,13 @@ public class Hilfe extends HAWView implements ActionListener{
 		
 
 		return FormBuilder.create()
-				.columns("center:300dlu")
-				.rows("p,3dlu,p,400dlu")
-				.debug(true)                                 // Rote Linien zeichnen
+				.columns("left:300dlu")
+				.rows("10dlu,top:400dlu")
+				//.debug(true)                                 // Rote Linien zeichnen
 				.padding(Paddings.DIALOG)
 				.add("Überschrift") .xy(1, 1)
-				.add(text)  .xy(1, 4)
+				.add(text)  .xy(1, 2)
+				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
 				.build();
 
 	}

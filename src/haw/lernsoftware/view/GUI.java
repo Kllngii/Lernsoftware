@@ -38,6 +38,8 @@ public class GUI implements ActionListener {
 	private JMenuItem menuItemStartseite = new JMenuItem("Startseite");
 	private JMenuItem menuItemLiniendiagramm = new JMenuItem("Liniengraph");
 	private JMenuItem menuItemAufgabentext = new JMenuItem("Aufgabentext");
+	
+	private JMenu fensterHilfe = new JMenu("Hilfe");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite();
@@ -64,6 +66,8 @@ public class GUI implements ActionListener {
 
 		menuBar.add(dateiMenü);
 		menuBar.add(fensterMenü);
+		menuBar.add(fensterHilfe);
+		fensterHilfe.addActionListener(this);
 		
 		dateiMenü.add(menuItemSpeichern);
 		dateiMenü.add(menuItemLaden);
@@ -118,6 +122,8 @@ public class GUI implements ActionListener {
 			log.debug("Wechsle zur Startseite");
 			layout.show(frame.getContentPane(), WindowSelect.STARTSEITE.getIdentifier());
 			model.setSelectedWindow(WindowSelect.STARTSEITE);
+		}else if(e.getSource() == fensterHilfe) {
+			
 		}
 	}
 
