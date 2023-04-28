@@ -43,6 +43,7 @@ public class Hilfe extends HAWView implements ActionListener{
 
 		fenster.setSize(800, 750);
 		fenster.getContentPane().add(panel);
+		fenster.setResizable(false);
 		
 
 		panel.add(buildContentMenu(), BorderLayout.WEST);
