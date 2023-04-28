@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -21,15 +22,13 @@ import static haw.lernsoftware.Konst.*;
 
 public class LinienDiagramm extends HAWView {
 	
-	private int sizeLeft = 150;
-	private int sizeRight = 300;
-	private int sizeLine;
-	private int numberMenge;
-	private int numberElemente;
+	private int linewidth = STD_LINEWIDTH;
+	private int numberEreignisse;
+	private int numberElementare;
 	
-	Logger log = Logger.getLogger(getClass());
-	List<Menge> mengen;
-	Ereignismenge eMenge;
+	private Logger log = Logger.getLogger(getClass());
+	private List<Menge> mengen;
+	private Ereignismenge eMenge;
 	
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.fromJSON(ResourceProvider.getFileContentAsString("würfel.em").replace(" ", ""));
@@ -46,9 +45,8 @@ public class LinienDiagramm extends HAWView {
 	
 	private void constructDiagramm(List<Menge> mengen, Ereignismenge e) {
 		panel = new DrawingPanel(this);
-		numberMenge = mengen.size();
-		numberElemente = e.getEreignisse().size();
-		panel.repaint();
+		numberEreignisse = mengen.size();
+		numberElementare = e.getEreignisse().size();
 	}
 
 	public static void main(String[] args) {
@@ -57,36 +55,55 @@ public class LinienDiagramm extends HAWView {
 			JFrame f = new JFrame();
 			f.setContentPane(d.panel);
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//			f.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			f.setResizable(true);
-
+			f.setSize(720,480);
 			f.setVisible(true);
 		});
+	}
 
-	}
+	
+	
 	private void setStroked(Graphics2D g2d) {
-		setStroked(g2d, STD_LINEWIDTH);
+		g2d.setStroke(new BasicStroke(linewidth, BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER,10.0f,new float[] {16.0f,20.0f},0.0f));
 	}
-	private void setStroked(Graphics2D g2d, int width) {
-		g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER,10.0f,new float[] {16.0f,20.0f},0.0f));
+	
+	private void setLinewidth(Graphics2D g2d, int newWidth) {
+		g2d.setStroke(new BasicStroke(newWidth));
+		linewidth = newWidth;
 	}
 
 	/**
-	 * Fenster von oben links (BORDER_X|BORDER_Y) -> unten rechts (BORDER_X + d.width | BORDER_Y + d.height)
+	 * Fensterecken:        (BORDER_X, BORDER_Y) --------------------------- (BORDER_X + d.width,  BORDER_Y)
+	 * 								 |													 |
+	 *								 |													 |
+	 * 								 |													 |
+	 * 								 |													 |
+	 * 			     (BORDER_X, BORDER_Y + d.height) ----------------- (BORDER_X + d.width, BORDER_Y + d.height)
 	 */
+	
 	public void paintPanel(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		Dimension d = panel.getSize();
-		g2d.setStroke(new BasicStroke(2));
-		g2d.drawLine(BORDER_X+sizeLeft, BORDER_Y, panel.getSize().width - sizeRight - BORDER_X, BORDER_Y);
+		setLinewidth(g2d, STD_LINEWIDTH);
+		int diagWidth = d.width - 20;
+		int diagHeight = d.height - 20;
 		
-		g2d.drawLine(BORDER_X+sizeLeft, BORDER_Y, BORDER_Y+sizeLeft, 100*(numberMenge+1));
-		g2d.drawLine(BORDER_X+sizeLeft, BORDER_Y, BORDER_Y+sizeLeft, 100*(numberMenge+1));
+		g2d.drawLine(BORDER_X, BORDER_Y + 10, BORDER_X + diagWidth, BORDER_Y + 10);
+		g2d.drawLine(BORDER_X, BORDER_Y + 10, BORDER_X, BORDER_Y + diagHeight);
 		
-		g2d.drawString(eMenge.getEreignisse().get(1).getName(), 0, BORDER_Y);
+		for (int i = 0; i < numberElementare; i++) {
+			g2d.drawString(eMenge.getEreignisse().get(i).getName(), BORDER_X + i*diagWidth/numberElementare + diagWidth/(2*numberElementare), BORDER_Y);
+			g2d.drawLine(BORDER_X + i*(diagWidth/numberElementare), BORDER_Y + 10, BORDER_X + i*(diagWidth/numberElementare), BORDER_Y + diagHeight);
+		}
 		
-		setStroked(g2d);
+		g2d.drawLine(BORDER_X + diagWidth, BORDER_Y + 10, BORDER_X + diagWidth, BORDER_Y + diagHeight);
 		
+		setLinewidth(g2d, 1);
+		
+		for (int j = 0; j <= numberEreignisse; j++) {
+//			g2d.drawString(eMenge.getEreignisse().get(i).getName(), BORDER_X + i*diagWidth/numberElementare + diagWidth/(2*numberElementare), BORDER_Y);
+			g2d.drawLine(BORDER_X, BORDER_Y + 10 + j*(diagHeight/numberEreignisse-100), BORDER_X + diagWidth, BORDER_Y + 10 + j*(diagHeight/numberEreignisse-100));
+		}
 	}
-
 }
