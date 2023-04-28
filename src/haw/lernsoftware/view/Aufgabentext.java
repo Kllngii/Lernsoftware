@@ -40,8 +40,8 @@ public class Aufgabentext extends HAWView {
 		Color color = panel.getBackground();
 		einleitungText.setBackground(color);
 
-		// gibt einen JComponent zurück, der
-		return FormBuilder.create().debug(true) // Rote Linien zeichnen
+		// gibt einen JComponent zurück, der .debug(true)
+		return FormBuilder.create() // Rote Linien zeichnen
 				.columns("100dlu, center:200dlu, 100dlu") //
 				.rows("p, 20dlu, p, $lg, top:300dlu") //
 				.padding(Paddings.DIALOG) //
