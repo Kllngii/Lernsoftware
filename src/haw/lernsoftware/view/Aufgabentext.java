@@ -2,6 +2,9 @@ package haw.lernsoftware.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -13,35 +16,45 @@ import org.apache.log4j.Logger;
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
+import haw.lernsoftware.model.Aufgabe;
 import haw.lernsoftware.model.Model;
 
-public class Aufgabentext extends HAWView {
+public class Aufgabentext extends HAWView implements ActionListener {
 	private Model model;
 	private Logger log = Logger.getLogger(getClass());
+
+	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
+	private JButton nextTaskButton = new JButton("NEXT");
+	private JButton previousTaskButton = new JButton("PREVIOUS");
+	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
+	private String aufgText = new String();
 
 	// fügt dem panel von Aufgabentext einen JComponent zu
 	public Aufgabentext(Model model) {
 		this.model = model;
 		panel.add(buildContentText());
-//		panel.add(buildContentProgressBar(), BorderLayout.CENTER);
 
 	}
 
 	// erstellt einen JComponent
 	public JComponent buildContentText() {
-		JLabel titleTaskLabel = new JLabel("Aufgabe X:");
-		JButton nextTaskButton = new JButton("NEXT");
-		JButton previousTaskButton = new JButton("PREVIOUS");
-		JTextArea einleitungText = new JTextArea("Test \n wow");
-		// JLabel einleitungText = new JLabel("<html>Test <BR> wow<html>");
-		einleitungText.setLineWrap(true);
-		einleitungText.setPreferredSize(new Dimension(100, 100));
-		einleitungText.setEditable(false);
-		Color color = panel.getBackground();
-		einleitungText.setBackground(color);
 
-		// gibt einen JComponent zurück, der .debug(true)
-		return FormBuilder.create() // Rote Linien zeichnen
+		previousTaskButton.setEnabled(false);
+
+		// Aufgabentext erstellen und formatieren
+		aufgabenText.setText(model.getCurrentAufgabe().getText());
+		aufgabenText.setLineWrap(true);
+		aufgabenText.setPreferredSize(new Dimension(100, 100));
+		aufgabenText.setEditable(false);
+		Color color = panel.getBackground();
+		aufgabenText.setBackground(color);
+
+		// Button Listener
+		previousTaskButton.addActionListener(this);
+		nextTaskButton.addActionListener(this);
+
+		// gibt einen JComponent zurück, der
+		return FormBuilder.create().debug(true) // Rote Linien zeichnen
 				.columns("100dlu, center:200dlu, 100dlu") //
 				.rows("p, 20dlu, p, $lg, top:300dlu") //
 				.padding(Paddings.DIALOG) //
@@ -49,19 +62,35 @@ public class Aufgabentext extends HAWView {
 				.add(titleTaskLabel).xy(2, 1) //
 				.add(nextTaskButton).xy(3, 2) //
 				.addSeparator("Aufgabentext").xyw(1, 3, 3) //
-				.add(einleitungText).xyw(1, 5, 3) //
+				.add(aufgabenText).xyw(1, 5, 3) //
 				.build(); //
 	}
 
-//	public JComponent buildContentProgressBar() {
-//		JLabel titleField = new JLabel("Title");
-//		JLabel authorField = new JLabel("Title");
-//		JLabel priceField = new JLabel("Title");
-//		
-//
-//		return FormBuilder.create().columns("left:90dlu, 3dlu, 200dlu").rows("p, $lg, p, $lg, p")
-//				.padding(Paddings.DIALOG).add("_Title:").xy(1, 1).add(titleField).xy(3, 1).add("_Author:").xy(1, 3)
-//				.add(einleitungText).xy(3, 3).add("_Price:").xy(1, 5).add(priceField).xy(3, 5).build();
-//	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		List<Aufgabe> aufgaben = model.getAufgaben();
+		int i = aufgaben.indexOf(model.getCurrentAufgabe());
 
+		if (e.getSource() == previousTaskButton) {
+			model.setCurrentAufgabe(aufgaben.get(i - 1));
+			i--;
+			aufgabenText.setText(model.getCurrentAufgabe().getText());
+		}
+		if (e.getSource() == nextTaskButton) {
+			model.setCurrentAufgabe(aufgaben.get(i + 1));
+			i++;
+			aufgabenText.setText(model.getCurrentAufgabe().getText());
+		}
+		panel.repaint();
+
+		if (i == 0) {
+			previousTaskButton.setEnabled(false);
+		} else if (i == aufgaben.size() - 1) {
+			nextTaskButton.setEnabled(false);
+		} else {
+			previousTaskButton.setEnabled(true);
+			nextTaskButton.setEnabled(true);
+		}
+	}
 }
