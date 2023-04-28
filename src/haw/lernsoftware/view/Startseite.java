@@ -48,9 +48,9 @@ public class Startseite extends HAWView {
 	    c.anchor = GridBagConstraints.NORTH;
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.weighty = 1.0;
-	    
 	    c.insets = new Insets(5,20,0,20);
 	    
+	    HTMLEditorKit kit = new HTMLEditorKit();
 	    
 	    JLabel ueberschrift = new JLabel("Lernsoftware Startseite");
 	    ueberschrift.setHorizontalAlignment(SwingConstants.CENTER);
@@ -64,9 +64,11 @@ public class Startseite extends HAWView {
 		c.gridy = 0; 
 		jp.add(ueberschrift, c);
 	    
-		JTextArea einleitungText = new JTextArea(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.einleitungstext"));
-		einleitungText.setLineWrap(true);
-		einleitungText.setWrapStyleWord(true);
+		JEditorPane einleitungText = new JEditorPane();
+		einleitungText.setEditorKit(kit);
+		einleitungText.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.einleitungstext"));
+		//einleitungText.setLineWrap(true);
+		//einleitungText.setWrapStyleWord(true);
 		einleitungText.setEditable(false);
 		c.ipady = 40;      //make this component tall
 		c.weightx = 0.0;
@@ -75,7 +77,7 @@ public class Startseite extends HAWView {
 		c.gridy = 1; 
 		jp.add(einleitungText, c);
 		
-		HTMLEditorKit kit = new HTMLEditorKit();
+		
 		JEditorPane functionText1 = new JEditorPane();
 		functionText1.setEditorKit(kit);
 		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
@@ -103,8 +105,9 @@ public class Startseite extends HAWView {
 		c.gridy = 2;
 		jp.add(functionText2, c);
 		
-		JTextArea functionText3 = new JTextArea("Diagramm-Sandbox");
-		c.fill = GridBagConstraints.HORIZONTAL;
+		JEditorPane functionText3 = new JEditorPane();
+		functionText3.setEditorKit(kit);
+		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
 		c.weightx = 0.5;
 		c.gridwidth = 1;
 		c.gridx = 2;
