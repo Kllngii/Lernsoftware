@@ -5,9 +5,6 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,7 +20,7 @@ import haw.lernsoftware.view.HAWView;
 
 import static haw.lernsoftware.Konst.*;
 
-public class LinienDiagramm extends HAWView implements MouseListener {
+public class LinienDiagramm extends HAWView {
 	
 	private int linewidth = STD_LINEWIDTH;
 	private int numberEreignisse;
@@ -33,20 +30,19 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private List<Menge> mengen;
 	private Ereignismenge eMenge;
 	
-	private List<Integer> spaltenCoord = new ArrayList<Integer>();
-	private List<Integer> zeilenCoord = new ArrayList<Integer>();
-	
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.fromJSON(ResourceProvider.getFileContentAsString("würfel.em").replace(" ", ""));
 
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
 
-		Menge mengeA = new Menge("kleiner als 3", eMenge, eMenge.getEreignisse().subList(0, 3));
-		Menge mengeB = new Menge("zwischen 1 und 4", eMenge, eMenge.getEreignisse().subList(1, 4));
-		Menge mengeC = new Menge("zwischen 3 und 5", eMenge, eMenge.getEreignisse().subList(3, 5));
+		Menge mengeA = new Menge("kleiner gleich 3", eMenge, eMenge.getEreignisse().subList(0, 3));
+		Menge mengeB = new Menge("zwischen 2 und 4", eMenge, eMenge.getEreignisse().subList(1, 4));
+		Menge mengeC = new Menge("zwischen 4 und 5", eMenge, eMenge.getEreignisse().subList(3, 5));
+		Menge mengeD = new Menge("alles", eMenge, eMenge.getEreignisse().subList(0, 6));
+		Menge mengeE = new Menge("nix", eMenge, eMenge.getEreignisse().subList(0, 0));
 		//Die Mengen brauchen noch einen Namen und eine Anordungsnummer
 		
-		mengen = List.of(mengeA, mengeB, mengeC);
+		mengen = List.of(mengeA, mengeB, mengeC, mengeD, mengeE);
 		constructDiagramm(mengen, eMenge);
 	}
 	
@@ -54,7 +50,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		panel = new DrawingPanel(this);
 		numberEreignisse = mengen.size();
 		numberElementare = e.getEreignisse().size();
-		panel.addMouseListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -79,6 +74,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		linewidth = newWidth;
 	}
 	
+	// Elementarereignis in Spalte "order" in der Menge enthalten?
 	private boolean linesegment (Menge menge, int order) {
 		for (int k = 0; k < menge.getEreignisse().size(); k++) {
 			if (menge.getEreignisse().get(k).getOrder() == order) {
@@ -86,6 +82,15 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			}
 		}
 		return false;
+	}
+	
+	private int offset(Graphics2D g2d) {
+		int maxlength = 0;
+		for (int j = 0; j < numberEreignisse; j++) {
+			if (Integer.parseInt(g2d.getFontMetrics().stringWidth(mengen.get(j).getName())) > maxlength) {
+				maxlength = Integer.parseInt(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
+			}
+		}
 	}
 
 	/**
@@ -104,69 +109,36 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		int diagWidth = d.width - 20;
 		int diagHeight = d.height - 20;
 		int linewidth = 40;
-		int offsetlr = 100;
+		int offsetlr = offset(g2d);
+		int currentLeftBorder = BORDER_X + offsetlr;
 		
 		// Rahmen
 		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + 10);
 		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + offsetlr, BORDER_Y + diagHeight);
 		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
 		
-		spaltenCoord.clear();
-		
 		// Spalten
 		setLinewidth(g2d, 1);
+		currentLeftBorder = BORDER_X + offsetlr;
 		for (int i = 0; i < numberElementare; i++) {
-			g2d.drawString(eMenge.getEreignisse().get(i).getName(), BORDER_X + offsetlr + i*(diagWidth-2*offsetlr)/numberElementare + (diagWidth-2*offsetlr)/(2*numberElementare), BORDER_Y);
-			g2d.drawLine(BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + 10, BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + diagHeight);
-			spaltenCoord.add(BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare));
+			g2d.drawString(eMenge.getEreignisse().get(i).getName(), currentLeftBorder + (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)) / 2, BORDER_Y);
+			g2d.drawLine(currentLeftBorder, BORDER_Y + 10, currentLeftBorder, BORDER_Y + diagHeight);
+			currentLeftBorder += (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 		}
 		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
-		spaltenCoord.add(BORDER_X + diagWidth - offsetlr);
 		
 		// Zeilen
 		setLinewidth(g2d, STD_LINEWIDTH);
 		for (int j = 0; j < numberEreignisse; j++) {
+			currentLeftBorder = BORDER_X + offsetlr;
 			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
 			for (int i = 0; i < numberElementare; i++) {
 				if (linesegment(mengen.get(j), i+1)) {
-					g2d.drawLine(BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + 10 + j*linewidth + linewidth/2, BORDER_X + offsetlr + (i+1)*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + 10 + j*linewidth + linewidth/2);
+					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)), BORDER_Y + 10 + j*linewidth + linewidth/2);
 				}
+				currentLeftBorder += (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 			}
-			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
+			g2d.drawString(mengen.get(j).getProbability(), BORDER_X + + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
 		}
-		zeilenCoord.add(BORDER_Y + 10 + numberEreignisse*linewidth + linewidth/2 - 2*BORDER_X);
 	}
-	
-	public Koordinate getPosition(MouseEvent e) {
-		int spalte = -1;
-		for(Integer x : spaltenCoord) {
-			if(x < e.getPoint().getX()) {
-				spalte = spaltenCoord.indexOf(x);
-			}
-		}
-		int zeile = -1;
-		for(Integer y : zeilenCoord) {
-			if(y < e.getPoint().getY()) {
-				zeile = zeilenCoord.indexOf(y);
-			}
-		}
-		return new Koordinate(zeile, spalte);
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		log.info(getPosition(e));
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-
-	@Override
-	public void mouseExited(MouseEvent e) {}
 }
