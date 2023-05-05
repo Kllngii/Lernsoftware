@@ -2,6 +2,7 @@ package haw.lernsoftware.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Taskbar;
 import java.awt.Taskbar.Feature;
@@ -13,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
@@ -32,10 +34,11 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton Button3 = new JButton("Test3");	
 	private JLabel text = new JLabel();
 	private JLabel Ueberschrift = new JLabel("Überschrift");
+	private JTextArea test = new JTextArea(8,200);
 
 	
 
-	private String bla = new String("Test sadgfsafg sdafasfashdflashflasfhsahfsaifhaswiofhsaihfvsoadhjfsaohfdsaodfhasioufhvasdoivhsad9iuhfvas9u");
+	private String bla = new String(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text5"));
 	
 	public  Hilfe() {
 		
@@ -44,7 +47,7 @@ public class Hilfe extends HAWView implements ActionListener{
 
 		fenster.setSize(800, 750);
 		fenster.getContentPane().add(panel);
-		fenster.setResizable(false);
+		//fenster.setResizable(false);
 		
 
 		panel.add(buildContentMenu(), BorderLayout.WEST);
@@ -90,10 +93,11 @@ public class Hilfe extends HAWView implements ActionListener{
 		return FormBuilder.create()
 				.columns("left:300dlu")
 				.rows("10dlu,top:400dlu")
-				//.debug(true)                                 // Rote Linien zeichnen
+				.debug(true)                                 // Rote Linien zeichnen
 				.padding(Paddings.DIALOG)
 				.add(Ueberschrift) .xy(1, 1)
-				.add(text)  .xy(1, 2)
+				//.add(bla)  .xy(1, 2)
+				.add(test) .xy(1, 2)
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
 				.build();
 
@@ -114,6 +118,12 @@ public class Hilfe extends HAWView implements ActionListener{
 		if(e.getSource() == Button2) {
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text2"));
 			Ueberschrift.setText("Überschrift2");
+			test.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text5"));
+			test.setWrapStyleWord(true);
+			test.setLineWrap(true);
+			//test.setPreferredSize(new Dimension(400,400));
+			//test.setRows(4);
+			
 		}
 		if(e.getSource() == Button3) {
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text3"));
