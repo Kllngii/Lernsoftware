@@ -47,7 +47,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		previousTaskButton.setEnabled(false);
 		titleTaskLabel.setText("Aufgabe: 1");
 
-		progress = new JProgressBar(0, aufgaben.size());
+		progress = new JProgressBar(0, aufgaben.size() - 1);
 		progress.setValue(aufgaben.indexOf(model.getCurrentAufgabe()));
 		progress.setStringPainted(true);
 
@@ -101,6 +101,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		if (i == 0) {
 			previousTaskButton.setEnabled(false);
 		} else if (i == aufgaben.size() - 1) {
+			titleTaskLabel.setText("Glückwunsch!");
 			nextTaskButton.setEnabled(false);
 		} else {
 			previousTaskButton.setEnabled(true);
