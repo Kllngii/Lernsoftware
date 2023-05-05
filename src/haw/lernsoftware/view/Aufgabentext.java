@@ -107,6 +107,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			previousTaskButton.setEnabled(true);
 			nextTaskButton.setEnabled(true);
 		}
+import javax.swing.JLabel;
 
 import org.apache.log4j.Logger;
 

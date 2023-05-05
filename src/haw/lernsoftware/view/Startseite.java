@@ -124,6 +124,7 @@ public class Startseite extends HAWView {
 				.add(functionText2).xy(3, 3) //
 				.add(functionText3).xy(5, 3) //
 				.build(); //
+import javax.swing.JLabel;
 
 import org.apache.log4j.Logger;
 

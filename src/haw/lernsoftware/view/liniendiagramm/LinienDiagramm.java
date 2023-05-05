@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import static haw.lernsoftware.Konst.BORDER_X;
 import static haw.lernsoftware.Konst.BORDER_Y;
 import static haw.lernsoftware.Konst.STD_LINEWIDTH;
 
