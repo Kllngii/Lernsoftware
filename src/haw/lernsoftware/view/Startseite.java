@@ -27,7 +27,10 @@ import com.jgoodies.forms.factories.Paddings;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import haw.lernsoftware.Konst;
+import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.resources.ResourceProvider;
+
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Cursor;
@@ -41,9 +44,11 @@ public class Startseite extends HAWView {
 	Logger log = Logger.getLogger(getClass());
 	JPanel jp;
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
+private GUI gui;
 
 
-	public Startseite() {
+	public Startseite(GUI gui) {
+		this.gui = gui;
 		panel.add(constructStartseite());
 
 		//panel.add(buildContent());
@@ -92,10 +97,10 @@ public class Startseite extends HAWView {
 		functionText2.addMouseListener(new MouseAdapter() {
 			
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				System.out.println("Aufgaben");
+				log.debug("Wechsle zum Aufgabentext");
+				gui.switchToView(WindowSelect.AUFGABENTEXT);
 			}
 		});
-		
 		
 		//Sandbox 
 		JLabel functionText3 = new JLabel();
@@ -105,7 +110,8 @@ public class Startseite extends HAWView {
 		functionText3.addMouseListener(new MouseAdapter() {
 			
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				System.out.println("Sandbox");
+				log.debug("Wechsle zum Liniendiagramm");
+				gui.switchToView(WindowSelect.LINIENDIAGRAMM);
 			}
 		});
 		

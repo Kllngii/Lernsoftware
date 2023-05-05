@@ -45,7 +45,7 @@ public class GUI implements ActionListener {
 	private JMenuItem fensterHilfe = new JMenuItem("Hilfe");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
-	private Startseite startseitenView = new Startseite();
+	private Startseite startseitenView = new Startseite(this);
 	private Aufgabentext aufgabentextView = new Aufgabentext(model);
 
 	public GUI(JFrame frame) {
@@ -131,6 +131,20 @@ public class GUI implements ActionListener {
 		} else if(e.getSource() == fensterHilfe) {
 			log.debug("Öffne das Hilfe-Fenster!");
 			new Hilfe();
+		}
+	}
+	
+	public void switchToView(WindowSelect ws) {
+		CardLayout layout = (CardLayout) frame.getContentPane().getLayout();
+		
+		if(ws == WindowSelect.AUFGABENTEXT) {
+			log.debug("Wechsle zum Aufgabentext");
+			layout.show(frame.getContentPane(), WindowSelect.AUFGABENTEXT.getIdentifier());
+			model.setSelectedWindow(WindowSelect.AUFGABENTEXT);
+		} else if (ws == WindowSelect.LINIENDIAGRAMM) {
+			log.debug("Wechsle zum Liniendiagramm");
+			layout.show(frame.getContentPane(), WindowSelect.LINIENDIAGRAMM.getIdentifier());
+			model.setSelectedWindow(WindowSelect.LINIENDIAGRAMM);
 		}
 	}
 
