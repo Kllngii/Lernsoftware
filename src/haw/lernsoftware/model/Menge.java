@@ -70,9 +70,6 @@ public class Menge {
 		this.ereignisse = ereignisse;
 	}
 	
-<<<<<<< HEAD
-	
-=======
 	public String getProbability() {
 		String fracProbability = "0";
 		double decimalProbability = 0.0;
@@ -90,5 +87,4 @@ public class Menge {
 		
 		return "x/y";
 	}
->>>>>>> parent of 41317a5 (Merge branch 'feature-liniendiagramm' of https://github.com/Kllngii/Lernsoftware into feature-liniendiagramm)
 }
