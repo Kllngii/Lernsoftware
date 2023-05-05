@@ -15,6 +15,7 @@ import javax.swing.JMenuItem;
 
 import org.apache.log4j.Logger;
 
+import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.Model;
 import haw.lernsoftware.model.SpeicherService;
 import haw.lernsoftware.model.SpeicherService.ModelWithErrors;
@@ -74,7 +75,7 @@ public class GUI implements ActionListener {
 		menuItemSpeichern.addActionListener(this);
 		menuItemLaden.addActionListener(this);
 		
-		Image img = ResourceProvider.loadImage("hilfe.png");
+		Image img = ResourceProvider.loadImage(Konst.HILFE_ICON);
 		fensterHilfe.setIcon(new ImageIcon(img.getScaledInstance(16, 16, 0)));
 
 		fensterMenü.add(menuItemStartseite);

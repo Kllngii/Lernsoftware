@@ -2,6 +2,9 @@ package haw.lernsoftware.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Taskbar;
+import java.awt.Taskbar.Feature;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -45,6 +48,13 @@ public class Hilfe extends HAWView implements ActionListener{
 
 		panel.add(buildContentMenu(), BorderLayout.WEST);
 		panel.add(buildContentText(), BorderLayout.EAST);
+		
+		Image icon = ResourceProvider.loadImage(Konst.HILFE_ICON);
+		final Taskbar taskbar = Taskbar.getTaskbar();
+		if(taskbar.isSupported(Feature.ICON_IMAGE))
+			taskbar.setIconImage(icon);
+		if(icon != null)
+			fenster.setIconImage(icon);
 
 		fenster.setVisible(true);
 		
