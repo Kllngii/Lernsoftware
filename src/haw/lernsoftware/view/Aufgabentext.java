@@ -77,13 +77,13 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			model.setCurrentAufgabe(aufgaben.get(i - 1));
 			i--;
 			aufgabenText.setText(model.getCurrentAufgabe().getText());
-			titleTaskLabel.setText("Aufgabe:" + (i + 1));
+			titleTaskLabel.setText("Aufgabe: " + (i + 1));
 		}
 		if (e.getSource() == nextTaskButton) {
 			model.setCurrentAufgabe(aufgaben.get(i + 1));
 			i++;
 			aufgabenText.setText(model.getCurrentAufgabe().getText());
-			titleTaskLabel.setText("Aufgabe:" + (i + 1));
+			titleTaskLabel.setText("Aufgabe: " + (i + 1));
 		}
 		panel.repaint();
 
