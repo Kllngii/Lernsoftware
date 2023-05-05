@@ -31,11 +31,11 @@ import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 public class GUI implements ActionListener {
 	private SpeicherService sp = new SpeicherService();
 	private Model model = new Model(sp.ladeAufgaben());
-	
+
 	private Logger log = Logger.getLogger(getClass());
 
 	private JFrame frame;
-	
+
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
 	private JMenuItem menuItemLaden = new JMenuItem("Laden");
@@ -69,12 +69,12 @@ public class GUI implements ActionListener {
 
 		menuBar.add(dateiMenü);
 		menuBar.add(fensterMenü);
-		
+
 		dateiMenü.add(menuItemSpeichern);
 		dateiMenü.add(menuItemLaden);
 		menuItemSpeichern.addActionListener(this);
 		menuItemLaden.addActionListener(this);
-		
+
 		Image img = ResourceProvider.loadImage(Konst.HILFE_ICON);
 		fensterHilfe.setIcon(new ImageIcon(img.getScaledInstance(16, 16, 0)));
 
@@ -87,7 +87,7 @@ public class GUI implements ActionListener {
 		menuItemAufgabentext.addActionListener(this);
 		fensterHilfe.addActionListener(this);
 	}
-	
+
 	/**
 	 * Erstellt das ContentPanel des Fensters.
 	 */
@@ -118,25 +118,22 @@ public class GUI implements ActionListener {
 			}
 		} else if(e.getSource() == menuItemLiniendiagramm) {
 			log.debug("Wechsle zum Liniendiagramm");
-			layout.show(frame.getContentPane(), WindowSelect.LINIENDIAGRAMM.getIdentifier());
-			model.setSelectedWindow(WindowSelect.LINIENDIAGRAMM);
+			this.switchToView(WindowSelect.LINIENDIAGRAMM);
 		} else if(e.getSource() == menuItemAufgabentext) {
 			log.debug("Wechsle zum Aufgabentext");
-			layout.show(frame.getContentPane(), WindowSelect.AUFGABENTEXT.getIdentifier());
-			model.setSelectedWindow(WindowSelect.AUFGABENTEXT);
+			this.switchToView(WindowSelect.AUFGABENTEXT);
 		} else if(e.getSource() == menuItemStartseite) {
 			log.debug("Wechsle zur Startseite");
-			layout.show(frame.getContentPane(), WindowSelect.STARTSEITE.getIdentifier());
-			model.setSelectedWindow(WindowSelect.STARTSEITE);
+			this.switchToView(WindowSelect.STARTSEITE);
 		} else if(e.getSource() == fensterHilfe) {
 			log.debug("Öffne das Hilfe-Fenster!");
 			new Hilfe();
 		}
 	}
-	
+
 	public void switchToView(WindowSelect ws) {
 		CardLayout layout = (CardLayout) frame.getContentPane().getLayout();
-		
+
 		if(ws == WindowSelect.AUFGABENTEXT) {
 			log.debug("Wechsle zum Aufgabentext");
 			layout.show(frame.getContentPane(), WindowSelect.AUFGABENTEXT.getIdentifier());
@@ -145,7 +142,10 @@ public class GUI implements ActionListener {
 			log.debug("Wechsle zum Liniendiagramm");
 			layout.show(frame.getContentPane(), WindowSelect.LINIENDIAGRAMM.getIdentifier());
 			model.setSelectedWindow(WindowSelect.LINIENDIAGRAMM);
+		} else if (ws == WindowSelect.STARTSEITE) {
+			log.debug("Wechsle zur Startseite");
+			layout.show(frame.getContentPane(), WindowSelect.STARTSEITE.getIdentifier());
+			model.setSelectedWindow(WindowSelect.STARTSEITE);
 		}
 	}
-
 }

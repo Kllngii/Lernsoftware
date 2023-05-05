@@ -44,19 +44,16 @@ public class Startseite extends HAWView {
 	Logger log = Logger.getLogger(getClass());
 	JPanel jp;
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
-private GUI gui;
+	private GUI gui;
 
 
 	public Startseite(GUI gui) {
 		this.gui = gui;
 		panel.add(constructStartseite());
 
-		//panel.add(buildContent());
 	}
 
 	private JComponent constructStartseite() {
-		//panel.add(new JLabel("Das hier ist die Startseite"));
-
 		//Panel formatieren
 		jp = new JPanel();
 		jp.setPreferredSize(new java.awt.Dimension(Toolkit.getDefaultToolkit().getScreenSize()));
@@ -82,7 +79,7 @@ private GUI gui;
 		functionText1.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		functionText1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		functionText1.addMouseListener(new MouseAdapter() {
-			
+
 			public void mouseClicked(java.awt.event.MouseEvent e) {
 				System.out.println("Tutorial");
 			}
@@ -95,29 +92,27 @@ private GUI gui;
 		functionText2.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		functionText2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		functionText2.addMouseListener(new MouseAdapter() {
-			
+
 			public void mouseClicked(java.awt.event.MouseEvent e) {
 				log.debug("Wechsle zum Aufgabentext");
 				gui.switchToView(WindowSelect.AUFGABENTEXT);
 			}
 		});
-		
+
 		//Sandbox 
 		JLabel functionText3 = new JLabel();
 		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
 		functionText3.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		functionText3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		functionText3.addMouseListener(new MouseAdapter() {
-			
+
 			public void mouseClicked(java.awt.event.MouseEvent e) {
 				log.debug("Wechsle zum Liniendiagramm");
 				gui.switchToView(WindowSelect.LINIENDIAGRAMM);
 			}
 		});
-		
 
-		//FormBuilder hinzufügen statt gridbagLayout
-
+		//FormBuilder hinzufügen
 		// gibt einen JComponent zurück, der .debug(true)
 		return FormBuilder.create() // Rote Linien zeichnen
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//, center:200dlu, 200dlu") //
