@@ -121,7 +121,7 @@ public class Startseite extends HAWView {
 		jp.add(functionText3, c);
 
 
-		FormBuilder hinzufügen statt gridbagLayout
+		//FormBuilder hinzufügen statt gridbagLayout
 		/*
 		// gibt einen JComponent zurück, der .debug(true)
 				return FormBuilder.create() // Rote Linien zeichnen
