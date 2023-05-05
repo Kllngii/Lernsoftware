@@ -3,7 +3,6 @@ package haw.lernsoftware;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Image;
-import java.awt.PopupMenu;
 import java.awt.Taskbar;
 import java.awt.Toolkit;
 
@@ -12,9 +11,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.log4j.Logger;
-
-import com.jgoodies.looks.plastic.PlasticLookAndFeel;
-import com.jgoodies.looks.plastic.theme.ExperienceRoyale;
 
 import haw.lernsoftware.model.Ereignismenge;
 import haw.lernsoftware.model.Menge;
