@@ -87,10 +87,11 @@ public class LinienDiagramm extends HAWView {
 	private int offset(Graphics2D g2d) {
 		int maxlength = 0;
 		for (int j = 0; j < numberEreignisse; j++) {
-			if (Integer.parseInt(g2d.getFontMetrics().stringWidth(mengen.get(j).getName())) > maxlength) {
-				maxlength = Integer.parseInt(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
+			if (Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName())) > maxlength) {
+				maxlength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
 			}
 		}
+		return maxlength + 30;
 	}
 
 	/**
