@@ -35,12 +35,13 @@ public class LinienDiagramm extends HAWView {
 
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
 
-		Menge mengeA = new Menge(eMenge, eMenge.getEreignisse().subList(0, 3));
-		Menge mengeB = new Menge(eMenge, eMenge.getEreignisse().subList(1, 4));
-		Menge mengeC = new Menge(eMenge, eMenge.getEreignisse().subList(3, 5));
+		Menge mengeA = new Menge("kleiner als 3", eMenge, eMenge.getEreignisse().subList(0, 3));
+		Menge mengeB = new Menge("zwischen 1 und 4", eMenge, eMenge.getEreignisse().subList(1, 4));
+		Menge mengeC = new Menge("zwischen 3 und 5", eMenge, eMenge.getEreignisse().subList(3, 5));
 		//Die Mengen brauchen noch einen Namen und eine Anordungsnummer
 		
-		constructDiagramm(List.of(mengeA, mengeB, mengeC), eMenge);
+		mengen = List.of(mengeA, mengeB, mengeC);
+		constructDiagramm(mengen, eMenge);
 	}
 	
 	private void constructDiagramm(List<Menge> mengen, Ereignismenge e) {
@@ -62,8 +63,6 @@ public class LinienDiagramm extends HAWView {
 		});
 	}
 
-	
-	
 	private void setStroked(Graphics2D g2d) {
 		g2d.setStroke(new BasicStroke(linewidth, BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER,10.0f,new float[] {16.0f,20.0f},0.0f));
 	}
@@ -72,14 +71,23 @@ public class LinienDiagramm extends HAWView {
 		g2d.setStroke(new BasicStroke(newWidth));
 		linewidth = newWidth;
 	}
+	
+	private boolean linesegment (Menge menge, int order) {
+		for (int k = 0; k < menge.getEreignisse().size(); k++) {
+			if (menge.getEreignisse().get(k).getOrder() == order) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
-	 * Fensterecken:        (BORDER_X, BORDER_Y) --------------------------- (BORDER_X + d.width,  BORDER_Y)
+	 * Fensterecken:        (BORDER_X, BORDER_Y) --------------------------- (BORDER_X + diagWidth,  BORDER_Y)
 	 * 								 |													 |
 	 *								 |													 |
 	 * 								 |													 |
 	 * 								 |													 |
-	 * 			     (BORDER_X, BORDER_Y + d.height) ----------------- (BORDER_X + d.width, BORDER_Y + d.height)
+	 * 			     (BORDER_X, BORDER_Y + diagHeight) ----------------- (BORDER_X + diagWidth, BORDER_Y + diagHeight)
 	 */
 	
 	public void paintPanel(Graphics g) {
@@ -88,22 +96,31 @@ public class LinienDiagramm extends HAWView {
 		setLinewidth(g2d, STD_LINEWIDTH);
 		int diagWidth = d.width - 20;
 		int diagHeight = d.height - 20;
+		int linewidth = 40;
+		int offsetlr = 100;
 		
-		g2d.drawLine(BORDER_X, BORDER_Y + 10, BORDER_X + diagWidth, BORDER_Y + 10);
-		g2d.drawLine(BORDER_X, BORDER_Y + 10, BORDER_X, BORDER_Y + diagHeight);
+		// Rahmen
+		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + 10);
+		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + offsetlr, BORDER_Y + diagHeight);
+		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
 		
-		for (int i = 0; i < numberElementare; i++) {
-			g2d.drawString(eMenge.getEreignisse().get(i).getName(), BORDER_X + i*diagWidth/numberElementare + diagWidth/(2*numberElementare), BORDER_Y);
-			g2d.drawLine(BORDER_X + i*(diagWidth/numberElementare), BORDER_Y + 10, BORDER_X + i*(diagWidth/numberElementare), BORDER_Y + diagHeight);
-		}
-		
-		g2d.drawLine(BORDER_X + diagWidth, BORDER_Y + 10, BORDER_X + diagWidth, BORDER_Y + diagHeight);
-		
+		// Spalten
 		setLinewidth(g2d, 1);
+		for (int i = 0; i < numberElementare; i++) {
+			g2d.drawString(eMenge.getEreignisse().get(i).getName(), BORDER_X + offsetlr + i*(diagWidth-2*offsetlr)/numberElementare + (diagWidth-2*offsetlr)/(2*numberElementare), BORDER_Y);
+			g2d.drawLine(BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + 10, BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + diagHeight);
+		}
+		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
 		
-		for (int j = 0; j <= numberEreignisse; j++) {
-//			g2d.drawString(eMenge.getEreignisse().get(i).getName(), BORDER_X + i*diagWidth/numberElementare + diagWidth/(2*numberElementare), BORDER_Y);
-			g2d.drawLine(BORDER_X, BORDER_Y + 10 + j*(diagHeight/numberEreignisse-100), BORDER_X + diagWidth, BORDER_Y + 10 + j*(diagHeight/numberEreignisse-100));
+		// Zeilen
+		setLinewidth(g2d, STD_LINEWIDTH);
+		for (int j = 0; j < numberEreignisse; j++) {
+			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
+			for (int i = 0; i < numberElementare; i++) {
+				if (linesegment(mengen.get(j), i+1)) {
+					g2d.drawLine(BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + 10 + j*linewidth + linewidth/2, BORDER_X + offsetlr + (i+1)*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + 10 + j*linewidth + linewidth/2);
+				}
+			}
 		}
 	}
 }
