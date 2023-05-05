@@ -75,4 +75,22 @@ public class Menge {
 	public String getName() {
 		return name;
 	}
+	
+	public String getProbability() {
+		String fracProbability = "0";
+		double decimalProbability = 0.0;
+		for (int i = 0; i < ereignisse.size(); i++) {
+			decimalProbability += ereignisse.get(i).getProbability();
+			fracProbability = addFracProbability(fracProbability, ereignisse.get(i).getProbString());
+		}
+		
+		String output = fracProbability + " = " + Double.toString(decimalProbability);
+		return output;
+	}
+
+	// Addiere die beiden Brüche frac1 und frac2 (jeweils gegeben im Format "x/y" bzw. "z")
+	public String addFracProbability(String frac1, String frac2) {
+		
+		return "x/y";
+	}
 }
