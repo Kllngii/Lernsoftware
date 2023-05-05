@@ -26,6 +26,8 @@ import com.jgoodies.forms.factories.Paddings;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
+
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.resources.ResourceProvider;
@@ -33,6 +35,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Cursor;
 
 
@@ -45,7 +48,12 @@ public class Startseite extends HAWView {
 	JPanel jp;
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
-
+	JLabel functionText1 = new JLabel();
+	JLabel functionText2 = new JLabel();
+	JLabel functionText3 = new JLabel();
+	EmptyBorder eBorder = new EmptyBorder(10, 10, 10, 10); // oben, rechts, unten, links
+	LineBorder lBorder = new LineBorder(new Color(100, 100, 100));
+	MatteBorder mBorder = new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY);
 
 	public Startseite(GUI gui) {
 		this.gui = gui;
@@ -55,12 +63,6 @@ public class Startseite extends HAWView {
 
 	private JComponent constructStartseite() {
 		//Panel formatieren
-		jp = new JPanel();
-		jp.setPreferredSize(new java.awt.Dimension(Toolkit.getDefaultToolkit().getScreenSize()));
-
-		EmptyBorder eBorder = new EmptyBorder(10, 10, 10, 10); // oben, rechts, unten, links
-		LineBorder lBorder = new LineBorder(new Color(100, 100, 100));
-
 
 		//Überschrift
 		JLabel ueberschrift = new JLabel("Lernsoftware Startseite");
@@ -74,43 +76,22 @@ public class Startseite extends HAWView {
 
 		// Beschreibungstexte hinzufügen
 		// Tutorial
-		JLabel functionText1 = new JLabel();
 		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
 		functionText1.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		functionText1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		functionText1.addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(java.awt.event.MouseEvent e) {
-				System.out.println("Tutorial");
-			}
-		});
-		//functionText1.insets = new Insets(10,10,10,10);
+		functionText1.addMouseListener(mL);
 
 		//Aufgaben
-		JLabel functionText2 = new JLabel();
 		functionText2.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.aufgaben"));
 		functionText2.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		functionText2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		functionText2.addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(java.awt.event.MouseEvent e) {
-				log.debug("Wechsle zum Aufgabentext");
-				gui.switchToView(WindowSelect.AUFGABENTEXT);
-			}
-		});
+		functionText2.addMouseListener(mL);
 
 		//Sandbox 
-		JLabel functionText3 = new JLabel();
 		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
 		functionText3.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		functionText3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		functionText3.addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(java.awt.event.MouseEvent e) {
-				log.debug("Wechsle zum Liniendiagramm");
-				gui.switchToView(WindowSelect.LINIENDIAGRAMM);
-			}
-		});
+		functionText3.addMouseListener(mL);
 
 		//FormBuilder hinzufügen
 		// gibt einen JComponent zurück, der .debug(true)
@@ -125,4 +106,27 @@ public class Startseite extends HAWView {
 				.add(functionText3).xy(5, 3) //
 				.build(); //
 	}
+
+	MouseAdapter mL = new MouseAdapter() {
+
+		public void mouseReleased(java.awt.event.MouseEvent e) {
+
+			if(e.getSource() == functionText1) {
+				log.debug("Wechsle zum Tutorial");
+			} else if(e.getSource() == functionText2) {
+				log.debug("Wechsle zum Aufgabentext");
+				gui.switchToView(WindowSelect.AUFGABENTEXT);
+			}else if(e.getSource() == functionText3) {
+				log.debug("Wechsle zum Liniendiagramm");
+				gui.switchToView(WindowSelect.LINIENDIAGRAMM);
+			}
+		}
+		public void mouseEntered(java.awt.event.MouseEvent e) {
+			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(mBorder, eBorder));
+		}
+		public void mouseExited(java.awt.event.MouseEvent e) {
+			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
+		}
+	};
+
 }
