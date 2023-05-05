@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
+import com.jgoodies.forms.layout.*;
 
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.resources.ResourceProvider;
@@ -34,7 +35,14 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton Button3 = new JButton("Test3");	
 	private JLabel text = new JLabel();
 	private JLabel Ueberschrift = new JLabel("Überschrift");
-	private JTextArea test = new JTextArea(8,200);
+	private JTextArea test = new JTextArea(8,50);
+	
+	/*Sachen zum Testen*/
+	//private Dimension preferredLayoutSize = new Dimension();
+	//private FormLayout layout = new FormLayout(
+	       //  "right:max(40dlu;pref), 3dlu, 80dlu, 7dlu, " // 1st major colum
+		     //  + "right:max(40dlu;pref), 3dlu, 80dlu",        // 2nd major column
+		       //  "");                                         // add rows dynamically
 
 	
 
@@ -51,7 +59,8 @@ public class Hilfe extends HAWView implements ActionListener{
 		
 
 		panel.add(buildContentMenu(), BorderLayout.WEST);
-		panel.add(buildContentText(), BorderLayout.EAST);
+		panel.add(buildContentText(), BorderLayout.CENTER);
+
 		
 		Image icon = ResourceProvider.loadImage(Konst.HILFE_ICON);
 		final Taskbar taskbar = Taskbar.getTaskbar();
@@ -74,9 +83,11 @@ public class Hilfe extends HAWView implements ActionListener{
 
 		
 		return FormBuilder.create()
-				.columns("center:90dlu")
+				//.columns("center:90dlu")
+				.columns("pref")
+				//.appendColumns("center:90dlu")
 				.rows("p,50dlu,p,50dlu,p,50dlu,p,50dlu,p,50dlu,p,50dlu,p,50dlu,60dlu")
-				//.debug(true)                                 // Rote Linien zeichnen
+				.debug(true)                                 // Rote Linien zeichnen
 				.padding(Paddings.DIALOG)
 				.addStack(Button1) .xy(1, 2)
 				.addStack(Button2) .xy(1, 4)
@@ -89,9 +100,11 @@ public class Hilfe extends HAWView implements ActionListener{
 
 	public JComponent buildContentText() {
 		
+		
 
 		return FormBuilder.create()
-				.columns("left:300dlu")
+				//.columns("left:300dlu")
+				.columns("pref")
 				.rows("10dlu,top:400dlu")
 				.debug(true)                                 // Rote Linien zeichnen
 				.padding(Paddings.DIALOG)
