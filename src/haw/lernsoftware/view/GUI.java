@@ -33,7 +33,6 @@ public class GUI implements ActionListener {
 	private Model model = new Model(sp.ladeAufgaben());
 
 	private Logger log = Logger.getLogger(getClass());
-import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
 public class GUI implements ActionListener {
 	
@@ -52,7 +51,6 @@ public class GUI implements ActionListener {
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite(this);
 	private Aufgabentext aufgabentextView = new Aufgabentext(model);
-	JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
 	JMenuItem menuItemLaden = new JMenuItem("Laden");
 	JMenuItem file2 = new JMenuItem("Element 3");
 	JMenuItem exercise0 = new JMenuItem("Element 1");
@@ -95,7 +93,6 @@ public class GUI implements ActionListener {
 
 		Image img = ResourceProvider.loadImage(Konst.HILFE_ICON);
 		fensterHilfe.setIcon(new ImageIcon(img.getScaledInstance(16, 16, 0)));
-		JMenu menuFile2 = new JMenu("Aufgaben");
 		JMenu fensterMenü = new JMenu("Fenster");
 
 		menuBar.add(dateiMenü);
@@ -171,7 +168,6 @@ public class GUI implements ActionListener {
 		} else if(e.getSource() == fensterHilfe) {
 			log.debug("Öffne das Hilfe-Fenster!");
 			new Hilfe();
-		} else if(e.getSource() == menuItemLiniendiagramm) {
 			log.debug("Wechsle zum Liniendiagramm");
 			layout.show(frame.getContentPane(), "liniendiagramm");
 		} else if(e.getSource() == menuItemAufgabentext) {

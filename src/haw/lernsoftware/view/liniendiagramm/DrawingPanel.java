@@ -14,7 +14,6 @@ public class DrawingPanel extends JPanel {
 	private static final long serialVersionUID = 4122090545664176370L;
 	private LinienDiagramm liniendiagramm;
 	
-public class DrawingPanel extends JPanel {
 	private LinienDiagramm liniendiagramm;
 	public DrawingPanel(LinienDiagramm l) {
 		this.liniendiagramm = l;
