@@ -124,5 +124,18 @@ public class Startseite extends HAWView {
 				.add(functionText2).xy(3, 3) //
 				.add(functionText3).xy(5, 3) //
 				.build(); //
+
+import org.apache.log4j.Logger;
+
+public class Startseite extends HAWView {
+	
+	Logger log = Logger.getLogger(getClass());
+	
+	public Startseite() {
+		constructStartseite();
+	}
+
+	private void constructStartseite() {
+		panel.add(new JLabel("Hier könnte Ihre Werbung stehen, dieses Mal auf der Startseite..."));
 	}
 }
