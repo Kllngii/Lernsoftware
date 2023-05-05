@@ -21,7 +21,7 @@ import haw.lernsoftware.model.Model;
 
 public class Aufgabentext extends HAWView implements ActionListener {
 	private Model model;
-	private Logger log = Logger.getLogger(getClass());
+	private final Logger log = Logger.getLogger(getClass());
 
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
 	private JButton nextTaskButton = new JButton("NEXT");

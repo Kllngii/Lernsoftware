@@ -12,11 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.plaf.IconUIResource;
 
 import org.apache.log4j.Logger;
 
-import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.Model;
 import haw.lernsoftware.model.SpeicherService;
 import haw.lernsoftware.model.SpeicherService.ModelWithErrors;

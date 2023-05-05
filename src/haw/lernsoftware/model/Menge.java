@@ -13,6 +13,7 @@ import org.json.JSONObject;
  */
 public class Menge {
 	//Für die JSON-(Re)konstrunktion
+	//TODO derzeit unused -> clean code?
 	private int möglicheEreignisseID;
 	
 	private Ereignismenge möglicheEreignisse;
