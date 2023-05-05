@@ -28,6 +28,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton Button2 = new JButton("Test2");
 	private JButton Button3 = new JButton("Test3");	
 	private JLabel text = new JLabel();
+	private JLabel Ueberschrift = new JLabel("Überschrift");
 
 	
 
@@ -81,7 +82,7 @@ public class Hilfe extends HAWView implements ActionListener{
 				.rows("10dlu,top:400dlu")
 				//.debug(true)                                 // Rote Linien zeichnen
 				.padding(Paddings.DIALOG)
-				.add("Überschrift") .xy(1, 1)
+				.add(Ueberschrift) .xy(1, 1)
 				.add(text)  .xy(1, 2)
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
 				.build();
@@ -98,12 +99,15 @@ public class Hilfe extends HAWView implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource() == Button1) {
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"));
+			Ueberschrift.setText("Überschrift1");
 		}
 		if(e.getSource() == Button2) {
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text2"));
+			Ueberschrift.setText("Überschrift2");
 		}
 		if(e.getSource() == Button3) {
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text3"));
+			Ueberschrift.setText("Überschrift3");
 		}
 		panel.repaint();
 	}
