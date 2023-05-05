@@ -1,15 +1,20 @@
 package haw.lernsoftware.view.liniendiagramm;
 
+import static haw.lernsoftware.Konst.BORDER_X;
+import static haw.lernsoftware.Konst.BORDER_Y;
+import static haw.lernsoftware.Konst.STD_LINEWIDTH;
+
 import java.awt.BasicStroke;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Iterator;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import org.apache.log4j.Logger;
 
@@ -18,9 +23,7 @@ import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.HAWView;
 
-import static haw.lernsoftware.Konst.*;
-
-public class LinienDiagramm extends HAWView {
+public class LinienDiagramm extends HAWView implements MouseListener {
 	
 	private int linewidth = STD_LINEWIDTH;
 	private int numberEreignisse;
@@ -29,6 +32,9 @@ public class LinienDiagramm extends HAWView {
 	private Logger log = Logger.getLogger(getClass());
 	private List<Menge> mengen;
 	private Ereignismenge eMenge;
+	
+	private List<Integer> spaltenCoord = new ArrayList<Integer>();
+	private List<Integer> zeilenCoord = new ArrayList<Integer>();
 	
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.fromJSON(ResourceProvider.getFileContentAsString("würfel.em").replace(" ", ""));
@@ -50,6 +56,8 @@ public class LinienDiagramm extends HAWView {
 		panel = new DrawingPanel(this);
 		numberEreignisse = mengen.size();
 		numberElementare = e.getEreignisse().size();
+		
+		panel.addMouseListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -118,14 +126,19 @@ public class LinienDiagramm extends HAWView {
 		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + offsetlr, BORDER_Y + diagHeight);
 		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
 		
+		spaltenCoord.clear();
+		zeilenCoord.clear();
+		
 		// Spalten
 		setLinewidth(g2d, 1);
 		currentLeftBorder = BORDER_X + offsetlr;
 		for (int i = 0; i < numberElementare; i++) {
 			g2d.drawString(eMenge.getEreignisse().get(i).getName(), currentLeftBorder + (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)) / 2, BORDER_Y);
 			g2d.drawLine(currentLeftBorder, BORDER_Y + 10, currentLeftBorder, BORDER_Y + diagHeight);
+			spaltenCoord.add(currentLeftBorder);
 			currentLeftBorder += (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 		}
+		spaltenCoord.add(currentLeftBorder);
 		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
 		
 		// Zeilen
@@ -139,7 +152,42 @@ public class LinienDiagramm extends HAWView {
 				}
 				currentLeftBorder += (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 			}
+			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
 			g2d.drawString(mengen.get(j).getProbability(), BORDER_X + + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
 		}
+		zeilenCoord.add(BORDER_Y + 10 + numberEreignisse*linewidth + linewidth/2 - 2*BORDER_X);
 	}
+	
+	public Koordinate getPosition(MouseEvent e) {
+		int spalte = -1;
+		for(Integer x : spaltenCoord) {
+			if(x < e.getPoint().getX()) {
+				spalte = spaltenCoord.indexOf(x);
+			}
+		}
+		int zeile = -1;
+		for(Integer y : zeilenCoord) {
+			if(y < e.getPoint().getY()) {
+				zeile = zeilenCoord.indexOf(y);
+			}
+		}
+		return new Koordinate(zeile, spalte);
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		log.info(getPosition(e));
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {}
 }
