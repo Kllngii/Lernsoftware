@@ -1,32 +1,23 @@
 package haw.lernsoftware.view;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.Color;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.border.LineBorder;
 
 import org.apache.log4j.Logger;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.resources.ResourceProvider;
-import java.awt.Color;
-import java.awt.Dimension;
 
 /**
  * Die Startseite des Programms.
