@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,7 +23,7 @@ import haw.lernsoftware.view.HAWView;
 
 import static haw.lernsoftware.Konst.*;
 
-public class LinienDiagramm extends HAWView {
+public class LinienDiagramm extends HAWView implements MouseListener {
 	
 	private int linewidth = STD_LINEWIDTH;
 	private int numberEreignisse;
@@ -29,6 +32,9 @@ public class LinienDiagramm extends HAWView {
 	private Logger log = Logger.getLogger(getClass());
 	private List<Menge> mengen;
 	private Ereignismenge eMenge;
+	
+	private List<Integer> spaltenCoord = new ArrayList<Integer>();
+	private List<Integer> zeilenCoord = new ArrayList<Integer>();
 	
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.fromJSON(ResourceProvider.getFileContentAsString("würfel.em").replace(" ", ""));
@@ -48,6 +54,7 @@ public class LinienDiagramm extends HAWView {
 		panel = new DrawingPanel(this);
 		numberEreignisse = mengen.size();
 		numberElementare = e.getEreignisse().size();
+		panel.addMouseListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -104,13 +111,17 @@ public class LinienDiagramm extends HAWView {
 		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + offsetlr, BORDER_Y + diagHeight);
 		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
 		
+		spaltenCoord.clear();
+		
 		// Spalten
 		setLinewidth(g2d, 1);
 		for (int i = 0; i < numberElementare; i++) {
 			g2d.drawString(eMenge.getEreignisse().get(i).getName(), BORDER_X + offsetlr + i*(diagWidth-2*offsetlr)/numberElementare + (diagWidth-2*offsetlr)/(2*numberElementare), BORDER_Y);
 			g2d.drawLine(BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + 10, BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + diagHeight);
+			spaltenCoord.add(BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare));
 		}
 		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
+		spaltenCoord.add(BORDER_X + diagWidth - offsetlr);
 		
 		// Zeilen
 		setLinewidth(g2d, STD_LINEWIDTH);
@@ -121,6 +132,41 @@ public class LinienDiagramm extends HAWView {
 					g2d.drawLine(BORDER_X + offsetlr + i*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + 10 + j*linewidth + linewidth/2, BORDER_X + offsetlr + (i+1)*((diagWidth-2*offsetlr)/numberElementare), BORDER_Y + 10 + j*linewidth + linewidth/2);
 				}
 			}
+			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
 		}
+		zeilenCoord.add(BORDER_Y + 10 + numberEreignisse*linewidth + linewidth/2 - 2*BORDER_X);
 	}
+	
+	public Koordinate getPosition(MouseEvent e) {
+		int spalte = -1;
+		for(Integer x : spaltenCoord) {
+			if(x < e.getPoint().getX()) {
+				spalte = spaltenCoord.indexOf(x);
+			}
+		}
+		int zeile = -1;
+		for(Integer y : zeilenCoord) {
+			if(y < e.getPoint().getY()) {
+				zeile = zeilenCoord.indexOf(y);
+			}
+		}
+		return new Koordinate(zeile, spalte);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		log.info(getPosition(e));
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {}
 }
