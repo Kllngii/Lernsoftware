@@ -2,6 +2,7 @@ package haw.lernsoftware.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import static haw.lernsoftware.Konst.DIGITS;
 
 import org.json.JSONObject;
 import org.json.JSONPropertyIgnore;
@@ -84,6 +85,7 @@ public class Menge {
 			fracProbability = addFracProbability(fracProbability, ereignisse.get(i).getProbString());
 		}
 		
+		decimalProbability = Math.round(decimalProbability*Math.pow(10.0,DIGITS))/Math.pow(10.0,DIGITS);
 		String output = fracProbability + " = " + Double.toString(decimalProbability);
 		return output;
 	}
