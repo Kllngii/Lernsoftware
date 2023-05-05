@@ -5,6 +5,7 @@ import static haw.lernsoftware.Konst.BORDER_Y;
 import static haw.lernsoftware.Konst.STD_LINEWIDTH;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
@@ -146,12 +147,14 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		for (int j = 0; j < numberEreignisse; j++) {
 			currentLeftBorder = BORDER_X + offsetlr;
 			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
+			g2d.setColor(Color.BLUE);
 			for (int i = 0; i < numberElementare; i++) {
 				if (linesegment(mengen.get(j), i+1)) {
 					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)), BORDER_Y + 10 + j*linewidth + linewidth/2);
 				}
 				currentLeftBorder += (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 			}
+			g2d.setColor(Color.black);
 			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
 			g2d.drawString(mengen.get(j).getProbability(), BORDER_X + + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
 		}
