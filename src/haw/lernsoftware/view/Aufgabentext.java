@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 
 import org.apache.log4j.Logger;
@@ -21,6 +22,9 @@ import haw.lernsoftware.model.Model;
 
 public class Aufgabentext extends HAWView implements ActionListener {
 	private Model model;
+	private List<Aufgabe> aufgaben;
+	private JProgressBar progress;
+
 	private final Logger log = Logger.getLogger(getClass());
 
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
@@ -32,6 +36,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	// fügt dem panel von Aufgabentext einen JComponent zu
 	public Aufgabentext(Model model) {
 		this.model = model;
+		aufgaben = model.getAufgaben();
 		panel.add(buildContentText());
 
 	}
@@ -41,6 +46,10 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 		previousTaskButton.setEnabled(false);
 		titleTaskLabel.setText("Aufgabe: 1");
+
+		progress = new JProgressBar(0, aufgaben.size());
+		progress.setValue(aufgaben.indexOf(model.getCurrentAufgabe()));
+		progress.setStringPainted(true);
 
 		// Aufgabentext erstellen und formatieren
 		aufgabenText.setText(model.getCurrentAufgabe().getText());
@@ -59,8 +68,9 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.columns("100dlu, center:200dlu, 100dlu") //
 				.rows("p, 20dlu, p, $lg, top:300dlu") //
 				.padding(Paddings.DIALOG) //
-				.add(previousTaskButton).xy(1, 2) //
 				.add(titleTaskLabel).xy(2, 1) //
+				.add(previousTaskButton).xy(1, 2) //
+				.add(progress).xy(2, 2) //
 				.add(nextTaskButton).xy(3, 2) //
 				.addSeparator("Aufgabentext").xyw(1, 3, 3) //
 				.add(aufgabenText).xyw(1, 5, 3) //
@@ -70,20 +80,21 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		List<Aufgabe> aufgaben = model.getAufgaben();
 		int i = aufgaben.indexOf(model.getCurrentAufgabe());
 
 		if (e.getSource() == previousTaskButton) {
-			model.setCurrentAufgabe(aufgaben.get(i - 1));
 			i--;
+			model.setCurrentAufgabe(aufgaben.get(i));
 			aufgabenText.setText(model.getCurrentAufgabe().getText());
 			titleTaskLabel.setText("Aufgabe: " + (i + 1));
+			progress.setValue(i);
 		}
 		if (e.getSource() == nextTaskButton) {
-			model.setCurrentAufgabe(aufgaben.get(i + 1));
 			i++;
+			model.setCurrentAufgabe(aufgaben.get(i));
 			aufgabenText.setText(model.getCurrentAufgabe().getText());
 			titleTaskLabel.setText("Aufgabe: " + (i + 1));
+			progress.setValue(i);
 		}
 		panel.repaint();
 
