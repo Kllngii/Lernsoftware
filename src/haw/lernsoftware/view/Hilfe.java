@@ -101,9 +101,6 @@ public class Hilfe extends HAWView implements ActionListener{
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
 				.build();
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 	}
 
 	public static void main(String[] args) {

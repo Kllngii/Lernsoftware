@@ -1,12 +1,12 @@
 {"ereignisse": [
    {
       "name": "1",
-      "probString": "3/12",
+      "probString": "1/6",
       "order": 1
    },
    {
       "name": "2",
-      "probString": "1/12",
+      "probString": "1/6",
       "order": 2
    },
    {
@@ -16,12 +16,12 @@
    },
    {
       "name": "4",
-      "probString": "3/12",
+      "probString": "1/6",
       "order": 4
    },
    {
       "name": "5",
-      "probString": "1/12",
+      "probString": "1/6",
       "order": 5
    },
    {

@@ -41,8 +41,7 @@ public class Ereignismenge {
 			gesamt += e.getProbability();
 		if(gesamt > 1) //TODO floatingPoint-Fehler beachten
 			return false;
-		if(gesamt < 0.99)
-			return false;
+		
 		return true;
 	}
 	public List<Elementarereignis> getEreignisse() {

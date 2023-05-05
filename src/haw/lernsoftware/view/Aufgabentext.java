@@ -107,18 +107,5 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			previousTaskButton.setEnabled(true);
 			nextTaskButton.setEnabled(true);
 		}
-
-import org.apache.log4j.Logger;
-
-public class Aufgabentext extends HAWView {
-
-	Logger log = Logger.getLogger(getClass());
-
-	public Aufgabentext() {
-		constructAufgabentext();
-	}
-
-	private void constructAufgabentext() {
-		panel.add(new JLabel("Ich bin der Aufgabentext :)"));
 	}
 }
