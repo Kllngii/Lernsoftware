@@ -14,6 +14,7 @@ import java.util.prefs.Preferences;
 import org.apache.log4j.Logger;
 
 import haw.lernsoftware.Konst;
+import haw.lernsoftware.resources.ResourceProvider;
 
 /**
  * Speichert das Model ab, um nach einem Programmneustart den alten Fortschritt
@@ -95,7 +96,7 @@ public class SpeicherService {
 
 	public List<Aufgabe> ladeAufgaben() {
 		log.debug("Lade Aufgaben!");
-		return List.of(new Aufgabe("Aufgabentext A"), new Aufgabe("Aufgabentext B"), new Aufgabe("Aufgabentext C"),
+		return List.of(new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text2")), new Aufgabe("Aufgabentext B"), new Aufgabe("Aufgabentext C"),
 				new Aufgabe("Zum Bearbeiten der nächsten Aufgabensammlung klicken Sie im Reiter auf 'Aufgaben'."));
 	}
 
