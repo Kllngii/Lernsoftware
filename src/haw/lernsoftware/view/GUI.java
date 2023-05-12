@@ -86,7 +86,6 @@ public class GUI implements ActionListener {
 
 		fensterMenü.add(menuItemStartseite);
 		fensterMenü.add(menuItemLiniendiagramm);
-		//fensterMenü.add(fensterAufgabentyp);
 		fensterMenü.add(menuItemAufgabentext);
 		fensterMenü.add(fensterHilfe);
 		menuItemStartseite.addActionListener(this);

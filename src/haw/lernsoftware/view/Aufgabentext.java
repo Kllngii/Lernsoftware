@@ -2,10 +2,12 @@ package haw.lernsoftware.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -17,8 +19,10 @@ import org.apache.log4j.Logger;
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
+import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.Aufgabe;
 import haw.lernsoftware.model.Model;
+import haw.lernsoftware.resources.ResourceProvider;
 
 public class Aufgabentext extends HAWView implements ActionListener {
 	private Model model;
@@ -32,6 +36,8 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JButton previousTaskButton = new JButton("PREVIOUS");
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
 	private String aufgText = new String();
+	
+	private Image img = ResourceProvider.loadImage(Konst.HILFE_ICON);
 
 	// fügt dem panel von Aufgabentext einen JComponent zu
 	public Aufgabentext(Model model) {
@@ -66,7 +72,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		// gibt einen JComponent zurück, der
 		return FormBuilder.create().debug(true) // Rote Linien zeichnen
 				.columns("100dlu, center:200dlu, 100dlu") //
-				.rows("p, 20dlu, p, $lg, top:300dlu") //
+				.rows("p, 20dlu, p, $lg, top:100dlu, top:200dlu") //
 				.padding(Paddings.DIALOG) //
 				.add(titleTaskLabel).xy(2, 1) //
 				.add(previousTaskButton).xy(1, 2) //
@@ -74,6 +80,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.add(nextTaskButton).xy(3, 2) //
 				.addSeparator("Aufgabentext").xyw(1, 3, 3) //
 				.add(aufgabenText).xyw(1, 5, 3) //
+				.add(new ImageIcon(img.getScaledInstance(16, 16, 0))) .xyw(1, 6, 3)
 				.build(); //
 	}
 
