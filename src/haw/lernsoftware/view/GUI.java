@@ -43,6 +43,10 @@ public class GUI implements ActionListener {
 	private JMenuItem menuItemLiniendiagramm = new JMenuItem("Liniengraph");
 	private JMenuItem menuItemAufgabentext = new JMenuItem("Aufgabentext");
 	private JMenuItem fensterHilfe = new JMenuItem("Hilfe");
+	private JMenuItem menuItemTutorial = new JMenuItem("Tutorial");
+	private JMenuItem menuItemLeicht = new JMenuItem("Leicht");
+	private JMenuItem menuItemMedium = new JMenuItem("Medium");
+	private JMenuItem menuItemSchwer = new JMenuItem("Schwer");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite(this);
@@ -66,9 +70,11 @@ public class GUI implements ActionListener {
 	private void constructMenubar() {
 		JMenu dateiMenü = new JMenu("Datei");
 		JMenu fensterMenü = new JMenu("Fenster");
+		JMenu fensterAufgabentyp = new JMenu("Aufgaben");
 
 		menuBar.add(dateiMenü);
 		menuBar.add(fensterMenü);
+		menuBar.add(fensterAufgabentyp);
 
 		dateiMenü.add(menuItemSpeichern);
 		dateiMenü.add(menuItemLaden);
@@ -80,12 +86,22 @@ public class GUI implements ActionListener {
 
 		fensterMenü.add(menuItemStartseite);
 		fensterMenü.add(menuItemLiniendiagramm);
+		//fensterMenü.add(fensterAufgabentyp);
 		fensterMenü.add(menuItemAufgabentext);
 		fensterMenü.add(fensterHilfe);
 		menuItemStartseite.addActionListener(this);
 		menuItemLiniendiagramm.addActionListener(this);
 		menuItemAufgabentext.addActionListener(this);
 		fensterHilfe.addActionListener(this);
+		
+		fensterAufgabentyp.add(menuItemTutorial);
+		fensterAufgabentyp.add(menuItemLeicht);
+		fensterAufgabentyp.add(menuItemMedium);
+		fensterAufgabentyp.add(menuItemSchwer);
+		menuItemTutorial.addActionListener(this);
+		menuItemLeicht.addActionListener(this);
+		menuItemMedium.addActionListener(this);
+		menuItemSchwer.addActionListener(this);
 	}
 
 	/**
