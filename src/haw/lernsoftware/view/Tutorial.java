@@ -42,7 +42,7 @@ public class Tutorial extends HAWView {
 	private JComponent constructStartseite() {
 		
 		
-		text1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGGABEN, "tutorial1_Ueberschrift.text"));
+		text1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_Ueberschrift.text"));
 		
 		//FormBuilder hinzufügen
 		// gibt einen JComponent zurück, der .debug(true)
@@ -52,7 +52,7 @@ public class Tutorial extends HAWView {
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 5) //
 				.add(text1).xyw(1, 2, 5) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 5) //
 				.build(); //
 		//test
 	}
