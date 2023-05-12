@@ -48,11 +48,13 @@ public class Tutorial extends HAWView {
 		// gibt einen JComponent zurück, der .debug(true)
 		return FormBuilder.create() // Rote Linien zeichnen
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//, center:200dlu, 200dlu") //
-				.rows("100dlu, 160dlu, p") //
+				.rows("100dlu, p, p,p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 5) //
 				.add(text1).xyw(1, 2, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 5) //
+				// hier muss ein bild rein
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz2.text")).xyw(1, 4, 5) //
 				.build(); //
 		//test
 	}
