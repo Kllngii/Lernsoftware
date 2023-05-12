@@ -98,6 +98,7 @@ public class Startseite extends HAWView {
 
 			if(e.getSource() == functionText1) {
 				log.debug("Wechsle zum Tutorial");
+				gui.switchToView(WindowSelect.TUTORIAL);
 			} else if(e.getSource() == functionText2) {
 				log.debug("Wechsle zum Aufgabentext");
 				gui.switchToView(WindowSelect.AUFGABENTEXT);

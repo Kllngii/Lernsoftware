@@ -51,7 +51,8 @@ public class GUI implements ActionListener {
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite(this);
 	private Aufgabentext aufgabentextView = new Aufgabentext(model);
-
+	private Tutorial tutorialView = new Tutorial(this);
+	
 	public GUI(JFrame frame) {
 		this.frame = frame;
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -112,6 +113,7 @@ public class GUI implements ActionListener {
 		contentPane.add(startseitenView.panel, "startseite");
 		contentPane.add(liniendiagrammView.panel, "liniendiagramm");
 		contentPane.add(aufgabentextView.panel, "aufgabentext");
+		contentPane.add(tutorialView.panel, "tutorial");
 	}
 
 	@Override
@@ -143,7 +145,10 @@ public class GUI implements ActionListener {
 		} else if(e.getSource() == fensterHilfe) {
 			log.debug("Öffne das Hilfe-Fenster!");
 			new Hilfe();
-		}
+		} else if(e.getSource() == menuItemTutorial) {
+			log.debug("Öffne das Tutorial-Fenster!");
+			this.switchToView(WindowSelect.TUTORIAL);
+		} 
 	}
 
 	public void switchToView(WindowSelect ws) {
@@ -161,6 +166,10 @@ public class GUI implements ActionListener {
 			log.debug("Wechsle zur Startseite");
 			layout.show(frame.getContentPane(), WindowSelect.STARTSEITE.getIdentifier());
 			model.setSelectedWindow(WindowSelect.STARTSEITE);
+		} else if (ws == WindowSelect.TUTORIAL) {
+			log.debug("Wechsle zur Startseite");
+			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL.getIdentifier());
+			model.setSelectedWindow(WindowSelect.TUTORIAL);
 		}
 	}
 }
