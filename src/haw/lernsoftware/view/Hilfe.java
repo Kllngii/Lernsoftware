@@ -53,12 +53,12 @@ public class Hilfe extends HAWView implements ActionListener{
 		//Fenster erstellen
 		JFrame fenster = new JFrame("Hilfe");
 
-		fenster.setSize(800, 750);
+		fenster.setSize(600, 450);
 		fenster.getContentPane().add(panel);
 		//fenster.setResizable(false);
 		
 
-		panel.add(buildContentMenu(), BorderLayout.WEST);
+		//panel.add(buildContentMenu(), BorderLayout.WEST);
 		panel.add(buildContentText(), BorderLayout.CENTER);
 
 		
@@ -103,16 +103,32 @@ public class Hilfe extends HAWView implements ActionListener{
 		
 
 		return FormBuilder.create()
-				//.columns("left:300dlu")
+				
+				.columns("pref, 200dlu")
+				.rows("10dlu,top:200dlu") 
+				
+				.debug(true)
+				.padding(Paddings.DIALOG)
+				.add(Ueberschrift) .xy(2, 1)
+				.addStack(Button1,Button2,Button3) .xy(1, 2, "fill,center")
+				.add(test) .xy(2, 2)
+				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
+				.build();
+				////.columns("left:300dlu")
+				/*
 				.columns("pref")
 				.rows("10dlu,top:400dlu")
 				.debug(true)                                 // Rote Linien zeichnen
 				.padding(Paddings.DIALOG)
 				.add(Ueberschrift) .xy(1, 1)
-				//.add(bla)  .xy(1, 2)
+				////.add(bla)  .xy(1, 2)
 				.add(test) .xy(1, 2)
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
 				.build();
+				*/
+				
+				
+		
 
 	}
 
