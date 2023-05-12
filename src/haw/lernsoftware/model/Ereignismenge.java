@@ -14,9 +14,6 @@ import org.json.JSONObject;
  *
  */
 public class Ereignismenge {
-	
-	Logger log = Logger.getLogger(getClass());
-	
 	private List<Elementarereignis> ereignisse = new ArrayList<>();
 
 	public Ereignismenge(List<Elementarereignis> ereignisse) {
@@ -87,19 +84,37 @@ public class Ereignismenge {
 		return new Ereignismenge(eList);
 	}
 	
-	public static List<Menge> ereignisseFromJSON(String jsonString) {
+	public static List<Menge> ereignisseFromJSON(String jsonString, Ereignismenge eMenge) {
 		Logger log = Logger.getLogger(Ereignismenge.class);
 		JSONObject json = new JSONObject(jsonString);
 		JSONArray arr = json.getJSONArray("ereignisse");
 		List<Menge> eList = new ArrayList<>();
 		
-//		arr.forEach(a -> {
-//			log.debug("Lese ein: " + a);
-//			if(a instanceof JSONObject j) {
-//				eList.add(Elementarereignis.fromJSON(j.toString()));
-//			}
-//		});
+		arr.forEach(a -> {
+			log.debug("Lese ein: " + a);
+			if(a instanceof JSONObject j) {
+				eList.add(fromJSON(j.toString(), eMenge));
+			}
+		});
 		
 		return eList;
+	}
+	
+	public static Menge fromJSON(String jsonString, Ereignismenge eMenge) {
+		JSONObject json = new JSONObject(jsonString);
+		String elementareString = json.getString("elementare");
+		List<Elementarereignis> elementare = new ArrayList<>();
+		if (elementareString == "") {
+			return new Menge(json.getString("name"), eMenge, eMenge.getEreignisse().subList(0, 0), json.getInt("order"));
+		} else {
+			String[] elementareArray = elementareString.split(",");
+			int index = 0;
+			while (index < elementareArray.length) {
+				elementare.add(eMenge.getEreignisse().get(Integer.parseInt(elementareArray[index]) - 1));
+				index++;
+				System.out.println(elementareString);
+			}
+			return new Menge(json.getString("name"), eMenge, elementare, json.getInt("order"));
+		}
 	}
 }

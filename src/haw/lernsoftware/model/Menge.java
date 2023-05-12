@@ -5,23 +5,23 @@ import static haw.lernsoftware.Konst.DIGITS;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 public class Menge {
 	// Für die JSON-(Re)konstrunktion
 	private int möglicheEreignisseID;
-	private final Logger log = Logger.getLogger(getClass());
 
 	private String name;
 	private Ereignismenge möglicheEreignisse;
 	private List<Elementarereignis> ereignisse;
+	private int order;
 
-	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> ereignisse) {
+	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> ereignisse, int order) {
 		super();
 		this.name = name;
 		this.möglicheEreignisse = möglicheEreignisse;
 		this.ereignisse = ereignisse;
+		this.order = order;
 	}
 
 	public Menge vereinigt(Menge m) {
@@ -29,7 +29,7 @@ public class Menge {
 		for (Elementarereignis e : m.getEreignisse())
 			if (!vereinigteMenge.contains(e))
 				vereinigteMenge.add(e);
-		return new Menge("Beispielmenge", möglicheEreignisse, vereinigteMenge);
+		return new Menge("Beispielmenge", möglicheEreignisse, vereinigteMenge, order);
 	}
 
 	public Menge geschnitten(Menge m) {
@@ -37,14 +37,14 @@ public class Menge {
 		for (Elementarereignis e : m.getEreignisse())
 			if (ereignisse.contains(e))
 				schnittMenge.add(e);
-		return new Menge("Beispielmenge", möglicheEreignisse, schnittMenge);
+		return new Menge("Beispielmenge", möglicheEreignisse, schnittMenge, order);
 	}
 
 	public Menge negiert() {
 		List<Elementarereignis> negierteMenge = new ArrayList<>(möglicheEreignisse.getEreignisse());
 		for (Elementarereignis e : ereignisse)
 			negierteMenge.remove(e);
-		return new Menge("Beispielmenge", möglicheEreignisse, negierteMenge);
+		return new Menge("Beispielmenge", möglicheEreignisse, negierteMenge, order);
 	}
 
 	public static Menge negiert(Menge m) {
@@ -78,6 +78,10 @@ public class Menge {
 	public String getName() {
 		return name;
 	}
+	
+	public int getOrder() {
+		return order;
+	}
 
 	public String getProbability() {
 		String fracProbability = "0";
@@ -110,28 +114,19 @@ public class Menge {
 		int frac2denum;
 		int gcf;
 
-		if (frac1 == "0" || frac1 == "1") {
-			frac1 = String.format("%s/1", frac1);
-		}
-		if (frac2 == "0" || frac2 == "1") {
-			frac2 = String.format("%s/1", frac2);
-		}
-
 		if (frac1.contains("/")) {
 			String[] rat1 = frac1.split("/");
-			log.info(rat1[0]);
 			frac1num = Integer.parseInt(rat1[0]);
 			frac1denum = Integer.parseInt(rat1[1]);
 		} else {
-			return "error no fraction in frac1";
+			return "error no '/' in frac1";
 		}
-
 		if (frac2.contains("/")) {
 			String[] rat2 = frac2.split("/");
 			frac2num = Integer.parseInt(rat2[0]);
 			frac2denum = Integer.parseInt(rat2[1]);
 		} else {
-			return "error no fraction in frac2";
+			return "error no '/' in frac2";
 		}
 
 		num = frac1num * frac2denum + frac2num * frac1denum;
