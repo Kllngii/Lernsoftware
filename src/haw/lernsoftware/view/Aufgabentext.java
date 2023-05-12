@@ -40,7 +40,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
 	private String aufgText = new String();
 	
-	private Image img;  // Variable zun Laden der Bilder
+	private Image img ;  // Variable zun Laden der Bilder
 
 	
 	// fügt dem panel von Aufgabentext einen JComponent zu

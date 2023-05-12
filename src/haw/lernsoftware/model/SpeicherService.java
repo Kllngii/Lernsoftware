@@ -96,7 +96,9 @@ public class SpeicherService {
 
 	public List<Aufgabe> ladeAufgaben() {
 		log.debug("Lade Aufgaben!");
-		return List.of(new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text2")), new Aufgabe("Aufgabentext B"), new Aufgabe("Aufgabentext C"),
+		return List.of(new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe1.text")), 
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe2.text")), 
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe3.text")),
 				new Aufgabe("Zum Bearbeiten der nächsten Aufgabensammlung klicken Sie im Reiter auf 'Aufgaben'."));
 	}
 
