@@ -11,6 +11,7 @@ public class Konst {
 	
 	public static final String ICON_PATH = "icon.png";
 	public static final String HILFE_ICON = "hilfe.png";
+	public static final String EINFÜHRUNG_BILD1 = "Einfuehrung_Bild1.png";
 	
 	public static final String PROPERTIES_STARTSEITE = "startseite.properties";
 	public static final String PROPERTIES_HILFE = "hilfe.properties";
