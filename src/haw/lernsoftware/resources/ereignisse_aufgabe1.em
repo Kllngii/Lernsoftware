@@ -1,42 +1,42 @@
 {"ereignisse": [
    {
       "name": "A",
-      "elementare": "1,2,3,4,5,6,7.",
+      "elementare": "1,2,3,4,5,6,7",
       "order": 1
    },
    {
       "name": "B",
-      "elementare": "4,5,6,7,8.",
+      "elementare": "4,5,6,7,8",
       "order": 2
    },
    {
       "name": "A\B",
-      "elementare": ".",
+      "elementare": "",
       "order": 3
    },
    {
       "name": "B\A",
-      "elementare": ".",
+      "elementare": "",
       "order": 4
    },
    {
       "name": "A und B",
-      "elementare": ".",
+      "elementare": "",
       "order": 5
    },
    {
       "name": "A oder B",
-      "elementare": ".",
+      "elementare": "",
       "order": 6
    },
    {
       "name": "Nicht A",
-      "elementare": ".",
+      "elementare": "",
       "order": 7
    },
    {
       "name": "Nicht A und B",
-      "elementare": ".",
+      "elementare": "",
       "order": 8
    }
 ]}

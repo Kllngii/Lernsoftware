@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
 
 import org.apache.log4j.Logger;
 
@@ -30,6 +31,8 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JProgressBar progress;
 
 	private final Logger log = Logger.getLogger(getClass());
+	
+	private JScrollBar scrollBar = new JScrollBar();
 
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
 	private JButton nextTaskButton = new JButton("NEXT");
@@ -37,8 +40,9 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
 	private String aufgText = new String();
 	
-	private Image img = ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1);
+	private Image img ;  // Variable zun Laden der Bilder
 
+	
 	// fügt dem panel von Aufgabentext einen JComponent zu
 	public Aufgabentext(Model model) {
 		this.model = model;
@@ -71,8 +75,8 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 		// gibt einen JComponent zurück, der
 		return FormBuilder.create().debug(true) // Rote Linien zeichnen
-				.columns("100dlu, center:200dlu, 100dlu") //
-				.rows("p, 20dlu, p, $lg, top:100dlu, top:200dlu") //
+				.columns("100dlu, center:200dlu, 100dlu,pref") //
+				.rows("p, 20dlu, p, $lg, top:100dlu, pref,pref,pref,pref,pref") //
 				.padding(Paddings.DIALOG) //
 				.add(titleTaskLabel).xy(2, 1) //
 				.add(previousTaskButton).xy(1, 2) //
@@ -80,7 +84,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.add(nextTaskButton).xy(3, 2) //
 				.addSeparator("Aufgabentext").xyw(1, 3, 3) //
 				.add(aufgabenText).xyw(1, 5, 3) //
-				.add(new ImageIcon(img.getScaledInstance(16, 16, 0))) .xyw(1, 6, 3)
+				//.add() .xyw(1, 6, 3) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
 				.build(); //
 	}
 
