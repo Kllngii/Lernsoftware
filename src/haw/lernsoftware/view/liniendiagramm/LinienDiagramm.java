@@ -38,7 +38,8 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private List<Integer> zeilenCoord = new ArrayList<Integer>();
 	
 	public LinienDiagramm() {
-		eMenge = Ereignismenge.fromJSON(ResourceProvider.getFileContentAsString("würfel.em").replace(" ", ""));
+		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em").replace(" ", ""));
+		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em").replace(" ", ""));
 
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
 

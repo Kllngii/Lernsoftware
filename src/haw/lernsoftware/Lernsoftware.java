@@ -86,7 +86,7 @@ public class Lernsoftware extends HAWView {
 
 		//FIXME Testcode später entfernen
 		Logger log = Logger.getLogger(Lernsoftware.class);
-		Ereignismenge eMenge = Ereignismenge.fromJSON(ResourceProvider.getFileContentAsString("würfel.em").replace(" ", ""));
+		Ereignismenge eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em").replace(" ", ""));
 
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
 

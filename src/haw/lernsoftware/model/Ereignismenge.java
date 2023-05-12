@@ -72,7 +72,7 @@ public class Ereignismenge {
 			ereignisse.add(e);
 	}
 
-	public static Ereignismenge fromJSON(String jsonString) {
+	public static Ereignismenge elementareFromJSON(String jsonString) {
 		Logger log = Logger.getLogger(Ereignismenge.class);
 		JSONObject json = new JSONObject(jsonString);
 		JSONArray arr = json.getJSONArray("ereignisse");
@@ -85,5 +85,21 @@ public class Ereignismenge {
 			}
 		});
 		return new Ereignismenge(eList);
+	}
+	
+	public static List<Menge> ereignisseFromJSON(String jsonString) {
+		Logger log = Logger.getLogger(Ereignismenge.class);
+		JSONObject json = new JSONObject(jsonString);
+		JSONArray arr = json.getJSONArray("ereignisse");
+		List<Menge> eList = new ArrayList<>();
+		
+//		arr.forEach(a -> {
+//			log.debug("Lese ein: " + a);
+//			if(a instanceof JSONObject j) {
+//				eList.add(Elementarereignis.fromJSON(j.toString()));
+//			}
+//		});
+		
+		return eList;
 	}
 }
