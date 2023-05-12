@@ -6,12 +6,12 @@
    },
    {
       "name": "2",
-      "probString": "1/6",
+      "probString": "1/12",
       "order": 2
    },
    {
       "name": "3",
-      "probString": "1/6",
+      "probString": "3/12",
       "order": 3
    },
    {
