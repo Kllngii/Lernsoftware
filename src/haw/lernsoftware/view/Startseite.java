@@ -89,6 +89,7 @@ public class Startseite extends HAWView {
 				.add(functionText2).xy(3, 3) //
 				.add(functionText3).xy(5, 3) //
 				.build(); //
+		//test
 	}
 
 	MouseAdapter mL = new MouseAdapter() {
