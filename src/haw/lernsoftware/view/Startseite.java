@@ -1,43 +1,27 @@
 package haw.lernsoftware.view;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.MouseMotionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import javax.swing.text.html.HTMLEditorKit;
-
 import org.apache.log4j.Logger;
-import org.w3c.dom.events.MouseEvent;
 import java.awt.event.MouseAdapter;
-
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
-
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.plaf.DimensionUIResource;
 
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.resources.ResourceProvider;
-
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Cursor;
-
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 /**
  * Die Startseite des Programms.
@@ -45,15 +29,16 @@ import java.awt.Cursor;
 public class Startseite extends HAWView {
 
 	Logger log = Logger.getLogger(getClass());
-	JPanel jp;
+	//JPanel jp;
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
 	JLabel functionText1 = new JLabel();
 	JLabel functionText2 = new JLabel();
 	JLabel functionText3 = new JLabel();
-	EmptyBorder eBorder = new EmptyBorder(10, 10, 10, 10); // oben, rechts, unten, links
+	EmptyBorder eBorder = new EmptyBorder(12, 12, 12, 12); // oben, rechts, unten, links
 	LineBorder lBorder = new LineBorder(new Color(100, 100, 100));
 	MatteBorder mBorder = new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY);
+	JPanel kurzTextePanel = new JPanel();
 
 	public Startseite(GUI gui) {
 		this.gui = gui;
@@ -63,6 +48,7 @@ public class Startseite extends HAWView {
 
 	private JComponent constructStartseite() {
 		//Panel formatieren
+		kurzTextePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		//Überschrift
 		JLabel ueberschrift = new JLabel("Lernsoftware Startseite");
@@ -89,12 +75,13 @@ public class Startseite extends HAWView {
 		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
 		setNormalBorder(functionText3);
 		functionText3.addMouseListener(mL);
-
+		
+		
 		//FormBuilder hinzufügen
 		// gibt einen JComponent zurück, der .debug(true)
 		return FormBuilder.create() // Rote Linien zeichnen
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//, center:200dlu, 200dlu") //
-				.rows("100dlu, 200dlu, p") //
+				.rows("100dlu, 160dlu, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 5) //
 				.add(einleitungText).xyw(1, 2, 5) //
