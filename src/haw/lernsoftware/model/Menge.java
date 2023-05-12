@@ -2,8 +2,6 @@ package haw.lernsoftware.model;
 
 import static haw.lernsoftware.Konst.DIGITS;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,18 +88,6 @@ public class Menge {
 		decimalProbability = Math.round(decimalProbability * Math.pow(10.0, DIGITS)) / Math.pow(10.0, DIGITS);
 		String output = fracProbability + " = " + Double.toString(decimalProbability);
 		return output;
-	}
-
-	public static String decimalToFraction(String number) {
-		BigDecimal decimal = new BigDecimal(number);
-		BigInteger numerator = decimal.unscaledValue();
-		int scale = decimal.scale();
-		BigInteger denominator = BigInteger.TEN.pow(scale);
-		BigInteger gcd = numerator.gcd(denominator);
-		numerator = numerator.divide(gcd);
-		denominator = denominator.divide(gcd);
-
-		return (numerator + "/" + denominator);
 	}
 
 	public int GCF(int a, int b) {
