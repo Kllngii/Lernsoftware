@@ -77,20 +77,17 @@ public class Startseite extends HAWView {
 		// Beschreibungstexte hinzufügen
 		// Tutorial
 		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
-		functionText1.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
-		functionText1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		setNormalBorder(functionText1);
 		functionText1.addMouseListener(mL);
 
 		//Aufgaben
 		functionText2.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.aufgaben"));
-		functionText2.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
-		functionText2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		setNormalBorder(functionText2);
 		functionText2.addMouseListener(mL);
 
 		//Sandbox 
 		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
-		functionText3.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
-		functionText3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		setNormalBorder(functionText3);
 		functionText3.addMouseListener(mL);
 
 		//FormBuilder hinzufügen
@@ -128,5 +125,10 @@ public class Startseite extends HAWView {
 			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		}
 	};
+	
+	public void setNormalBorder(JLabel textLabel) {
+		textLabel.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
+		textLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	}
 
 }
