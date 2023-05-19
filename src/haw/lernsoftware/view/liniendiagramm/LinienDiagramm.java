@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.RepaintManager;
 
 import org.apache.log4j.Logger;
 
