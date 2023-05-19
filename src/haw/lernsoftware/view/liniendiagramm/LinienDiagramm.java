@@ -8,6 +8,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -29,6 +30,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private int linewidth = STD_LINEWIDTH;
 	private int numberEreignisse;
 	private int numberElementare;
+	private boolean bedingtMode = false;
 	
 	private Logger log = Logger.getLogger(getClass());
 	private List<Menge> mengen;
@@ -136,20 +138,23 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		currentLeftBorder = BORDER_X + offsetlr;
 		for (int i = 0; i < numberElementare; i++) {
 			int currentWidth = (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
-			g2d.drawString(eMenge.getEreignisse().get(i).getName(), currentLeftBorder + currentWidth / 2, BORDER_Y);
+			g2d.setColor(Color.BLACK);
 			g2d.drawLine(currentLeftBorder, BORDER_Y + 10, currentLeftBorder, BORDER_Y + diagHeight);
 			spaltenCoord.add(currentLeftBorder);
-			g2d.setColor(Color.ORANGE);
 			if (eMenge.getEreignisse().get(i).isBedingt()) {
+				g2d.setColor(Color.ORANGE);
 				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, currentWidth - 1, numberEreignisse*linewidth - 2);
 			}
+			
+			g2d.setColor(Color.BLACK);
+			g2d.drawString(eMenge.getEreignisse().get(i).getName(), currentLeftBorder + currentWidth / 2, BORDER_Y);
+			
 			if(selectedColumn == i) {
 				g2d.setColor(new Color(0.85f, 1f, 1f, 0.8f));
 				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, currentWidth - 1, numberEreignisse*linewidth - 2);
-//				g2d.drawString("TEST", currentLeftBorder + 1, BORDER_Y + 12);
 				log.info("Zeichne bei (" + currentLeftBorder + currentWidth / 2 + ", " + BORDER_Y + 10 + linewidth + ")");
 			}
-			
+						
 			g2d.setColor(Color.BLACK);
 			currentLeftBorder += currentWidth;
 		}
@@ -170,9 +175,16 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				}
 				currentLeftBorder += currentWidth;
 			}
-			g2d.setColor(Color.black);
+			g2d.setColor(Color.BLACK);
 			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
-			g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
+			if (bedingtMode) {
+				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/10);
+				g2d.setColor(Color.ORANGE);
+				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*8/10);
+				g2d.setColor(Color.BLACK);
+			} else {
+				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
+			}
 		}
 		zeilenCoord.add(BORDER_Y + 10 + numberEreignisse*linewidth + linewidth/2 - 2*BORDER_X);
 	}
@@ -204,18 +216,21 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		log.debug(mi);
 		
 		int length = mouseInteractions.size();
-		if(length >= 2 && (mouseInteractions.get(length-1).timeStamp() -  mouseInteractions.get(length-2).timeStamp()) < 1500) {
+		if (length >= 2 && (mouseInteractions.get(length-1).timeStamp() -  mouseInteractions.get(length-2).timeStamp()) < 1500) {
 			//Zwei aufeinanderfolgende Klicks in unter 1,5 Sekunden -> Auswertung starten
 			Koordinate current = mouseInteractions.get(length-1).koord();
 			Koordinate last = mouseInteractions.get(length-2).koord();
-			if(current.spalte() == -1 && last.spalte() == -1 && current.zeile() == last.zeile()) {
+			if (current.spalte() == -1 && last.spalte() == -1 && current.zeile() == last.zeile()) {
 				log.debug("Zeile " + current.zeile() + " wurde gewählt!");
 				//bedingt für alle auf false
 				eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
-				if(current.zeile() != -1 && selectedRow != current.zeile()) {
+				bedingtMode = false;
+				if (current.zeile() != -1 && selectedRow != current.zeile()) {
+					bedingtMode = true;
 					//bedingt fürs richtige auf true
 					for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
 						mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
+
 					}
 				}
 				selectedRow = (selectedRow == current.zeile() ? -1 : current.zeile());
