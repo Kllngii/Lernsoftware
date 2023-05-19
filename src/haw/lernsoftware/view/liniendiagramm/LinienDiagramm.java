@@ -221,7 +221,9 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				//bedingt für alle auf false
 				eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
 				//bedingt fürs richtige auf true
-				//TODO hier bedingt ja/nein setzen
+				for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
+					mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
+				}
 				mouseInteractions.clear();
 				panel.repaint();
 			}
