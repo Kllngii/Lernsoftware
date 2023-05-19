@@ -45,7 +45,7 @@ public class GUI implements ActionListener {
 	private JMenuItem menuItemHilfe = new JMenuItem("Hilfe");
 	private JMenuItem menuItemTutorial = new JMenuItem("Tutorial");
 	private JMenuItem menuItemLeicht = new JMenuItem("Leicht");
-	private JMenuItem menuItemMedium = new JMenuItem("Medium");
+	private JMenuItem menuItemMittel = new JMenuItem("Mittel");
 	private JMenuItem menuItemSchwer = new JMenuItem("Schwer");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
@@ -100,7 +100,7 @@ public class GUI implements ActionListener {
 		menuItemLaden.setIcon(new ImageIcon(LadenImg.getScaledInstance(16, 16, 0)));
 		menuItemTutorial.setIcon(new ImageIcon(TutorialImg.getScaledInstance(16, 16, 0)));
 		menuItemLeicht.setIcon(new ImageIcon(LeichtImg.getScaledInstance(16, 16, 0)));
-		menuItemMedium.setIcon(new ImageIcon(MittelImg.getScaledInstance(16, 16, 0)));
+		menuItemMittel.setIcon(new ImageIcon(MittelImg.getScaledInstance(16, 16, 0)));
 		menuItemSchwer.setIcon(new ImageIcon(SchwerImg.getScaledInstance(16, 16, 0)));
 
 		fensterMenü.add(menuItemStartseite);
@@ -114,11 +114,11 @@ public class GUI implements ActionListener {
 		
 		fensterAufgabentyp.add(menuItemTutorial);
 		fensterAufgabentyp.add(menuItemLeicht);
-		fensterAufgabentyp.add(menuItemMedium);
+		fensterAufgabentyp.add(menuItemMittel);
 		fensterAufgabentyp.add(menuItemSchwer);
 		menuItemTutorial.addActionListener(this);
 		menuItemLeicht.addActionListener(this);
-		menuItemMedium.addActionListener(this);
+		menuItemMittel.addActionListener(this);
 		menuItemSchwer.addActionListener(this);
 	}
 
