@@ -38,9 +38,20 @@ public class Aufgabe implements Serializable {
 	public String getText() {
 		return text;
 	}
-
-	public void setText(String text) {
-		this.text = text;
+	public Image getImage() {
+		return img;
+	}
+	public boolean hasImage() {
+		return hasImage;
+	}
+	public boolean hasLiniendiagramm() {
+		return hasLiniendiagramm;
+	}
+	public Ereignismenge geteMenge() {
+		return eMenge;
+	}
+	public List<Menge> getEreignisse() {
+		return ereignisse;
 	}
 	
 	

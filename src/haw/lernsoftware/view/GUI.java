@@ -42,10 +42,10 @@ public class GUI implements ActionListener {
 	private JMenuItem menuItemStartseite = new JMenuItem("Startseite");
 	private JMenuItem menuItemLiniendiagramm = new JMenuItem("Liniengraph");
 	private JMenuItem menuItemAufgabentext = new JMenuItem("Aufgabentext");
-	private JMenuItem fensterHilfe = new JMenuItem("Hilfe");
+	private JMenuItem menuItemHilfe = new JMenuItem("Hilfe");
 	private JMenuItem menuItemTutorial = new JMenuItem("Tutorial");
 	private JMenuItem menuItemLeicht = new JMenuItem("Leicht");
-	private JMenuItem menuItemMedium = new JMenuItem("Medium");
+	private JMenuItem menuItemMittel = new JMenuItem("Mittel");
 	private JMenuItem menuItemSchwer = new JMenuItem("Schwer");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
@@ -82,25 +82,43 @@ public class GUI implements ActionListener {
 		menuItemSpeichern.addActionListener(this);
 		menuItemLaden.addActionListener(this);
 
-		Image img = ResourceProvider.loadImage(Konst.HILFE_ICON);
-		fensterHilfe.setIcon(new ImageIcon(img.getScaledInstance(16, 16, 0)));
+		Image hilfeImg = ResourceProvider.loadImage(Konst.HILFE_ICON);
+		Image ldImg = ResourceProvider.loadImage(Konst.LINIENDIAGRAMM_ICON);
+		Image startseiteImg = ResourceProvider.loadImage(Konst.STARTSEITE_ICON);
+		Image aufgabentextImg = ResourceProvider.loadImage(Konst.AUFGABENTEXT_ICON);
+		Image SpeichernImg = ResourceProvider.loadImage(Konst.SPEICHERN_ICON);
+		Image LadenImg = ResourceProvider.loadImage(Konst.LADEN_ICON);
+		Image TutorialImg = ResourceProvider.loadImage(Konst.TUTORIAL_ICON);
+		Image LeichtImg = ResourceProvider.loadImage(Konst.LEICHT_ICON);
+		Image MittelImg = ResourceProvider.loadImage(Konst.MITTEL_ICON);
+		Image SchwerImg = ResourceProvider.loadImage(Konst.SCHWER_ICON);
+		menuItemHilfe.setIcon(new ImageIcon(hilfeImg.getScaledInstance(16, 16, 0)));
+		menuItemLiniendiagramm.setIcon(new ImageIcon(ldImg.getScaledInstance(16, 16, 0)));
+		menuItemStartseite.setIcon(new ImageIcon(startseiteImg.getScaledInstance(16, 16, 0)));
+		menuItemAufgabentext.setIcon(new ImageIcon(aufgabentextImg.getScaledInstance(16, 16, 0)));
+		menuItemSpeichern.setIcon(new ImageIcon(SpeichernImg.getScaledInstance(16, 16, 0)));
+		menuItemLaden.setIcon(new ImageIcon(LadenImg.getScaledInstance(16, 16, 0)));
+		menuItemTutorial.setIcon(new ImageIcon(TutorialImg.getScaledInstance(16, 16, 0)));
+		menuItemLeicht.setIcon(new ImageIcon(LeichtImg.getScaledInstance(16, 16, 0)));
+		menuItemMittel.setIcon(new ImageIcon(MittelImg.getScaledInstance(16, 16, 0)));
+		menuItemSchwer.setIcon(new ImageIcon(SchwerImg.getScaledInstance(16, 16, 0)));
 
 		fensterMenü.add(menuItemStartseite);
 		fensterMenü.add(menuItemLiniendiagramm);
 		fensterMenü.add(menuItemAufgabentext);
-		fensterMenü.add(fensterHilfe);
+		fensterMenü.add(menuItemHilfe);
 		menuItemStartseite.addActionListener(this);
 		menuItemLiniendiagramm.addActionListener(this);
 		menuItemAufgabentext.addActionListener(this);
-		fensterHilfe.addActionListener(this);
+		menuItemHilfe.addActionListener(this);
 		
 		fensterAufgabentyp.add(menuItemTutorial);
 		fensterAufgabentyp.add(menuItemLeicht);
-		fensterAufgabentyp.add(menuItemMedium);
+		fensterAufgabentyp.add(menuItemMittel);
 		fensterAufgabentyp.add(menuItemSchwer);
 		menuItemTutorial.addActionListener(this);
 		menuItemLeicht.addActionListener(this);
-		menuItemMedium.addActionListener(this);
+		menuItemMittel.addActionListener(this);
 		menuItemSchwer.addActionListener(this);
 	}
 
@@ -142,7 +160,7 @@ public class GUI implements ActionListener {
 		} else if(e.getSource() == menuItemStartseite) {
 			log.debug("Wechsle zur Startseite");
 			this.switchToView(WindowSelect.STARTSEITE);
-		} else if(e.getSource() == fensterHilfe) {
+		} else if(e.getSource() == menuItemHilfe) {
 			log.debug("Öffne das Hilfe-Fenster!");
 			new Hilfe();
 		} else if(e.getSource() == menuItemTutorial) {

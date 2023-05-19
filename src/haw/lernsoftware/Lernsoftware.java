@@ -83,15 +83,5 @@ public class Lernsoftware extends HAWView {
 		EventQueue.invokeLater(() -> {
 			new Lernsoftware(); //Lernsoftware aus dem richtigen Thread starten
 		});
-
-		//FIXME Testcode später entfernen
-		Logger log = Logger.getLogger(Lernsoftware.class);
-		Ereignismenge eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em").replace(" ", ""));
-
-		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
-
-		Menge mengeA = new Menge("A", eMenge, eMenge.getEreignisse().subList(0, 3), 0);
-		Menge mengeB = new Menge("B", eMenge, eMenge.getEreignisse().subList(1, 4), 1);
-		log.info(mengeA.vereinigt(mengeB).negiert().toJSON().toString(0));
 	}
 }
