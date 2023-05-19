@@ -7,23 +7,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
-import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
 
 import org.apache.log4j.Logger;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
-import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.Aufgabe;
 import haw.lernsoftware.model.Model;
-import haw.lernsoftware.resources.ResourceProvider;
 
 public class Aufgabentext extends HAWView implements ActionListener {
 	private Model model;
@@ -40,7 +37,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
 	private String aufgText = new String();
 	
-	private Image img ;  // Variable zun Laden der Bilder
+	private Image img;  // Variable zun Laden der Bilder
 
 	
 	// fügt dem panel von Aufgabentext einen JComponent zu

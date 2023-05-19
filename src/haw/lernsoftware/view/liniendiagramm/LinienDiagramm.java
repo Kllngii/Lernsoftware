@@ -67,6 +67,11 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		});
 	}
 
+	/**
+	 * 
+	 * @param g2d
+	 * @deprecated
+	 */
 	private void setStroked(Graphics2D g2d) {
 		g2d.setStroke(new BasicStroke(linewidth, BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER,10.0f,new float[] {16.0f,20.0f},0.0f));
 	}

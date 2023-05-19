@@ -2,7 +2,6 @@ package haw.lernsoftware.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Taskbar;
 import java.awt.Taskbar.Feature;
@@ -18,7 +17,6 @@ import javax.swing.JTextArea;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
-import com.jgoodies.forms.layout.*;
 
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.resources.ResourceProvider;

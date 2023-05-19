@@ -8,8 +8,6 @@ import java.util.List;
 import org.json.JSONObject;
 
 public class Menge {
-	// Für die JSON-(Re)konstrunktion
-	private int möglicheEreignisseID;
 
 	private String name;
 	private Ereignismenge möglicheEreignisse;
