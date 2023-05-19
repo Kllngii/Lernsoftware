@@ -210,6 +210,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				//bedingt fürs richtige auf true
 				//TODO hier bedingt ja/nein setzen
 				mouseInteractions.clear();
+				panel.repaint();
 			}
 		}
 	}
