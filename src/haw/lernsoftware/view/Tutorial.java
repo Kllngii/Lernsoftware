@@ -76,7 +76,7 @@ public class Tutorial extends HAWView {
 				
 				
 				.build(); //
-		
+		  
 		//test
 	}
 

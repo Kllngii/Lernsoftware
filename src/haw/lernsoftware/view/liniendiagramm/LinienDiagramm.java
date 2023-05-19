@@ -37,6 +37,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private List<Integer> spaltenCoord = new ArrayList<Integer>();
 	private List<Integer> zeilenCoord = new ArrayList<Integer>();
 	
+	
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
 		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
@@ -51,8 +52,10 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		numberEreignisse = mengen.size();
 		numberElementare = e.getEreignisse().size();
 		
+		////////////////////////////////////////////////////////////////////////////////////////////////////
 		//FIXME Nur testweise
 		eMenge.getEreignisse().get(1).setBedingt(true);
+		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		panel.addMouseListener(this);
 	}
@@ -138,8 +141,14 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			g2d.drawString(eMenge.getEreignisse().get(i).getName(), currentLeftBorder + (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)) / 2, BORDER_Y);
 			g2d.drawLine(currentLeftBorder, BORDER_Y + 10, currentLeftBorder, BORDER_Y + diagHeight);
 			spaltenCoord.add(currentLeftBorder);
+			g2d.setColor(Color.ORANGE);
+			if (eMenge.getEreignisse().get(i).isBedingt()) {
+				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)) - 1, numberEreignisse*linewidth - 2);
+			}
+			g2d.setColor(Color.BLACK);
 			currentLeftBorder += (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 		}
+		g2d.setColor(Color.BLACK);
 		spaltenCoord.add(currentLeftBorder);
 		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
 		
@@ -148,7 +157,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		for (int j = 0; j < numberEreignisse; j++) {
 			currentLeftBorder = BORDER_X + offsetlr;
 			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
-			g2d.setColor(Color.BLUE);
+//			g2d.setColor(Color.BLUE);
 			for (int i = 0; i < numberElementare; i++) {
 				if (linesegment(mengen.get(j), i+1)) {
 					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)), BORDER_Y + 10 + j*linewidth + linewidth/2);

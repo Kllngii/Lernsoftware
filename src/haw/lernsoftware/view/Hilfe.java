@@ -1,6 +1,5 @@
 package haw.lernsoftware.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Taskbar;
@@ -17,7 +16,12 @@ import javax.swing.JTextArea;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
+/*
+<<<<<<< Updated upstream
+=======
 
+>>>>>>> Stashed changes
+*/
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.resources.ResourceProvider;
 
@@ -28,38 +32,39 @@ import haw.lernsoftware.resources.ResourceProvider;
 public class Hilfe extends HAWView implements ActionListener{
 
 	
-	private JButton Button1 = new JButton("Test");
+	private JButton Button1 = new JButton("Allgemein");
 	private JButton Button2 = new JButton("Test2");
 	private JButton Button3 = new JButton("Test3");	
-	private JLabel text = new JLabel();
-	private JLabel Ueberschrift = new JLabel("Überschrift");
-	private JTextArea test = new JTextArea(8,50);
+	private JLabel Ueberschrift = new JLabel("");
+	private JTextArea text = new JTextArea(22,50);	
 	
-	/*Sachen zum Testen*/
-	//private Dimension preferredLayoutSize = new Dimension();
-	//private FormLayout layout = new FormLayout(
-	       //  "right:max(40dlu;pref), 3dlu, 80dlu, 7dlu, " // 1st major colum
-		     //  + "right:max(40dlu;pref), 3dlu, 80dlu",        // 2nd major column
-		       //  "");                                         // add rows dynamically
-
-	
-
-	private String bla = new String(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text5"));
+	// Eventuell wird das noch mal benötigt
+	//private String bla = new String(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text5"));
 	
 	public  Hilfe() {
 		
 		//Fenster erstellen
 		JFrame fenster = new JFrame("Hilfe");
+		
+		// Buttons sollen etwas machen
+		Button1.addActionListener(this);
+		Button2.addActionListener(this);
+		Button3.addActionListener(this);
+		
+		// Textfeld einstellen
+		text.setEditable(false);
+		Color color = panel.getBackground();
+		text.setBackground(color);
 
-		fenster.setSize(600, 450);
+		// Fenster einstellen
+		fenster.setSize(500, 400);
 		fenster.getContentPane().add(panel);
-		//fenster.setResizable(false);
+		fenster.setResizable(false);
 		
+		// ContentText zum Panel hinzufügen
+		panel.add(buildContentText());
 
-		//panel.add(buildContentMenu(), BorderLayout.WEST);
-		panel.add(buildContentText(), BorderLayout.CENTER);
-
-		
+		// Ein Hilfe-Icon dem Fenster hinzufügen
 		Image icon = ResourceProvider.loadImage(Konst.HILFE_ICON);
 		final Taskbar taskbar = Taskbar.getTaskbar();
 		if(taskbar.isSupported(Feature.ICON_IMAGE))
@@ -72,91 +77,47 @@ public class Hilfe extends HAWView implements ActionListener{
 		
 	}
 
-/*
-	public JComponent buildContentMenu() {		
-		
-		Button1.addActionListener(this);
-		Button2.addActionListener(this);
-		Button3.addActionListener(this);
-
-		
-		return FormBuilder.create()
-				//.columns("center:90dlu")
-				.columns("pref")
-				//.appendColumns("center:90dlu")
-				.rows("p,50dlu,p,50dlu,p,50dlu,p,50dlu,p,50dlu,p,50dlu,p,50dlu,60dlu")
-				.debug(true)                                 // Rote Linien zeichnen
-				.padding(Paddings.DIALOG)
-				.addStack(Button1) .xy(1, 2)
-				.addStack(Button2) .xy(1, 4)
-				.addStack(Button3) .xy(1, 6)
-				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
-				.build();
-		
-
-	}
-	
-	*/
-
-	public JComponent buildContentText() {
-		
-		
-
+	// Layout designer
+	public JComponent buildContentText() {				
 		return FormBuilder.create()
 				
 				.columns("pref, 200dlu")
-				.rows("10dlu,top:200dlu") 
-				
+				.rows("10dlu,top:200dlu") 				
 				.debug(true)
 				.padding(Paddings.DIALOG)
 				.add(Ueberschrift) .xy(2, 1)
 				.addStack(Button1,Button2,Button3) .xy(1, 2, "fill,center")
-				.add(test) .xy(2, 2)
+				.add(text) .xy(2, 2)
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
 				.build();
-				////.columns("left:300dlu")
-				/*
-				.columns("pref")
-				.rows("10dlu,top:400dlu")
-				.debug(true)                                 // Rote Linien zeichnen
-				.padding(Paddings.DIALOG)
-				.add(Ueberschrift) .xy(1, 1)
-				////.add(bla)  .xy(1, 2)
-				.add(test) .xy(1, 2)
-				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
-				.build();
-				*/
-				
-				
-		
-
 	}
 
+	// Starte das Fenster
 	public static void main(String[] args) {
 		new Hilfe();
 	}
 
 
+	// Aktionen die die Buttons machen sollen
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == Button1) {
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"));
-			Ueberschrift.setText("Überschrift1");
+			Ueberschrift.setText("Allgemein");
 		}
 		if(e.getSource() == Button2) {
-			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text2"));
 			Ueberschrift.setText("Überschrift2");
-			test.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text5"));
-			test.setWrapStyleWord(true);
-			test.setLineWrap(true);
-			//test.setPreferredSize(new Dimension(400,400));
-			//test.setRows(4);
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text5"));
+			text.setWrapStyleWord(true);
+			text.setLineWrap(true);
 			
 		}
 		if(e.getSource() == Button3) {
-			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text3"));
 			Ueberschrift.setText("Überschrift3");
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text3"));
+			text.setWrapStyleWord(true);
+			text.setLineWrap(true);
 		}
 		panel.repaint();
 	}
