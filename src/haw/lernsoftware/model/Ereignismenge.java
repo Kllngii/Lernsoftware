@@ -1,6 +1,7 @@
 package haw.lernsoftware.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -108,12 +109,22 @@ public class Ereignismenge {
 			return new Menge(json.getString("name"), eMenge, eMenge.getEreignisse().subList(0, 0), json.getInt("order"));
 		} else {
 			String[] elementareArray = elementareString.split(",");
-			int index = 0;
-			while (index < elementareArray.length) {
-				elementare.add(eMenge.getEreignisse().get(Integer.parseInt(elementareArray[index]) - 1));
-				index++;
-				System.out.println(elementareString);
-			}
+			Arrays.stream(elementareArray).map(elem -> {
+				try {
+					return eMenge.getEreignisse().get(Integer.parseInt(elem) - 1);
+				} catch(NumberFormatException ex) {
+					return null;
+				}
+				}).forEach(elemEr -> {
+					if(elemEr != null)
+						elementare.add(elemEr);
+				});
+//			int index = 0;
+//			while (index < elementareArray.length) {
+//				elementare.add(eMenge.getEreignisse().get(Integer.parseInt(elementareArray[index]) - 1));
+//				index++;
+//				System.out.println(elementareString);
+//			}
 			return new Menge(json.getString("name"), eMenge, elementare, json.getInt("order"));
 		}
 	}
