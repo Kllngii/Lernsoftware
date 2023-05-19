@@ -40,6 +40,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private List<MouseInteract> mouseInteractions = new ArrayList<MouseInteract>();
 	
 	private int selectedColumn = -1;
+	private int selectedRow = -1;
 	
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
@@ -72,7 +73,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	}
 
 	private void setStroked(Graphics2D g2d) {
-		g2d.setStroke(new BasicStroke(linewidth, BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER,10.0f,new float[] {16.0f,20.0f},0.0f));
+		g2d.setStroke(new BasicStroke(linewidth, BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER,10.0f,new float[] {5.0f,5.0f},0.0f));
 	}
 	private void setNormal(Graphics2D g2d) {
 		g2d.setStroke(new BasicStroke(linewidth));
@@ -165,11 +166,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			for (int i = 0; i < numberElementare; i++) {
 				int currentWidth = (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 				if (linesegment(mengen.get(j), i+1)) {
-					if(selectedColumn == i)
-						setStroked(g2d);	
 					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + currentWidth, BORDER_Y + 10 + j*linewidth + linewidth/2);
-					if(selectedColumn == i)
-						setNormal(g2d);
 				}
 				currentLeftBorder += currentWidth;
 			}
@@ -215,18 +212,19 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				log.debug("Zeile " + current.zeile() + " wurde gewählt!");
 				//bedingt für alle auf false
 				eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
-				if(current.zeile() != -1) {
+				if(current.zeile() != -1 && selectedRow != current.zeile()) {
 					//bedingt fürs richtige auf true
 					for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
 						mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
 					}
 				}
+				selectedRow = (selectedRow == current.zeile() ? -1 : current.zeile());
 				mouseInteractions.clear();
 				panel.repaint();
 			}
 			if(current.zeile() == -1 && last.zeile() == -1 && current.spalte() == last.spalte()) {
 				log.debug("Spalte " + current.spalte() + " wurde gewählt!");
-				selectedColumn = current.spalte();
+				selectedColumn = (selectedColumn == current.spalte() ? -1 : current.spalte());
 				mouseInteractions.clear();
 				panel.repaint();
 			}
