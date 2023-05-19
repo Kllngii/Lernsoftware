@@ -1,11 +1,13 @@
 package haw.lernsoftware.view;
 
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import org.apache.log4j.Logger;
@@ -43,6 +45,9 @@ public class Tutorial extends HAWView {
 		JPanel view = new JPanel();
 		panel = new JScrollPane(view);
 		view.add(constructStartseite());
+		JScrollBar scroll = new JScrollBar();
+		scroll.setUnitIncrement(16);
+		((JScrollPane)panel).setVerticalScrollBar(scroll);
 	}
 
 	private JComponent constructStartseite() {
@@ -73,7 +78,7 @@ public class Tutorial extends HAWView {
 		return FormBuilder.create()
 				  .columns("p")
 				  .rows("p")
-				  .addScrolled(inhalt) .xy(1, 1)
+				  .add(inhalt) .xy(1, 1)
 				  .debug(true)
 				  .build();
 		//test
