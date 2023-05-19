@@ -134,7 +134,7 @@ public class Hilfe extends HAWView implements ActionListener{
 			text.setLineWrap(true);
 		}
 		if(e.getSource() == ButtonLiniengraph) {
-			Ueberschrift.setText("Aufgaben");
+			Ueberschrift.setText("Liniengraph");
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text5"));
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
