@@ -72,17 +72,19 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		log.info(i);
 		log.info(model.getCurrentAufgabe().hasImage());
 
+		// TODO was ist wenn auch noch Liniendiagramme dazukommen
 		if (model.getCurrentAufgabe().hasImage() == true) {
-
-			bild = new ImageIcon(getClass().getResource("aufgabentext_test.png"));
+			bild = new ImageIcon(model.getCurrentAufgabe().getImage());
 			aufgabenBild = new JLabel(bild);
+		} else {
+			aufgabenBild = new JLabel("");
 		}
 
 		// Button Listener
 		previousTaskButton.addActionListener(this);
 		nextTaskButton.addActionListener(this);
 
-		// gibt einen JComponent zurück, der
+		// gibt einen JComponent zurück mit nur Text
 		return FormBuilder.create().debug(true) // Rote Linien zeichnen
 				.columns("100dlu, center:200dlu, 100dlu") //
 				.rows("p, 20dlu, p, $lg, top:100dlu, p") //
@@ -93,19 +95,28 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.add(nextTaskButton).xy(3, 2) //
 				.addSeparator("Aufgabentext").xyw(1, 3, 3) //
 				.add(aufgabenText).xyw(1, 5, 3) //
-				.add(aufgabenBild).xyw(1, 7, 3) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
+				.add(aufgabenBild).xyw(1, 6, 3) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
 				.build(); //
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+
 		if (e.getSource() == previousTaskButton) {
 			i--;
 			model.setCurrentAufgabe(aufgaben.get(i));
 			aufgabenText.setText(model.getCurrentAufgabe().getText());
 			titleTaskLabel.setText("Aufgabe: " + (i + 1));
 			progress.setValue(i);
+
+			// TODO hübscher machen
+			if (model.getCurrentAufgabe().hasImage() == true) { // aktualisiert falls bild vorhanden...
+				bild.setImage(model.getCurrentAufgabe().getImage());
+				aufgabenBild.setIcon(bild);
+			} else {
+				aufgabenBild.setText("");
+			}
 		}
 		if (e.getSource() == nextTaskButton) {
 			i++;
@@ -113,6 +124,13 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			aufgabenText.setText(model.getCurrentAufgabe().getText());
 			titleTaskLabel.setText("Aufgabe: " + (i + 1));
 			progress.setValue(i);
+
+			if (model.getCurrentAufgabe().hasImage() == true) { // aktualisiert falls bild vorhanden...
+				bild.setImage(model.getCurrentAufgabe().getImage());
+				aufgabenBild.setIcon(bild);
+			} else {
+				aufgabenBild.setText("");
+			}
 		}
 		panel.repaint();
 
