@@ -2,7 +2,7 @@ package haw.lernsoftware.view;
 
 import javax.swing.JFrame;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class Aufgaben extends HAWView {
 
 	public Aufgaben() {

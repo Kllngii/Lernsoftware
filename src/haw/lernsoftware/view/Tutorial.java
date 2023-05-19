@@ -1,16 +1,18 @@
 package haw.lernsoftware.view;
 
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import org.apache.log4j.Logger;
+
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
+
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.resources.ResourceProvider;
 
