@@ -46,7 +46,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		aufgaben = model.getAufgaben();
 		panel.add(scrollBar);
 		panel.add(buildContentText());
-
 	}
 
 	// erstellt einen JComponent
@@ -88,7 +87,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		int i = aufgaben.indexOf(model.getCurrentAufgabe());
 
 		if (e.getSource() == previousTaskButton) {

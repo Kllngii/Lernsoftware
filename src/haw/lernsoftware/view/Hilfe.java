@@ -113,7 +113,6 @@ public class Hilfe extends HAWView implements ActionListener{
 	// Aktionen die die Buttons machen sollen
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource() == ButtonAllgemein) {
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text2"));
 			text.setWrapStyleWord(true);
