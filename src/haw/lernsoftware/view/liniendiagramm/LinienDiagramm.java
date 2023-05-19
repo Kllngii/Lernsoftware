@@ -12,10 +12,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.RepaintManager;
 
 import org.apache.log4j.Logger;
 
@@ -24,7 +26,7 @@ import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.HAWView;
 
-public class LinienDiagramm extends HAWView implements MouseListener {
+public class LinienDiagramm extends HAWView implements MouseListener, MouseMotionListener {
 	
 	private int linewidth = STD_LINEWIDTH;
 	private int numberEreignisse;
@@ -57,6 +59,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		numberElementare = e.getEreignisse().size();
 
 		panel.addMouseListener(this);
+		panel.addMouseMotionListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -239,4 +242,16 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+//		Koordinate koord = getPosition(e);
+//		if(koord.spalte() != selectedColumn) {
+//			selectedColumn = koord.spalte();
+//			panel.repaint();
+//		}
+	}
 }
