@@ -39,6 +39,8 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	
 	private List<MouseInteract> mouseInteractions = new ArrayList<MouseInteract>();
 	
+	private int selectedColumn = -1;
+	
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
 		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
@@ -74,13 +76,11 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		});
 	}
 
-	/**
-	 * 
-	 * @param g2d
-	 * @deprecated
-	 */
 	private void setStroked(Graphics2D g2d) {
 		g2d.setStroke(new BasicStroke(linewidth, BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER,10.0f,new float[] {16.0f,20.0f},0.0f));
+	}
+	private void setNormal(Graphics2D g2d) {
+		g2d.setStroke(new BasicStroke(linewidth));
 	}
 	
 	private void setLinewidth(Graphics2D g2d, int newWidth) {
@@ -89,7 +89,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	}
 	
 	// Elementarereignis in Spalte "order" in der Menge enthalten?
-	private boolean linesegment (Menge menge, int order) {
+	private boolean linesegment(Menge menge, int order) {
 		for (int k = 0; k < menge.getEreignisse().size(); k++) {
 			if (menge.getEreignisse().get(k).getOrder() == order) {
 				return true;
@@ -161,7 +161,11 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 //			g2d.setColor(Color.BLUE);
 			for (int i = 0; i < numberElementare; i++) {
 				if (linesegment(mengen.get(j), i+1)) {
+					if(selectedColumn == i)
+						setStroked(g2d);	
 					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)), BORDER_Y + 10 + j*linewidth + linewidth/2);
+					if(selectedColumn == i)
+						setNormal(g2d);
 				}
 				currentLeftBorder += (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 			}
@@ -209,6 +213,12 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
 				//bedingt fürs richtige auf true
 				//TODO hier bedingt ja/nein setzen
+				mouseInteractions.clear();
+				panel.repaint();
+			}
+			if(current.zeile() == -1 && last.zeile() == -1 && current.spalte() == last.spalte()) {
+				log.debug("Spalte " + current.spalte() + " wurde gewählt!");
+				selectedColumn = current.spalte();
 				mouseInteractions.clear();
 				panel.repaint();
 			}
