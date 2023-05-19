@@ -74,7 +74,7 @@ public class Hilfe extends HAWView implements ActionListener{
 		
 	}
 
-
+/*
 	public JComponent buildContentMenu() {		
 		
 		Button1.addActionListener(this);
@@ -97,6 +97,8 @@ public class Hilfe extends HAWView implements ActionListener{
 		
 
 	}
+	
+	*/
 
 	public JComponent buildContentText() {
 		
