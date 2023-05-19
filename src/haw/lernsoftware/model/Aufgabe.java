@@ -42,6 +42,36 @@ public class Aufgabe implements Serializable {
 	public void setText(String text) {
 		this.text = text;
 	}
+	public Image getImage() {
+		return img;
+	}
+	public void setImage(Image img) {
+		this.img = img;
+	}
+	public boolean isHasImage() {
+		return hasImage;
+	}
+	public void setHasImage(boolean hasImage) {
+		this.hasImage = hasImage;
+	}
+	public boolean isHasLiniendiagramm() {
+		return hasLiniendiagramm;
+	}
+	public void setHasLiniendiagramm(boolean hasLiniendiagramm) {
+		this.hasLiniendiagramm = hasLiniendiagramm;
+	}
+	public Ereignismenge geteMenge() {
+		return eMenge;
+	}
+	public void seteMenge(Ereignismenge eMenge) {
+		this.eMenge = eMenge;
+	}
+	public List<Menge> getEreignisse() {
+		return ereignisse;
+	}
+	public void setEreignisse(List<Menge> ereignisse) {
+		this.ereignisse = ereignisse;
+	}
 	
 	
 }
