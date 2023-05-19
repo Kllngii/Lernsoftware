@@ -38,10 +38,6 @@ public class Aufgabe implements Serializable {
 	public String getText() {
 		return text;
 	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
 	public Image getImage() {
 		return img;
 	}
@@ -57,14 +53,8 @@ public class Aufgabe implements Serializable {
 	public Ereignismenge geteMenge() {
 		return eMenge;
 	}
-	public void seteMenge(Ereignismenge eMenge) {
-		this.eMenge = eMenge;
-	}
 	public List<Menge> getEreignisse() {
 		return ereignisse;
-	}
-	public void setEreignisse(List<Menge> ereignisse) {
-		this.ereignisse = ereignisse;
 	}
 	
 	
