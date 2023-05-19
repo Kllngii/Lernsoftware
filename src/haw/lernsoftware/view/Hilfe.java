@@ -1,9 +1,11 @@
 package haw.lernsoftware.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Taskbar;
 import java.awt.Taskbar.Feature;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -75,6 +77,12 @@ public class Hilfe extends HAWView implements ActionListener{
 		if(icon != null)
 			fenster.setIconImage(icon);
 
+		// Fenster Zentrieren
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - fenster.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - fenster.getHeight()) / 2);
+	    fenster.setLocation(x, y);
+	    // Fenster zeige dich
 		fenster.setVisible(true);
 		
 		
