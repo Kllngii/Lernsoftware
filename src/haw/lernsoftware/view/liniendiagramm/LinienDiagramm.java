@@ -37,6 +37,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private List<Integer> spaltenCoord = new ArrayList<Integer>();
 	private List<Integer> zeilenCoord = new ArrayList<Integer>();
 	
+	private List<MouseInteract> mouseInteractions = new ArrayList<MouseInteract>();
 	
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
@@ -184,7 +185,25 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		log.info(getPosition(e));
+		Koordinate koord = getPosition(e);
+		MouseInteract mi = new MouseInteract(koord, System.currentTimeMillis());
+		mouseInteractions.add(mi);
+		log.debug(mi);
+		
+		int length = mouseInteractions.size();
+		if(length >= 2 && (mouseInteractions.get(length-1).timeStamp() -  mouseInteractions.get(length-2).timeStamp()) < 1500) {
+			//Zwei aufeinanderfolgende Klicks in unter 1,5 Sekunden -> Auswertung starten
+			Koordinate current = mouseInteractions.get(length-1).koord();
+			Koordinate last = mouseInteractions.get(length-2).koord();
+			if(current.spalte() == -1 && last.spalte() == -1 && current.zeile() == last.zeile()) {
+				log.debug("Zeile " + current.zeile() + " wurde gewählt!");
+				//bedingt für alle auf false
+				eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
+				//bedingt fürs richtige auf true
+				//TODO hier bedingt ja/nein setzen
+				mouseInteractions.clear();
+			}
+		}
 	}
 
 	@Override
