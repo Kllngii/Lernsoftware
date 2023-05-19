@@ -3,6 +3,7 @@ package haw.lernsoftware.view;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import java.awt.Image;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,6 +29,10 @@ public class Tutorial extends HAWView {
 	private ImageIcon bild1 = new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1));
 	JPanel bild = new JPanel();
 	JPanel uPanel = new JPanel();
+	
+	// Skaliere das ImageIcon
+    int x = 700; // Gewünschte Breite des Bildes
+    int y = 400; // Gewünschte Höhe des Bildes
 	
 	
 
@@ -58,16 +63,16 @@ public class Tutorial extends HAWView {
 				.add(ueberschrift).xyw(1, 1, 5) //
 				.add(text1).xyw(1, 2, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 5) //
-				.add(new JLabel(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1)))).xyw(1,4,5) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1)), x, y) )).xyw(1,4,5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz2.text")).xyw(1, 5, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz3.text")).xyw(1, 6, 5) //
-				.add(new JLabel(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD2)))).xyw(1,7,5) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz4.text")).xyw(1, 6, 5) //
-				.add(new JLabel(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD3)))).xyw(1,7,5) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz5.text")).xyw(1, 6, 5) //
-				.add(new JLabel(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)))).xyw(1,7,5) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 6, 5) //
-				.add(new JLabel(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)))).xyw(1,7,5) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD2)), x, y) )).xyw(1,7,5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz4.text")).xyw(1, 8, 5) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD3)), x, y) )).xyw(1,9,5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz5.text")).xyw(1, 10, 5) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)), x, y) )).xyw(1,11,5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 12, 5) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)), x, y) )).xyw(1,13,5) //
 				
 				
 				.build(); //
@@ -75,5 +80,10 @@ public class Tutorial extends HAWView {
 		//test
 	}
 
+	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
+		Image image = img.getImage();
+        Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
+	}
 
 }
