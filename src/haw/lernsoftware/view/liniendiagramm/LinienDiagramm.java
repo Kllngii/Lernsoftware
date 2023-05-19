@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.HAWView;
 
-public class LinienDiagramm extends HAWView implements MouseListener {
+public class LinienDiagramm extends HAWView implements MouseListener, MouseMotionListener {
 	
 	private int linewidth = STD_LINEWIDTH;
 	private int numberEreignisse;
@@ -57,6 +58,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		numberElementare = e.getEreignisse().size();
 
 		panel.addMouseListener(this);
+		panel.addMouseMotionListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -146,8 +148,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			if(selectedColumn == i) {
 				g2d.setColor(new Color(0.85f, 1f, 1f, 0.8f));
 				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, currentWidth - 1, numberEreignisse*linewidth - 2);
-//				g2d.drawString("TEST", currentLeftBorder + 1, BORDER_Y + 12);
-				log.info("Zeichne bei (" + currentLeftBorder + currentWidth / 2 + ", " + BORDER_Y + 10 + linewidth + ")");
 			}
 			
 			g2d.setColor(Color.BLACK);
@@ -239,4 +239,16 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+//		Koordinate koord = getPosition(e);
+//		if(koord.spalte() != selectedColumn) {
+//			selectedColumn = koord.spalte();
+//			panel.repaint();
+//		}
+	}
 }
