@@ -48,17 +48,11 @@ public class Aufgabe implements Serializable {
 	public void setImage(Image img) {
 		this.img = img;
 	}
-	public boolean isHasImage() {
+	public boolean hasImage() {
 		return hasImage;
 	}
-	public void setHasImage(boolean hasImage) {
-		this.hasImage = hasImage;
-	}
-	public boolean isHasLiniendiagramm() {
+	public boolean hasLiniendiagramm() {
 		return hasLiniendiagramm;
-	}
-	public void setHasLiniendiagramm(boolean hasLiniendiagramm) {
-		this.hasLiniendiagramm = hasLiniendiagramm;
 	}
 	public Ereignismenge geteMenge() {
 		return eMenge;
