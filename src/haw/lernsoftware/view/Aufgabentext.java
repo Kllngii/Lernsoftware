@@ -26,6 +26,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private Model model;
 	private List<Aufgabe> aufgaben;
 	private JProgressBar progress;
+	private int i;
 
 	private final Logger log = Logger.getLogger(getClass());
 
@@ -40,31 +41,21 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private ImageIcon bild;
 	private JLabel aufgabenBild;
 
-//	public ladeBild(){
-//		try
-//		{
-//			
-//		}catch(IOException ex)
-//		{
-//			// handle exception...
-//		}
-//	}
-
-	// private Image img = ; // Variable zun Laden der Bilder
-
 	// fügt dem panel von Aufgabentext einen JComponent zu
 	public Aufgabentext(Model model) {
 		this.model = model;
 		aufgaben = model.getAufgaben();
 		panel.add(scrollBar);
 		panel.add(buildContentText());
+
 	}
 
 	// erstellt einen JComponent
 	public JComponent buildContentText() {
+		i = aufgaben.indexOf(model.getCurrentAufgabe());
 
 		previousTaskButton.setEnabled(false);
-		titleTaskLabel.setText("Aufgabe: 1");
+		titleTaskLabel.setText("Aufgabe: " + (i + 1));
 
 		progress = new JProgressBar(0, aufgaben.size() - 1);
 		progress.setValue(aufgaben.indexOf(model.getCurrentAufgabe()));
@@ -78,19 +69,25 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		Color color = panel.getBackground();
 		aufgabenText.setBackground(color);
 
+		log.info(i);
+		log.info(model.getCurrentAufgabe().hasImage());
+
+		// TODO was ist wenn auch noch Liniendiagramme dazukommen
 		if (model.getCurrentAufgabe().hasImage() == true) {
-			bild = new ImageIcon(getClass().getResource("aufgabentext_test.png"));
+			bild = new ImageIcon(model.getCurrentAufgabe().getImage());
 			aufgabenBild = new JLabel(bild);
+		} else {
+			aufgabenBild = new JLabel("");
 		}
 
 		// Button Listener
 		previousTaskButton.addActionListener(this);
 		nextTaskButton.addActionListener(this);
 
-		// gibt einen JComponent zurück, der
+		// gibt einen JComponent zurück mit nur Text
 		return FormBuilder.create().debug(true) // Rote Linien zeichnen
-				.columns("100dlu, center:200dlu, 100dlu,pref") //
-				.rows("p, 20dlu, p, $lg, top:100dlu, pref,pref,pref,pref,pref") //
+				.columns("100dlu, center:200dlu, 100dlu") //
+				.rows("p, 20dlu, p, $lg, top:100dlu, p") //
 				.padding(Paddings.DIALOG) //
 				.add(titleTaskLabel).xy(2, 1) //
 				.add(previousTaskButton).xy(1, 2) //
@@ -104,7 +101,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		int i = aufgaben.indexOf(model.getCurrentAufgabe());
+		// TODO Auto-generated method stub
 
 		if (e.getSource() == previousTaskButton) {
 			i--;
@@ -112,6 +109,14 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			aufgabenText.setText(model.getCurrentAufgabe().getText());
 			titleTaskLabel.setText("Aufgabe: " + (i + 1));
 			progress.setValue(i);
+
+			// TODO hübscher machen
+			if (model.getCurrentAufgabe().hasImage() == true) { // aktualisiert falls bild vorhanden...
+				bild.setImage(model.getCurrentAufgabe().getImage());
+				aufgabenBild.setIcon(bild);
+			} else {
+				aufgabenBild.setText("");
+			}
 		}
 		if (e.getSource() == nextTaskButton) {
 			i++;
@@ -119,6 +124,13 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			aufgabenText.setText(model.getCurrentAufgabe().getText());
 			titleTaskLabel.setText("Aufgabe: " + (i + 1));
 			progress.setValue(i);
+
+			if (model.getCurrentAufgabe().hasImage() == true) { // aktualisiert falls bild vorhanden...
+				bild.setImage(model.getCurrentAufgabe().getImage());
+				aufgabenBild.setIcon(bild);
+			} else {
+				aufgabenBild.setText("");
+			}
 		}
 		panel.repaint();
 

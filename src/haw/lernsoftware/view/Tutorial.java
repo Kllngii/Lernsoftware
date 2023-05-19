@@ -1,16 +1,20 @@
 package haw.lernsoftware.view;
 
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+
 import org.apache.log4j.Logger;
+
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
+
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.resources.ResourceProvider;
 
@@ -24,59 +28,59 @@ public class Tutorial extends HAWView {
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
 	JLabel ueberschrift = new JLabel("Tutorial");
+	
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
-	private ImageIcon bild1 = new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1));
-	JPanel bild = new JPanel();
-	JPanel uPanel = new JPanel();
 	
 	// Skaliere das ImageIcon
-    int x = 700; // Gewünschte Breite des Bildes
-    int y = 400; // Gewünschte Höhe des Bildes
+    int x1 = 700; // Gewünschte Breite des Bildes
+    int y1 = 400; // Gewünschte Höhe des Bildes
+    int x = 500; // Gewünschte Breite des Bildes
+    int y = 300; // Gewünschte Höhe des Bildes
 	
 	
 
 	public Tutorial(GUI gui) {
 		this.gui = gui;
-
 		JPanel view = new JPanel();
 		panel = new JScrollPane(view);
 		view.add(constructStartseite());
+		JScrollBar scroll = new JScrollBar();
+		scroll.setUnitIncrement(16);
+		((JScrollPane)panel).setVerticalScrollBar(scroll);
 	}
 
 	private JComponent constructStartseite() {
 		
-		text1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_Ueberschrift.text"));
-		//bild.add(bild1);
-		 bildLabel1.setIcon(bild1);
-		 //bildLabel.setPreferredSize(new Dimension(500, 300));
-		 String[] texte = new String[200] ;
-		 for(int i = 0; i<100;i++) {
-			 texte[i]= ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz"+i+".text");
-		 }
-		 log.info("Der erste Text ist:"+texte[7]);
+		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 		//FormBuilder hinzufügen
-		return FormBuilder.create() // Rote Linien zeichnen
+		JComponent inhalt = FormBuilder.create() // Rote Linien zeichnen
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//, center:200dlu, 200dlu") //
-				.rows("20dlu, p, p, p, p, p, p, p,p,p,p,p,p,p") //
+				.rows("p, p, p, 5dlu, p, p, p, 5dlu, p, 5dlu, p, 5dlu, p, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 5) //
-				.add(text1).xyw(1, 2, 5) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 5) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1)), x, y) )).xyw(1,4,5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_Ueberschrift.text")).xyw(1, 2, 5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 2) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1)), x1, y1) )).xyw(3,3,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz2.text")).xyw(1, 5, 5) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz3.text")).xyw(1, 6, 5) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD2)), x, y) )).xyw(1,7,5) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz4.text")).xyw(1, 8, 5) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD3)), x, y) )).xyw(1,9,5) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz5.text")).xyw(1, 10, 5) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)), x, y) )).xyw(1,11,5) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 12, 5) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)), x, y) )).xyw(1,13,5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz31.text")).xyw(1, 6, 5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz3.text")).xyw(1, 7, 2) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD2)), x, y) )).xyw(3,7,3) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz4.text")).xyw(1, 9, 2) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD3)), x, y) )).xyw(3,9,3) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz5.text")).xyw(1, 11, 2) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)), x, y) )).xyw(3,11,3) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 13, 2) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)), x, y) )).xyw(3,13,3) //
 				
 				
 				.build(); //
-		  
+		return FormBuilder.create()
+				  .columns("p")
+				  .rows("p")
+				  .add(inhalt) .xy(1, 1)
+				  .debug(true)
+				  .build();
 		//test
 	}
 
