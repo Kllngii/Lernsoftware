@@ -149,8 +149,6 @@ public class LinienDiagramm extends HAWView implements MouseListener, MouseMotio
 			if(selectedColumn == i) {
 				g2d.setColor(new Color(0.85f, 1f, 1f, 0.8f));
 				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, currentWidth - 1, numberEreignisse*linewidth - 2);
-//				g2d.drawString("TEST", currentLeftBorder + 1, BORDER_Y + 12);
-				log.info("Zeichne bei (" + currentLeftBorder + currentWidth / 2 + ", " + BORDER_Y + 10 + linewidth + ")");
 			}
 			
 			g2d.setColor(Color.BLACK);
