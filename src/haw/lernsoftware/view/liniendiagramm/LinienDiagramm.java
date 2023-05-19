@@ -51,6 +51,9 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		numberEreignisse = mengen.size();
 		numberElementare = e.getEreignisse().size();
 		
+		//FIXME Nur testweise
+		eMenge.getEreignisse().get(1).setBedingt(true);
+		
 		panel.addMouseListener(this);
 	}
 
