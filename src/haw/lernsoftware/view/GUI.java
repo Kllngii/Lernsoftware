@@ -86,10 +86,14 @@ public class GUI implements ActionListener {
 		Image ldImg = ResourceProvider.loadImage(Konst.LINIENDIAGRAMM_ICON);
 		Image startseiteImg = ResourceProvider.loadImage(Konst.STARTSEITE_ICON);
 		Image aufgabentextImg = ResourceProvider.loadImage(Konst.AUFGABENTEXT_ICON);
+		Image SpeichernImg = ResourceProvider.loadImage(Konst.SPEICHERN_ICON);
+		Image LadenImg = ResourceProvider.loadImage(Konst.LADEN_ICON);
 		menuItemHilfe.setIcon(new ImageIcon(hilfeImg.getScaledInstance(16, 16, 0)));
 		menuItemLiniendiagramm.setIcon(new ImageIcon(ldImg.getScaledInstance(16, 16, 0)));
 		menuItemStartseite.setIcon(new ImageIcon(startseiteImg.getScaledInstance(16, 16, 0)));
 		menuItemAufgabentext.setIcon(new ImageIcon(aufgabentextImg.getScaledInstance(16, 16, 0)));
+		menuItemSpeichern.setIcon(new ImageIcon(SpeichernImg.getScaledInstance(16, 16, 0)));
+		menuItemLaden.setIcon(new ImageIcon(LadenImg.getScaledInstance(16, 16, 0)));
 
 		fensterMenü.add(menuItemStartseite);
 		fensterMenü.add(menuItemLiniendiagramm);
