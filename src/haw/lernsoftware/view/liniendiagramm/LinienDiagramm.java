@@ -37,6 +37,9 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private List<Integer> spaltenCoord = new ArrayList<Integer>();
 	private List<Integer> zeilenCoord = new ArrayList<Integer>();
 	
+	private List<MouseInteract> mouseInteractions = new ArrayList<MouseInteract>();
+	
+	private int selectedColumn = -1;
 	
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
@@ -52,8 +55,10 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		numberEreignisse = mengen.size();
 		numberElementare = e.getEreignisse().size();
 		
+		////////////////////////////////////////////////////////////////////////////////////////////////////
 		//FIXME Nur testweise
 		eMenge.getEreignisse().get(1).setBedingt(true);
+		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		panel.addMouseListener(this);
 	}
@@ -71,13 +76,11 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		});
 	}
 
-	/**
-	 * 
-	 * @param g2d
-	 * @deprecated
-	 */
 	private void setStroked(Graphics2D g2d) {
 		g2d.setStroke(new BasicStroke(linewidth, BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER,10.0f,new float[] {16.0f,20.0f},0.0f));
+	}
+	private void setNormal(Graphics2D g2d) {
+		g2d.setStroke(new BasicStroke(linewidth));
 	}
 	
 	private void setLinewidth(Graphics2D g2d, int newWidth) {
@@ -86,7 +89,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	}
 	
 	// Elementarereignis in Spalte "order" in der Menge enthalten?
-	private boolean linesegment (Menge menge, int order) {
+	private boolean linesegment(Menge menge, int order) {
 		for (int k = 0; k < menge.getEreignisse().size(); k++) {
 			if (menge.getEreignisse().get(k).getOrder() == order) {
 				return true;
@@ -139,8 +142,14 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			g2d.drawString(eMenge.getEreignisse().get(i).getName(), currentLeftBorder + (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)) / 2, BORDER_Y);
 			g2d.drawLine(currentLeftBorder, BORDER_Y + 10, currentLeftBorder, BORDER_Y + diagHeight);
 			spaltenCoord.add(currentLeftBorder);
+			g2d.setColor(Color.ORANGE);
+			if (eMenge.getEreignisse().get(i).isBedingt()) {
+				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)) - 1, numberEreignisse*linewidth - 2);
+			}
+			g2d.setColor(Color.BLACK);
 			currentLeftBorder += (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 		}
+		g2d.setColor(Color.BLACK);
 		spaltenCoord.add(currentLeftBorder);
 		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
 		
@@ -149,10 +158,14 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		for (int j = 0; j < numberEreignisse; j++) {
 			currentLeftBorder = BORDER_X + offsetlr;
 			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
-			g2d.setColor(Color.BLUE);
+//			g2d.setColor(Color.BLUE);
 			for (int i = 0; i < numberElementare; i++) {
 				if (linesegment(mengen.get(j), i+1)) {
+					if(selectedColumn == i)
+						setStroked(g2d);	
 					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr)), BORDER_Y + 10 + j*linewidth + linewidth/2);
+					if(selectedColumn == i)
+						setNormal(g2d);
 				}
 				currentLeftBorder += (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 			}
@@ -184,7 +197,32 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		log.info(getPosition(e));
+		Koordinate koord = getPosition(e);
+		MouseInteract mi = new MouseInteract(koord, System.currentTimeMillis());
+		mouseInteractions.add(mi);
+		log.debug(mi);
+		
+		int length = mouseInteractions.size();
+		if(length >= 2 && (mouseInteractions.get(length-1).timeStamp() -  mouseInteractions.get(length-2).timeStamp()) < 1500) {
+			//Zwei aufeinanderfolgende Klicks in unter 1,5 Sekunden -> Auswertung starten
+			Koordinate current = mouseInteractions.get(length-1).koord();
+			Koordinate last = mouseInteractions.get(length-2).koord();
+			if(current.spalte() == -1 && last.spalte() == -1 && current.zeile() == last.zeile()) {
+				log.debug("Zeile " + current.zeile() + " wurde gewählt!");
+				//bedingt für alle auf false
+				eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
+				//bedingt fürs richtige auf true
+				//TODO hier bedingt ja/nein setzen
+				mouseInteractions.clear();
+				panel.repaint();
+			}
+			if(current.zeile() == -1 && last.zeile() == -1 && current.spalte() == last.spalte()) {
+				log.debug("Spalte " + current.spalte() + " wurde gewählt!");
+				selectedColumn = current.spalte();
+				mouseInteractions.clear();
+				panel.repaint();
+			}
+		}
 	}
 
 	@Override
