@@ -41,9 +41,6 @@ public class Aufgabe implements Serializable {
 	public Image getImage() {
 		return img;
 	}
-	public void setImage(Image img) {
-		this.img = img;
-	}
 	public boolean hasImage() {
 		return hasImage;
 	}
