@@ -2,11 +2,11 @@ package haw.lernsoftware.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -28,7 +28,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JProgressBar progress;
 
 	private final Logger log = Logger.getLogger(getClass());
-	
+
 	private JScrollBar scrollBar = new JScrollBar();
 
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
@@ -36,10 +36,22 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JButton previousTaskButton = new JButton("PREVIOUS");
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
 	private String aufgText = new String();
-	
-	private Image img;  // Variable zun Laden der Bilder
 
-	
+	private ImageIcon bild;
+	private JLabel aufgabenBild;
+
+//	public ladeBild(){
+//		try
+//		{
+//			
+//		}catch(IOException ex)
+//		{
+//			// handle exception...
+//		}
+//	}
+
+	// private Image img = ; // Variable zun Laden der Bilder
+
 	// fügt dem panel von Aufgabentext einen JComponent zu
 	public Aufgabentext(Model model) {
 		this.model = model;
@@ -67,6 +79,11 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		Color color = panel.getBackground();
 		aufgabenText.setBackground(color);
 
+		if (model.getCurrentAufgabe().hasImage() == true) {
+			bild = new ImageIcon(getClass().getResource("aufgabentext_test.png"));
+			aufgabenBild = new JLabel(bild);
+		}
+
 		// Button Listener
 		previousTaskButton.addActionListener(this);
 		nextTaskButton.addActionListener(this);
@@ -82,7 +99,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.add(nextTaskButton).xy(3, 2) //
 				.addSeparator("Aufgabentext").xyw(1, 3, 3) //
 				.add(aufgabenText).xyw(1, 5, 3) //
-				//.add() .xyw(1, 6, 3) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
+				.add(aufgabenBild).xyw(1, 6, 3) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
 				.build(); //
 	}
 
