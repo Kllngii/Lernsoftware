@@ -119,12 +119,6 @@ public class Ereignismenge {
 					if(elemEr != null)
 						elementare.add(elemEr);
 				});
-//			int index = 0;
-//			while (index < elementareArray.length) {
-//				elementare.add(eMenge.getEreignisse().get(Integer.parseInt(elementareArray[index]) - 1));
-//				index++;
-//				System.out.println(elementareString);
-//			}
 			return new Menge(json.getString("name"), eMenge, elementare, json.getInt("order"));
 		}
 	}

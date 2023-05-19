@@ -96,6 +96,7 @@ public class SpeicherService {
 
 	public List<Aufgabe> ladeAufgaben() {
 		log.debug("Lade Aufgaben!");
+		//TODO Aufgaben hier hinzufügen
 		return List.of(new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe1.text")), 
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe2.text")), 
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe3.text")),
