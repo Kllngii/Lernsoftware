@@ -7,37 +7,12 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-<<<<<<< Updated upstream
-
 import org.apache.log4j.Logger;
-
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
-=======
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import org.apache.log4j.Logger;
-import java.awt.event.MouseAdapter;
-import com.jgoodies.forms.builder.FormBuilder;
-import com.jgoodies.forms.factories.Paddings;
-import com.jgoodies.forms.layout.FormLayout;
-
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.plaf.DimensionUIResource;
-import javax.swing.text.Element;
-import javax.swing.text.html.ImageView;
->>>>>>> Stashed changes
-
 import haw.lernsoftware.Konst;
-import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.resources.ResourceProvider;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Image;
+
 
 /**
  * Die Tutorial des Programms.
@@ -58,16 +33,10 @@ public class Tutorial extends HAWView {
 
 	public Tutorial(GUI gui) {
 		this.gui = gui;
-<<<<<<< Updated upstream
+
 		JPanel view = new JPanel();
 		panel = new JScrollPane(view);
 		view.add(constructStartseite());
-=======
-		panel.add(constructStartseite());
-		//uPanel.add(constructStartseite());
-		//JScrollPane scrollPane = new JScrollPane(uPanel);
-		//panel.add(scrollPane);
->>>>>>> Stashed changes
 	}
 
 	private JComponent constructStartseite() {
@@ -93,6 +62,14 @@ public class Tutorial extends HAWView {
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz2.text")).xyw(1, 5, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz3.text")).xyw(1, 6, 5) //
 				.add(new JLabel(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD2)))).xyw(1,7,5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz4.text")).xyw(1, 6, 5) //
+				.add(new JLabel(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD3)))).xyw(1,7,5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz5.text")).xyw(1, 6, 5) //
+				.add(new JLabel(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)))).xyw(1,7,5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 6, 5) //
+				.add(new JLabel(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)))).xyw(1,7,5) //
+				
+				
 				.build(); //
 		
 		//test
