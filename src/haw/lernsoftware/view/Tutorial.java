@@ -49,7 +49,7 @@ public class Tutorial extends HAWView {
 		
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 		//FormBuilder hinzufügen
-		return FormBuilder.create() // Rote Linien zeichnen
+		JComponent inhalt = FormBuilder.create() // Rote Linien zeichnen
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//, center:200dlu, 200dlu") //
 				.rows("p, p, p, 5dlu, p, p, p, 5dlu, p, 5dlu, p, 5dlu, p, p") //
 				.padding(Paddings.DIALOG) //
@@ -70,7 +70,12 @@ public class Tutorial extends HAWView {
 				
 				
 				.build(); //
-		  
+		return FormBuilder.create()
+				  .columns("p")
+				  .rows("p")
+				  .addScrolled(inhalt) .xy(1, 1)
+				  .debug(true)
+				  .build();
 		//test
 	}
 
