@@ -72,7 +72,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 		// TODO was ist wenn auch noch Liniendiagramme dazukommen
 		if (model.getCurrentAufgabe().hasImage() == true) {
-			//bild = new ImageIcon(model.getCurrentAufgabe().getImage());
+			bild = new ImageIcon(model.getCurrentAufgabe().getImage());
 			aufgabenBild = new JLabel(bild);
 		} else {
 			aufgabenBild = new JLabel("");
@@ -83,7 +83,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		nextTaskButton.addActionListener(this);
 
 		// gibt einen JComponent zurück mit nur Text
-		return FormBuilder.create().debug(false) // Rote Linien zeichnen
+		return FormBuilder.create().debug(true) // Rote Linien zeichnen
 				.columns("100dlu, center:200dlu, 100dlu") //
 				.rows("p, 20dlu, p, $lg, top:100dlu, p") //
 				.padding(Paddings.DIALOG) //
