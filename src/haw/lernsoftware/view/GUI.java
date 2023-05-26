@@ -192,7 +192,7 @@ public class GUI implements ActionListener {
 			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL.getIdentifier());
 			model.setSelectedWindow(WindowSelect.TUTORIAL);
 		} else if (ws == WindowSelect.TUTORIAL2) {
-			log.debug("Wechsle zur Tutorial");
+			log.debug("Wechsle zur Tutorial 2");
 			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL2.getIdentifier());
 			model.setSelectedWindow(WindowSelect.TUTORIAL2);
 		}
