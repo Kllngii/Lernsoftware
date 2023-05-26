@@ -211,6 +211,12 @@ public class Hilfe extends HAWView implements ActionListener{
 	        	ButtonFUN.doClick();
 	        } else
 	        	i = 0;
+	        
+	        if (i % 2 == 0) {
+	        	fenster.setVisible(true);
+	        } else {
+	        	fenster.setVisible(false);
+	        }
 		}
 		panel.repaint();
 	}
