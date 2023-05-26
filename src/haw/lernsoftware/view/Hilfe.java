@@ -216,12 +216,11 @@ public class Hilfe extends HAWView implements ActionListener{
 	        fenster.setLocation(x, y);
 	                
 	        panel.repaint();	        
-	        if(i < 100) {
+	        if(i < 10) {
 	        	try {
-					TimeUnit.SECONDS.sleep((long) 0.8);
+					Thread.sleep(200);
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					log.error(e1);
 				}
 	        	ButtonFUN.doClick();
 	        } else
