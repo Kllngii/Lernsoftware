@@ -98,6 +98,8 @@ public class Ereignismenge {
 			}
 		});
 		
+		eList.stream().map(e -> e.toJSON()).forEach(log::debug);
+		
 		return eList;
 	}
 	
