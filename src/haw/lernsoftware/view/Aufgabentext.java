@@ -115,7 +115,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				bild.setImage(model.getCurrentAufgabe().getImage());
 				aufgabenBild.setIcon(bild);
 			} else {
-				aufgabenBild.setText("");
+				aufgabenBild.setIcon(null);
 			}
 		}
 		if (e.getSource() == nextTaskButton) {
@@ -129,9 +129,10 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				bild.setImage(model.getCurrentAufgabe().getImage());
 				aufgabenBild.setIcon(bild);
 			} else {
-				aufgabenBild.setText("");
+				aufgabenBild.setIcon(null);
 			}
 		}
+
 		panel.repaint();
 
 		if (i == 0) {
