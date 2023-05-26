@@ -87,19 +87,16 @@ public class Ereignismenge {
 	
 	public static List<Menge> ereignisseFromJSON(String jsonString, Ereignismenge eMenge) {
 		Logger log = Logger.getLogger(Ereignismenge.class);
-		log.warn(jsonString);
 		JSONObject json = new JSONObject(jsonString);
 		JSONArray arr = json.getJSONArray("ereignisse");
 		List<Menge> eList = new ArrayList<>();
 		
 		arr.forEach(a -> {
-			log.debug("Lese ein: " + a);
+			log.debug("Lese Ereignisse ein: " + a);
 			if(a instanceof JSONObject j) {
 				eList.add(fromJSON(j.toString(), eMenge));
 			}
 		});
-		
-		eList.stream().map(e -> e.toJSON()).forEach(log::debug);
 		
 		return eList;
 	}
