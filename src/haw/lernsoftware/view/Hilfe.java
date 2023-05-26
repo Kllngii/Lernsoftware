@@ -88,8 +88,8 @@ public class Hilfe extends HAWView implements ActionListener{
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	    
 		// Fenster einstellen
-	    int Width = (int) (dimension.getWidth() / 2.8);
-	    int Height = (int) (dimension.getHeight() / 2.1);
+	    int Width = (int) (dimension.getWidth() / Toolkit.getDefaultToolkit().getScreenResolution() * 50);
+	    int Height = (int) (dimension.getHeight() / Toolkit.getDefaultToolkit().getScreenResolution() * 50);
 		fenster.setSize(Width, Height);
 		fenster.getContentPane().add(panel);
 	    
