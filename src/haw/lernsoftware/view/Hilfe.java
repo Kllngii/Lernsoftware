@@ -14,18 +14,17 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import org.apache.log4j.Logger;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
@@ -39,6 +38,8 @@ import haw.lernsoftware.resources.ResourceProvider;
  */
 public class Hilfe extends HAWView implements ActionListener{
 
+	private Logger log = Logger.getLogger(getClass());
+	
 	private JFrame fenster = new JFrame("Hilfe");
 	private JButton ButtonAllgemein = new JButton("Allgemein");
 	private JButton ButtonLadenSpeichern = new JButton("Laden/Speichern");
@@ -188,14 +189,14 @@ public class Hilfe extends HAWView implements ActionListener{
 				uri = new URI("https://gidf.help/");
 			} catch (URISyntaxException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				log.error(e1);
 			}
 			Desktop dt = Desktop.getDesktop();
 			try {
 				dt.browse(uri.resolve(uri));
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				log.error(e1);
 			}
 		}
 		if(e.getSource() == ButtonFUN) {
@@ -210,8 +211,6 @@ public class Hilfe extends HAWView implements ActionListener{
 	        	ButtonFUN.doClick();
 	        } else
 	        	i = 0;
-	        System.out.println(x);
-	        System.out.println(y);
 		}
 		panel.repaint();
 	}
