@@ -50,7 +50,7 @@ public class GUI implements ActionListener {
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite(this);
-	private Aufgabentext aufgabentextView = new Aufgabentext(model);
+	private Aufgabentext aufgabentextView = new Aufgabentext(model, this);
 	private Tutorial tutorialView = new Tutorial(this);
 	
 	public GUI(JFrame frame) {
@@ -152,19 +152,19 @@ public class GUI implements ActionListener {
 				layout.show(frame.getContentPane(), model.getSelectedWindow().getIdentifier());
 			}
 		} else if(e.getSource() == menuItemLiniendiagramm) {
-			log.debug("Wechsle zum Liniendiagramm");
+			log.info("Wechsle zum Liniendiagramm");
 			this.switchToView(WindowSelect.LINIENDIAGRAMM);
 		} else if(e.getSource() == menuItemAufgabentext) {
-			log.debug("Wechsle zum Aufgabentext");
+			log.info("Wechsle zum Aufgabentext");
 			this.switchToView(WindowSelect.AUFGABENTEXT);
 		} else if(e.getSource() == menuItemStartseite) {
-			log.debug("Wechsle zur Startseite");
+			log.info("Wechsle zur Startseite");
 			this.switchToView(WindowSelect.STARTSEITE);
 		} else if(e.getSource() == menuItemHilfe) {
-			log.debug("Öffne das Hilfe-Fenster!");
+			log.info("Öffne das Hilfe-Fenster!");
 			new Hilfe();
 		} else if(e.getSource() == menuItemTutorial) {
-			log.debug("Öffne das Tutorial-Fenster!");
+			log.info("Öffne das Tutorial-Fenster!");
 			this.switchToView(WindowSelect.TUTORIAL);
 		} 
 	}
@@ -186,9 +186,13 @@ public class GUI implements ActionListener {
 			layout.show(frame.getContentPane(), WindowSelect.STARTSEITE.getIdentifier());
 			model.setSelectedWindow(WindowSelect.STARTSEITE);
 		} else if (ws == WindowSelect.TUTORIAL) {
-			log.debug("Wechsle zur Startseite");
+			log.debug("Wechsle zum Tutorial");
 			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL.getIdentifier());
 			model.setSelectedWindow(WindowSelect.TUTORIAL);
+		} else if (ws == WindowSelect.TUTORIAL2) {
+			log.debug("Wechsle zur Tutorial");
+			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL2.getIdentifier());
+			model.setSelectedWindow(WindowSelect.TUTORIAL2);
 		}
 	}
 }

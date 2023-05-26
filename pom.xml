@@ -11,13 +11,12 @@
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<release>17</release>
+					<mainClass>${mainClass}</mainClass>
 				</configuration>
 			</plugin>
-			<!-- //TODO In Executable packen -->
 		</plugins>
 	</build>
 	<dependencies>

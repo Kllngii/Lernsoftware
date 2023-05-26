@@ -24,6 +24,11 @@ import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.HAWView;
 
+/**
+ * 
+ * 
+ *
+ */
 public class LinienDiagramm extends HAWView implements MouseListener {
 	
 	private int linewidth = STD_LINEWIDTH;
@@ -72,6 +77,8 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	public void rebase(List<Menge> mengen, Ereignismenge e) {
 		this.mengen = mengen;
 		this.eMenge = e;
+		numberEreignisse = mengen.size();
+		numberElementare = e.getEreignisse().size();
 		log.debug("Neue Daten geladen!");
 		panel.repaint();
 	}
@@ -235,24 +242,27 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			//Zwei aufeinanderfolgende Klicks in unter 1,5 Sekunden -> Auswertung starten
 			Koordinate current = mouseInteractions.get(length-1).koord();
 			Koordinate last = mouseInteractions.get(length-2).koord();
+			
 			if (current.spalte() == -1 && last.spalte() == -1 && current.zeile() == last.zeile()) {
 				log.debug("Zeile " + current.zeile() + " wurde gewählt!");
 				//bedingt für alle auf false
 				eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
 				bedingtMode = false;
-				if (current.zeile() != -1 && selectedRow != current.zeile()) {
+				if (current.zeile() != -1 && selectedRow != current.zeile() && current.zeile() < mengen.size()) {
 					bedingtMode = true;
-					eingetreten = mengen.get(current.zeile());
-					for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
-						mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
-
+					if (current.zeile() < mengen.size()) {
+						eingetreten = mengen.get(current.zeile());
+						for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
+							mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
+						}
 					}
 				}
 				selectedRow = (selectedRow == current.zeile() ? -1 : current.zeile());
 				mouseInteractions.clear();
 				panel.repaint();
 			}
-			if(current.zeile() == -1 && last.zeile() == -1 && current.spalte() == last.spalte()) {
+			
+			else if (current.zeile() == -1 && last.zeile() == -1 && current.spalte() == last.spalte()) {
 				log.debug("Spalte " + current.spalte() + " wurde gewählt!");
 				selectedColumn = (selectedColumn == current.spalte() ? -1 : current.spalte());
 				mouseInteractions.clear();

@@ -92,13 +92,11 @@ public class Ereignismenge {
 		List<Menge> eList = new ArrayList<>();
 		
 		arr.forEach(a -> {
-			log.debug("Lese ein: " + a);
+			log.debug("Lese Ereignisse ein: " + a);
 			if(a instanceof JSONObject j) {
 				eList.add(fromJSON(j.toString(), eMenge));
 			}
 		});
-		
-		eList.stream().map(e -> e.toJSON()).forEach(log::debug);
 		
 		return eList;
 	}
