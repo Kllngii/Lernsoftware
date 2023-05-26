@@ -47,7 +47,7 @@ public class Tutorial2 extends HAWView {
 	}
 
 	private JComponent constructStartseite() {
-		
+		//hallo
 		// Überschrift Textgröße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 		//FormBuilder erstellen 
