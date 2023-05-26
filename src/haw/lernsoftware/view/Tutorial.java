@@ -36,8 +36,7 @@ public class Tutorial extends HAWView {
     int x = 500; // Gewünschte Breite des Bildes
     int y = 300; // Gewünschte Höhe des Bildes
 	
-	
-
+	//Erstellen eines Fensters mit ScrollBar
 	public Tutorial(GUI gui) {
 		this.gui = gui;
 		JPanel view = new JPanel();
@@ -50,10 +49,11 @@ public class Tutorial extends HAWView {
 
 	private JComponent constructStartseite() {
 		
+		// Überschrift Textgröße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 		//FormBuilder hinzufügen
-		JComponent inhalt = FormBuilder.create() // Rote Linien zeichnen
-				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//, center:200dlu, 200dlu") //
+		JComponent inhalt = FormBuilder.create()
+				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu") //
 				.rows("p, p, p, 5dlu, p, p, p, 5dlu, p, 5dlu, p, 5dlu, p, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 5) //
