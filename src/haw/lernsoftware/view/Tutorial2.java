@@ -1,9 +1,12 @@
 package haw.lernsoftware.view;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -11,6 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.plaf.DimensionUIResource;
 
 import org.apache.log4j.Logger;
 
@@ -55,7 +62,9 @@ public class Tutorial2 extends HAWView implements ActionListener{
 		// Überschrift Textgröße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 		
+		//Button konfigurieren
 		tutorialZurück.addActionListener(this);
+
 		
 		//FormBuilder erstellen 
 		JComponent inhalt = FormBuilder.create()
