@@ -31,7 +31,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 	private final Logger log = Logger.getLogger(getClass());
 
-
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
 	private JButton nextTaskButton = new JButton("NEXT");
 	private JButton previousTaskButton = new JButton("PREVIOUS");
@@ -40,10 +39,12 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	
 	private ImageIcon bild;
 	private JLabel aufgabenBild;
+	private GUI gui;
 
-	// fügt dem panel von Aufgabentext einen JComponent zu
-	public Aufgabentext(Model model) {
+	// fügt dem Panel von Aufgabentext einen JComponent zu
+	public Aufgabentext(Model model, GUI gui) {
 		this.model = model;
+		this.gui = gui;
 		aufgaben = model.getAufgaben();
 		
 		panel.add(buildContentText());
@@ -68,9 +69,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		aufgabenText.setEditable(false);
 		Color color = panel.getBackground();
 		aufgabenText.setBackground(color);
-
-		log.info(i);
-		log.info(model.getCurrentAufgabe().hasImage());
 
 		// TODO was ist wenn auch noch Liniendiagramme dazukommen
 		if (model.getCurrentAufgabe().hasImage() == true) {

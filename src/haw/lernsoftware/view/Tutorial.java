@@ -1,7 +1,11 @@
 package haw.lernsoftware.view;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,30 +18,30 @@ import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
 import haw.lernsoftware.Konst;
+import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.resources.ResourceProvider;
 
 
 /**
  * Die Tutorial des Programms.
  */
-public class Tutorial extends HAWView {
-
+public class Tutorial extends HAWView implements ActionListener {
+	//Definition und Init.
 	Logger log = Logger.getLogger(getClass());
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
 	JLabel ueberschrift = new JLabel("Tutorial");
-	
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
+	JButton tutorial2Button = new JButton("Nächstes Tutorial");
 	
-	// Skaliere das ImageIcon
+	// Skalierung für das ImageIcon
     int x1 = 700; // Gewünschte Breite des Bildes
     int y1 = 400; // Gewünschte Höhe des Bildes
     int x = 500; // Gewünschte Breite des Bildes
     int y = 300; // Gewünschte Höhe des Bildes
 	
-	
-
+	//Erstellen eines Fensters mit ScrollBar
 	public Tutorial(GUI gui) {
 		this.gui = gui;
 		JPanel view = new JPanel();
@@ -46,14 +50,22 @@ public class Tutorial extends HAWView {
 		JScrollBar scroll = new JScrollBar();
 		scroll.setUnitIncrement(16);
 		((JScrollPane)panel).setVerticalScrollBar(scroll);
+		
+		//Button
+		tutorial2Button.addActionListener(this);
+		
 	}
 
 	private JComponent constructStartseite() {
 		
+		// Überschrift Textgröße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
-		//FormBuilder hinzufügen
-		JComponent inhalt = FormBuilder.create() // Rote Linien zeichnen
-				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//, center:200dlu, 200dlu") //
+		
+		
+		
+		//FormBuilder erstellen 
+		JComponent inhalt = FormBuilder.create()
+				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu") //
 				.rows("p, p, p, 5dlu, p, p, p, 5dlu, p, 5dlu, p, 5dlu, p, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 5) //
@@ -70,22 +82,30 @@ public class Tutorial extends HAWView {
 				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)), x, y) )).xyw(3,11,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 13, 2) //
 				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)), x, y) )).xyw(3,13,3) //
-				
-				
+				.add(tutorial2Button).xyw(5, 14, 1) //
 				.build(); //
+		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einfügen und zurückgeben
 		return FormBuilder.create()
 				  .columns("p")
 				  .rows("p")
 				  .add(inhalt) .xy(1, 1)
 				  .debug(true)
 				  .build();
-		//test
 	}
 
+	//Bildgröße anpassen
 	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
 		Image image = img.getImage();
         Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == tutorial2Button) {
+			log.debug("Wechsle zum Tutorial 2");
+			gui.switchToView(WindowSelect.TUTORIAL2);
+		}
 	}
 
 }

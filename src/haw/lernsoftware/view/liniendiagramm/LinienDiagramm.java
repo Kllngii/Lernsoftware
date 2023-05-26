@@ -42,6 +42,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	
 	private int selectedColumn = -1;
 	private int selectedRow = -1;
+	private Menge eingetreten;
 	
 	public LinienDiagramm(Ereignismenge eMenge, List<Menge> mengen) {
 		this.eMenge = eMenge;
@@ -66,6 +67,15 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		numberElementare = e.getEreignisse().size();
 
 		panel.addMouseListener(this);
+	}
+	
+	public void rebase(List<Menge> mengen, Ereignismenge e) {
+		this.mengen = mengen;
+		this.eMenge = e;
+		numberEreignisse = mengen.size();
+		numberElementare = e.getEreignisse().size();
+		log.debug("Neue Daten geladen!");
+		panel.repaint();
 	}
 
 	public static void main(String[] args) {
@@ -149,7 +159,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			g2d.drawLine(currentLeftBorder, BORDER_Y + 10, currentLeftBorder, BORDER_Y + diagHeight);
 			spaltenCoord.add(currentLeftBorder);
 			if (eMenge.getEreignisse().get(i).isBedingt()) {
-				g2d.setColor(Color.ORANGE);
+				g2d.setColor(Color.CYAN);
 				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, currentWidth - 1, numberEreignisse*linewidth - 2);
 			}
 			
@@ -174,7 +184,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		for (int j = 0; j < numberEreignisse; j++) {
 			currentLeftBorder = BORDER_X + offsetlr;
 			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
-//			g2d.setColor(Color.BLUE);
+//			g2d.setColor(Color.CYAN);
 			for (int i = 0; i < numberElementare; i++) {
 				int currentWidth = (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 				if (linesegment(mengen.get(j), i+1)) {
@@ -186,8 +196,8 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
 			if (bedingtMode) {
 				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/10);
-				g2d.setColor(Color.ORANGE);
-				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*8/10);
+				g2d.setColor(Color.BLUE);
+				g2d.drawString(mengen.get(j).getConditionalProbability(eingetreten), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*8/10);
 				g2d.setColor(Color.BLACK);
 			} else {
 				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
@@ -227,24 +237,27 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			//Zwei aufeinanderfolgende Klicks in unter 1,5 Sekunden -> Auswertung starten
 			Koordinate current = mouseInteractions.get(length-1).koord();
 			Koordinate last = mouseInteractions.get(length-2).koord();
+			
 			if (current.spalte() == -1 && last.spalte() == -1 && current.zeile() == last.zeile()) {
 				log.debug("Zeile " + current.zeile() + " wurde gewählt!");
 				//bedingt für alle auf false
 				eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
 				bedingtMode = false;
-				if (current.zeile() != -1 && selectedRow != current.zeile()) {
+				if (current.zeile() != -1 && selectedRow != current.zeile() && current.zeile() < mengen.size()) {
 					bedingtMode = true;
-					//bedingt fürs richtige auf true
-					for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
-						mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
-
+					if (current.zeile() < mengen.size()) {
+						eingetreten = mengen.get(current.zeile());
+						for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
+							mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
+						}
 					}
 				}
 				selectedRow = (selectedRow == current.zeile() ? -1 : current.zeile());
 				mouseInteractions.clear();
 				panel.repaint();
 			}
-			if(current.zeile() == -1 && last.zeile() == -1 && current.spalte() == last.spalte()) {
+			
+			else if (current.zeile() == -1 && last.zeile() == -1 && current.spalte() == last.spalte()) {
 				log.debug("Spalte " + current.spalte() + " wurde gewählt!");
 				selectedColumn = (selectedColumn == current.spalte() ? -1 : current.spalte());
 				mouseInteractions.clear();

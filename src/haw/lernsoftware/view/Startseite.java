@@ -28,9 +28,8 @@ import haw.lernsoftware.resources.ResourceProvider;
  */
 public class Startseite extends HAWView {
 
+	//Definition und Init.
 	Logger log = Logger.getLogger(getClass());
-	//JPanel jp;
-	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
 	JLabel functionText1 = new JLabel();
 	JLabel functionText2 = new JLabel();
@@ -38,7 +37,6 @@ public class Startseite extends HAWView {
 	EmptyBorder eBorder = new EmptyBorder(12, 12, 12, 12); // oben, rechts, unten, links
 	LineBorder lBorder = new LineBorder(new Color(100, 100, 100));
 	MatteBorder mBorder = new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY);
-	JPanel kurzTextePanel = new JPanel();
 
 	public Startseite(GUI gui) {
 		this.gui = gui;
@@ -47,8 +45,6 @@ public class Startseite extends HAWView {
 	}
 
 	private JComponent constructStartseite() {
-		//Panel formatieren
-		kurzTextePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		//Überschrift
 		JLabel ueberschrift = new JLabel("Lernsoftware Startseite");
@@ -58,7 +54,6 @@ public class Startseite extends HAWView {
 		// Einleitungstext einfügen und ausrichten
 		JLabel einleitungText = new JLabel();
 		einleitungText.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.einleitungstext"));
-
 
 		// Beschreibungstexte hinzufügen
 		// Tutorial
@@ -76,10 +71,9 @@ public class Startseite extends HAWView {
 		setNormalBorder(functionText3);
 		functionText3.addMouseListener(mL);
 		
-		
 		//FormBuilder hinzufügen
 		// gibt einen JComponent zurück, der .debug(true)
-		return FormBuilder.create() // Rote Linien zeichnen
+		return FormBuilder.create() 
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//, center:200dlu, 200dlu") //
 				.rows("100dlu, 160dlu, p") //
 				.padding(Paddings.DIALOG) //
@@ -91,6 +85,7 @@ public class Startseite extends HAWView {
 				.build(); //
 	}
 
+	// JLabel Weiterleitung auf die jeweiligen Seiten
 	MouseAdapter mL = new MouseAdapter() {
 
 		public void mouseReleased(java.awt.event.MouseEvent e) {
@@ -106,6 +101,7 @@ public class Startseite extends HAWView {
 				gui.switchToView(WindowSelect.LINIENDIAGRAMM);
 			}
 		}
+		// Rahmenänderung, wenn der Mauszeiger auf das JLabel gerichtet ist 
 		public void mouseEntered(java.awt.event.MouseEvent e) {
 			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(mBorder, eBorder));
 		}
@@ -113,7 +109,7 @@ public class Startseite extends HAWView {
 			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		}
 	};
-	
+	//Methode: Rahmen auf normal definierte Werte setzen 
 	public void setNormalBorder(JLabel textLabel) {
 		textLabel.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
 		textLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
