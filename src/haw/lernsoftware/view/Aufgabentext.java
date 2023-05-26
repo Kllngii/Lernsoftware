@@ -30,7 +30,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 	private final Logger log = Logger.getLogger(getClass());
 
-	private JScrollBar scrollBar = new JScrollBar();
 
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
 	private JButton nextTaskButton = new JButton("NEXT");
@@ -45,7 +44,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	public Aufgabentext(Model model) {
 		this.model = model;
 		aufgaben = model.getAufgaben();
-		panel.add(scrollBar);
 		panel.add(buildContentText());
 
 	}
@@ -115,7 +113,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				bild.setImage(model.getCurrentAufgabe().getImage());
 				aufgabenBild.setIcon(bild);
 			} else {
-				aufgabenBild.setText("");
+				aufgabenBild.setIcon(null);
 			}
 		}
 		if (e.getSource() == nextTaskButton) {
@@ -129,9 +127,10 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				bild.setImage(model.getCurrentAufgabe().getImage());
 				aufgabenBild.setIcon(bild);
 			} else {
-				aufgabenBild.setText("");
+				aufgabenBild.setIcon(null);
 			}
 		}
+
 		panel.repaint();
 
 		if (i == 0) {
