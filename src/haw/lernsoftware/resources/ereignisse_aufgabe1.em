@@ -10,12 +10,12 @@
       "order": 2
    },
    {
-      "name": "A\B",
+      "name": "A\\B",
       "elementare": "",
       "order": 3
    },
    {
-      "name": "B\A",
+      "name": "B\\A",
       "elementare": "",
       "order": 4
    },
