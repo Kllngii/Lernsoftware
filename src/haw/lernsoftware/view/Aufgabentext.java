@@ -21,6 +21,7 @@ import com.jgoodies.forms.factories.Paddings;
 
 import haw.lernsoftware.model.Aufgabe;
 import haw.lernsoftware.model.Model;
+import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
 public class Aufgabentext extends HAWView implements ActionListener {
@@ -34,9 +35,10 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
 	private JButton nextTaskButton = new JButton("NEXT");
 	private JButton previousTaskButton = new JButton("PREVIOUS");
+	private JButton toLiniendiagrammButton = new JButton("Liniendiagramm");
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
 	private JComponent linienpanel;
-	
+
 	private ImageIcon bild;
 	private JLabel aufgabenBild;
 	private GUI gui;
@@ -46,7 +48,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		this.model = model;
 		this.gui = gui;
 		aufgaben = model.getAufgaben();
-		
+
 		panel.add(buildContentText());
 
 	}
@@ -81,28 +83,29 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		// Button Listener
 		previousTaskButton.addActionListener(this);
 		nextTaskButton.addActionListener(this);
+		toLiniendiagrammButton.addActionListener(this);
 
 		// gibt einen JComponent zurück mit nur Text
 		return FormBuilder.create().debug(true) // Rote Linien zeichnen
-				.columns("100dlu, center:200dlu, 100dlu") //
+				.columns("100dlu, 5dlu, center:200dlu, 5dlu, 100dlu") //
 				.rows("p, 20dlu, p, $lg, top:100dlu, p") //
 				.padding(Paddings.DIALOG) //
-				.add(titleTaskLabel).xy(2, 1) //
+				.add(titleTaskLabel).xy(3, 1) //
 				.add(previousTaskButton).xy(1, 2) //
-				.add(progress).xy(2, 2) //
-				.add(nextTaskButton).xy(3, 2) //
-				.addSeparator("Aufgabentext").xyw(1, 3, 3) //
+				.add(progress).xy(3, 2) //
+				.add(nextTaskButton).xy(5, 2) //
+				.addSeparator("Aufgabentext").xyw(1, 3, 5) //
 				.add(aufgabenText).xyw(1, 5, 3) //
-				.add(aufgabenBild).xyw(1, 6, 3) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
-				.add(linienpanel).xyw(1, 7, 3)
-				.build(); //
+				.add(toLiniendiagrammButton).xy(5, 5) //
+				.add(aufgabenBild).xyw(1, 6, 5) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
+				.add(linienpanel).xyw(1, 7, 5).build(); //
 	}
-	
+
 	private void refreshAufgabenview() {
 		model.setCurrentAufgabe(aufgaben.get(i));
-		
+
 		Aufgabe current = model.getCurrentAufgabe();
-		
+
 		aufgabenText.setText(current.getText());
 		titleTaskLabel.setText("Aufgabe: " + (i + 1));
 		progress.setValue(i);
@@ -112,13 +115,13 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			aufgabenBild.setIcon(bild);
 		} else
 			aufgabenBild.setIcon(null);
-		
-		if(current.hasLiniendiagramm()) {
+
+		if (current.hasLiniendiagramm()) {
 			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse());
 			linienpanel = liniendiagramm.panel;
 		} else
 			linienpanel = new JPanel();
-		
+
 		panel.repaint();
 	}
 
@@ -126,6 +129,10 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
+		if (e.getSource() == toLiniendiagrammButton) {
+			log.debug("Wechsle zum Liniendiagramm");
+			gui.switchToView(WindowSelect.LINIENDIAGRAMM);
+		}
 		if (e.getSource() == previousTaskButton) {
 			i--;
 		}
