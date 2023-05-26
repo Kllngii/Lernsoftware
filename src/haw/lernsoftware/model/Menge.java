@@ -82,13 +82,33 @@ public class Menge {
 	}
 
 	public String getProbability() {
+		String output = this.getFracProbability() + " = " + Double.toString(this.getDecimalProbability());
+		return output;
+	}
+
+	public String getFracProbability() {
 		String fracProbability = "0";
+		for (int i = 0; i < ereignisse.size(); i++) {
+			fracProbability = addFracProbability(fracProbability, ereignisse.get(i).getProbString());
+		}
+		return fracProbability;
+	}
+
+	public double getDecimalProbability() {
 		double decimalProbability = 0.0;
 		for (int i = 0; i < ereignisse.size(); i++) {
 			decimalProbability += ereignisse.get(i).getProbability();
-			fracProbability = addFracProbability(fracProbability, ereignisse.get(i).getProbString());
 		}
+		decimalProbability = Math.round(decimalProbability * Math.pow(10.0, DIGITS)) / Math.pow(10.0, DIGITS);
+		return decimalProbability;
+	}
 
+	public String getConditionalProbability(Menge m) {
+		String fracProbability = this.divideFracProbability(this.geschnitten(m).getFracProbability(), m.getFracProbability());
+		double decimalProbability = this.geschnitten(m).getDecimalProbability() / m.getDecimalProbability();
+		if (m.getDecimalProbability() == 0.0) {
+			decimalProbability = 0.0;
+		}
 		decimalProbability = Math.round(decimalProbability * Math.pow(10.0, DIGITS)) / Math.pow(10.0, DIGITS);
 		String output = fracProbability + " = " + Double.toString(decimalProbability);
 		return output;
@@ -136,6 +156,49 @@ public class Menge {
 
 		num = frac1num * frac2denum + frac2num * frac1denum;
 		denum = frac1denum * frac2denum;
+		gcf = GCF(denum, num);
+		num = num / gcf;
+		denum = denum / gcf;
+
+		return String.format("%d/%d", num, denum);
+	}
+
+	public String divideFracProbability(String frac1, String frac2) {
+		int num;
+		int denum;
+		int frac1num;
+		int frac1denum;
+		int frac2num;
+		int frac2denum;
+		int gcf;
+
+		if (frac2 == "0" || frac2 == "0/1") {
+			return "0/1";
+		}
+		if (frac1 == "0" || frac1 == "1") {
+			frac1 = String.format("%s/1", frac1);
+		}
+		if (frac2 == "0" || frac2 == "1") {
+			frac2 = String.format("%s/1", frac2);
+		}
+
+		if (frac1.contains("/")) {
+			String[] rat1 = frac1.split("/");
+			frac1num = Integer.parseInt(rat1[0]);
+			frac1denum = Integer.parseInt(rat1[1]);
+		} else {
+			return "error no fraction in frac1";
+		}
+		if (frac2.contains("/")) {
+			String[] rat2 = frac2.split("/");
+			frac2num = Integer.parseInt(rat2[0]);
+			frac2denum = Integer.parseInt(rat2[1]);
+		} else {
+			return "error no fraction in frac2";
+		}
+
+		num = frac1num * frac2denum;
+		denum = frac1denum * frac2num;
 		gcf = GCF(denum, num);
 		num = num / gcf;
 		denum = denum / gcf;

@@ -1,6 +1,7 @@
 package haw.lernsoftware.view;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Taskbar;
@@ -8,13 +9,21 @@ import java.awt.Taskbar.Feature;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import org.apache.log4j.Logger;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
@@ -28,11 +37,13 @@ import haw.lernsoftware.resources.ResourceProvider;
  */
 public class Hilfe extends HAWView implements ActionListener{
 
+	private Logger log = Logger.getLogger(getClass());
 	
 	private JButton ButtonAllgemein = new JButton("Allgemein");
 	private JButton ButtonLadenSpeichern = new JButton("Laden/Speichern");
 	private JButton ButtonAufgaben = new JButton("Aufgaben");	
 	private JButton ButtonLiniengraph = new JButton("Liniengraph");
+	private JButton ButtonWeitereHilfe = new JButton("Weitere Hilfe");
 	private JLabel Ueberschrift = new JLabel("Hilfe");
 	private JTextArea text = new JTextArea(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"),20,50);	
 	
@@ -41,8 +52,17 @@ public class Hilfe extends HAWView implements ActionListener{
 	
 	public  Hilfe() {
 		
+		
 		//Fenster erstellen
 		JFrame fenster = new JFrame("Hilfe");
+		
+		JPanel view = new JPanel();
+		panel = new JScrollPane(view);
+		view.add(buildContentText());			
+		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
+		
 		
 		// Text für die Erstausgabe formatieren
 		text.setWrapStyleWord(true);
@@ -55,19 +75,13 @@ public class Hilfe extends HAWView implements ActionListener{
 		ButtonLadenSpeichern.addActionListener(this);
 		ButtonAufgaben.addActionListener(this);
 		ButtonLiniengraph.addActionListener(this);
+		ButtonWeitereHilfe.addActionListener(this);
 		
 		// Textfeld einstellen
 		text.setEditable(false);
 		Color color = panel.getBackground();
 		text.setBackground(color);
 
-		// Fenster einstellen
-		fenster.setSize(550, 400);
-		fenster.getContentPane().add(panel);
-		fenster.setResizable(false);
-		
-		// ContentText zum Panel hinzufügen
-		panel.add(buildContentText());
 
 		// Ein Hilfe-Icon dem Fenster hinzufügen
 		Image icon = ResourceProvider.loadImage(Konst.HILFE_ICON);
@@ -79,9 +93,17 @@ public class Hilfe extends HAWView implements ActionListener{
 
 		// Fenster Zentrieren
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    
+		// Fenster einstellen
+	    int Width = (int) (dimension.getWidth() / Toolkit.getDefaultToolkit().getScreenResolution() * 45);
+	    int Height = (int) (dimension.getHeight() / Toolkit.getDefaultToolkit().getScreenResolution() * 58);
+		fenster.setSize(Width, Height);
+		fenster.getContentPane().add(panel);
+	    
 	    int x = (int) ((dimension.getWidth() - fenster.getWidth()) / 2);
 	    int y = (int) ((dimension.getHeight() - fenster.getHeight()) / 2);
 	    fenster.setLocation(x, y);
+	    
 	    // Fenster zeige dich
 		fenster.setVisible(true);
 		
@@ -90,18 +112,25 @@ public class Hilfe extends HAWView implements ActionListener{
 
 	// Layout designer
 	public JComponent buildContentText() {				
-		return FormBuilder.create()
+				JComponent inhalt = FormBuilder.create() //
 				
 				.columns("pref, 200dlu")
 				.rows("10dlu,top:200dlu") 				
 				//.debug(true)
 				.padding(Paddings.DIALOG)
 				.add(Ueberschrift) .xy(2, 1)
-				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph) .xy(1, 2, "fill,top")
+				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph,ButtonWeitereHilfe) .xy(1, 2, "fill,top")
 				//.add(text) .xy(2, 2)
 				.addScrolled(text) .xy(2, 2)
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
 				.build();
+				
+				return FormBuilder.create()
+						.columns("p")
+						  .rows("p")
+						  .addScrolled(inhalt) .xy(1, 1)
+						  .debug(true)
+						  .build();
 	}
 
 	// Starte das Fenster
@@ -137,6 +166,20 @@ public class Hilfe extends HAWView implements ActionListener{
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text5"));
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
+		}
+		if(e.getSource() == ButtonWeitereHilfe) {
+			URI uri = null;
+			try {
+				uri = new URI("https://gidf.help/");
+			} catch (URISyntaxException e1) {
+				log.error("Fehler in der URL-Syntax, das sollte nicht passieren...", e1);
+			}
+			Desktop dt = Desktop.getDesktop();
+			try {
+				dt.browse(uri.resolve(uri));
+			} catch (IOException e1) {
+				log.error("IO-Exception", e1);
+			}
 		}
 		panel.repaint();
 	}

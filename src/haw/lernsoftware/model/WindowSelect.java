@@ -8,7 +8,8 @@ public enum WindowSelect {
 	AUFGABENTEXT("aufgabentext"),
 	LINIENDIAGRAMM("liniendiagramm"),
 	STARTSEITE("startseite"),
-	TUTORIAL("tutorial");
+	TUTORIAL("tutorial"),
+	TUTORIAL2("tutorial2");
 	;
 	
 	private final String identifier;
