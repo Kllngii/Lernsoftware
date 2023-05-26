@@ -8,6 +8,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -183,8 +184,12 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		setLinewidth(g2d, STD_LINEWIDTH);
 		for (int j = 0; j < numberEreignisse; j++) {
 			currentLeftBorder = BORDER_X + offsetlr;
+			if (mengen.get(j).equals(eingetreten)) {
+				g2d.setFont(new Font("default", Font.BOLD, g2d.getFont().getSize()));
+			}
 			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
-//			g2d.setColor(Color.CYAN);
+			g2d.setFont(new Font("default", Font.PLAIN, g2d.getFont().getSize()));
+			
 			for (int i = 0; i < numberElementare; i++) {
 				int currentWidth = (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 				if (linesegment(mengen.get(j), i+1)) {
@@ -233,36 +238,62 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		log.debug(mi);
 		
 		int length = mouseInteractions.size();
-		if (length >= 2 && (mouseInteractions.get(length-1).timeStamp() -  mouseInteractions.get(length-2).timeStamp()) < 1500) {
-			//Zwei aufeinanderfolgende Klicks in unter 1,5 Sekunden -> Auswertung starten
+		if (length >= 2 && (mouseInteractions.get(length-1).timeStamp() -  mouseInteractions.get(length-2).timeStamp()) < 500) {
+			//Zwei aufeinanderfolgende Klicks in unter 0,5 Sekunden -> Auswertung starten
 			Koordinate current = mouseInteractions.get(length-1).koord();
 			Koordinate last = mouseInteractions.get(length-2).koord();
 			
-			if (current.spalte() == -1 && last.spalte() == -1 && current.zeile() == last.zeile()) {
+			if (current.spalte() == -1 && last.spalte() == -1 && current.zeile() == last.zeile() && current.zeile() < mengen.size()) {
 				log.debug("Zeile " + current.zeile() + " wurde gewählt!");
 				//bedingt für alle auf false
 				eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
 				bedingtMode = false;
-				if (current.zeile() != -1 && selectedRow != current.zeile() && current.zeile() < mengen.size()) {
+				if (current.zeile() != -1 && selectedRow != current.zeile()) {
 					bedingtMode = true;
 					if (current.zeile() < mengen.size()) {
 						eingetreten = mengen.get(current.zeile());
-						for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
-							mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
+						for (int i = 0; i < eingetreten.getEreignisse().size(); i++) {
+							eingetreten.getEreignisse().get(i).setBedingt(true);
 						}
 					}
 				}
 				selectedRow = (selectedRow == current.zeile() ? -1 : current.zeile());
 				mouseInteractions.clear();
-				panel.repaint();
 			}
 			
 			else if (current.zeile() == -1 && last.zeile() == -1 && current.spalte() == last.spalte()) {
 				log.debug("Spalte " + current.spalte() + " wurde gewählt!");
 				selectedColumn = (selectedColumn == current.spalte() ? -1 : current.spalte());
 				mouseInteractions.clear();
-				panel.repaint();
 			}
+			
+			else if (current.spalte() == eMenge.getEreignisse().size() && last.spalte() == eMenge.getEreignisse().size() && current.zeile() == last.zeile()) {
+				log.debug("Zeile " + current.zeile() + " in der rechtesten Spalte wurde gewählt!");
+			}
+			
+			else if (current.zeile() >= mengen.size() && current.zeile() == last.zeile() && current.spalte() == last.spalte()) {
+				log.debug("NEUES EREIGNIS HINZUFÜGEN!");
+			}
+			
+			else if (current.zeile() == last.zeile() && current.spalte() == last.spalte()) {
+				if (mengen.get(current.zeile()).getEreignisse().contains(eMenge.getEreignisse().get(current.spalte()))) {
+					mengen.get(current.zeile()).deleteElementar(eMenge.getEreignisse().get(current.spalte()));
+					log.debug("Von Ereignis " + mengen.get(current.zeile()).getName() + " wurde das Elementarereignis " + eMenge.getEreignisse().get(current.spalte()).getName() + " gelöscht!");
+				} else {
+					mengen.get(current.zeile()).addElementar(eMenge.getEreignisse().get(current.spalte()));
+					log.debug("Dem Ereignis " + mengen.get(current.zeile()).getName() + " wurde das Elementarereignis " + eMenge.getEreignisse().get(current.spalte()).getName() + " hinzugefügt!");
+				}
+				
+				if (bedingtMode) {
+					// bedingt für alle auf false
+					eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
+					for (int i = 0; i < eingetreten.getEreignisse().size(); i++) {
+						eingetreten.getEreignisse().get(i).setBedingt(true);
+					}
+				}
+			}
+			
+			panel.repaint();
 		}
 	}
 

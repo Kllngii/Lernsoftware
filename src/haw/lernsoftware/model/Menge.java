@@ -49,6 +49,15 @@ public class Menge {
 		return m.negiert();
 	}
 
+	public void addElementar(Elementarereignis eEreignis) {
+		ereignisse.add(eEreignis);
+	}
+	
+	public void deleteElementar(Elementarereignis eEreignis) {
+		ereignisse.remove(eEreignis);
+	}
+	
+	
 	/*
 	 * *** Getter und Setter ***
 	 */
