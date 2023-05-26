@@ -45,7 +45,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	public Aufgabentext(Model model) {
 		this.model = model;
 		aufgaben = model.getAufgaben();
-		panel.add(scrollBar);
+		//panel.add(scrollBar);
 		panel.add(buildContentText());
 
 	}
