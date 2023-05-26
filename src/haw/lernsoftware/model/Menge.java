@@ -94,6 +94,9 @@ public class Menge {
 		return output;
 	}
 
+	/**
+	 * Größter gemeinsamer Teiler
+	 */
 	public int GCF(int a, int b) {
 		if (b == 0)
 			return a;
