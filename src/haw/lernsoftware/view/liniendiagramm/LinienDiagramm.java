@@ -24,6 +24,11 @@ import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.HAWView;
 
+/**
+ * 
+ * 
+ *
+ */
 public class LinienDiagramm extends HAWView implements MouseListener {
 	
 	private int linewidth = STD_LINEWIDTH;
