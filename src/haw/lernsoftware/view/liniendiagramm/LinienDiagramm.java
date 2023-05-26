@@ -235,6 +235,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			//Zwei aufeinanderfolgende Klicks in unter 1,5 Sekunden -> Auswertung starten
 			Koordinate current = mouseInteractions.get(length-1).koord();
 			Koordinate last = mouseInteractions.get(length-2).koord();
+			
 			if (current.spalte() == -1 && last.spalte() == -1 && current.zeile() == last.zeile()) {
 				log.debug("Zeile " + current.zeile() + " wurde gewählt!");
 				//bedingt für alle auf false
@@ -242,17 +243,19 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				bedingtMode = false;
 				if (current.zeile() != -1 && selectedRow != current.zeile()) {
 					bedingtMode = true;
-					eingetreten = mengen.get(current.zeile());
-					for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
-						mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
-
+					if (current.zeile() < mengen.size()) {
+						eingetreten = mengen.get(current.zeile());
+						for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
+							mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
+						}
 					}
 				}
 				selectedRow = (selectedRow == current.zeile() ? -1 : current.zeile());
 				mouseInteractions.clear();
 				panel.repaint();
 			}
-			if(current.zeile() == -1 && last.zeile() == -1 && current.spalte() == last.spalte()) {
+			
+			else if (current.zeile() == -1 && last.zeile() == -1 && current.spalte() == last.spalte()) {
 				log.debug("Spalte " + current.spalte() + " wurde gewählt!");
 				selectedColumn = (selectedColumn == current.spalte() ? -1 : current.spalte());
 				mouseInteractions.clear();
