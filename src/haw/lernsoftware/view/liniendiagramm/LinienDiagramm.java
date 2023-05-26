@@ -189,7 +189,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		setLinewidth(g2d, STD_LINEWIDTH);
 		for (int j = 0; j < numberEreignisse; j++) {
 			currentLeftBorder = BORDER_X + offsetlr;
-			if (mengen.get(j).equals(eingetreten)) {
+			if (mengen.get(j).equals(eingetreten) && bedingtMode) {
 				g2d.setFont(new Font("default", Font.BOLD, g2d.getFont().getSize()));
 			}
 			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
