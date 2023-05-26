@@ -10,8 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 
 import org.apache.log4j.Logger;
@@ -21,6 +21,7 @@ import com.jgoodies.forms.factories.Paddings;
 
 import haw.lernsoftware.model.Aufgabe;
 import haw.lernsoftware.model.Model;
+import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
 public class Aufgabentext extends HAWView implements ActionListener {
 	private Model model;
@@ -35,8 +36,8 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JButton nextTaskButton = new JButton("NEXT");
 	private JButton previousTaskButton = new JButton("PREVIOUS");
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
-	private String aufgText = new String();
-
+	private JComponent linienpanel;
+	
 	private ImageIcon bild;
 	private JLabel aufgabenBild;
 
@@ -44,6 +45,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	public Aufgabentext(Model model) {
 		this.model = model;
 		aufgaben = model.getAufgaben();
+		
 		panel.add(buildContentText());
 
 	}
@@ -94,7 +96,32 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.addSeparator("Aufgabentext").xyw(1, 3, 3) //
 				.add(aufgabenText).xyw(1, 5, 3) //
 				.add(aufgabenBild).xyw(1, 6, 3) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
+				.add(linienpanel).xyw(1, 7, 3)
 				.build(); //
+	}
+	
+	private void refreshAufgabenview() {
+		model.setCurrentAufgabe(aufgaben.get(i));
+		
+		Aufgabe current = model.getCurrentAufgabe();
+		
+		aufgabenText.setText(current.getText());
+		titleTaskLabel.setText("Aufgabe: " + (i + 1));
+		progress.setValue(i);
+
+		if (current.hasImage()) { // aktualisiert falls bild vorhanden...
+			bild.setImage(current.getImage());
+			aufgabenBild.setIcon(bild);
+		} else
+			aufgabenBild.setIcon(null);
+		
+		if(current.hasLiniendiagramm()) {
+			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse());
+			linienpanel = liniendiagramm.panel;
+		} else
+			linienpanel = new JPanel();
+		
+		panel.repaint();
 	}
 
 	@Override
@@ -103,34 +130,11 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 		if (e.getSource() == previousTaskButton) {
 			i--;
-			model.setCurrentAufgabe(aufgaben.get(i));
-			aufgabenText.setText(model.getCurrentAufgabe().getText());
-			titleTaskLabel.setText("Aufgabe: " + (i + 1));
-			progress.setValue(i);
-
-			// TODO hübscher machen
-			if (model.getCurrentAufgabe().hasImage() == true) { // aktualisiert falls bild vorhanden...
-				bild.setImage(model.getCurrentAufgabe().getImage());
-				aufgabenBild.setIcon(bild);
-			} else {
-				aufgabenBild.setText("");
-			}
 		}
 		if (e.getSource() == nextTaskButton) {
 			i++;
-			model.setCurrentAufgabe(aufgaben.get(i));
-			aufgabenText.setText(model.getCurrentAufgabe().getText());
-			titleTaskLabel.setText("Aufgabe: " + (i + 1));
-			progress.setValue(i);
-
-			if (model.getCurrentAufgabe().hasImage() == true) { // aktualisiert falls bild vorhanden...
-				bild.setImage(model.getCurrentAufgabe().getImage());
-				aufgabenBild.setIcon(bild);
-			} else {
-				aufgabenBild.setText("");
-			}
 		}
-		panel.repaint();
+		refreshAufgabenview();
 
 		if (i == 0) {
 			previousTaskButton.setEnabled(false);
