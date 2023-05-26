@@ -72,6 +72,8 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	public void rebase(List<Menge> mengen, Ereignismenge e) {
 		this.mengen = mengen;
 		this.eMenge = e;
+		numberEreignisse = mengen.size();
+		numberElementare = e.getEreignisse().size();
 		log.debug("Neue Daten geladen!");
 		panel.repaint();
 	}
