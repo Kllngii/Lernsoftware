@@ -3,6 +3,8 @@ package haw.lernsoftware.model;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import haw.lernsoftware.resources.ResourceProvider;
 
 /**
@@ -13,6 +15,7 @@ import haw.lernsoftware.resources.ResourceProvider;
  *
  */
 public class Model implements Serializable {
+	private Logger log = Logger.getLogger(getClass());
 	private static final long serialVersionUID = 3639339910529002338L;
 	private WindowSelect selectedWindow = WindowSelect.STARTSEITE;
 	private List<Aufgabe> aufgaben;
@@ -22,8 +25,9 @@ public class Model implements Serializable {
 	private Ereignismenge eMenge;
 	
 	public Model(List<Aufgabe> aufgaben) {
+		log.info("Initialisiere Model mit " + aufgaben.size() + " Aufgaben!");
 		this.aufgaben = aufgaben;
-		this.currentAufgabe = aufgaben.get(0);
+		setCurrentAufgabe(aufgaben.get(0));
 	}
 
 	public List<Aufgabe> getAufgaben() {
