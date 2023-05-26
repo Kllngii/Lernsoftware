@@ -23,6 +23,8 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import org.apache.log4j.Logger;
+
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.factories.Paddings;
 
@@ -35,6 +37,7 @@ import haw.lernsoftware.resources.ResourceProvider;
  */
 public class Hilfe extends HAWView implements ActionListener{
 
+	private Logger log = Logger.getLogger(getClass());
 	
 	private JButton ButtonAllgemein = new JButton("Allgemein");
 	private JButton ButtonLadenSpeichern = new JButton("Laden/Speichern");
@@ -169,15 +172,13 @@ public class Hilfe extends HAWView implements ActionListener{
 			try {
 				uri = new URI("https://gidf.help/");
 			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				log.error("Fehler in der URL-Syntax, das sollte nicht passieren...", e1);
 			}
 			Desktop dt = Desktop.getDesktop();
 			try {
 				dt.browse(uri.resolve(uri));
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				log.error("IO-Exception", e1);
 			}
 		}
 		panel.repaint();
