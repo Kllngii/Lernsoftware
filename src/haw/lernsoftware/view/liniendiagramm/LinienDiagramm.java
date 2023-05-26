@@ -43,12 +43,20 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private int selectedColumn = -1;
 	private int selectedRow = -1;
 	
+	public LinienDiagramm(Ereignismenge eMenge, List<Menge> mengen) {
+		this.eMenge = eMenge;
+		this.mengen = mengen;
+		
+		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
+		constructDiagramm(mengen, eMenge);
+	}
+	
+	@Deprecated(since = "26.05.2023")
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
 		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
 
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
-		
 		constructDiagramm(mengen, eMenge);
 	}
 	
