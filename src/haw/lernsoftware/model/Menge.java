@@ -142,4 +142,44 @@ public class Menge {
 
 		return String.format("%d/%d", num, denum);
 	}
+
+	public String divideFracProbability(String frac1, String frac2) {
+		int num;
+		int denum;
+		int frac1num;
+		int frac1denum;
+		int frac2num;
+		int frac2denum;
+		int gcf;
+
+		if (frac1 == "0" || frac1 == "1") {
+			frac1 = String.format("%s/1", frac1);
+		}
+		if (frac2 == "0" || frac2 == "1") {
+			frac2 = String.format("%s/1", frac2);
+		}
+
+		if (frac1.contains("/")) {
+			String[] rat1 = frac1.split("/");
+			frac1num = Integer.parseInt(rat1[0]);
+			frac1denum = Integer.parseInt(rat1[1]);
+		} else {
+			return "error no fraction in frac1";
+		}
+		if (frac2.contains("/")) {
+			String[] rat2 = frac2.split("/");
+			frac2num = Integer.parseInt(rat2[0]);
+			frac2denum = Integer.parseInt(rat2[1]);
+		} else {
+			return "error no fraction in frac2";
+		}
+
+		num = frac1num * frac2denum;
+		denum = frac1denum * frac2num;
+		gcf = GCF(denum, num);
+		num = num / gcf;
+		denum = denum / gcf;
+
+		return String.format("%d/%d", num, denum);
+	}
 }
