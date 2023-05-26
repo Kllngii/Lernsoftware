@@ -44,6 +44,19 @@ public class Menge {
 			negierteMenge.remove(e);
 		return new Menge("Beispielmenge", möglicheEreignisse, negierteMenge, order);
 	}
+	
+	public String bedingteWSK(Menge m) {
+		String fracProbability = "0";
+		double decimalProbability = 0.0;
+		for (int i = 0; i < ereignisse.size(); i++) {
+			decimalProbability += ereignisse.get(i).getProbability();
+			fracProbability = addFracProbability(fracProbability, ereignisse.get(i).getProbString());
+		}
+
+		decimalProbability = Math.round(decimalProbability * Math.pow(10.0, DIGITS)) / Math.pow(10.0, DIGITS);
+		String output = fracProbability + " = " + Double.toString(decimalProbability);
+		return output;
+	}
 
 	public static Menge negiert(Menge m) {
 		return m.negiert();
@@ -83,15 +96,21 @@ public class Menge {
 
 	public String getProbability() {
 		String fracProbability = "0";
-		double decimalProbability = 0.0;
 		for (int i = 0; i < ereignisse.size(); i++) {
-			decimalProbability += ereignisse.get(i).getProbability();
 			fracProbability = addFracProbability(fracProbability, ereignisse.get(i).getProbString());
 		}
 
-		decimalProbability = Math.round(decimalProbability * Math.pow(10.0, DIGITS)) / Math.pow(10.0, DIGITS);
-		String output = fracProbability + " = " + Double.toString(decimalProbability);
+		String output = fracProbability + " = " + Double.toString(this.getDecimalProbability());
 		return output;
+	}
+	
+	public double getDecimalProbability() {
+		double decimalProbability = 0.0;
+		for (int i = 0; i < ereignisse.size(); i++) {
+			decimalProbability += ereignisse.get(i).getProbability();
+		}
+		decimalProbability = Math.round(decimalProbability * Math.pow(10.0, DIGITS)) / Math.pow(10.0, DIGITS);
+		return decimalProbability;
 	}
 
 	public int GCF(int a, int b) {
