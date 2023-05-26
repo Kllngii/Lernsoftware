@@ -1,6 +1,7 @@
 package haw.lernsoftware.view;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Taskbar;
@@ -8,6 +9,9 @@ import java.awt.Taskbar.Feature;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -36,15 +40,14 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton ButtonLadenSpeichern = new JButton("Laden/Speichern");
 	private JButton ButtonAufgaben = new JButton("Aufgaben");	
 	private JButton ButtonLiniengraph = new JButton("Liniengraph");
+	private JButton ButtonWeitereHilfe = new JButton("Weitere Hilfe");
 	private JLabel Ueberschrift = new JLabel("Hilfe");
-	private JScrollBar scroll = new JScrollBar();
 	private JTextArea text = new JTextArea(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"),20,50);	
 	
 	// Eventuell wird das noch mal benötigt
 	//private String bla = new String(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text5"));
 	
 	public  Hilfe() {
-		
 		
 		
 		//Fenster erstellen
@@ -69,6 +72,7 @@ public class Hilfe extends HAWView implements ActionListener{
 		ButtonLadenSpeichern.addActionListener(this);
 		ButtonAufgaben.addActionListener(this);
 		ButtonLiniengraph.addActionListener(this);
+		ButtonWeitereHilfe.addActionListener(this);
 		
 		// Textfeld einstellen
 		text.setEditable(false);
@@ -112,7 +116,7 @@ public class Hilfe extends HAWView implements ActionListener{
 				//.debug(true)
 				.padding(Paddings.DIALOG)
 				.add(Ueberschrift) .xy(2, 1)
-				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph) .xy(1, 2, "fill,top")
+				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph,ButtonWeitereHilfe) .xy(1, 2, "fill,top")
 				//.add(text) .xy(2, 2)
 				.addScrolled(text) .xy(2, 2)
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
@@ -159,6 +163,22 @@ public class Hilfe extends HAWView implements ActionListener{
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text5"));
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
+		}
+		if(e.getSource() == ButtonWeitereHilfe) {
+			URI uri = null;
+			try {
+				uri = new URI("https://gidf.help/");
+			} catch (URISyntaxException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			Desktop dt = Desktop.getDesktop();
+			try {
+				dt.browse(uri.resolve(uri));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		panel.repaint();
 	}
