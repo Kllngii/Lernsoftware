@@ -21,16 +21,15 @@ import haw.lernsoftware.resources.ResourceProvider;
  * Die Tutorial des Programms.
  */
 public class Tutorial extends HAWView {
-
+	//Definition und Init.
 	Logger log = Logger.getLogger(getClass());
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
 	JLabel ueberschrift = new JLabel("Tutorial");
-	
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
 	
-	// Skaliere das ImageIcon
+	// Skalierung für das ImageIcon
     int x1 = 700; // Gewünschte Breite des Bildes
     int y1 = 400; // Gewünschte Höhe des Bildes
     int x = 500; // Gewünschte Breite des Bildes
@@ -51,7 +50,7 @@ public class Tutorial extends HAWView {
 		
 		// Überschrift Textgröße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
-		//FormBuilder hinzufügen
+		//FormBuilder erstellen 
 		JComponent inhalt = FormBuilder.create()
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu") //
 				.rows("p, p, p, 5dlu, p, p, p, 5dlu, p, 5dlu, p, 5dlu, p, p") //
@@ -71,17 +70,17 @@ public class Tutorial extends HAWView {
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 13, 2) //
 				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)), x, y) )).xyw(3,13,3) //
 				
-				
 				.build(); //
+		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einfügen und zurückgeben
 		return FormBuilder.create()
 				  .columns("p")
 				  .rows("p")
 				  .add(inhalt) .xy(1, 1)
 				  .debug(true)
 				  .build();
-		//test
 	}
 
+	//Bildgröße anpassen
 	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
 		Image image = img.getImage();
         Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
