@@ -45,14 +45,6 @@ public class Menge {
 		return new Menge("Beispielmenge", möglicheEreignisse, negierteMenge, order);
 	}
 
-	public String bedingteWSK(Menge m) {
-		String fracProbability = this.divideFracProbability(this.geschnitten(m).getProbability(), m.getProbability());
-		double decimalProbability = this.geschnitten(m).getDecimalProbability() / m.getDecimalProbability();
-
-		String output = fracProbability + " = " + Double.toString(decimalProbability);
-		return output;
-	}
-
 	public static Menge negiert(Menge m) {
 		return m.negiert();
 	}
@@ -90,13 +82,16 @@ public class Menge {
 	}
 
 	public String getProbability() {
+		String output = this.getFracProbability() + " = " + Double.toString(this.getDecimalProbability());
+		return output;
+	}
+	
+	public String getFracProbability() {
 		String fracProbability = "0";
 		for (int i = 0; i < ereignisse.size(); i++) {
 			fracProbability = addFracProbability(fracProbability, ereignisse.get(i).getProbString());
 		}
-
-		String output = fracProbability + " = " + Double.toString(this.getDecimalProbability());
-		return output;
+		return fracProbability;
 	}
 
 	public double getDecimalProbability() {
@@ -106,6 +101,14 @@ public class Menge {
 		}
 		decimalProbability = Math.round(decimalProbability * Math.pow(10.0, DIGITS)) / Math.pow(10.0, DIGITS);
 		return decimalProbability;
+	}
+	
+	public String getConditionalProbability(Menge m) {
+		String fracProbability = this.divideFracProbability(this.geschnitten(m).getFracProbability(), m.getFracProbability());
+		double decimalProbability = this.geschnitten(m).getDecimalProbability() / m.getDecimalProbability();
+
+		String output = fracProbability + " = " + Double.toString(decimalProbability);
+		return output;
 	}
 
 	public int GCF(int a, int b) {
