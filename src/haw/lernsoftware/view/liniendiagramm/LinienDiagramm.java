@@ -68,6 +68,13 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 		panel.addMouseListener(this);
 	}
+	
+	public void rebase(List<Menge> mengen, Ereignismenge e) {
+		this.mengen = mengen;
+		this.eMenge = e;
+		log.debug("Neue Daten geladen!");
+		panel.repaint();
+	}
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
