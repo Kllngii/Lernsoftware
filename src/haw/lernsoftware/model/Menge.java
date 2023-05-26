@@ -104,10 +104,12 @@ public class Menge {
 	}
 
 	public String getConditionalProbability(Menge m) {
-		String fracProbability = this.divideFracProbability(this.geschnitten(m).getFracProbability(),
-				m.getFracProbability());
+		String fracProbability = this.divideFracProbability(this.geschnitten(m).getFracProbability(), m.getFracProbability());
 		double decimalProbability = this.geschnitten(m).getDecimalProbability() / m.getDecimalProbability();
-
+		if (m.getDecimalProbability() == 0.0) {
+			decimalProbability = 0.0;
+		}
+		decimalProbability = Math.round(decimalProbability * Math.pow(10.0, DIGITS)) / Math.pow(10.0, DIGITS);
 		String output = fracProbability + " = " + Double.toString(decimalProbability);
 		return output;
 	}
@@ -170,14 +172,14 @@ public class Menge {
 		int frac2denum;
 		int gcf;
 
+		if (frac2 == "0" || frac2 == "0/1") {
+			return "0/1";
+		}
 		if (frac1 == "0" || frac1 == "1") {
 			frac1 = String.format("%s/1", frac1);
 		}
 		if (frac2 == "0" || frac2 == "1") {
 			frac2 = String.format("%s/1", frac2);
-		}
-		if (frac2 == "0" || frac2 == "0/1") {
-			return "0/1";
 		}
 
 		if (frac1.contains("/")) {

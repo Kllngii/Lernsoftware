@@ -1,7 +1,7 @@
 {"ereignisse": [
    {
       "name": "A",
-      "elementare": "",
+      "elementare": "1,2,3",
       "order": 1
    },
    {

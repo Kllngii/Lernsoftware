@@ -87,6 +87,7 @@ public class Ereignismenge {
 	
 	public static List<Menge> ereignisseFromJSON(String jsonString, Ereignismenge eMenge) {
 		Logger log = Logger.getLogger(Ereignismenge.class);
+		log.warn(jsonString);
 		JSONObject json = new JSONObject(jsonString);
 		JSONArray arr = json.getJSONArray("ereignisse");
 		List<Menge> eList = new ArrayList<>();
@@ -97,6 +98,8 @@ public class Ereignismenge {
 				eList.add(fromJSON(j.toString(), eMenge));
 			}
 		});
+		
+		eList.stream().map(e -> e.toJSON()).forEach(log::debug);
 		
 		return eList;
 	}
