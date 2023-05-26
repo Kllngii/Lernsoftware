@@ -42,13 +42,22 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	
 	private int selectedColumn = -1;
 	private int selectedRow = -1;
+	private Menge eingetreten;
 	
+	public LinienDiagramm(Ereignismenge eMenge, List<Menge> mengen) {
+		this.eMenge = eMenge;
+		this.mengen = mengen;
+		
+		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
+		constructDiagramm(mengen, eMenge);
+	}
+	
+	@Deprecated(since = "26.05.2023")
 	public LinienDiagramm() {
 		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
 		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
 
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
-		
 		constructDiagramm(mengen, eMenge);
 	}
 	
@@ -177,7 +186,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			g2d.setColor(Color.BLACK);
 			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
 			if (bedingtMode) {
-				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/10);
+				g2d.drawString(mengen.get(j).bedingteWSK(eingetreten), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/10);
 				g2d.setColor(Color.ORANGE);
 				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*8/10);
 				g2d.setColor(Color.BLACK);
@@ -226,7 +235,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				bedingtMode = false;
 				if (current.zeile() != -1 && selectedRow != current.zeile()) {
 					bedingtMode = true;
-					//bedingt fürs richtige auf true
+					eingetreten = mengen.get(current.zeile());
 					for (int i = 0; i < mengen.get(current.zeile()).getEreignisse().size(); i++) {
 						mengen.get(current.zeile()).getEreignisse().get(i).setBedingt(true);
 
