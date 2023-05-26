@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -41,6 +42,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	private Logger log = Logger.getLogger(getClass());
 	
 	private JFrame fenster = new JFrame("Hilfe");
+	private JPanel view = new JPanel();
 	private JButton ButtonAllgemein = new JButton("Allgemein");
 	private JButton ButtonLadenSpeichern = new JButton("Laden/Speichern");
 	private JButton ButtonAufgaben = new JButton("Aufgaben");	
@@ -50,6 +52,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JLabel Ueberschrift = new JLabel("Hilfe");
 	private JTextArea text = new JTextArea(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"),20,50);
 	private int i = 0;
+	private Color color = panel.getBackground();
 	
 	private Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	
@@ -59,7 +62,6 @@ public class Hilfe extends HAWView implements ActionListener{
 	public  Hilfe() {
 		
 		
-		JPanel view = new JPanel();
 		panel = new JScrollPane(view);
 		view.add(buildContentText());			
 		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -95,7 +97,6 @@ public class Hilfe extends HAWView implements ActionListener{
 		
 		// Textfeld einstellen
 		text.setEditable(false);
-		Color color = panel.getBackground();
 		text.setBackground(color);
 
 
@@ -201,22 +202,30 @@ public class Hilfe extends HAWView implements ActionListener{
 		}
 		if(e.getSource() == ButtonFUN) {
 			i++;
+			
+	        if ((i & 1) == 0) {
+	        	view.setBackground(color);
+	        } else {
+	        	view.setBackground(Color.pink);
+	        }
+			
 			Random rand = new Random();
 			int x = rand.nextInt((int) dimension.getWidth());
 			int y = rand.nextInt((int) dimension.getHeight());
 			
 	        fenster.setLocation(x, y);
-	        
+	                
+	        panel.repaint();	        
 	        if(i < 100) {
+	        	try {
+					TimeUnit.SECONDS.sleep((long) 0.8);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 	        	ButtonFUN.doClick();
 	        } else
 	        	i = 0;
-	        
-	        if (i % 2 == 0) {
-	        	fenster.setVisible(true);
-	        } else {
-	        	fenster.setVisible(false);
-	        }
 		}
 		panel.repaint();
 	}
