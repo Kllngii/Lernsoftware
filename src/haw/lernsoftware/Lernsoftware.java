@@ -16,6 +16,9 @@ import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.GUI;
 import haw.lernsoftware.view.HAWView;
 
+//TODO Liniendiagramm: gewählte Zeile einfärben
+//FIXME Speichern funktioniert nicht
+
 /**
  * Die Hauptklasse und der Einstiegpunkt des Programms
  * @author Lasse Kelling

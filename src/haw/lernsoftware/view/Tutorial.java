@@ -51,8 +51,7 @@ public class Tutorial extends HAWView implements ActionListener {
 		scroll.setUnitIncrement(16);
 		((JScrollPane)panel).setVerticalScrollBar(scroll);
 		
-		//Button
-		tutorial2Button.addActionListener(this);
+		
 		
 	}
 
@@ -61,14 +60,16 @@ public class Tutorial extends HAWView implements ActionListener {
 		// Überschrift Textgröße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 		
-		
+		//Button
+		tutorial2Button.addActionListener(this);
 		
 		//FormBuilder erstellen 
 		JComponent inhalt = FormBuilder.create()
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu") //
 				.rows("p, p, p, 5dlu, p, p, p, 5dlu, p, 5dlu, p, 5dlu, p, p") //
 				.padding(Paddings.DIALOG) //
-				.add(ueberschrift).xyw(1, 1, 5) //
+				.add(ueberschrift).xyw(1, 1, 3) //
+				.add(tutorial2Button).xyw(5, 1, 1) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_Ueberschrift.text")).xyw(1, 2, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 2) //
 				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1)), x1, y1) )).xyw(3,3,3) //
@@ -82,7 +83,6 @@ public class Tutorial extends HAWView implements ActionListener {
 				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)), x, y) )).xyw(3,11,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 13, 2) //
 				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)), x, y) )).xyw(3,13,3) //
-				.add(tutorial2Button).xyw(5, 14, 1) //
 				.build(); //
 		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einfügen und zurückgeben
 		return FormBuilder.create()

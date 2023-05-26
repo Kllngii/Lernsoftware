@@ -52,6 +52,7 @@ public class GUI implements ActionListener {
 	private Startseite startseitenView = new Startseite(this);
 	private Aufgabentext aufgabentextView = new Aufgabentext(model, this);
 	private Tutorial tutorialView = new Tutorial(this);
+	private Tutorial2 tutorial2View = new Tutorial2(this);
 	
 	public GUI(JFrame frame) {
 		this.frame = frame;
@@ -132,6 +133,7 @@ public class GUI implements ActionListener {
 		contentPane.add(liniendiagrammView.panel, "liniendiagramm");
 		contentPane.add(aufgabentextView.panel, "aufgabentext");
 		contentPane.add(tutorialView.panel, "tutorial");
+		contentPane.add(tutorial2View.panel, "tutorial2");
 	}
 
 	@Override
@@ -190,7 +192,7 @@ public class GUI implements ActionListener {
 			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL.getIdentifier());
 			model.setSelectedWindow(WindowSelect.TUTORIAL);
 		} else if (ws == WindowSelect.TUTORIAL2) {
-			log.debug("Wechsle zur Tutorial");
+			log.debug("Wechsle zur Tutorial 2");
 			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL2.getIdentifier());
 			model.setSelectedWindow(WindowSelect.TUTORIAL2);
 		}
