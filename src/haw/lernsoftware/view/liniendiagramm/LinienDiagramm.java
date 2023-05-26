@@ -157,7 +157,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			g2d.drawLine(currentLeftBorder, BORDER_Y + 10, currentLeftBorder, BORDER_Y + diagHeight);
 			spaltenCoord.add(currentLeftBorder);
 			if (eMenge.getEreignisse().get(i).isBedingt()) {
-				g2d.setColor(Color.ORANGE);
+				g2d.setColor(Color.CYAN);
 				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, currentWidth - 1, numberEreignisse*linewidth - 2);
 			}
 			
@@ -182,7 +182,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		for (int j = 0; j < numberEreignisse; j++) {
 			currentLeftBorder = BORDER_X + offsetlr;
 			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
-//			g2d.setColor(Color.BLUE);
+//			g2d.setColor(Color.CYAN);
 			for (int i = 0; i < numberElementare; i++) {
 				int currentWidth = (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 				if (linesegment(mengen.get(j), i+1)) {
@@ -193,9 +193,9 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			g2d.setColor(Color.BLACK);
 			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
 			if (bedingtMode) {
-				g2d.drawString(mengen.get(j).bedingteWSK(eingetreten), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/10);
-				g2d.setColor(Color.ORANGE);
-				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*8/10);
+				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/10);
+				g2d.setColor(Color.BLUE);
+				g2d.drawString(mengen.get(j).getConditionalProbability(eingetreten), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*8/10);
 				g2d.setColor(Color.BLACK);
 			} else {
 				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
