@@ -50,7 +50,7 @@ public class GUI implements ActionListener {
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite(this);
-	private Aufgabentext aufgabentextView = new Aufgabentext(model);
+	private Aufgabentext aufgabentextView = new Aufgabentext(model, this);
 	private Tutorial tutorialView = new Tutorial(this);
 	
 	public GUI(JFrame frame) {

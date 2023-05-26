@@ -25,7 +25,7 @@
       "order": 5
    },
    {
-      "name": "Nicht A\B oder C :?",
+      "name": "Nicht A\\B oder C :?",
       "elementare": "12",
       "order": 6
    }

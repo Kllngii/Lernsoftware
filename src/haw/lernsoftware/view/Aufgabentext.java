@@ -40,10 +40,12 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	
 	private ImageIcon bild;
 	private JLabel aufgabenBild;
+	private GUI gui;
 
 	// fügt dem panel von Aufgabentext einen JComponent zu
-	public Aufgabentext(Model model) {
+	public Aufgabentext(Model model, GUI gui) {
 		this.model = model;
+		this.gui = gui;
 		aufgaben = model.getAufgaben();
 		
 		panel.add(buildContentText());
