@@ -25,6 +25,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.RenderingHints;
 
+
 import org.apache.log4j.Logger;
 
 import com.jgoodies.forms.builder.FormBuilder;
@@ -46,21 +47,22 @@ public class Tutorial3 extends HAWView implements ActionListener{
 	JLabel ueberschrift = new JLabel("Tutorial 3");
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
-	int diameter = 20;
-	JButton tutorialZurück = new JButton("zurück") {
+	JButton tutorialZurueck = new JButton("zurueck") {
 		@Override
 		protected void paintComponent(Graphics g) {
-			Graphics2D g2 = (Graphics2D) g.create();
-			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			super.paintComponent(g);
 
-			int diameter = Math.min(getWidth(), getHeight());
-			Shape circle = new Ellipse2D.Double((getWidth() - diameter) / 2, (getHeight() - diameter) / 2, diameter, diameter);
-			g2.setColor(getBackground());
-			g2.fill(circle);
+		    Graphics2D g2 = (Graphics2D) g.create();
+		    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-			super.paintComponent(g2);
+		    int diameter = Math.min(getWidth(), getHeight());
+		    int x = (getWidth() - diameter) / 2;
+		    int y = (getHeight() - diameter) / 2;
 
-			g2.dispose();
+		    g2.setColor(Color.BLACK);
+		    g2.fillOval(x, y, diameter, diameter);
+
+		    g2.dispose();
 		}
 
 		@Override
@@ -68,9 +70,9 @@ public class Tutorial3 extends HAWView implements ActionListener{
 			// Kein Rahmen zeichnen
 		}
 	};
-	// Skalierung für das ImageIcon
-	int x = 500; // Gewünschte Breite des Bildes
-	int y = 400; // Gewünschte Höhe des Bildes
+	// Skalierung f�r das ImageIcon
+	int x = 500; // Gew�nschte Breite des Bildes
+	int y = 400; // Gew�nschte H�he des Bildes
 
 	//Erstellen eines Fensters mit ScrollBar
 	public Tutorial3(GUI gui) {
@@ -86,20 +88,20 @@ public class Tutorial3 extends HAWView implements ActionListener{
 
 	private JComponent constructStartseite() {
 		//hallo
-		// Überschrift Textgröße ändern
+		// �berschrift Textgr��e �ndern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 
 		JPanel buttonAnordnung = new JPanel();
 		buttonAnordnung.setLayout(new FlowLayout());
-		buttonAnordnung.add(tutorialZurück);
+		buttonAnordnung.add(tutorialZurueck);
+
 		//buttonAnordnung.add(tutorialNext);
 		//Button konfigurieren
 		//tutorialNext.addActionListener(this);
-		tutorialZurück.addActionListener(this);
-		//tutorialZurück.setForeground(Color.WHITE);
-		//tutorialZurück.setBackground(Color.BLACK);
-
-
+		tutorialZurueck.addActionListener(this);
+		tutorialZurueck.setPreferredSize(new Dimension(150, 50));
+		//tutorialZur�ck.setForeground(Color.WHITE);
+		tutorialZurueck.setOpaque(false);
 
 
 		//FormBuilder erstellen 
@@ -125,16 +127,17 @@ public class Tutorial3 extends HAWView implements ActionListener{
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_absatz6.text")).xyw(1, 15, 2) //
 				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BEDINGTE_W)), x, y) )).xyw(3, 15, 3) //
 				.build(); //
-		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einfügen und zurückgeben
+		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einf�gen und zur�ckgeben
 		return FormBuilder.create()
 				.columns("p")
 				.rows("p")
 				.add(inhalt) .xy(1, 1)
 				.debug(true)
 				.build();
+		
 	}
 
-	//Bildgröße anpassen
+	//Bildgr��e anpassen
 	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
 		Image image = img.getImage();
 		Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
@@ -143,7 +146,7 @@ public class Tutorial3 extends HAWView implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == tutorialZurück) {
+		if(e.getSource() == tutorialZurueck) {
 			log.debug("Wechsle zum Tutorial 2");
 			gui.switchToView(WindowSelect.TUTORIAL2);
 		}		
