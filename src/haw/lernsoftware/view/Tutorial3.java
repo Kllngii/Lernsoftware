@@ -47,28 +47,33 @@ public class Tutorial3 extends HAWView implements ActionListener{
 	JLabel ueberschrift = new JLabel("Tutorial 3");
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
-	JButton tutorialZurueck = new JButton("zurueck") {
+	JButton tutorialZurueck = new JButton("zurück") {
 		@Override
 		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
+			Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		    Graphics2D g2 = (Graphics2D) g.create();
-		    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            if (getModel().isArmed()) {
+                g2.setColor(Color.DARK_GRAY);
+            } else {
+                g2.setColor(Color.BLACK);
+            }
 
-		    int diameter = Math.min(getWidth(), getHeight());
-		    int x = (getWidth() - diameter) / 2;
-		    int y = (getHeight() - diameter) / 2;
+            int arc = 20; // Radius der abgerundeten Ecken
+            g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, arc, arc);
 
-		    g2.setColor(Color.BLACK);
-		    g2.fillOval(x, y, diameter, diameter);
-
-		    g2.dispose();
+            super.paintComponent(g2);
+            g2.dispose();
 		}
 
 		@Override
 		protected void paintBorder(Graphics g) {
 			// Kein Rahmen zeichnen
 		}
+		@Override
+	    public boolean isOpaque() {
+	        return false;
+	    }
 	};
 	// Skalierung f�r das ImageIcon
 	int x = 500; // Gew�nschte Breite des Bildes
@@ -99,9 +104,10 @@ public class Tutorial3 extends HAWView implements ActionListener{
 		//Button konfigurieren
 		//tutorialNext.addActionListener(this);
 		tutorialZurueck.addActionListener(this);
-		tutorialZurueck.setPreferredSize(new Dimension(150, 50));
-		//tutorialZur�ck.setForeground(Color.WHITE);
-		tutorialZurueck.setOpaque(false);
+		//tutorialZurueck.setPreferredSize(new Dimension(150, 50));
+		tutorialZurueck.setForeground(Color.WHITE);
+		tutorialZurueck.setContentAreaFilled(false);
+		tutorialZurueck.setBorderPainted(false);
 
 
 		//FormBuilder erstellen 
