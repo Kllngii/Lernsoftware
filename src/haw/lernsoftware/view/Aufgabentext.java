@@ -79,7 +79,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		loesungText.setLineWrap(true);
 		loesungText.setPreferredSize(new Dimension(100, 100));
 		loesungText.setEditable(true);
-		loesungText.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY));
+		loesungText.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.DARK_GRAY));
 		// loesungText.setBackground(color);
 
 		// TODO was ist wenn auch noch Liniendiagramme dazukommen
