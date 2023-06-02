@@ -1,20 +1,24 @@
 package haw.lernsoftware.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Taskbar;
 import java.awt.Taskbar.Feature;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.RootPaneContainer;
 
 import org.apache.log4j.Logger;
 
@@ -68,6 +73,10 @@ public class Hilfe extends HAWView implements ActionListener{
 		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
+		Image Background = ResourceProvider.loadImage(Konst.Background_JPEG);
+		fenster.setLayout(new BorderLayout());
+		fenster.setContentPane(new JLabel(new ImageIcon(Background)));
+		fenster.setLayout(new FlowLayout());
 		
 		
 		// Text für die Erstausgabe formatieren
@@ -124,6 +133,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	    // Fenster zeige dich
 	    ButtonFUN.setVisible(false);
 
+	    
 		fenster.setVisible(true);
 		
 		
@@ -231,7 +241,6 @@ public class Hilfe extends HAWView implements ActionListener{
 	    if(j > 4) {
 	    ButtonFUN.setVisible(true);
 	    }
-	    System.out.println(j);
 		panel.repaint();
 	}
 }

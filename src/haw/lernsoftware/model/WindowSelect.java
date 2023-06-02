@@ -11,7 +11,8 @@ public enum WindowSelect {
 	LINIENDIAGRAMM("liniendiagramm"),
 	STARTSEITE("startseite"),
 	TUTORIAL("tutorial"),
-	TUTORIAL2("tutorial2");
+	TUTORIAL2("tutorial2"),
+	TUTORIAL3("tutorial3");
 	;
 	
 	private final String identifier;
