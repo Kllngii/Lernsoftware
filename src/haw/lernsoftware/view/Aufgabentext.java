@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -78,6 +79,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		loesungText.setLineWrap(true);
 		loesungText.setPreferredSize(new Dimension(100, 100));
 		loesungText.setEditable(true);
+		loesungText.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY));
 		// loesungText.setBackground(color);
 
 		// TODO was ist wenn auch noch Liniendiagramme dazukommen
@@ -107,7 +109,8 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.add(aufgabenText).xyw(1, 5, 5) //
 				.add(aufgabenBild).xyw(1, 6, 5) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
 				.add(linienpanel).xyw(1, 7, 5) //
-				.add(loesungText).xyw(1, 8, 5).build(); //
+				.add(loesungText).xyw(1, 8, 5) //
+				.build(); //
 	}
 
 	private void refreshAufgabenview() {
