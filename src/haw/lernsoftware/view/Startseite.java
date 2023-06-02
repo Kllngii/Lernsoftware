@@ -2,13 +2,11 @@ package haw.lernsoftware.view;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -39,7 +37,7 @@ public class Startseite extends HAWView {
 	MatteBorder mBorder = new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY);
 
 	public Startseite(GUI gui) {
-		this.gui = gui;
+		this.gui = gui;		
 		panel.add(constructStartseite());
 
 	}

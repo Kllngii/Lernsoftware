@@ -33,7 +33,6 @@ public class GUI implements ActionListener {
 	private Model model = new Model(sp.ladeAufgaben());
 
 	private Logger log = Logger.getLogger(getClass());
-
 	private JFrame frame;
 
 	private JMenuBar menuBar = new JMenuBar();
@@ -124,6 +123,7 @@ public class GUI implements ActionListener {
 		menuItemLeicht.addActionListener(this);
 		menuItemMittel.addActionListener(this);
 		menuItemSchwer.addActionListener(this);
+		
 	}
 
 	/**
