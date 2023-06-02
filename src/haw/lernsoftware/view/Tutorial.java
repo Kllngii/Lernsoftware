@@ -31,7 +31,7 @@ public class Tutorial extends HAWView implements ActionListener {
 	Logger log = Logger.getLogger(getClass());
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
-	JLabel ueberschrift = new JLabel("Tutorial");
+	JLabel ueberschrift = new JLabel("Tutorial 1");
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
 	JButton tutorialNext = new JButton("Nächstes Tutorial");
@@ -51,8 +51,6 @@ public class Tutorial extends HAWView implements ActionListener {
 		JScrollBar scroll = new JScrollBar();
 		scroll.setUnitIncrement(16);
 		((JScrollPane)panel).setVerticalScrollBar(scroll);
-		
-		
 		
 	}
 
