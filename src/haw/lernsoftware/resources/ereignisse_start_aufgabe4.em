@@ -1,31 +1,31 @@
 {"ereignisse": [
    {
-      "name": "A",
-      "elementare": "1,3,5",
+      "name": "A:=Zahl ist durch 3 teilbar",
+      "elementare": "",
       "order": 1
    },
    {
-      "name": "B",
-      "elementare": "1,2,3,4",
+      "name": "B:= Quersumme <= 11",
+      "elementare": "",
       "order": 2
    },
    {
-      "name": "AnB",
+      "name": "C := Zahl < 42",
       "elementare": "",
       "order": 3
    },
    {
-      "name": "AuB",
+      "name": "Nicht A := ?",
       "elementare": "",
       "order": 4
    },
    {
-      "name": "A|B",
+      "name": "B oder C := ?",
       "elementare": "",
       "order": 5
    },
    {
-      "name": "B|A",
+      "name": "Nicht A ohne B oder C :?",
       "elementare": "",
       "order": 6
    }

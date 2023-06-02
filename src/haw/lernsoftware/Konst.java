@@ -8,6 +8,7 @@ package haw.lernsoftware;
 public class Konst {
 	public static final String SO_HEISST_DAS_DING = "Lernsoftware";
 	public static final String PREFERENCES_ROOT_KEY = "/haw/lernsoftware";
+	public static final String MODEL_KEY = "model";
 	
 	public static final String ICON_PATH = "icon.png";
 	public static final String HILFE_ICON = "hilfe.png";
@@ -27,6 +28,8 @@ public class Konst {
 	public static final String EINFÜHRUNG_BILD4 = "Einfuehrung_Bild4.png";
 	public static final String EINFÜHRUNG_BILD5 = "Einfuehrung_Bild5.png";
 	public static final String FOLGEN_EINFÜHRUNG_BILD_1 = "Folgen_Einfuehrung_Bild_1.jpeg";
+	public static final String EINFÜHRUNG_BEDINGTE_W = "Einfuehrung_bedingte_W.png";
+	public static final String Background_JPEG = "background.jpeg";
 	
 	public static final String PROPERTIES_STARTSEITE = "startseite.properties";
 	public static final String PROPERTIES_HILFE = "hilfe.properties";

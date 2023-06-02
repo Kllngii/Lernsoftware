@@ -1,14 +1,18 @@
 package haw.lernsoftware.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -31,6 +35,7 @@ public class Startseite extends HAWView {
 	//Definition und Init.
 	Logger log = Logger.getLogger(getClass());
 	private GUI gui;
+	private JPanel view = new JPanel();
 	JLabel functionText1 = new JLabel();
 	JLabel functionText2 = new JLabel();
 	JLabel functionText3 = new JLabel();
@@ -39,8 +44,20 @@ public class Startseite extends HAWView {
 	MatteBorder mBorder = new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY);
 
 	public Startseite(GUI gui) {
-		this.gui = gui;
-		panel.add(constructStartseite());
+		this.gui = gui;				
+		
+		
+		panel = new JScrollPane(view);
+		view.add(constructStartseite());			
+		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
+		//Image Background = ResourceProvider.loadImage(Konst.Background_JPEG);
+		//panel.setLayout(new BorderLayout());
+		//panel.setContentPane(new JLabel(new ImageIcon(Background)));
+		//panel.setLayout(new FlowLayout());
+		//panel.add(constructStartseite());
+		//panel.add(constructStartseite());
 
 	}
 
@@ -91,13 +108,10 @@ public class Startseite extends HAWView {
 		public void mouseReleased(java.awt.event.MouseEvent e) {
 
 			if(e.getSource() == functionText1) {
-				log.debug("Wechsle zum Tutorial");
 				gui.switchToView(WindowSelect.TUTORIAL);
 			} else if(e.getSource() == functionText2) {
-				log.debug("Wechsle zum Aufgabentext");
 				gui.switchToView(WindowSelect.AUFGABENTEXT);
 			}else if(e.getSource() == functionText3) {
-				log.debug("Wechsle zum Liniendiagramm");
 				gui.switchToView(WindowSelect.LINIENDIAGRAMM);
 			}
 		}

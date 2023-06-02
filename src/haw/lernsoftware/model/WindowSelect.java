@@ -1,5 +1,7 @@
 package haw.lernsoftware.model;
 
+import java.util.Arrays;
+
 /**
  * Ein Enum, welches das zuletzt geöffnete Fenster symbolisch beschreibt.
  * @author Lasse Kelling
@@ -9,7 +11,8 @@ public enum WindowSelect {
 	LINIENDIAGRAMM("liniendiagramm"),
 	STARTSEITE("startseite"),
 	TUTORIAL("tutorial"),
-	TUTORIAL2("tutorial2");
+	TUTORIAL2("tutorial2"),
+	TUTORIAL3("tutorial3");
 	;
 	
 	private final String identifier;
@@ -26,6 +29,14 @@ public enum WindowSelect {
 	public String toString() {
 		return identifier;
 	}
-	
+
+	static WindowSelect parse(String string) {
+		WindowSelect val = AUFGABENTEXT;
+		for(WindowSelect ws : values()) {
+			if(ws.identifier.equalsIgnoreCase(string))
+				val = ws;
+		}
+		return val;
+	}
 	
 }

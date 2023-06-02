@@ -1,32 +1,42 @@
 {"ereignisse": [
    {
       "name": "A",
-      "elementare": "1,3,5",
+      "elementare": "",
       "order": 1
    },
    {
       "name": "B",
-      "elementare": "1,2,3,4",
+      "elementare": "",
       "order": 2
    },
    {
-      "name": "AnB",
+      "name": "ungerade Zahl",
       "elementare": "",
       "order": 3
    },
    {
-      "name": "AuB",
+      "name": "Nicht A",
       "elementare": "",
       "order": 4
    },
    {
-      "name": "A|B",
+      "name": "Zahl >= 6",
       "elementare": "",
       "order": 5
    },
    {
-      "name": "B|A",
+      "name": "Nicht B",
       "elementare": "",
       "order": 6
+   },
+   {
+      "name": "gerade Zahl < 6",
+      "elementare": "",
+      "order": 7
+   },
+   {
+      "name": "A und B",
+      "elementare": "",
+      "order": 8
    }
 ]}

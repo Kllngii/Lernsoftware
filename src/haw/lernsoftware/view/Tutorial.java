@@ -1,5 +1,6 @@
 package haw.lernsoftware.view;
 
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,10 +31,10 @@ public class Tutorial extends HAWView implements ActionListener {
 	Logger log = Logger.getLogger(getClass());
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
-	JLabel ueberschrift = new JLabel("Tutorial");
+	JLabel ueberschrift = new JLabel("Tutorial 1");
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
-	JButton tutorial2Button = new JButton("Nächstes Tutorial");
+	JButton tutorialNext = new JButton("Nächstes Tutorial");
 	
 	// Skalierung für das ImageIcon
     int x1 = 700; // Gewünschte Breite des Bildes
@@ -51,8 +52,6 @@ public class Tutorial extends HAWView implements ActionListener {
 		scroll.setUnitIncrement(16);
 		((JScrollPane)panel).setVerticalScrollBar(scroll);
 		
-		
-		
 	}
 
 	private JComponent constructStartseite() {
@@ -60,8 +59,11 @@ public class Tutorial extends HAWView implements ActionListener {
 		// Überschrift Textgröße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 		
-		//Button
-		tutorial2Button.addActionListener(this);
+		JPanel buttonAnordnung = new JPanel();
+		buttonAnordnung.setLayout(new FlowLayout());
+		buttonAnordnung.add(tutorialNext);
+		//Button konfigurieren
+		tutorialNext.addActionListener(this);
 		
 		//FormBuilder erstellen 
 		JComponent inhalt = FormBuilder.create()
@@ -69,7 +71,7 @@ public class Tutorial extends HAWView implements ActionListener {
 				.rows("p, p, p, 5dlu, p, p, p, 5dlu, p, 5dlu, p, 5dlu, p, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 3) //
-				.add(tutorial2Button).xyw(5, 1, 1) //
+				.add(buttonAnordnung).xyw(5, 1, 1) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_Ueberschrift.text")).xyw(1, 2, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 2) //
 				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1)), x1, y1) )).xyw(3,3,3) //
@@ -102,7 +104,7 @@ public class Tutorial extends HAWView implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == tutorial2Button) {
+		if(e.getSource() == tutorialNext) {
 			log.debug("Wechsle zum Tutorial 2");
 			gui.switchToView(WindowSelect.TUTORIAL2);
 		}

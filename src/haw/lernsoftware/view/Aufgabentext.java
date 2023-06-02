@@ -6,12 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import org.apache.log4j.Logger;
@@ -30,11 +33,20 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JProgressBar progress;
 	private int i;
 
+	public int getI() {
+		return i;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+		refreshAufgabenview();
+	}
+
 	private final Logger log = Logger.getLogger(getClass());
 
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
-	private JButton nextTaskButton = new JButton("NEXT");
-	private JButton previousTaskButton = new JButton("PREVIOUS");
+	private JButton nextTaskButton = new JButton("Weiter");
+	private JButton previousTaskButton = new JButton("Zurück");
 	private JButton toLiniendiagrammButton = new JButton("Liniendiagramm");
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
 	private JTextArea loesungText = new JTextArea("if you can read this, report a bug");
@@ -50,7 +62,14 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		this.gui = gui;
 		aufgaben = model.getAufgaben();
 
-		panel.add(buildContentText());
+		JPanel view = new JPanel();
+		panel = new JScrollPane(view);
+		view.add(buildContentText());
+		JScrollBar scroll = new JScrollBar();
+		scroll.setUnitIncrement(16);
+		((JScrollPane) panel).setVerticalScrollBar(scroll);
+
+		// panel.add(buildContentText());
 
 	}
 
@@ -72,12 +91,14 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		aufgabenText.setEditable(false);
 		Color color = panel.getBackground();
 		aufgabenText.setBackground(color);
+		aufgabenText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
 
 		// Aufgabentext erstellen und formatieren
-		loesungText.setText("hier die Lösung!");
+		loesungText.setText("Hier die Lösung eingeben!");
 		loesungText.setLineWrap(true);
 		loesungText.setPreferredSize(new Dimension(100, 100));
 		loesungText.setEditable(true);
+		loesungText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
 		// loesungText.setBackground(color);
 
 		// TODO was ist wenn auch noch Liniendiagramme dazukommen
@@ -107,10 +128,21 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.add(aufgabenText).xyw(1, 5, 5) //
 				.add(aufgabenBild).xyw(1, 6, 5) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
 				.add(linienpanel).xyw(1, 7, 5) //
-				.add(loesungText).xyw(1, 8, 5).build(); //
+				.add(loesungText).xyw(1, 8, 5) //
+				.build(); //
 	}
 
 	private void refreshAufgabenview() {
+		if (i == 0) {
+			previousTaskButton.setEnabled(false);
+		} else if (i == aufgaben.size() - 1) {
+			titleTaskLabel.setText("Glückwunsch!");
+			nextTaskButton.setEnabled(false);
+		} else {
+			previousTaskButton.setEnabled(true);
+			nextTaskButton.setEnabled(true);
+		}
+		
 		model.setCurrentAufgabe(aufgaben.get(i));
 
 		Aufgabe current = model.getCurrentAufgabe();
@@ -120,8 +152,10 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		progress.setValue(i);
 
 		if (current.hasImage()) { // aktualisiert falls bild vorhanden...
-			bild.setImage(current.getImage());
-			aufgabenBild.setIcon(bild);
+			if(bild != null) {
+				bild.setImage(current.getImage());
+				aufgabenBild.setIcon(bild);
+			}
 		} else
 			aufgabenBild.setIcon(null);
 
@@ -150,14 +184,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		}
 		refreshAufgabenview();
 
-		if (i == 0) {
-			previousTaskButton.setEnabled(false);
-		} else if (i == aufgaben.size() - 1) {
-			titleTaskLabel.setText("Glückwunsch!");
-			nextTaskButton.setEnabled(false);
-		} else {
-			previousTaskButton.setEnabled(true);
-			nextTaskButton.setEnabled(true);
-		}
+		
 	}
 }

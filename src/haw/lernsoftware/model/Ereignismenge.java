@@ -31,13 +31,13 @@ public class Ereignismenge {
 	 * @return true, wenn alle Checks erfolgreich waren
 	 */
 	public boolean vaildate() {
-		if (ereignisse == null)
+		if(ereignisse == null)
 			return false;
 		
-		double gesamt = 0.0;
-		for (Elementarereignis e : ereignisse)
+		double gesamt = 0;
+		for(Elementarereignis e : ereignisse)
 			gesamt += e.getProbability();
-		if (gesamt > 1.001 || gesamt < 0.999)
+		if(gesamt > 1) //TODO floatingPoint-Fehler beachten
 			return false;
 		
 		return true;
@@ -77,7 +77,7 @@ public class Ereignismenge {
 		List<Elementarereignis> eList = new ArrayList<>();
 		
 		arr.forEach(a -> {
-			//log.debug("Lese ein: " + a);
+			log.debug("Lese ein: " + a);
 			if(a instanceof JSONObject j) {
 				eList.add(Elementarereignis.fromJSON(j.toString()));
 			}
@@ -91,12 +91,12 @@ public class Ereignismenge {
 		JSONArray arr = json.getJSONArray("ereignisse");
 		List<Menge> eList = new ArrayList<>();
 		
-		arr.forEach(a -> {
-			//log.debug("Lese Ereignisse ein: " + a);
-			if(a instanceof JSONObject j) {
-				eList.add(fromJSON(j.toString(), eMenge));
-			}
-		});
+//		arr.forEach(a -> {
+//			log.debug("Lese Ereignisse ein: " + a);
+//			if(a instanceof JSONObject j) {
+//				eList.add(fromJSON(j.toString(), eMenge));
+//			}
+//		});
 		
 		return eList;
 	}
@@ -105,19 +105,21 @@ public class Ereignismenge {
 		JSONObject json = new JSONObject(jsonString);
 		String elementareString = json.getString("elementare");
 		List<Elementarereignis> elementare = new ArrayList<>();
-		
-		String[] elementareArray = elementareString.split(",");
-		Arrays.stream(elementareArray).map(elem -> {
-			try {
-				return eMenge.getEreignisse().get(Integer.parseInt(elem) - 1);
-			} catch(NumberFormatException ex) {
-				return null;
-			}
-			}).forEach(elemEr -> {
-				if(elemEr != null)
-					elementare.add(elemEr);
-			});
-		
-		return new Menge(json.getString("name"), eMenge, elementare, json.getInt("order"));
+		if (elementareString == "") {
+			return new Menge(json.getString("name"), eMenge, eMenge.getEreignisse().subList(0, 0), json.getInt("order"));
+		} else {
+			String[] elementareArray = elementareString.split(",");
+			Arrays.stream(elementareArray).map(elem -> {
+				try {
+					return eMenge.getEreignisse().get(Integer.parseInt(elem) - 1);
+				} catch(NumberFormatException ex) {
+					return null;
+				}
+				}).forEach(elemEr -> {
+					if(elemEr != null)
+						elementare.add(elemEr);
+				});
+			return new Menge(json.getString("name"), eMenge, elementare, json.getInt("order"));
+		}
 	}
 }
