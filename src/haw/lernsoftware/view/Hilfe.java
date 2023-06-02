@@ -231,7 +231,6 @@ public class Hilfe extends HAWView implements ActionListener{
 	    if(j > 4) {
 	    ButtonFUN.setVisible(true);
 	    }
-	    System.out.println(j);
 		panel.repaint();
 	}
 }
