@@ -1,7 +1,9 @@
 package haw.lernsoftware.view;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
