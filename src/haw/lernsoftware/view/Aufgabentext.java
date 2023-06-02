@@ -94,7 +94,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		toLiniendiagrammButton.addActionListener(this);
 
 		// gibt einen JComponent zurück mit nur Text
-		return FormBuilder.create().debug(true) // Rote Linien zeichnen
+		return FormBuilder.create() // Rote Linien zeichnen
 				.columns("100dlu, 5dlu, center:200dlu, 5dlu, 100dlu") //
 				.rows("p, 20dlu, p, $lg, top:100dlu, p, p, top:50dlu") //
 				.padding(Paddings.DIALOG) //
