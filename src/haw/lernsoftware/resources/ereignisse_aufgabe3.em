@@ -10,7 +10,7 @@
       "order": 2
    },
    {
-      "name": "Du darfst bei "Mensch ärgere dich nicht" raussetzen",
+      "name": "Du darfst bei \"Mensch ärgere dich nicht\" raussetzen",
       "elementare": "6",
       "order": 3
    },

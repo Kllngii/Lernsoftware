@@ -41,7 +41,7 @@ public class Model implements Serializable {
 		this.selectedWindow = selectedWindow;
 		this.currentAufgabeID = currentAufgabeID;
 		this.aufgaben = SpeicherService.ladeAufgaben();
-		this.currentAufgabe = aufgaben.get(currentAufgabeID);
+		setCurrentAufgabe(aufgaben.get(currentAufgabeID));
 	}
 
 	@JSONPropertyIgnore

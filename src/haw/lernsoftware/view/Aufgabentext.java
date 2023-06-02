@@ -68,7 +68,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		JScrollBar scroll = new JScrollBar();
 		scroll.setUnitIncrement(16);
 		((JScrollPane) panel).setVerticalScrollBar(scroll);
-
+		refreshAufgabenview();
 		// panel.add(buildContentText());
 
 	}
