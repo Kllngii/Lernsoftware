@@ -52,6 +52,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JLabel Ueberschrift = new JLabel("Hilfe");
 	private JTextArea text = new JTextArea(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"),20,50);
 	private int i = 0;
+	private int j = 0;
 	private Color color = panel.getBackground();
 	
 	private Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -120,8 +121,9 @@ public class Hilfe extends HAWView implements ActionListener{
 	    int x = (int) ((dimension.getWidth() - fenster.getWidth()) / 2);
 	    int y = (int) ((dimension.getHeight() - fenster.getHeight()) / 2);
 	    fenster.setLocation(x, y);
-	    
 	    // Fenster zeige dich
+	    ButtonFUN.setVisible(false);
+
 		fenster.setVisible(true);
 		
 		
@@ -164,6 +166,7 @@ public class Hilfe extends HAWView implements ActionListener{
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
 			Ueberschrift.setText("Allgemein");
+			j++;
 		}
 		if(e.getSource() == ButtonLadenSpeichern) {
 			Ueberschrift.setText("Laden/Speichern");
@@ -202,7 +205,6 @@ public class Hilfe extends HAWView implements ActionListener{
 		}
 		if(e.getSource() == ButtonFUN) {
 			i++;
-			
 	        if ((i & 1) == 0) {
 	        	view.setBackground(color);
 	        } else {
@@ -226,6 +228,10 @@ public class Hilfe extends HAWView implements ActionListener{
 	        } else
 	        	i = 0;
 		}
+	    if(j > 4) {
+	    ButtonFUN.setVisible(true);
+	    }
+	    System.out.println(j);
 		panel.repaint();
 	}
 }
