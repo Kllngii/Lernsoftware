@@ -27,6 +27,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 public class SpeicherService {
 	private final Logger log = Logger.getLogger(getClass());
 	private List<String> errors = new ArrayList<>();
+	private static List<Aufgabe> geladeneAufgaben = new ArrayList<Aufgabe>();
 
 	public static class ModelWithErrors implements Serializable {
 		private static final long serialVersionUID = -63082038168922917L;
@@ -132,9 +133,12 @@ public class SpeicherService {
 	}
 
 	public static List<Aufgabe> ladeAufgaben() {
+		if(geladeneAufgaben.size() != 0)
+			return geladeneAufgaben; //Quick-return ohne Debugausgaben...
 		Logger.getLogger(SpeicherService.class).info("Lade Aufgaben!");
+		
 		// TODO Aufgaben hier hinzufügen
-		return List.of(
+		geladeneAufgaben = List.of(
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe1.text"),
 						"aufgabentext_test.png"),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe2.text")),
@@ -142,8 +146,9 @@ public class SpeicherService {
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe4.text")),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe5.text")),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe6.text")),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe8.text")),
 				new Aufgabe("Zum Bearbeiten der nächsten Aufgabensammlung klicken Sie im Reiter auf 'Aufgaben'."));
+		
+		return geladeneAufgaben;
 	}
 
 	public List<String> getErrors() {
