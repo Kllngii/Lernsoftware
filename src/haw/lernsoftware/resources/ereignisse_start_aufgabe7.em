@@ -1,21 +1,21 @@
 {"ereignisse": [
    {
-      "name": "helle Farben",
+      "name": "",
       "elementare": "1,3,5,7",
       "order": 1
    },
    {
-      "name": "Grün",
+      "name": "",
       "elementare": "3,4",
       "order": 2
    },
    {
-      "name": "nicht Gelb",
+      "name": "",
       "elementare": "1,2,3,4,7,8",
       "order": 3
    },
    {
-      "name": "Blau oder Rot",
+      "name": "",
       "elementare": "1,2,7,8",
       "order": 4
    }
