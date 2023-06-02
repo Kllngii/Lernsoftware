@@ -33,8 +33,8 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private final Logger log = Logger.getLogger(getClass());
 
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
-	private JButton nextTaskButton = new JButton("NEXT");
-	private JButton previousTaskButton = new JButton("PREVIOUS");
+	private JButton nextTaskButton = new JButton("Weiter");
+	private JButton previousTaskButton = new JButton("Zurück");
 	private JButton toLiniendiagrammButton = new JButton("Liniendiagramm");
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
 	private JTextArea loesungText = new JTextArea("if you can read this, report a bug");
@@ -74,7 +74,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		aufgabenText.setBackground(color);
 
 		// Aufgabentext erstellen und formatieren
-		loesungText.setText("hier die Lösung!");
+		loesungText.setText("Hier die Lösung eingeben!");
 		loesungText.setLineWrap(true);
 		loesungText.setPreferredSize(new Dimension(100, 100));
 		loesungText.setEditable(true);
