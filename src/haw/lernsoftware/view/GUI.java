@@ -54,6 +54,7 @@ public class GUI implements ActionListener {
 	private Tutorial tutorialView = new Tutorial(this);
 	private Tutorial2 tutorial2View = new Tutorial2(this);
 	private Tutorial3 tutorial3View = new Tutorial3(this);
+	
 
 	
 	public GUI(JFrame frame) {
@@ -176,9 +177,11 @@ public class GUI implements ActionListener {
 			this.switchToView(WindowSelect.AUFGABENTEXT);
 		} else if(e.getSource() == menuItemMittel) {
 			log.info("Öffne das Mittel-Fenster!");
+			aufgabentextView.setI(3);
 			this.switchToView(WindowSelect.AUFGABENTEXT);
 		} else if(e.getSource() == menuItemSchwer) {
 			log.info("Öffne das Schwer-Fenster!");
+			aufgabentextView.setI(5);
 			this.switchToView(WindowSelect.AUFGABENTEXT);
 		}
 		

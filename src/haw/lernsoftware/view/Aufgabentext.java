@@ -31,6 +31,14 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JProgressBar progress;
 	private int i;
 
+	public int getI() {
+		return i;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+	}
+
 	private final Logger log = Logger.getLogger(getClass());
 
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
