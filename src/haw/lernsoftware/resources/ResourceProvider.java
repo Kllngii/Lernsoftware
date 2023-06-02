@@ -49,7 +49,7 @@ public class ResourceProvider {
 		Objects.requireNonNull(path);
 		URI pathURL = ResourceProvider.class.getResource(path).toURI();
 		Path p = Paths.get(pathURL);
-		log.debug("Suche nach der Datei " + path + " unter " + p.toAbsolutePath().toString());
+		log.debug("Einlesen der Datei " + path + " unter " + p.toAbsolutePath().toString());
 		
 		return Files.readAllLines(p);
 		} catch(NullPointerException e) { //Falls reqireNonNull fehlschlägt
