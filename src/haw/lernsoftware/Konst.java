@@ -8,6 +8,7 @@ package haw.lernsoftware;
 public class Konst {
 	public static final String SO_HEISST_DAS_DING = "Lernsoftware";
 	public static final String PREFERENCES_ROOT_KEY = "/haw/lernsoftware";
+	public static final String MODEL_KEY = "model";
 	
 	public static final String ICON_PATH = "icon.png";
 	public static final String HILFE_ICON = "hilfe.png";

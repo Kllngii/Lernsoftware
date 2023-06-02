@@ -91,12 +91,12 @@ public class Ereignismenge {
 		JSONArray arr = json.getJSONArray("ereignisse");
 		List<Menge> eList = new ArrayList<>();
 		
-		arr.forEach(a -> {
-			log.debug("Lese Ereignisse ein: " + a);
-			if(a instanceof JSONObject j) {
-				eList.add(fromJSON(j.toString(), eMenge));
-			}
-		});
+//		arr.forEach(a -> {
+//			log.debug("Lese Ereignisse ein: " + a);
+//			if(a instanceof JSONObject j) {
+//				eList.add(fromJSON(j.toString(), eMenge));
+//			}
+//		});
 		
 		return eList;
 	}

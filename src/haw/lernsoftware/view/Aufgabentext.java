@@ -120,8 +120,10 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		progress.setValue(i);
 
 		if (current.hasImage()) { // aktualisiert falls bild vorhanden...
-			bild.setImage(current.getImage());
-			aufgabenBild.setIcon(bild);
+			if(bild != null) {
+				bild.setImage(current.getImage());
+				aufgabenBild.setIcon(bild);
+			}
 		} else
 			aufgabenBild.setIcon(null);
 
