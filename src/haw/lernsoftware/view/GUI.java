@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -30,7 +31,7 @@ import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
  */
 public class GUI implements ActionListener {
 	private SpeicherService sp = new SpeicherService();
-	private Model model = new Model(sp.ladeAufgaben());
+	private Model model = sp.ladeModel();
 
 	private Logger log = Logger.getLogger(getClass());
 
@@ -53,10 +54,7 @@ public class GUI implements ActionListener {
 	private Aufgabentext aufgabentextView = new Aufgabentext(model, this);
 	private Tutorial tutorialView = new Tutorial(this);
 	private Tutorial2 tutorial2View = new Tutorial2(this);
-	private Tutorial3 tutorial3View = new Tutorial3(this);
-	
 
-	
 	public GUI(JFrame frame) {
 		this.frame = frame;
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,7 +113,7 @@ public class GUI implements ActionListener {
 		menuItemLiniendiagramm.addActionListener(this);
 		menuItemAufgabentext.addActionListener(this);
 		menuItemHilfe.addActionListener(this);
-		
+
 		fensterAufgabentyp.add(menuItemTutorial);
 		fensterAufgabentyp.add(menuItemLeicht);
 		fensterAufgabentyp.add(menuItemMittel);
@@ -137,7 +135,6 @@ public class GUI implements ActionListener {
 		contentPane.add(aufgabentextView.panel, "aufgabentext");
 		contentPane.add(tutorialView.panel, "tutorial");
 		contentPane.add(tutorial2View.panel, "tutorial2");
-		contentPane.add(tutorial3View.panel, "tutorial3");
 	}
 
 	@Override
@@ -145,18 +142,11 @@ public class GUI implements ActionListener {
 		CardLayout layout = (CardLayout) frame.getContentPane().getLayout();
 		if(e.getSource() == menuItemSpeichern) {
 			log.debug("Speichere!");
-			sp.speichereInPreferences(new ModelWithErrors(model, new ArrayList<String>()));
+			SpeicherService.speichereInPreferences(Konst.MODEL_KEY, model.toJSON());
 		} else if(e.getSource() == menuItemLaden) {
 			log.debug("Lade!");
-			ModelWithErrors modelAndErrors = sp.ladeAusPreferences();
-			if(modelAndErrors == null)
-				log.debug("Es war kein Model zum Laden verfügbar.");
-			else {
-				if(modelAndErrors.getErrors().size() != 0)
-					modelAndErrors.getErrors().stream().map(str -> "Es trat ein Fehler beim Speichern/Laden auf: " + str).forEach(log::warn);
-				model = modelAndErrors.getModel();
-				layout.show(frame.getContentPane(), model.getSelectedWindow().getIdentifier());
-			}
+			model = sp.ladeModel();
+			layout.show(frame.getContentPane(), model.getSelectedWindow().getIdentifier());
 		} else if(e.getSource() == menuItemLiniendiagramm) {
 			log.info("Wechsle zum Liniendiagramm");
 			this.switchToView(WindowSelect.LINIENDIAGRAMM);
@@ -172,20 +162,7 @@ public class GUI implements ActionListener {
 		} else if(e.getSource() == menuItemTutorial) {
 			log.info("Öffne das Tutorial-Fenster!");
 			this.switchToView(WindowSelect.TUTORIAL);
-		} else if(e.getSource() == menuItemLeicht) {
-			log.info("Öffne das Leicht-Fenster!");
-			aufgabentextView.setI(0);
-			this.switchToView(WindowSelect.AUFGABENTEXT);
-		} else if(e.getSource() == menuItemMittel) {
-			log.info("Öffne das Mittel-Fenster!");
-			aufgabentextView.setI(3);
-			this.switchToView(WindowSelect.AUFGABENTEXT);
-		} else if(e.getSource() == menuItemSchwer) {
-			log.info("Öffne das Schwer-Fenster!");
-			aufgabentextView.setI(5);
-			this.switchToView(WindowSelect.AUFGABENTEXT);
-		}
-		
+		} 
 	}
 
 	public void switchToView(WindowSelect ws) {
@@ -212,10 +189,6 @@ public class GUI implements ActionListener {
 			log.debug("Wechsle zur Tutorial 2");
 			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL2.getIdentifier());
 			model.setSelectedWindow(WindowSelect.TUTORIAL2);
-		} else if (ws == WindowSelect.TUTORIAL3) {
-			log.debug("Wechsle zur Tutorial 3");
-			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL3.getIdentifier());
-			model.setSelectedWindow(WindowSelect.TUTORIAL3);
 		}
 	}
 }
