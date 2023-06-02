@@ -73,13 +73,14 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		aufgabenText.setEditable(false);
 		Color color = panel.getBackground();
 		aufgabenText.setBackground(color);
+		aufgabenText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
 
 		// Aufgabentext erstellen und formatieren
 		loesungText.setText("Hier die Lösung eingeben!");
 		loesungText.setLineWrap(true);
 		loesungText.setPreferredSize(new Dimension(100, 100));
 		loesungText.setEditable(true);
-		loesungText.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.DARK_GRAY));
+		loesungText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
 		// loesungText.setBackground(color);
 
 		// TODO was ist wenn auch noch Liniendiagramme dazukommen
