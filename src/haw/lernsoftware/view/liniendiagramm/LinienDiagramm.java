@@ -55,7 +55,8 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		this.mengen = mengen;
 		
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
-		constructDiagramm(mengen, eMenge);
+		if (eMenge.vaildate())
+			constructDiagramm(mengen, eMenge);
 	}
 	
 	@Deprecated(since = "26.05.2023")
@@ -64,7 +65,8 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
 
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
-		constructDiagramm(mengen, eMenge);
+		if (eMenge.vaildate())
+			constructDiagramm(mengen, eMenge);
 	}
 	
 	private void constructDiagramm(List<Menge> mengen, Ereignismenge e) {
@@ -197,6 +199,10 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			
 			for (int i = 0; i < numberElementare; i++) {
 				int currentWidth = (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
+				if (mengen.get(j).equals(eingetreten) && bedingtMode) {
+					g2d.setColor(Color.BLUE);
+				}
+				
 				if (linesegment(mengen.get(j), i+1)) {
 					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + currentWidth, BORDER_Y + 10 + j*linewidth + linewidth/2);
 				}
