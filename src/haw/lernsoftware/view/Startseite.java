@@ -11,6 +11,8 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -33,6 +35,7 @@ public class Startseite extends HAWView {
 	//Definition und Init.
 	Logger log = Logger.getLogger(getClass());
 	private GUI gui;
+	private JPanel view = new JPanel();
 	JLabel functionText1 = new JLabel();
 	JLabel functionText2 = new JLabel();
 	JLabel functionText3 = new JLabel();
@@ -42,7 +45,19 @@ public class Startseite extends HAWView {
 
 	public Startseite(GUI gui) {
 		this.gui = gui;				
-		panel.add(constructStartseite());
+		
+		
+		panel = new JScrollPane(view);
+		view.add(constructStartseite());			
+		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
+		//Image Background = ResourceProvider.loadImage(Konst.Background_JPEG);
+		//panel.setLayout(new BorderLayout());
+		//panel.setContentPane(new JLabel(new ImageIcon(Background)));
+		//panel.setLayout(new FlowLayout());
+		//panel.add(constructStartseite());
+		//panel.add(constructStartseite());
 
 	}
 

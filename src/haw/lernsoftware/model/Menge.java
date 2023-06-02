@@ -14,13 +14,14 @@ public class Menge {
 	private List<Elementarereignis> ereignisse;
 	private int order;
 
-	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> ereignisse, int order) {
+	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> list, int order) {
 		super();
 		this.name = name;
 		this.möglicheEreignisse = möglicheEreignisse;
-		this.ereignisse = ereignisse;
+		this.ereignisse = list;
 		this.order = order;
 	}
+
 
 	public Menge vereinigt(Menge m) {
 		List<Elementarereignis> vereinigteMenge = new ArrayList<>(ereignisse);
