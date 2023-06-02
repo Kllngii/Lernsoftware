@@ -54,6 +54,7 @@ public class GUI implements ActionListener {
 	private Aufgabentext aufgabentextView = new Aufgabentext(model, this);
 	private Tutorial tutorialView = new Tutorial(this);
 	private Tutorial2 tutorial2View = new Tutorial2(this);
+	private Tutorial3 tutorial3View = new Tutorial3(this);
 
 	public GUI(JFrame frame) {
 		this.frame = frame;
@@ -135,6 +136,7 @@ public class GUI implements ActionListener {
 		contentPane.add(aufgabentextView.panel, "aufgabentext");
 		contentPane.add(tutorialView.panel, "tutorial");
 		contentPane.add(tutorial2View.panel, "tutorial2");
+		contentPane.add(tutorial3View.panel, "tutorial3");
 	}
 
 	@Override
@@ -189,6 +191,10 @@ public class GUI implements ActionListener {
 			log.debug("Wechsle zur Tutorial 2");
 			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL2.getIdentifier());
 			model.setSelectedWindow(WindowSelect.TUTORIAL2);
+		} else if (ws == WindowSelect.TUTORIAL3) {
+			log.debug("Wechsle zur Tutorial 2");
+			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL3.getIdentifier());
+			model.setSelectedWindow(WindowSelect.TUTORIAL3);
 		}
 	}
 }
