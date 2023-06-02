@@ -18,6 +18,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.plaf.DimensionUIResource;
+import java.awt.FlowLayout;
+
 
 import org.apache.log4j.Logger;
 
@@ -40,6 +42,7 @@ public class Tutorial2 extends HAWView implements ActionListener{
 	JLabel ueberschrift = new JLabel("Tutorial 2");
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
+	JButton tutorialNext = new JButton("nächstes Tutorial");
 	JButton tutorialZurück = new JButton("zurück");
 	
 	// Skalierung für das ImageIcon
@@ -61,8 +64,12 @@ public class Tutorial2 extends HAWView implements ActionListener{
 		//hallo
 		// Überschrift Textgröße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
-		
+		JPanel buttonAnordnung = new JPanel();
+		buttonAnordnung.setLayout(new FlowLayout());
+		buttonAnordnung.add(tutorialZurück);
+		buttonAnordnung.add(tutorialNext);
 		//Button konfigurieren
+		tutorialNext.addActionListener(this);
 		tutorialZurück.addActionListener(this);
 
 		
@@ -72,7 +79,7 @@ public class Tutorial2 extends HAWView implements ActionListener{
 				.rows("p, p, p, p, p, p, p, p, p, p, p, p, p, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 4) //
-				.add(tutorialZurück).xyw(5, 1, 1)
+				.add(buttonAnordnung).xyw(5, 1, 1) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_ueberschrift.text")).xyw(1, 2, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_absatz1.text")).xyw(1, 3, 5) //
 				.add(new JLabel(" ")).xy(1, 4) //
@@ -109,7 +116,10 @@ public class Tutorial2 extends HAWView implements ActionListener{
 		if(e.getSource() == tutorialZurück) {
 			log.debug("Wechsle zum Tutorial 1");
 			gui.switchToView(WindowSelect.TUTORIAL);
-		}		
+		} else if(e.getSource() == tutorialNext) {
+			log.debug("Wechsle zum Tutorial 3");
+			gui.switchToView(WindowSelect.TUTORIAL3);
+		}
 	}
 
 }
