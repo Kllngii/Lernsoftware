@@ -47,34 +47,7 @@ public class Tutorial3 extends HAWView implements ActionListener{
 	JLabel ueberschrift = new JLabel("Tutorial 3");
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
-	JButton tutorialZurueck = new JButton("zurück") {
-		@Override
-		protected void paintComponent(Graphics g) {
-			Graphics2D g2 = (Graphics2D) g.create();
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-            if (getModel().isArmed()) {
-                g2.setColor(Color.DARK_GRAY);
-            } else {
-                g2.setColor(Color.BLACK);
-            }
-
-            int arc = 20; // Radius der abgerundeten Ecken
-            g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, arc, arc);
-
-            super.paintComponent(g2);
-            g2.dispose();
-		}
-
-		@Override
-		protected void paintBorder(Graphics g) {
-			// Kein Rahmen zeichnen
-		}
-		@Override
-	    public boolean isOpaque() {
-	        return false;
-	    }
-	};
+	JButton tutorialZurueck = new CircleButton("zurück");
 	// Skalierung f�r das ImageIcon
 	int x = 500; // Gew�nschte Breite des Bildes
 	int y = 400; // Gew�nschte H�he des Bildes

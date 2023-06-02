@@ -1,5 +1,6 @@
 package haw.lernsoftware.view;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -34,7 +35,7 @@ public class Tutorial extends HAWView implements ActionListener {
 	JLabel ueberschrift = new JLabel("Tutorial 1");
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
-	JButton tutorialNext = new JButton("Nächstes Tutorial");
+	JButton tutorialNext = new CircleButton("Nächstes Tutorial");
 	
 	// Skalierung für das ImageIcon
     int x1 = 700; // Gewünschte Breite des Bildes
@@ -64,6 +65,9 @@ public class Tutorial extends HAWView implements ActionListener {
 		buttonAnordnung.add(tutorialNext);
 		//Button konfigurieren
 		tutorialNext.addActionListener(this);
+		tutorialNext.setForeground(Color.WHITE);
+		tutorialNext.setContentAreaFilled(false);
+		tutorialNext.setBorderPainted(false);
 		
 		//FormBuilder erstellen 
 		JComponent inhalt = FormBuilder.create()

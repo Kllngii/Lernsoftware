@@ -42,8 +42,8 @@ public class Tutorial2 extends HAWView implements ActionListener{
 	JLabel ueberschrift = new JLabel("Tutorial 2");
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
-	JButton tutorialNext = new JButton("nächstes Tutorial");
-	JButton tutorialZurück = new JButton("zurück");
+	JButton tutorialNext = new CircleButton("nächstes Tutorial");
+	JButton tutorialZurück = new CircleButton("zurück");
 	
 	// Skalierung für das ImageIcon
     int x = 500; // Gewünschte Breite des Bildes
@@ -70,7 +70,13 @@ public class Tutorial2 extends HAWView implements ActionListener{
 		buttonAnordnung.add(tutorialNext);
 		//Button konfigurieren
 		tutorialNext.addActionListener(this);
+		tutorialNext.setForeground(Color.WHITE);
+		tutorialNext.setContentAreaFilled(false);
+		tutorialNext.setBorderPainted(false);
 		tutorialZurück.addActionListener(this);
+		tutorialZurück.setForeground(Color.WHITE);
+		tutorialZurück.setContentAreaFilled(false);
+		tutorialZurück.setBorderPainted(false);
 
 		
 		//FormBuilder erstellen 
