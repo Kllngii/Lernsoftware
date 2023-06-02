@@ -269,8 +269,9 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		
 		if (e.getButton() == e.BUTTON1) {
 			int length = mouseInteractions.size();
+			
+			//Zwei aufeinanderfolgende Klicks in unter 0,5 Sekunden -> Auswertung starten
 			if (length >= 2 && (mouseInteractions.get(length-1).timeStamp() -  mouseInteractions.get(length-2).timeStamp()) < 500) {
-				//Zwei aufeinanderfolgende Klicks in unter 0,5 Sekunden -> Auswertung starten
 				Koordinate current = mouseInteractions.get(length-1).koord();
 				Koordinate last = mouseInteractions.get(length-2).koord();
 
@@ -330,7 +331,15 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				}
 
 				panel.repaint();
+				
+			// einfacher Linksklick
+			} else {
+				Koordinate current = mouseInteractions.get(length-1).koord();
+				if (current.spalte() == -1 && current.zeile() < mengen.size()) {
+					log.debug("EREIGNIS UMBENENNEN");
+				}
 			}
+			
 		} else if (e.getButton() == e.BUTTON3) {
 			int length = mouseInteractions.size();
 			Koordinate current = mouseInteractions.get(length-1).koord();
