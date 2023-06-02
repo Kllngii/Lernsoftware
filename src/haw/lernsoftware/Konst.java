@@ -28,6 +28,7 @@ public class Konst {
 	public static final String EINFÜHRUNG_BILD5 = "Einfuehrung_Bild5.png";
 	public static final String FOLGEN_EINFÜHRUNG_BILD_1 = "Folgen_Einfuehrung_Bild_1.jpeg";
 	public static final String EINFÜHRUNG_BEDINGTE_W = "Einfuehrung_bedingte_W.png";
+	public static final String Background_JPEG = "background.jpeg";
 	
 	public static final String PROPERTIES_STARTSEITE = "startseite.properties";
 	public static final String PROPERTIES_HILFE = "hilfe.properties";
