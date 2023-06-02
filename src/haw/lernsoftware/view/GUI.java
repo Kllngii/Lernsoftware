@@ -174,6 +174,7 @@ public class GUI implements ActionListener {
 			this.switchToView(WindowSelect.TUTORIAL);
 		} else if(e.getSource() == menuItemLeicht) {
 			log.info("Öffne das Leicht-Fenster!");
+			aufgabentextView.setI(0);
 			this.switchToView(WindowSelect.AUFGABENTEXT);
 		} else if(e.getSource() == menuItemMittel) {
 			log.info("Öffne das Mittel-Fenster!");

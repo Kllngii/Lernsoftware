@@ -37,6 +37,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 	public void setI(int i) {
 		this.i = i;
+		refreshAufgabenview();
 	}
 
 	private final Logger log = Logger.getLogger(getClass());
@@ -123,6 +124,16 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	}
 
 	private void refreshAufgabenview() {
+		if (i == 0) {
+			previousTaskButton.setEnabled(false);
+		} else if (i == aufgaben.size() - 1) {
+			titleTaskLabel.setText("Glückwunsch!");
+			nextTaskButton.setEnabled(false);
+		} else {
+			previousTaskButton.setEnabled(true);
+			nextTaskButton.setEnabled(true);
+		}
+		
 		model.setCurrentAufgabe(aufgaben.get(i));
 
 		Aufgabe current = model.getCurrentAufgabe();
@@ -162,14 +173,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		}
 		refreshAufgabenview();
 
-		if (i == 0) {
-			previousTaskButton.setEnabled(false);
-		} else if (i == aufgaben.size() - 1) {
-			titleTaskLabel.setText("Glückwunsch!");
-			nextTaskButton.setEnabled(false);
-		} else {
-			previousTaskButton.setEnabled(true);
-			nextTaskButton.setEnabled(true);
-		}
+		
 	}
 }
