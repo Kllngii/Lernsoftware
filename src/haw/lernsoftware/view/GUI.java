@@ -55,6 +55,8 @@ public class GUI implements ActionListener {
 	private Tutorial2 tutorial2View = new Tutorial2(this);
 	private Tutorial3 tutorial3View = new Tutorial3(this);
 	
+
+	
 	public GUI(JFrame frame) {
 		this.frame = frame;
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -170,7 +172,20 @@ public class GUI implements ActionListener {
 		} else if(e.getSource() == menuItemTutorial) {
 			log.info("Öffne das Tutorial-Fenster!");
 			this.switchToView(WindowSelect.TUTORIAL);
-		} 
+		} else if(e.getSource() == menuItemLeicht) {
+			log.info("Öffne das Leicht-Fenster!");
+			aufgabentextView.setI(0);
+			this.switchToView(WindowSelect.AUFGABENTEXT);
+		} else if(e.getSource() == menuItemMittel) {
+			log.info("Öffne das Mittel-Fenster!");
+			aufgabentextView.setI(3);
+			this.switchToView(WindowSelect.AUFGABENTEXT);
+		} else if(e.getSource() == menuItemSchwer) {
+			log.info("Öffne das Schwer-Fenster!");
+			aufgabentextView.setI(5);
+			this.switchToView(WindowSelect.AUFGABENTEXT);
+		}
+		
 	}
 
 	public void switchToView(WindowSelect ws) {

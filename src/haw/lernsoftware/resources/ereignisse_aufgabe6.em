@@ -1,37 +1,32 @@
 {"ereignisse": [
    {
-      "name": "A",
-      "elementare": "1,2,3,5,6",
+      "name": "P(A)",
+      "elementare": "1,3,5",
       "order": 1
    },
    {
-      "name": "B",
-      "elementare": "3,4,5,6",
+      "name": "P(B)",
+      "elementare": "1,2,3,4",
       "order": 2
    },
    {
-      "name": "C",
-      "elementare": "1,2,4,5",
+      "name": "P(AnB)",
+      "elementare": "1,3",
       "order": 3
    },
    {
-      "name": "D",
-      "elementare": "2,4,6",
+      "name": "P(AuB)",
+      "elementare": "1,2,3,4,5",
       "order": 4
    },
    {
-      "name": "E",
-      "elementare": "3",
+      "name": "P(A|B)",
+      "elementare": "1,3",
       "order": 5
    },
    {
-      "name": "F",
-      "elementare": "1,2,3,4,5,6",
+      "name": "P(B|A)",
+      "elementare": "1,3",
       "order": 6
-   },
-   {
-      "name": "G",
-      "elementare": "",
-      "order": 7
    }
 ]}

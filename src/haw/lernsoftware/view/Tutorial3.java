@@ -2,6 +2,7 @@ package haw.lernsoftware.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +38,7 @@ public class Tutorial3 extends HAWView implements ActionListener{
 	Logger log = Logger.getLogger(getClass());
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
-	JLabel ueberschrift = new JLabel("Tutorial 2");
+	JLabel ueberschrift = new JLabel("Tutorial 3");
 	JLabel text1 = new JLabel();
 	JLabel bildLabel1 = new JLabel();
 	JButton tutorialZurück = new JButton("zurück");
@@ -62,31 +63,39 @@ public class Tutorial3 extends HAWView implements ActionListener{
 		// Überschrift Textgröße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 		
+		JPanel buttonAnordnung = new JPanel();
+		buttonAnordnung.setLayout(new FlowLayout());
+		buttonAnordnung.add(tutorialZurück);
+		//buttonAnordnung.add(tutorialNext);
 		//Button konfigurieren
+		//tutorialNext.addActionListener(this);
 		tutorialZurück.addActionListener(this);
 
 		
 		//FormBuilder erstellen 
 		JComponent inhalt = FormBuilder.create()
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu") //
-				.rows("p, p, p, p, p, p, p, p, p, p, p, p, p, p") //
+				.rows("p, p, p, p, p, p, p, p, p, p, p, p, p, p,p,p,p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 4) //
-				.add(tutorialZurück).xyw(5, 1, 1)
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_ueberschrift.text")).xyw(1, 2, 5) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_absatz1.text")).xyw(1, 3, 5) //
+				.add(buttonAnordnung).xyw(5, 1, 1)
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_ueberschrift.text")).xyw(1, 2, 5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_absatz1.text")).xyw(1, 3, 5) //
 				.add(new JLabel(" ")).xy(1, 4) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_zwischenUeberschrift.text")).xyw(1,5,2) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_absatz2.text")).xyw(1, 6, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.FOLGEN_EINFÜHRUNG_BILD_1)), x, y) )).xyw(3, 6, 3) //
-				.add(new JLabel(" ")).xy(1, 7) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_absatz3.text")).xyw(1, 8, 5) //
-				.add(new JLabel(" ")).xy(1, 9) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_absatz4.text")).xyw(1, 10, 5) //
-				.add(new JLabel(" ")).xy(1, 11) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_absatz5.text")).xyw(1, 12, 5) //
-				.add(new JLabel(" ")).xy(1, 13) //
-				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_absatz6.text")).xyw(1, 14, 5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_absatz2.text")).xyw(1,5,2) //
+				.add(new JLabel(" ")).xy(1, 6) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_absatz3.text")).xyw(1, 7, 2) //
+				.add(new JLabel(" ")).xy(1, 8) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_absatz4.text")).xyw(1, 9, 5) //
+				.add(new JLabel(" ")).xy(1, 10) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_absatz5.text")).xyw(1, 11, 5) //
+				.add(new JLabel(" ")).xy(1, 12) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_zwischenUeberschrift.text")).xyw(1, 13, 5) //
+				.add(new JLabel(" ")).xy(1, 14) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_absatz.text")).xyw(1, 13, 5) //
+				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_absatz6.text")).xyw(1, 14, 5) //
+				.add(new JLabel(" ")).xy(1, 15) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.FOLGEN_EINFÜHRUNG_BILD_1)), x, y) )).xyw(1, 16, 5) //
 				.build(); //
 		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einfügen und zurückgeben
 		return FormBuilder.create()
@@ -107,8 +116,8 @@ public class Tutorial3 extends HAWView implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == tutorialZurück) {
-			log.debug("Wechsle zum Tutorial 1");
-			gui.switchToView(WindowSelect.TUTORIAL);
+			log.debug("Wechsle zum Tutorial 2");
+			gui.switchToView(WindowSelect.TUTORIAL2);
 		}		
 	}
 
