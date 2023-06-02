@@ -79,6 +79,7 @@ public class SpeicherService {
 	 * @return
 	 */
 	public ModelWithErrors ladeAusPreferences() {
+		log.info("Lade aus den Prefs!");
 		ModelWithErrors fromPrefs = null;
 		byte[] bytes = getRoot().getByteArray(MODEL_KEY, null);
 		if (bytes != null) {

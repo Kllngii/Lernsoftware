@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import haw.lernsoftware.model.SpeicherService.ModelWithErrors;
 import haw.lernsoftware.resources.ResourceProvider;
 
 /**
@@ -68,4 +69,7 @@ public class Model implements Serializable {
 		return eMenge;
 	}
 	
+	public static Model stripErrors(ModelWithErrors mwe) {
+		return mwe.getModel();
+	}
 }
