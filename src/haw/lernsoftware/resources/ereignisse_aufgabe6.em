@@ -1,32 +1,32 @@
 {"ereignisse": [
    {
-      "name": "P(A)",
+      "name": "A",
       "elementare": "1,3,5",
       "order": 1
    },
    {
-      "name": "P(B)",
+      "name": "B",
       "elementare": "1,2,3,4",
       "order": 2
    },
    {
-      "name": "P(AnB)",
-      "elementare": "1,3",
+      "name": "AnB",
+      "elementare": "",
       "order": 3
    },
    {
-      "name": "P(AuB)",
-      "elementare": "1,2,3,4,5",
+      "name": "AuB",
+      "elementare": "",
       "order": 4
    },
    {
-      "name": "P(A|B)",
-      "elementare": "1,3",
+      "name": "A|B",
+      "elementare": "",
       "order": 5
    },
    {
-      "name": "P(B|A)",
-      "elementare": "1,3",
+      "name": "B|A",
+      "elementare": "",
       "order": 6
    }
 ]}
