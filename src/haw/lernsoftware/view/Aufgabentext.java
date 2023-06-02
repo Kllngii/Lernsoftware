@@ -12,6 +12,8 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import org.apache.log4j.Logger;
@@ -50,7 +52,14 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		this.gui = gui;
 		aufgaben = model.getAufgaben();
 
-		panel.add(buildContentText());
+		JPanel view = new JPanel();
+		panel = new JScrollPane(view);
+		view.add(buildContentText());
+		JScrollBar scroll = new JScrollBar();
+		scroll.setUnitIncrement(16);
+		((JScrollPane) panel).setVerticalScrollBar(scroll);
+
+		// panel.add(buildContentText());
 
 	}
 
