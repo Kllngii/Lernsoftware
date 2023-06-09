@@ -18,6 +18,7 @@ import java.util.List;
 import javax.swing.JTextField;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 
@@ -38,6 +39,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private int numberEreignisse;
 	private int numberElementare;
 	private boolean bedingtMode = false;
+	private boolean enableNeueEreignisse = true;
 	
 	private Logger log = Logger.getLogger(getClass());
 	private List<Menge> mengen;
@@ -156,16 +158,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		int linewidth = 40;
 		int offsetlr = offset(g2d);
 		int currentLeftBorder = BORDER_X + offsetlr;
-		List<JTextField> nameTextFields = new ArrayList<JTextField>();
-		List<JTextField> probTextFields = new ArrayList<JTextField>();
-
-        for (int i = 0; i < numberEreignisse; i++)
-        {
-            JTextField t1 = new JTextField(10);
-            JTextField t2 = new JTextField(20);
-            probTextFields.add(t1);
-            probTextFields.add(t2);
-        }
 		
 		// Rahmen
 		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + 10);
@@ -189,7 +181,10 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			}
 			
 			g2d.setColor(Color.BLACK);
-			g2d.drawString(eMenge.getEreignisse().get(i).getName(), currentLeftBorder + currentWidth / 2, BORDER_Y);
+			g2d.drawString(eMenge.getEreignisse().get(i).getName(), currentLeftBorder + currentWidth / 2  - g2d.getFontMetrics().stringWidth(eMenge.getEreignisse().get(i).getName()) / 2, BORDER_Y);
+			g2d.setColor(Color.GRAY);
+			g2d.drawString(eMenge.getEreignisse().get(i).getProbString(), currentLeftBorder + currentWidth / 2  - g2d.getFontMetrics().stringWidth(eMenge.getEreignisse().get(i).getProbString()) / 2, BORDER_Y + linewidth * numberEreignisse + 30);
+			g2d.setColor(Color.BLACK);
 			
 			if(selectedColumn == i) {
 				g2d.setColor(new Color(0.85f, 1f, 1f, 0.8f));
@@ -306,10 +301,13 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 					mouseInteractions.clear();
 				}
 
-				else if (current.zeile() >= mengen.size() && current.zeile() == last.zeile() && current.spalte() == last.spalte()) {
+				else if (current.zeile() >= mengen.size() && current.zeile() == last.zeile() && current.spalte() == last.spalte() && enableNeueEreignisse) {
 					log.debug("NEUES EREIGNIS HINZUFÜGEN");
-					mengen.add(new Menge("Neues Ereignis", eMenge, new ArrayList<Elementarereignis>(), mengen.size() + 1));
-					rebase(mengen, eMenge);
+					String m = JOptionPane.showInputDialog("Name des neuen Ereignisses:");
+					if (m != null) {
+						mengen.add(new Menge(m, eMenge, new ArrayList<Elementarereignis>(), mengen.size() + 1));
+						rebase(mengen, eMenge);
+					}
 					mouseInteractions.clear();
 				}
 
@@ -331,15 +329,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 					}
 					mouseInteractions.clear();
 				}
-
 				panel.repaint();
-				
-			// einfacher Linksklick
-			} else {
-				Koordinate current = mouseInteractions.get(length-1).koord();
-				if (current.spalte() == -1 && current.zeile() < mengen.size()) {
-					log.debug("EREIGNIS UMBENENNEN");
-				}
 			}
 			
 		} else if (e.getButton() == e.BUTTON3) {
