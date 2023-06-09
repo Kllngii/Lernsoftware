@@ -5,8 +5,6 @@ import java.awt.Container;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Properties;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -19,7 +17,6 @@ import org.apache.log4j.Logger;
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.Model;
 import haw.lernsoftware.model.SpeicherService;
-import haw.lernsoftware.model.SpeicherService.ModelWithErrors;
 import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
