@@ -6,7 +6,7 @@
    },
    {
       "name": "G",
-      "elementare": "3",
+      "elementare": "",
       "order": 2
    },
    {
