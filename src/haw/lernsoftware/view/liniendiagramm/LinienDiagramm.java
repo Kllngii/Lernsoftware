@@ -136,6 +136,9 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			if (Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName())) > maxlength) {
 				maxlength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
 			}
+			if (Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getProbability())) > maxlength) {
+				maxlength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
+			}
 		}
 		return maxlength + 30;
 	}
