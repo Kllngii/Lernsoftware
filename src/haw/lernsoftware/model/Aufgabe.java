@@ -23,6 +23,7 @@ public class Aufgabe implements Serializable {
 	private boolean hasLiniendiagramm = false;
 	private Ereignismenge eMenge;
 	private List<Menge> ereignisse;
+	private List<Menge> startEreignisse;
 	
 	public Aufgabe(String text) {
 		this.text = text;
@@ -33,20 +34,22 @@ public class Aufgabe implements Serializable {
 		
 		hasImage = true;
 	}
-	public Aufgabe(String text, String pathToLiniendiagrammElementare, String pathToLiniendiagrammEreignisse) {
+	public Aufgabe(String text, String pathToLiniendiagrammElementare, String pathToEreignisse, String pathToStartEreignisse) {
 		this.text = text;
 		this.eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString(pathToLiniendiagrammElementare));
-		this.ereignisse = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString(pathToLiniendiagrammEreignisse), eMenge);
+		this.ereignisse = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString(pathToEreignisse), eMenge);
+		this.startEreignisse = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString(pathToStartEreignisse), eMenge);
 		
 		hasImage = false;
 		hasLiniendiagramm = true;
 	}
 	
-	public Aufgabe(String text, String pathToImage, String pathToLiniendiagrammElementare, String pathToLiniendiagrammEreignisse) {
+	public Aufgabe(String text, String pathToImage, String pathToLiniendiagrammElementare, String pathToEreignisse, String pathToStartEreignisse) {
 		this.text = text;
 		this.img = ResourceProvider.loadImage(pathToImage);
 		this.eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString(pathToLiniendiagrammElementare));
-		this.ereignisse = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString(pathToLiniendiagrammEreignisse), eMenge);
+		this.ereignisse = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString(pathToEreignisse), eMenge);
+		this.startEreignisse = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString(pathToStartEreignisse), eMenge);
 		
 		hasImage = true;
 		hasLiniendiagramm = true;

@@ -1,31 +1,31 @@
 {"ereignisse": [
-	{
-      "name": "R",
-      "elementare": "1,2",
+   {
+      "name": "A",
+      "elementare": "1,3,5",
       "order": 1
    },
    {
-      "name": "G",
-      "elementare": "",
+      "name": "B",
+      "elementare": "1,2,3,4",
       "order": 2
    },
    {
-      "name": "R,G",
+      "name": "AnB",
       "elementare": "",
       "order": 3
    },
    {
-      "name": "R,R",
+      "name": "AuB",
       "elementare": "",
       "order": 4
    },
    {
-      "name": "G,R",
+      "name": "A|B",
       "elementare": "",
       "order": 5
    },
    {
-      "name": "G,G",
+      "name": "B|A",
       "elementare": "",
       "order": 6
    }

@@ -140,15 +140,15 @@ public class SpeicherService {
 		// TODO Aufgaben hier hinzufügen
 		geladeneAufgaben = List.of(
 				//new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe1.text"), "aufgabentext_test.png"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe1.text"), "elementare_aufgabe1.em", "ereignisse_aufgabe1.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe2.text"), "elementare_aufgabe2.em", "ereignisse_aufgabe2.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe3.text"), "elementare_aufgabe3.em", "ereignisse_aufgabe3.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe1.text"), "elementare_aufgabe1.em", "ereignisse_aufgabe1.em", "ereignisse_start_aufgabe1.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe2.text"), "elementare_aufgabe2.em", "ereignisse_aufgabe2.em", "ereignisse_start_aufgabe2.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe3.text"), "elementare_aufgabe3.em", "ereignisse_aufgabe3.em", "ereignisse_start_aufgabe3.em"),
 				//new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe2.text"), "elementare_aufgabe4.em", "ereignisse_aufgabe4.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe4.text"), "elementare_aufgabe4.em", "ereignisse_aufgabe4.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe5.text"), "elementare_aufgabe5.em", "ereignisse_aufgabe5.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe6.text"), "elementare_aufgabe6.em", "ereignisse_aufgabe6.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe7.text"), "elementare_aufgabe7.em", "ereignisse_aufgabe7.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe8.text"), "elementare_aufgabe8.em", "ereignisse_aufgabe8.em"));
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe4.text"), "elementare_aufgabe4.em", "ereignisse_aufgabe4.em", "ereignisse_start_aufgabe4.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe5.text"), "elementare_aufgabe5.em", "ereignisse_aufgabe5.em", "ereignisse_start_aufgabe5.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe6.text"), "elementare_aufgabe6.em", "ereignisse_aufgabe6.em", "ereignisse_start_aufgabe6.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe7.text"), "elementare_aufgabe7.em", "ereignisse_aufgabe7.em", "ereignisse_start_aufgabe7.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe8.text"), "elementare_aufgabe8.em", "ereignisse_aufgabe8.em", "ereignisse_start_aufgabe8.em"));
 				//new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe9.text")),
 				//new Aufgabe("Zum Bearbeiten der nächsten Aufgabensammlung klicken Sie im Reiter auf 'Aufgaben'."));
 		
