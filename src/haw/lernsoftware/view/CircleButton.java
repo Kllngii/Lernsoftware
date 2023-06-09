@@ -17,6 +17,9 @@ public class CircleButton extends JButton {
         setOpaque(false);
         setContentAreaFilled(false);
         setBorderPainted(false);
+        setForeground(Color.WHITE);
+		setContentAreaFilled(false);
+		setBorderPainted(false);
     }
 
     @Override
