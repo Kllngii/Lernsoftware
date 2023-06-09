@@ -162,7 +162,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			aufgabenBild.setIcon(null);
 
 		if (current.hasLiniendiagramm()) {
-			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse());
+			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse(), current.getStartEreignisse());
 			linienpanel = liniendiagramm.panel;
 		} else
 			linienpanel = new JPanel();
