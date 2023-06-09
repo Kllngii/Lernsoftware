@@ -32,6 +32,7 @@ public class Tutorial extends HAWView implements ActionListener {
 	private GUI gui;
 	private JLabel ueberschrift = new JLabel("Tutorial 1");
 	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
+	private JButton tutorialBack = new CircleButton("zurück");
 	
 
 	// Skalierung für das ImageIcon
@@ -60,7 +61,10 @@ public class Tutorial extends HAWView implements ActionListener {
 
 		JPanel buttonAnordnung = new JPanel();
 		buttonAnordnung.setLayout(new FlowLayout());
+		buttonAnordnung.add(tutorialBack);
+		tutorialBack.getModel().setEnabled(false);
 		buttonAnordnung.add(tutorialNext);
+		
 		
 		//Button konfigurieren
 		tutorialNext.addActionListener(this);
