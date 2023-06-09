@@ -44,13 +44,13 @@ public class Tutorial3 extends HAWView implements ActionListener{
 	Logger log = Logger.getLogger(getClass());
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
-	JLabel ueberschrift = new JLabel("Tutorial 3");
-	JLabel text1 = new JLabel();
-	JLabel bildLabel1 = new JLabel();
-	JButton tutorialZurueck = new CircleButton("zurück");
-	// Skalierung f�r das ImageIcon
-	int x = 500; // Gew�nschte Breite des Bildes
-	int y = 400; // Gew�nschte H�he des Bildes
+	private JLabel ueberschrift = new JLabel("Tutorial 3");
+	private JLabel text1 = new JLabel();
+	private JLabel bildLabel1 = new JLabel();
+	private JButton tutorialZurueck = new CircleButton("zurück");
+	// Skalierung für das ImageIcon
+	int x = 500; // Gewuenschte Breite des Bildes
+	int y = 400; // Gewuenschte H�he des Bildes
 
 	//Erstellen eines Fensters mit ScrollBar
 	public Tutorial3(GUI gui) {
@@ -65,19 +65,14 @@ public class Tutorial3 extends HAWView implements ActionListener{
 	}
 
 	private JComponent constructStartseite() {
-		//hallo
-		// �berschrift Textgr��e �ndern
+		// �berschrift Textgroeße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 
 		JPanel buttonAnordnung = new JPanel();
 		buttonAnordnung.setLayout(new FlowLayout());
 		buttonAnordnung.add(tutorialZurueck);
 
-		//buttonAnordnung.add(tutorialNext);
-		//Button konfigurieren
-		//tutorialNext.addActionListener(this);
 		tutorialZurueck.addActionListener(this);
-		//tutorialZurueck.setPreferredSize(new Dimension(150, 50));
 		tutorialZurueck.setForeground(Color.WHITE);
 		tutorialZurueck.setContentAreaFilled(false);
 		tutorialZurueck.setBorderPainted(false);
@@ -116,7 +111,7 @@ public class Tutorial3 extends HAWView implements ActionListener{
 		
 	}
 
-	//Bildgr��e anpassen
+	//Bildgröße anpassen
 	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
 		Image image = img.getImage();
 		Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);

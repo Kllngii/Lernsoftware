@@ -32,10 +32,10 @@ public class Tutorial extends HAWView implements ActionListener {
 	Logger log = Logger.getLogger(getClass());
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
-	JLabel ueberschrift = new JLabel("Tutorial 1");
-	JLabel text1 = new JLabel();
-	JLabel bildLabel1 = new JLabel();
-	JButton tutorialNext = new CircleButton("Nächstes Tutorial");
+	private JLabel ueberschrift = new JLabel("Tutorial 1");
+	private JLabel text1 = new JLabel();
+	private JLabel bildLabel1 = new JLabel();
+	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
 	
 	// Skalierung für das ImageIcon
     int x1 = 700; // Gewünschte Breite des Bildes
@@ -65,9 +65,9 @@ public class Tutorial extends HAWView implements ActionListener {
 		buttonAnordnung.add(tutorialNext);
 		//Button konfigurieren
 		tutorialNext.addActionListener(this);
-		tutorialNext.setForeground(Color.WHITE);
-		tutorialNext.setContentAreaFilled(false);
-		tutorialNext.setBorderPainted(false);
+		//tutorialNext.setForeground(Color.WHITE);
+		//tutorialNext.setContentAreaFilled(false);
+		//tutorialNext.setBorderPainted(false);
 		
 		//FormBuilder erstellen 
 		JComponent inhalt = FormBuilder.create()

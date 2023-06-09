@@ -45,9 +45,9 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private final Logger log = Logger.getLogger(getClass());
 
 	private JLabel titleTaskLabel = new JLabel("Aufgabe X:");
-	private JButton nextTaskButton = new JButton("Weiter");
-	private JButton previousTaskButton = new JButton("Zurück");
-	private JButton toLiniendiagrammButton = new JButton("Liniendiagramm");
+	private JButton nextTaskButton = new CircleButton("Weiter");
+	private JButton previousTaskButton = new CircleButton("Zurück");
+	private JButton toLiniendiagrammButton = new CircleButton("Liniendiagramm");
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
 	private JTextArea loesungText = new JTextArea("if you can read this, report a bug");
 	private JComponent linienpanel;
