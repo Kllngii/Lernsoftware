@@ -44,10 +44,10 @@ public class Tutorial3 extends HAWView implements ActionListener{
 	Logger log = Logger.getLogger(getClass());
 	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
-	JLabel ueberschrift = new JLabel("Tutorial 3");
-	JLabel text1 = new JLabel();
-	JLabel bildLabel1 = new JLabel();
-	JButton tutorialZurueck = new CircleButton("zurück");
+	private JLabel ueberschrift = new JLabel("Tutorial 3");
+	private JLabel text1 = new JLabel();
+	private JLabel bildLabel1 = new JLabel();
+	private JButton tutorialZurueck = new CircleButton("zurück");
 	// Skalierung für das ImageIcon
 	int x = 500; // Gewuenschte Breite des Bildes
 	int y = 400; // Gewuenschte H�he des Bildes
