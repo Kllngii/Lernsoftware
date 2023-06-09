@@ -1,6 +1,5 @@
 package haw.lernsoftware.view;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
