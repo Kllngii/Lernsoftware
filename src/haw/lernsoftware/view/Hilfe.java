@@ -69,9 +69,10 @@ public class Hilfe extends HAWView implements ActionListener{
 		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
+		/* Work in Progress 
 		Image Background = ResourceProvider.loadImage(Konst.Background_JPEG);
 		//fenster.setContentPane(new JLabel(new ImageIcon(Background)));
-		
+		*/
 		
 		
 		// Text für die Erstausgabe formatieren
