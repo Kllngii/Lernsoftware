@@ -52,7 +52,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton ButtonLadenSpeichern = new JButton("Laden/Speichern");
 	private JButton ButtonAufgaben = new JButton("Aufgaben");	
 	private JButton ButtonLiniengraph = new JButton("Liniengraph");
-	private JButton ButtonWeitereHilfe = new JButton("Weitere Hilfe");
+	private JButton ButtonWeitereHilfe = new CircleButton("Weitere Hilfe");
 	private JButton ButtonFUN = new JButton();
 	private JLabel Ueberschrift = new JLabel("Hilfe");
 	private JTextArea text = new JTextArea(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"),20,50);
