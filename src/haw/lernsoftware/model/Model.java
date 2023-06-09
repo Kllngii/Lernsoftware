@@ -28,6 +28,7 @@ public class Model implements Serializable {
 	private int currentAufgabeID = 0;
 
 	private List<Menge> mengen;
+	private List<Menge> startMengen;
 	private Ereignismenge eMenge;
 
 	public Model(List<Aufgabe> aufgaben) {
@@ -62,11 +63,16 @@ public class Model implements Serializable {
 		this.currentAufgabe = currentAufgabe;
 		currentAufgabeID = aufgaben.indexOf(currentAufgabe);
 
-		String ereignisStr = ResourceProvider.getFileContentAsString("elementare_aufgabe" + (aufgaben.indexOf(currentAufgabe) + 1) + ".em");
-		String mengenStr = ResourceProvider.getFileContentAsString("ereignisse_aufgabe" + (aufgaben.indexOf(currentAufgabe) + 1) + ".em");
-
-		this.eMenge =  Ereignismenge.elementareFromJSON(ereignisStr);
-		this.mengen = Ereignismenge.ereignisseFromJSON(mengenStr, eMenge);
+//		String ereignisStr = ResourceProvider.getFileContentAsString("elementare_aufgabe" + (aufgaben.indexOf(currentAufgabe) + 1) + ".em");
+//		String mengenStr = ResourceProvider.getFileContentAsString("ereignisse_aufgabe" + (aufgaben.indexOf(currentAufgabe) + 1) + ".em");
+//
+//		this.eMenge =  Ereignismenge.elementareFromJSON(ereignisStr);
+//		this.mengen = Ereignismenge.ereignisseFromJSON(mengenStr, eMenge);
+		if(currentAufgabe.hasLiniendiagramm()) {
+			this.eMenge = currentAufgabe.geteMenge();
+			this.mengen = currentAufgabe.getEreignisse();
+			this.startMengen = currentAufgabe.getStartEreignisse();
+		}
 	}
 
 	public WindowSelect getSelectedWindow() {
@@ -119,4 +125,9 @@ public class Model implements Serializable {
 		}
 		
 	}
+
+	public List<Menge> getStartMengen() {
+		return startMengen;
+	}
+	
 }

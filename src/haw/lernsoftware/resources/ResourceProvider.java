@@ -53,10 +53,13 @@ public class ResourceProvider {
 		
 		return Files.readAllLines(p);
 		} catch(NullPointerException e) { //Falls reqireNonNull fehlschlägt
+			log.error(path);
 			log.error(e.getMessage());
 		} catch (URISyntaxException e) { //Falls die pathURL ungültig ist
+			log.error(path);
 			log.error(e.getMessage());
 		} catch (IOException e) { //Falls readAllLines fehlschlägt
+			log.error(path);
 			log.error(e.getMessage());
 		}
 		

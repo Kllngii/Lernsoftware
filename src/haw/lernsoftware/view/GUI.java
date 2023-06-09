@@ -1,8 +1,10 @@
 package haw.lernsoftware.view;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Image;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JButton;
 
 import org.apache.log4j.Logger;
 
@@ -45,6 +48,7 @@ public class GUI implements ActionListener {
 	private JMenuItem menuItemLeicht = new JMenuItem("Leicht");
 	private JMenuItem menuItemMittel = new JMenuItem("Mittel");
 	private JMenuItem menuItemSchwer = new JMenuItem("Schwer");
+	private JButton hilfeButton = new JButton("Hilfe");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite(this);
@@ -69,6 +73,7 @@ public class GUI implements ActionListener {
 	 * Erstellt die Menubar des Fensters.
 	 */
 	private void constructMenubar() {
+		
 		JMenu dateiMenü = new JMenu("Datei");
 		JMenu fensterMenü = new JMenu("Fenster");
 		JMenu fensterAufgabentyp = new JMenu("Aufgaben");
@@ -76,6 +81,7 @@ public class GUI implements ActionListener {
 		menuBar.add(dateiMenü);
 		menuBar.add(fensterMenü);
 		menuBar.add(fensterAufgabentyp);
+		menuBar.add(hilfeButton);
 
 		dateiMenü.add(menuItemSpeichern);
 		dateiMenü.add(menuItemLaden);
@@ -102,6 +108,10 @@ public class GUI implements ActionListener {
 		menuItemLeicht.setIcon(new ImageIcon(LeichtImg.getScaledInstance(16, 16, 0)));
 		menuItemMittel.setIcon(new ImageIcon(MittelImg.getScaledInstance(16, 16, 0)));
 		menuItemSchwer.setIcon(new ImageIcon(SchwerImg.getScaledInstance(16, 16, 0)));
+		hilfeButton.setIcon(new ImageIcon(hilfeImg.getScaledInstance(16, 16, 0)));	
+		hilfeButton.setOpaque(false);
+		hilfeButton.setContentAreaFilled(false);
+		hilfeButton.setBorderPainted(false);
 
 		fensterMenü.add(menuItemStartseite);
 		fensterMenü.add(menuItemLiniendiagramm);
@@ -112,6 +122,8 @@ public class GUI implements ActionListener {
 		menuItemAufgabentext.addActionListener(this);
 		menuItemHilfe.addActionListener(this);
 
+		hilfeButton.addActionListener(this);
+		
 		fensterAufgabentyp.add(menuItemTutorial);
 		fensterAufgabentyp.add(menuItemLeicht);
 		fensterAufgabentyp.add(menuItemMittel);
@@ -173,6 +185,9 @@ public class GUI implements ActionListener {
 			log.info("Öffne das Schwer-Fenster!");
 			aufgabentextView.setI(5);
 			this.switchToView(WindowSelect.AUFGABENTEXT);
+		}else if(e.getSource() == hilfeButton) {
+			log.info("Öffne das Hilfe-Fenster!");
+			new Hilfe();
 		}
 	}
 
@@ -185,7 +200,7 @@ public class GUI implements ActionListener {
 			model.setSelectedWindow(WindowSelect.AUFGABENTEXT);
 		} else if (ws == WindowSelect.LINIENDIAGRAMM) {
 			log.debug("Wechsle zum Liniendiagramm");
-			liniendiagrammView.rebase(model.getMengen(), model.geteMenge());
+			liniendiagrammView.rebase(model.getMengen(), model.getStartMengen(), model.geteMenge());
 			layout.show(frame.getContentPane(), WindowSelect.LINIENDIAGRAMM.getIdentifier());
 			model.setSelectedWindow(WindowSelect.LINIENDIAGRAMM);
 		} else if (ws == WindowSelect.STARTSEITE) {
@@ -206,4 +221,5 @@ public class GUI implements ActionListener {
 			model.setSelectedWindow(WindowSelect.TUTORIAL3);
 		}
 	}
+	
 }

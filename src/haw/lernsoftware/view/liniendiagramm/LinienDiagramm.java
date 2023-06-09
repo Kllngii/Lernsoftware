@@ -7,7 +7,6 @@ import static haw.lernsoftware.Konst.STD_LINEWIDTH;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -15,9 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JTextField;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
@@ -29,9 +26,11 @@ import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.HAWView;
 
 /**
+ * Das Herzstück des Programms, wird verwendet um ein {@link Liniendiagramm} zu zeichen.
  * 
- * 
- *
+ * @see #rebase(List, Ereignismenge)
+ * @see Ereignismenge
+ * @see Menge
  */
 public class LinienDiagramm extends HAWView implements MouseListener {
 	
@@ -43,6 +42,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	
 	private Logger log = Logger.getLogger(getClass());
 	private List<Menge> mengen;
+	private List<Menge> zielMengen;
 	private Ereignismenge eMenge;
 	
 	private List<Integer> spaltenCoord = new ArrayList<Integer>();
@@ -54,13 +54,17 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private int selectedRow = -1;
 	private Menge eingetreten;
 	
-	public LinienDiagramm(Ereignismenge eMenge, List<Menge> mengen) {
+	public LinienDiagramm(Ereignismenge eMenge, List<Menge> mengen, List<Menge> startMengen) {
 		this.eMenge = eMenge;
-		this.mengen = mengen;
+		this.zielMengen = mengen;
+		this.mengen = startMengen;
+		
+		
+		this.mengen.get(3).getEreignisse().stream().forEach(log::fatal);
 		
 		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
 		if (eMenge.vaildate())
-			constructDiagramm(mengen, eMenge);
+			constructDiagramm(this.mengen, this.eMenge);
 	}
 	
 	@Deprecated(since = "26.05.2023")
@@ -83,8 +87,24 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 		panel.addMouseListener(this);
 	}
-	
-	public void rebase(List<Menge> mengen, Ereignismenge e) {
+	/**
+	 * Führt einen Rebase aus und betrachtet fortan neue Daten. Nur für den externen Gebrauch - beispielsweise beim Aufgabenwechsel - bestimmt
+	 * @param mengen
+	 * @param startMengen
+	 * @param e
+	 * @see #rebase(List, Ereignismenge)
+	 */
+	public void rebase(List<Menge> mengen, List<Menge> startMengen, Ereignismenge e) {
+		this.zielMengen = mengen;
+		rebase(startMengen, e);
+	}
+	/**
+	 * Führt einen Rebase aus und betrachtet fortan neue Daten. Für den internen Gebrauch innerhalb einer Aufgabe bestimmt
+	 * @param mengen
+	 * @param e
+	 * @see #rebase(List, Ereignismenge) 
+	 */
+	private void rebase(List<Menge> mengen, Ereignismenge e) {
 		this.mengen = mengen;
 		this.eMenge = e;
 		numberEreignisse = mengen.size();
@@ -92,19 +112,19 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		log.debug("Neue Daten geladen!");
 		panel.repaint();
 	}
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(() -> {
-			LinienDiagramm d = new LinienDiagramm();
-			JFrame f = new JFrame();
-			f.setContentPane(d.panel);
-			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//			f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-			f.setResizable(true);
-			f.setSize(720,480);
-			f.setVisible(true);
-		});
-	}
+//
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(() -> {
+//			LinienDiagramm d = new LinienDiagramm();
+//			JFrame f = new JFrame();
+//			f.setContentPane(d.panel);
+//			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+////			f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//			f.setResizable(true);
+//			f.setSize(720,480);
+//			f.setVisible(true);
+//		});
+//	}
 
 	@Deprecated(since = "09.06.2023")
 	private void setStroked(Graphics2D g2d) {
@@ -134,6 +154,9 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		int maxlength = 0;
 		for (int j = 0; j < numberEreignisse; j++) {
 			if (Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName())) > maxlength) {
+				maxlength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
+			}
+			if (Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getProbability())) > maxlength) {
 				maxlength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
 			}
 		}
