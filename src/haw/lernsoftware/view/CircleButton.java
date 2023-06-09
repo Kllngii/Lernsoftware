@@ -1,6 +1,7 @@
 package haw.lernsoftware.view;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -20,6 +21,7 @@ public class CircleButton extends JButton {
         setForeground(Color.WHITE);
 		setContentAreaFilled(false);
 		setBorderPainted(false);
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     @Override
