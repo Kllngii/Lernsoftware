@@ -87,6 +87,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		// Aufgabentext erstellen und formatieren
 		aufgabenText.setText(model.getCurrentAufgabe().getText());
 		aufgabenText.setLineWrap(true);
+		aufgabenText.setWrapStyleWord(true);
 		aufgabenText.setPreferredSize(new Dimension(100, 100));
 		aufgabenText.setEditable(false);
 		Color color = panel.getBackground();
@@ -96,6 +97,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		// Aufgabentext erstellen und formatieren
 		loesungText.setText("Hier die Lösung eingeben!");
 		loesungText.setLineWrap(true);
+		loesungText.setWrapStyleWord(true);
 		loesungText.setPreferredSize(new Dimension(100, 100));
 		loesungText.setEditable(true);
 		loesungText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
@@ -142,7 +144,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			previousTaskButton.setEnabled(true);
 			nextTaskButton.setEnabled(true);
 		}
-		
+
 		model.setCurrentAufgabe(aufgaben.get(i));
 
 		Aufgabe current = model.getCurrentAufgabe();
@@ -152,7 +154,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		progress.setValue(i);
 
 		if (current.hasImage()) { // aktualisiert falls bild vorhanden...
-			if(bild != null) {
+			if (bild != null) {
 				bild.setImage(current.getImage());
 				aufgabenBild.setIcon(bild);
 			}
@@ -184,6 +186,5 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		}
 		refreshAufgabenview();
 
-		
 	}
 }
