@@ -52,6 +52,7 @@ public class Tutorial3 extends HAWView implements ActionListener{
 		view.add(constructStartseite());
 		JScrollBar scroll = new JScrollBar();
 		scroll.setUnitIncrement(16);
+		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		((JScrollPane)panel).setVerticalScrollBar(scroll);
 	}
 
