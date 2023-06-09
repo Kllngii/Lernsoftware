@@ -15,12 +15,12 @@
       "order": 3
    },
    {
-      "name": "Nicht A := Zahl ist nicht durch 3 teilbar",
+      "name": "Nicht A",
       "elementare": "1,3,4,6,7,9,10,12",
       "order": 4
    },
    {
-      "name": "B oder C := Zahl hat Quersumme <= 11 oder ist kleiner als 42",
+      "name": "B oder C",
       "elementare": "1,2,3,4,5,6,7,8,9,10",
       "order": 5
    },
