@@ -36,16 +36,15 @@ public class Startseite extends HAWView {
 	Logger log = Logger.getLogger(getClass());
 	private GUI gui;
 	private JPanel view = new JPanel();
-	JLabel functionText1 = new JLabel();
-	JLabel functionText2 = new JLabel();
-	JLabel functionText3 = new JLabel();
+	private JLabel functionText1 = new JLabel();
+	private JLabel functionText2 = new JLabel();
+	private JLabel functionText3 = new JLabel();
 	EmptyBorder eBorder = new EmptyBorder(12, 12, 12, 12); // oben, rechts, unten, links
 	LineBorder lBorder = new LineBorder(new Color(100, 100, 100));
 	MatteBorder mBorder = new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY);
 
 	public Startseite(GUI gui) {
 		this.gui = gui;				
-		
 		
 		panel = new JScrollPane(view);
 		view.add(constructStartseite());			
