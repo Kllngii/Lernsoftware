@@ -233,13 +233,23 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			// Wahrscheinlichkeiten am rechten Rand
 			g2d.setColor(Color.BLACK);
 			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
-			if (bedingtMode) {
-				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/10);
-				g2d.setColor(Color.BLUE);
-				g2d.drawString(mengen.get(j).getConditionalProbability(eingetreten), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*8/10);
+			
+			// Wenn in Zeile mengen.get(j) die WSK berechnet werden soll
+			if (true) {
+				g2d.setFont(new Font("default", Font.BOLD, g2d.getFont().getSize()));
+				g2d.setColor(Color.RED);
+				g2d.drawString(mengen.get(j).getUserProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
+				g2d.setFont(new Font("default", Font.PLAIN, g2d.getFont().getSize()));
 				g2d.setColor(Color.BLACK);
 			} else {
-				g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
+				if (bedingtMode) {
+					g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/10);
+					g2d.setColor(Color.BLUE);
+					g2d.drawString(mengen.get(j).getConditionalProbability(eingetreten), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*8/10);
+					g2d.setColor(Color.BLACK);
+				} else {
+					g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
+				}
 			}
 		}
 		zeilenCoord.add(BORDER_Y + 10 + numberEreignisse*linewidth + linewidth/2 - 2*BORDER_X);
@@ -305,6 +315,11 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 				else if (current.spalte() == eMenge.getEreignisse().size() && last.spalte() == eMenge.getEreignisse().size() && current.zeile() == last.zeile()) {
 					log.debug("Zeile " + current.zeile() + " in der rechtesten Spalte wurde gewählt!");
+					String m = JOptionPane.showInputDialog("Wahrscheinlichkeit des Ereignisses " + mengen.get(current.zeile()).getName() + ":");
+					if (m != null) {
+						mengen.get(current.zeile()).setUserProb(m);
+						rebase(mengen, eMenge);
+					}
 					mouseInteractions.clear();
 				}
 
@@ -343,7 +358,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			int length = mouseInteractions.size();
 			Koordinate current = mouseInteractions.get(length-1).koord();
 			
-			if (current.zeile() > 0 && current.zeile() < numberEreignisse) {	
+			if (current.zeile() >= 0 && current.zeile() < numberEreignisse) {	
 				log.debug("Ereignis " + mengen.get(current.zeile()).getName() + " wurde gelöscht!");
 				bedingtMode = false;
 				mengen.remove(current.zeile());

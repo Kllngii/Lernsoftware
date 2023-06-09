@@ -17,6 +17,7 @@ public class Menge {
 	private Ereignismenge möglicheEreignisse;
 	private List<Elementarereignis> ereignisse;
 	private int order;
+	private String userProb;
 
 	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> list, int order) {
 		super();
@@ -24,8 +25,8 @@ public class Menge {
 		this.möglicheEreignisse = möglicheEreignisse;
 		this.ereignisse = list;
 		this.order = order;
+		this.userProb = "P = ";
 	}
-
 
 	public Menge vereinigt(Menge m) {
 		List<Elementarereignis> vereinigteMenge = new ArrayList<>(ereignisse);
@@ -95,6 +96,11 @@ public class Menge {
 		return order;
 	}
 
+	public String getUserProbability() {
+		String output = this.userProb;
+		return output;
+	}
+	
 	public String getProbability() {
 		String output = this.getFracProbability() + " = " + Double.toString(this.getDecimalProbability());
 		return output;
@@ -218,5 +224,9 @@ public class Menge {
 		denum = denum / gcf;
 
 		return String.format("%d/%d", num, denum);
+	}
+
+	public void setUserProb(String m) {
+		this.userProb = "P = " + m;
 	}
 }
