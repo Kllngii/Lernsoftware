@@ -33,7 +33,8 @@ public class Tutorial2 extends HAWView implements ActionListener {
 	private GUI gui;
 	private JLabel ueberschrift = new JLabel("Tutorial 2");
 	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
-	private JButton tutorialZurück = new CircleButton("zurück");
+	private JButton tutorialBack = new CircleButton("zurück");
+	
 	
 	// Skalierung für das ImageIcon
     int x = 500; // Gewünschte Breite des Bildes
@@ -47,6 +48,7 @@ public class Tutorial2 extends HAWView implements ActionListener {
 		view.add(constructStartseite());
 		JScrollBar scroll = new JScrollBar();
 		scroll.setUnitIncrement(16);
+		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		((JScrollPane)panel).setVerticalScrollBar(scroll);
 	}
 
@@ -56,23 +58,18 @@ public class Tutorial2 extends HAWView implements ActionListener {
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 		JPanel buttonAnordnung = new JPanel();
 		buttonAnordnung.setLayout(new FlowLayout());
-		buttonAnordnung.add(tutorialZurück);
+		buttonAnordnung.add(tutorialBack);
 		buttonAnordnung.add(tutorialNext);
+		
 		//Button konfigurieren
 		tutorialNext.addActionListener(this);
-		tutorialNext.setForeground(Color.WHITE);
-		tutorialNext.setContentAreaFilled(false);
-		tutorialNext.setBorderPainted(false);
-		tutorialZurück.addActionListener(this);
-		tutorialZurück.setForeground(Color.WHITE);
-		tutorialZurück.setContentAreaFilled(false);
-		tutorialZurück.setBorderPainted(false);
-
+		tutorialBack.addActionListener(this);
+		
 		
 		//FormBuilder erstellen 
 		JComponent inhalt = FormBuilder.create()
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu") //
-				.rows("p, p, p, p, p, p, p, p, p, p, p, p, p, p") //
+				.rows("p, p, p, p, p, p, p, p, p, p, p, p, p, p, p, p, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 4) //
 				.add(buttonAnordnung).xyw(5, 1, 1) //
@@ -109,7 +106,7 @@ public class Tutorial2 extends HAWView implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == tutorialZurück) {
+		if(e.getSource() == tutorialBack) {
 			log.debug("Wechsle zum Tutorial 1");
 			gui.switchToView(WindowSelect.TUTORIAL);
 		} else if(e.getSource() == tutorialNext) {

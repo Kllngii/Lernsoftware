@@ -25,21 +25,8 @@ public class CircleButton extends JButton {
         setForeground(Color.WHITE);
 		setContentAreaFilled(false);
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		addMouseListener(mL);
     }
     
-    MouseAdapter mL = new MouseAdapter() {
-
-		public void mouseReleased(java.awt.event.MouseEvent e) {
-		}
-		// Rahmenänderung
-		public void mouseEntered(java.awt.event.MouseEvent e) {
-			setBorderPainted(true);
-		}
-		public void mouseExited(java.awt.event.MouseEvent e) {
-			setBorderPainted(false);
-		}
-	};
 
     @Override
     protected void paintComponent(Graphics g) {

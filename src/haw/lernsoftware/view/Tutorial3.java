@@ -33,6 +33,9 @@ public class Tutorial3 extends HAWView implements ActionListener{
 	private GUI gui;
 	private JLabel ueberschrift = new JLabel("Tutorial 3");
 	private JButton tutorialZurueck = new CircleButton("zurück");
+	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
+
+
 	// Skalierung für das ImageIcon
 	int x = 500; // Gewuenschte Breite des Bildes
 	int y = 400; // Gewuenschte H�he des Bildes
@@ -46,27 +49,30 @@ public class Tutorial3 extends HAWView implements ActionListener{
 		view.add(constructStartseite());
 		JScrollBar scroll = new JScrollBar();
 		scroll.setUnitIncrement(16);
+		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		((JScrollPane)panel).setVerticalScrollBar(scroll);
 	}
 
 	private JComponent constructStartseite() {
-		// �berschrift Textgroeße ändern
+		// ueberschrift Textgroeße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 
+		// JPanel fuer die Buttons, um sie in einem neuen Layout anzuordnen
 		JPanel buttonAnordnung = new JPanel();
 		buttonAnordnung.setLayout(new FlowLayout());
 		buttonAnordnung.add(tutorialZurueck);
+		buttonAnordnung.add(tutorialNext);
+		tutorialNext.getModel().setEnabled(false);
 
+		//Button konfigurieren
+		tutorialNext.addActionListener(this);
 		tutorialZurueck.addActionListener(this);
-		tutorialZurueck.setForeground(Color.WHITE);
-		tutorialZurueck.setContentAreaFilled(false);
-		tutorialZurueck.setBorderPainted(false);
 
 
 		//FormBuilder erstellen 
 		JComponent inhalt = FormBuilder.create()
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu") //
-				.rows("p, p, p, p, p, p, p, p, p, p, p, p, p, p,p,p,p") //
+				.rows("p, p, p, p, p, p, p, p, p, p, p, p, p, p, p, p, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 4) //
 				.add(buttonAnordnung).xyw(5, 1, 1)
@@ -93,7 +99,7 @@ public class Tutorial3 extends HAWView implements ActionListener{
 				.add(inhalt) .xy(1, 1)
 				.debug(true)
 				.build();
-		
+
 	}
 
 	//Bildgröße anpassen
