@@ -73,6 +73,9 @@ public class Aufgabe implements Serializable {
 	public List<Menge> getEreignisse() {
 		return ereignisse;
 	}
+	public List<Menge> getStartEreignisse() {
+		return startEreignisse;
+	}
 	
 	
 }

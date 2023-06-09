@@ -28,6 +28,7 @@ public class Model implements Serializable {
 	private int currentAufgabeID = 0;
 
 	private List<Menge> mengen;
+	private List<Menge> startMengen;
 	private Ereignismenge eMenge;
 
 	public Model(List<Aufgabe> aufgaben) {
@@ -70,6 +71,7 @@ public class Model implements Serializable {
 		if(currentAufgabe.hasLiniendiagramm()) {
 			this.eMenge = currentAufgabe.geteMenge();
 			this.mengen = currentAufgabe.getEreignisse();
+			this.startMengen = currentAufgabe.getStartEreignisse();
 		}
 	}
 
@@ -123,4 +125,9 @@ public class Model implements Serializable {
 		}
 		
 	}
+
+	public List<Menge> getStartMengen() {
+		return startMengen;
+	}
+	
 }
