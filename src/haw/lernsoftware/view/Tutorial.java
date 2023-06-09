@@ -1,6 +1,5 @@
 package haw.lernsoftware.view;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -30,11 +29,8 @@ import haw.lernsoftware.resources.ResourceProvider;
 public class Tutorial extends HAWView implements ActionListener {
 	//Definition und Init.
 	Logger log = Logger.getLogger(getClass());
-	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
 	private JLabel ueberschrift = new JLabel("Tutorial 1");
-	private JLabel text1 = new JLabel();
-	private JLabel bildLabel1 = new JLabel();
 	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
 	
 	// Skalierung für das ImageIcon

@@ -5,16 +5,15 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.event.MouseAdapter;
-import java.awt.geom.Ellipse2D;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
-import haw.lernsoftware.model.WindowSelect;
-
+/**
+ * Ein Button mit abgerundeten Ecken
+ * 
+ * @author Moritz Koch
+ */
 public class CircleButton extends JButton {
     private static final long serialVersionUID = 1L;
 

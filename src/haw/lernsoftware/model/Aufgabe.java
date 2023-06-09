@@ -6,6 +6,14 @@ import java.util.List;
 
 import haw.lernsoftware.resources.ResourceProvider;
 
+/**
+ * Speichert alle Informationen zu einer Aufgabe.
+ * Unteranderem umfasst das:
+ * <li> die Aufgabenstellung
+ * <li> ein dazugehöriges Bild
+ * <li> die Daten des Liniendiagramms
+ * @author Lasse Kelling
+ */
 public class Aufgabe implements Serializable {
 	private static final long serialVersionUID = -3727129919178718459L;
 	private String text;

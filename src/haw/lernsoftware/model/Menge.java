@@ -7,6 +7,10 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+/**
+ * Eine Menge kennt sowohl alle möglichen Elemente als auch die enthaltenen Elemente.
+ * @author Lasse Kelling
+ */
 public class Menge {
 
 	private String name;

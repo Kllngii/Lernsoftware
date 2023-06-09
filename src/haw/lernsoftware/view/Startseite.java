@@ -1,14 +1,10 @@
 package haw.lernsoftware.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.FlowLayout;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,6 +25,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 
 /**
  * Die Startseite des Programms.
+ * @author Moritz Koch
  */
 public class Startseite extends HAWView {
 

@@ -27,14 +27,11 @@ import haw.lernsoftware.resources.ResourceProvider;
 /**
  * Die Tutorial des Programms.
  */
-public class Tutorial2 extends HAWView implements ActionListener{
+public class Tutorial2 extends HAWView implements ActionListener {
 	//Definition und Init.
 	Logger log = Logger.getLogger(getClass());
-	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
 	private JLabel ueberschrift = new JLabel("Tutorial 2");
-	private JLabel text1 = new JLabel();
-	private JLabel bildLabel1 = new JLabel();
 	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
 	private JButton tutorialZurück = new CircleButton("zurück");
 	
