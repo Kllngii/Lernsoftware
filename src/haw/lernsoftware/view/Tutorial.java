@@ -35,14 +35,16 @@ public class Tutorial extends HAWView implements ActionListener {
 	private JLabel ueberschrift = new JLabel("Tutorial 1");
 	private JLabel text1 = new JLabel();
 	private JLabel bildLabel1 = new JLabel();
+	private JButton tutorialZurueck = new CircleButton("zurück");
 	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
 	
+
 	// Skalierung für das ImageIcon
-    int x1 = 700; // Gewünschte Breite des Bildes
-    int y1 = 400; // Gewünschte Höhe des Bildes
-    int x = 500; // Gewünschte Breite des Bildes
-    int y = 300; // Gewünschte Höhe des Bildes
-	
+	int x1 = 700; // Gewünschte Breite des Bildes
+	int y1 = 400; // Gewünschte Höhe des Bildes
+	int x = 500; // Gewünschte Breite des Bildes
+	int y = 300; // Gewünschte Höhe des Bildes
+
 	//Erstellen eines Fensters mit ScrollBar
 	public Tutorial(GUI gui) {
 		this.gui = gui;
@@ -52,23 +54,24 @@ public class Tutorial extends HAWView implements ActionListener {
 		JScrollBar scroll = new JScrollBar();
 		scroll.setUnitIncrement(16);
 		((JScrollPane)panel).setVerticalScrollBar(scroll);
-		
+
 	}
 
 	private JComponent constructStartseite() {
-		
+
 		// Überschrift Textgröße ändern
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
-		
+
 		JPanel buttonAnordnung = new JPanel();
 		buttonAnordnung.setLayout(new FlowLayout());
+		buttonAnordnung.add(tutorialZurueck);
 		buttonAnordnung.add(tutorialNext);
+		
 		//Button konfigurieren
 		tutorialNext.addActionListener(this);
-		//tutorialNext.setForeground(Color.WHITE);
-		//tutorialNext.setContentAreaFilled(false);
-		//tutorialNext.setBorderPainted(false);
-		
+		tutorialZurueck.addActionListener(this);
+		tutorialZurueck.getModel().setEnabled(false);
+
 		//FormBuilder erstellen 
 		JComponent inhalt = FormBuilder.create()
 				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu") //
@@ -92,18 +95,18 @@ public class Tutorial extends HAWView implements ActionListener {
 				.build(); //
 		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einfügen und zurückgeben
 		return FormBuilder.create()
-				  .columns("p")
-				  .rows("p")
-				  .add(inhalt) .xy(1, 1)
-				  .debug(true)
-				  .build();
+				.columns("p")
+				.rows("p")
+				.add(inhalt) .xy(1, 1)
+				.debug(true)
+				.build();
 	}
 
 	//Bildgröße anpassen
 	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
 		Image image = img.getImage();
-        Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return new ImageIcon(resizedImage);
+		Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		return new ImageIcon(resizedImage);
 	}
 
 	@Override
