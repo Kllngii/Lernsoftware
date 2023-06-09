@@ -164,7 +164,18 @@ public class GUI implements ActionListener {
 		} else if(e.getSource() == menuItemTutorial) {
 			log.info("Öffne das Tutorial-Fenster!");
 			this.switchToView(WindowSelect.TUTORIAL);
-		} 
+		} else if(e.getSource() == menuItemLeicht) {
+			log.info("Öffne das Leicht-Fenster!");
+			this.switchToView(WindowSelect.AUFGABENTEXT);
+		} else if(e.getSource() == menuItemMittel) {
+			log.info("Öffne das Mittel-Fenster!");
+			aufgabentextView.setI(3);
+			this.switchToView(WindowSelect.AUFGABENTEXT);
+		} else if(e.getSource() == menuItemSchwer) {
+			log.info("Öffne das Schwer-Fenster!");
+			aufgabentextView.setI(5);
+			this.switchToView(WindowSelect.AUFGABENTEXT);
+		}
 	}
 
 	public void switchToView(WindowSelect ws) {
