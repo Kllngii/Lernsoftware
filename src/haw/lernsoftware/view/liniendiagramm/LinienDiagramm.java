@@ -7,7 +7,6 @@ import static haw.lernsoftware.Konst.STD_LINEWIDTH;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -16,7 +15,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
@@ -28,9 +26,11 @@ import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.HAWView;
 
 /**
+ * Das Herzstück des Programms, wird verwendet um ein {@link Liniendiagramm} zu zeichen.
  * 
- * 
- *
+ * @see #rebase(List, Ereignismenge)
+ * @see Ereignismenge
+ * @see Menge
  */
 public class LinienDiagramm extends HAWView implements MouseListener {
 	
@@ -87,8 +87,24 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 		panel.addMouseListener(this);
 	}
-	
-	public void rebase(List<Menge> mengen, Ereignismenge e) {
+	/**
+	 * Führt einen Rebase aus und betrachtet fortan neue Daten. Nur für den externen Gebrauch - beispielsweise beim Aufgabenwechsel - bestimmt
+	 * @param mengen
+	 * @param startMengen
+	 * @param e
+	 * @see #rebase(List, Ereignismenge)
+	 */
+	public void rebase(List<Menge> mengen, List<Menge> startMengen, Ereignismenge e) {
+		this.zielMengen = mengen;
+		rebase(startMengen, e);
+	}
+	/**
+	 * Führt einen Rebase aus und betrachtet fortan neue Daten. Für den internen Gebrauch innerhalb einer Aufgabe bestimmt
+	 * @param mengen
+	 * @param e
+	 * @see #rebase(List, Ereignismenge) 
+	 */
+	private void rebase(List<Menge> mengen, Ereignismenge e) {
 		this.mengen = mengen;
 		this.eMenge = e;
 		numberEreignisse = mengen.size();

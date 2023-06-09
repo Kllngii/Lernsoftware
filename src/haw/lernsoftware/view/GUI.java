@@ -185,7 +185,7 @@ public class GUI implements ActionListener {
 			model.setSelectedWindow(WindowSelect.AUFGABENTEXT);
 		} else if (ws == WindowSelect.LINIENDIAGRAMM) {
 			log.debug("Wechsle zum Liniendiagramm");
-			liniendiagrammView.rebase(model.getStartMengen(), model.geteMenge());
+			liniendiagrammView.rebase(model.getMengen(), model.getStartMengen(), model.geteMenge());
 			layout.show(frame.getContentPane(), WindowSelect.LINIENDIAGRAMM.getIdentifier());
 			model.setSelectedWindow(WindowSelect.LINIENDIAGRAMM);
 		} else if (ws == WindowSelect.STARTSEITE) {
