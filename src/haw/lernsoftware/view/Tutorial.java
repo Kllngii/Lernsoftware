@@ -33,6 +33,7 @@ public class Tutorial extends HAWView implements ActionListener {
 	private JLabel ueberschrift = new JLabel("Tutorial 1");
 	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
 	
+
 	// Skalierung für das ImageIcon
 	int x1 = 700; // Gewünschte Breite des Bildes
 	int y1 = 400; // Gewünschte Höhe des Bildes
