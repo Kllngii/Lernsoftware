@@ -1,7 +1,5 @@
 package haw.lernsoftware.model;
 
-import java.util.Arrays;
-
 /**
  * Ein Enum, welches das zuletzt geöffnete Fenster symbolisch beschreibt.
  * @author Lasse Kelling

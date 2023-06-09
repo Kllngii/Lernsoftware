@@ -104,9 +104,11 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		});
 	}
 
+	@Deprecated(since = "09.06.2023")
 	private void setStroked(Graphics2D g2d) {
 		g2d.setStroke(new BasicStroke(linewidth, BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER,10.0f,new float[] {5.0f,5.0f},0.0f));
 	}
+	@Deprecated(since = "09.06.2023")
 	private void setNormal(Graphics2D g2d) {
 		g2d.setStroke(new BasicStroke(linewidth));
 	}
