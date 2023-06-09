@@ -5,16 +5,15 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.event.MouseAdapter;
-import java.awt.geom.Ellipse2D;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
-import haw.lernsoftware.model.WindowSelect;
-
+/**
+ * Ein Button mit abgerundeten Ecken
+ * 
+ * @author Moritz Koch
+ */
 public class CircleButton extends JButton {
     private static final long serialVersionUID = 1L;
 
@@ -26,21 +25,8 @@ public class CircleButton extends JButton {
         setForeground(Color.WHITE);
 		setContentAreaFilled(false);
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		addMouseListener(mL);
     }
     
-    MouseAdapter mL = new MouseAdapter() {
-
-		public void mouseReleased(java.awt.event.MouseEvent e) {
-		}
-		// Rahmenänderung
-		public void mouseEntered(java.awt.event.MouseEvent e) {
-			setBorderPainted(true);
-		}
-		public void mouseExited(java.awt.event.MouseEvent e) {
-			setBorderPainted(false);
-		}
-	};
 
     @Override
     protected void paintComponent(Graphics g) {

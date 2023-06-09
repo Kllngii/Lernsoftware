@@ -21,10 +21,10 @@ import haw.lernsoftware.Konst;
 /**
  * Verwaltet (lesende) Dateizugriffe auf die Dateien im resources-Package. Hier sollen bspw. Aufgabendateien abgelegt werden.
  * @author Lasse Kelling
- *
  */
 public class ResourceProvider {
-	static Logger log = Logger.getLogger(ResourceProvider.class);
+	private static Logger log = Logger.getLogger(ResourceProvider.class);
+	
 	/**
 	 * Liest eine Datei ein und gibt den Inhalt <b>aller Zeilen</b> zu einem String verbunden aus
 	 * @param path Der Pfad der Datei

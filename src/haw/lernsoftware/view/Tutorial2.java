@@ -27,16 +27,13 @@ import haw.lernsoftware.resources.ResourceProvider;
 /**
  * Die Tutorial des Programms.
  */
-public class Tutorial2 extends HAWView implements ActionListener{
+public class Tutorial2 extends HAWView implements ActionListener {
 	//Definition und Init.
 	Logger log = Logger.getLogger(getClass());
-	private javax.swing.border.Border border = javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED);
 	private GUI gui;
 	private JLabel ueberschrift = new JLabel("Tutorial 2");
-	private JLabel text1 = new JLabel();
-	private JLabel bildLabel1 = new JLabel();
-	private JButton tutorialZurueck = new CircleButton("zurück");
 	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
+	private JButton tutorialBack = new CircleButton("zurück");
 	
 	
 	// Skalierung für das ImageIcon
@@ -61,12 +58,12 @@ public class Tutorial2 extends HAWView implements ActionListener{
 		ueberschrift.setFont(ueberschrift.getFont().deriveFont(50f));
 		JPanel buttonAnordnung = new JPanel();
 		buttonAnordnung.setLayout(new FlowLayout());
-		buttonAnordnung.add(tutorialZurueck);
+		buttonAnordnung.add(tutorialBack);
 		buttonAnordnung.add(tutorialNext);
 		
 		//Button konfigurieren
 		tutorialNext.addActionListener(this);
-		tutorialZurueck.addActionListener(this);
+		tutorialBack.addActionListener(this);
 		
 		
 		//FormBuilder erstellen 
@@ -109,7 +106,7 @@ public class Tutorial2 extends HAWView implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == tutorialZurueck) {
+		if(e.getSource() == tutorialBack) {
 			log.debug("Wechsle zum Tutorial 1");
 			gui.switchToView(WindowSelect.TUTORIAL);
 		} else if(e.getSource() == tutorialNext) {
