@@ -36,7 +36,8 @@ public class Startseite extends HAWView {
 	private JLabel functionText1 = new JLabel();
 	private JLabel functionText2 = new JLabel();
 	private JLabel functionText3 = new JLabel();
-	EmptyBorder eBorder = new EmptyBorder(12, 12, 12, 12); // oben, rechts, unten, links
+	EmptyBorder emptyBorder = new EmptyBorder(12, 12, 12, 12); // oben, rechts, unten, links
+	EmptyBorder thickEmptyBorder = new EmptyBorder(15, 15, 15, 15);
 	LineBorder lBorder = new LineBorder(new Color(100, 100, 100));
 	MatteBorder mBorder = new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY);
 
@@ -47,13 +48,6 @@ public class Startseite extends HAWView {
 		view.add(constructStartseite());			
 		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
-		//Image Background = ResourceProvider.loadImage(Konst.Background_JPEG);
-		//panel.setLayout(new BorderLayout());
-		//panel.setContentPane(new JLabel(new ImageIcon(Background)));
-		//panel.setLayout(new FlowLayout());
-		//panel.add(constructStartseite());
-		//panel.add(constructStartseite());
 
 	}
 
@@ -91,7 +85,7 @@ public class Startseite extends HAWView {
 				.rows("100dlu, 160dlu, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 5) //
-				.add(einleitungText).xyw(1, 2, 5) //
+				.add(padding(einleitungText, 10)).xyw(1, 2, 5) //
 				.add(functionText1).xy(1, 3) //
 				.add(functionText2).xy(3, 3) //
 				.add(functionText3).xy(5, 3) //
@@ -113,15 +107,15 @@ public class Startseite extends HAWView {
 		}
 		// Rahmenänderung, wenn der Mauszeiger auf das JLabel gerichtet ist 
 		public void mouseEntered(java.awt.event.MouseEvent e) {
-			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(mBorder, eBorder));
+			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
 		}
 		public void mouseExited(java.awt.event.MouseEvent e) {
-			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
+			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
 		}
 	};
 	//Methode: Rahmen auf normal definierte Werte setzen 
 	public void setNormalBorder(JLabel textLabel) {
-		textLabel.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder));
+		textLabel.setBorder(BorderFactory.createCompoundBorder(lBorder, emptyBorder));
 		textLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
 
