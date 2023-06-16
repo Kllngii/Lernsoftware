@@ -2,6 +2,7 @@ package haw.lernsoftware.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -108,6 +109,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			bild = new ImageIcon(model.getCurrentAufgabe().getImage());
 			aufgabenBild = new JLabel(bild);
 		} else {
+			bild = new ImageIcon();
 			aufgabenBild = new JLabel("");
 		}
 
@@ -134,6 +136,17 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.build(); //
 	}
 
+	// Bildgröße anpassen
+	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
+		Image image = img.getImage();
+		// double ratio = (width/height);
+		// log.debug("Höhe " + img.getIconHeight() + "Breite " + img.getIconWidth());
+		// double widthratio = width * ratio;
+		// int height1 = (int) widthratio;
+		Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		return new ImageIcon(resizedImage);
+	}
+
 	private void refreshAufgabenview() {
 		if (i == 0) {
 			previousTaskButton.setEnabled(false);
@@ -153,16 +166,33 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		titleTaskLabel.setText("Aufgabe: " + (i + 1));
 		progress.setValue(i);
 
-		if (current.hasImage()) { // aktualisiert falls bild vorhanden...
-			if (bild != null) {
-				bild.setImage(current.getImage());
-				aufgabenBild.setIcon(bild);
-			}
-		} else
-			aufgabenBild.setIcon(null);
+		log.debug(current.hasImage());
+		log.debug(current.hasImage());
 
-		if (current.hasLiniendiagramm()) {
-			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse(), current.getStartEreignisse());
+		if (model.getCurrentAufgabe().hasImage() == true) {
+			bild.setImage(model.getCurrentAufgabe().getImage());
+			aufgabenBild.setIcon(resizeImage(bild, 750, 350));
+			log.debug("lade bild!");
+		} else {
+			aufgabenBild.setIcon(null);
+			log.debug("kein Bild!");
+		}
+
+//		if (current.hasImage()) { // aktualisiert falls bild vorhanden...
+//			if (bild != null) {
+//			log.debug("lade bild!");
+//			bild.setImage(current.getImage());
+//			aufgabenBild.setIcon(bild);
+//			}
+//		} else {
+//			aufgabenBild.setIcon(null);
+//		}
+
+		if (current.hasLiniendiagramm())
+
+		{
+			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse(),
+					current.getStartEreignisse());
 			linienpanel = liniendiagramm.panel;
 		} else
 			linienpanel = new JPanel();
