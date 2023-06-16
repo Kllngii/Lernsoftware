@@ -44,6 +44,7 @@ public class Startseite extends HAWView {
 	public Startseite(GUI gui) {
 		this.gui = gui;				
 		
+		//Scrollbar hinzufügen
 		panel = new JScrollPane(view);
 		view.add(constructStartseite());			
 		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
