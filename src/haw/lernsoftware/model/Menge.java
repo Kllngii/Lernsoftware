@@ -6,20 +6,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
+import org.json.JSONPropertyIgnore;
 
+/**
+ * Eine Menge kennt sowohl alle möglichen Elemente als auch die enthaltenen Elemente.
+ * @author Lasse Kelling
+ */
 public class Menge {
 
 	private String name;
 	private Ereignismenge möglicheEreignisse;
 	private List<Elementarereignis> ereignisse;
 	private int order;
+	private String userProb;
+	private boolean calculateProbability = true;
+	private boolean editable = true;
+	private boolean deleteable = true;
+	private boolean correct = false;
 
-	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> ereignisse, int order) {
+	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> list, int order,
+			boolean calculateProbability, boolean editable, boolean deleteable) {
 		super();
 		this.name = name;
 		this.möglicheEreignisse = möglicheEreignisse;
-		this.ereignisse = ereignisse;
+		this.ereignisse = list;
 		this.order = order;
+		this.userProb = "P = ";
+		
+		this.calculateProbability = calculateProbability;
+		this.editable = editable;
+		this.deleteable = deleteable;
 	}
 
 	public Menge vereinigt(Menge m) {
@@ -27,7 +43,7 @@ public class Menge {
 		for (Elementarereignis e : m.getEreignisse())
 			if (!vereinigteMenge.contains(e))
 				vereinigteMenge.add(e);
-		return new Menge("Beispielmenge", möglicheEreignisse, vereinigteMenge, order);
+		return new Menge("Beispielmenge", möglicheEreignisse, vereinigteMenge, order, m.isCalculateProbability(), m.isEditable(), m.isDeleteable());
 	}
 
 	public Menge geschnitten(Menge m) {
@@ -35,20 +51,29 @@ public class Menge {
 		for (Elementarereignis e : m.getEreignisse())
 			if (ereignisse.contains(e))
 				schnittMenge.add(e);
-		return new Menge("Beispielmenge", möglicheEreignisse, schnittMenge, order);
+		return new Menge("Beispielmenge", möglicheEreignisse, schnittMenge, order, m.isCalculateProbability(), m.isEditable(), m.isDeleteable());
 	}
 
 	public Menge negiert() {
 		List<Elementarereignis> negierteMenge = new ArrayList<>(möglicheEreignisse.getEreignisse());
 		for (Elementarereignis e : ereignisse)
 			negierteMenge.remove(e);
-		return new Menge("Beispielmenge", möglicheEreignisse, negierteMenge, order);
+		return new Menge("Beispielmenge", möglicheEreignisse, negierteMenge, order, isCalculateProbability(), isEditable(), isDeleteable());
 	}
 
 	public static Menge negiert(Menge m) {
 		return m.negiert();
 	}
 
+	public void addElementar(Elementarereignis eEreignis) {
+		ereignisse.add(eEreignis);
+	}
+	
+	public void deleteElementar(Elementarereignis eEreignis) {
+		ereignisse.remove(eEreignis);
+	}
+	
+	
 	/*
 	 * *** Getter und Setter ***
 	 */
@@ -81,6 +106,10 @@ public class Menge {
 		return order;
 	}
 
+	public String getUserProbability() {
+		return this.userProb;
+	}
+	
 	public String getProbability() {
 		String output = this.getFracProbability() + " = " + Double.toString(this.getDecimalProbability());
 		return output;
@@ -205,4 +234,32 @@ public class Menge {
 
 		return String.format("%d/%d", num, denum);
 	}
+
+	public void setUserProb(String m) {
+		this.userProb = m;
+	}
+
+	public boolean isCalculateProbability() {
+		return calculateProbability;
+	}
+
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public boolean isDeleteable() {
+		return deleteable;
+	}
+
+	@JSONPropertyIgnore
+	public boolean isCorrect() {
+		return correct;
+	}
+
+	public void setCorrect(boolean correct) {
+		this.correct = correct;
+	}
+	
+	
+	
 }

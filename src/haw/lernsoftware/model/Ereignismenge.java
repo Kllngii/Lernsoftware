@@ -15,6 +15,9 @@ import org.json.JSONObject;
  *
  */
 public class Ereignismenge {
+	
+	private Logger log = Logger.getLogger(getClass());
+	
 	private List<Elementarereignis> ereignisse = new ArrayList<>();
 
 	public Ereignismenge(List<Elementarereignis> ereignisse) {
@@ -30,15 +33,18 @@ public class Ereignismenge {
 	 * <li> eine Gesamtwahrscheinlichkeit >1 haben
 	 * @return true, wenn alle Checks erfolgreich waren
 	 */
-	public boolean vaildate() {
-		if(ereignisse == null)
+	public boolean validate() {
+		if(ereignisse == null) {
+			log.warn("Die Liste an Ereignissen ist null!");
 			return false;
-		
+		}
 		double gesamt = 0;
 		for(Elementarereignis e : ereignisse)
 			gesamt += e.getProbability();
-		if(gesamt > 1) //TODO floatingPoint-Fehler beachten
+		if(gesamt > (1.0+1e-2) && gesamt < 1.0-1e-2) {
+			log.warn("Die Gesamtwahrscheinlichkeit ist != 1");
 			return false;
+		}
 		
 		return true;
 	}
@@ -77,7 +83,7 @@ public class Ereignismenge {
 		List<Elementarereignis> eList = new ArrayList<>();
 		
 		arr.forEach(a -> {
-			log.debug("Lese ein: " + a);
+//			log.debug("Lese ein: " + a);
 			if(a instanceof JSONObject j) {
 				eList.add(Elementarereignis.fromJSON(j.toString()));
 			}
@@ -92,7 +98,7 @@ public class Ereignismenge {
 		List<Menge> eList = new ArrayList<>();
 		
 		arr.forEach(a -> {
-			log.debug("Lese Ereignisse ein: " + a);
+//			log.debug("Lese Ereignisse ein: " + a);
 			if(a instanceof JSONObject j) {
 				eList.add(fromJSON(j.toString(), eMenge));
 			}
@@ -105,8 +111,19 @@ public class Ereignismenge {
 		JSONObject json = new JSONObject(jsonString);
 		String elementareString = json.getString("elementare");
 		List<Elementarereignis> elementare = new ArrayList<>();
+		
+		boolean calculateProbability = true, editable = true, deleteable = true;
+		if(json.has("calculateProbability"))
+			calculateProbability = json.getBoolean("calculateProbability");
+		if(json.has("editable"))
+			editable = json.getBoolean("editable");
+		if(json.has("deleteable"))
+			deleteable = json.getBoolean("deleteable");
+		
+		
 		if (elementareString == "") {
-			return new Menge(json.getString("name"), eMenge, eMenge.getEreignisse().subList(0, 0), json.getInt("order"));
+			return new Menge(json.getString("name"), eMenge, eMenge.getEreignisse().subList(0, 0), json.getInt("order"),
+					calculateProbability, editable, deleteable);
 		} else {
 			String[] elementareArray = elementareString.split(",");
 			Arrays.stream(elementareArray).map(elem -> {
@@ -119,7 +136,8 @@ public class Ereignismenge {
 					if(elemEr != null)
 						elementare.add(elemEr);
 				});
-			return new Menge(json.getString("name"), eMenge, elementare, json.getInt("order"));
+			return new Menge(json.getString("name"), eMenge, elementare, json.getInt("order"),
+					calculateProbability, editable, deleteable);
 		}
 	}
 }
