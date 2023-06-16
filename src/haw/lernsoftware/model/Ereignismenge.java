@@ -83,7 +83,7 @@ public class Ereignismenge {
 		List<Elementarereignis> eList = new ArrayList<>();
 		
 		arr.forEach(a -> {
-			log.debug("Lese ein: " + a);
+//			log.debug("Lese ein: " + a);
 			if(a instanceof JSONObject j) {
 				eList.add(Elementarereignis.fromJSON(j.toString()));
 			}
