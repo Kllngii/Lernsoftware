@@ -122,7 +122,7 @@ public class Ereignismenge {
 		
 		
 		if (elementareString == "") {
-			return new Menge(json.getString("name"), eMenge, eMenge.getEreignisse().subList(0, 0), json.getInt("order"),
+			return new Menge(json.getString("name"), eMenge, new ArrayList<Elementarereignis>(), json.getInt("order"),
 					calculateProbability, editable, deleteable);
 		} else {
 			String[] elementareArray = elementareString.split(",");
