@@ -22,7 +22,6 @@ import org.apache.log4j.Logger;
 import haw.lernsoftware.model.Elementarereignis;
 import haw.lernsoftware.model.Ereignismenge;
 import haw.lernsoftware.model.Menge;
-import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.HAWView;
 
 /**
