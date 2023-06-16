@@ -129,15 +129,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	//		});
 	//	}
 
-	@Deprecated(since = "09.06.2023")
-	private void setStroked(Graphics2D g2d) {
-		g2d.setStroke(new BasicStroke(linewidth, BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER,10.0f,new float[] {5.0f,5.0f},0.0f));
-	}
-	@Deprecated(since = "09.06.2023")
-	private void setNormal(Graphics2D g2d) {
-		g2d.setStroke(new BasicStroke(linewidth));
-	}
-
 	private void setLinewidth(Graphics2D g2d, int newWidth) {
 		g2d.setStroke(new BasicStroke(newWidth));
 		linewidth = newWidth;
@@ -252,12 +243,17 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 							}
 						}
 					}
-					if(correct && mengen.get(j).isEditable())
+					if(correct && mengen.get(j).isEditable()) {
 						g2d.setColor(new Color(42, 112, 37));
-					else
+						g2d.setStroke(new BasicStroke(3));
+					}
+					else {
 						g2d.setColor(Color.BLACK);
+						g2d.setStroke(new BasicStroke());
+					}
 					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + currentWidth, BORDER_Y + 10 + j*linewidth + linewidth/2);
 					g2d.setColor(Color.BLACK);
+					g2d.setStroke(new BasicStroke());
 				}
 				currentLeftBorder += currentWidth;
 			}
