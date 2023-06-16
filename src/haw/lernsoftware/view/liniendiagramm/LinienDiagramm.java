@@ -329,10 +329,17 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				else if (current.spalte() == eMenge.getEreignisse().size() && last.spalte() == eMenge.getEreignisse().size() && current.zeile() == last.zeile()) {
 					if (mengen.get(current.zeile()).isCalculateProbability()) {
 						log.debug("Zeile " + current.zeile() + " in der rechtesten Spalte wurde gewählt!");
-						String m = JOptionPane.showInputDialog("Wahrscheinlichkeit des Ereignisses " + mengen.get(current.zeile()).getName() + ":");
-						if (m != null) {
-							mengen.get(current.zeile()).setUserProb(m);
-							rebase(mengen, eMenge);
+						boolean accepted = false;
+						while(!accepted) {
+							String m = JOptionPane.showInputDialog("Wahrscheinlichkeit des Ereignisses " + mengen.get(current.zeile()).getName() + " (als gekürzter Bruch):");
+							if (m != null) {
+								if(m.matches("([0-9]+)/([0-9]+)") || m.equals("0") || m.equals("1")) {
+									mengen.get(current.zeile()).setUserProb(m);
+									rebase(mengen, eMenge);
+									accepted = true;
+								}
+							} else
+								accepted = true;
 						}
 					}
 					mouseInteractions.clear();
