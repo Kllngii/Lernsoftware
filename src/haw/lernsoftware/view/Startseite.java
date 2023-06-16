@@ -45,6 +45,9 @@ public class Startseite extends HAWView {
 		this.gui = gui;				
 		
 		panel = new JScrollPane(view);
+		panel.setBorder(emptyBorder);
+		view.setBackground(new Color(230, 230, 230));
+		panel.setBackground(new Color(230, 230, 230));
 		view.add(constructStartseite());			
 		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
