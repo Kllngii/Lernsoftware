@@ -2,6 +2,7 @@ package haw.lernsoftware.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -135,6 +136,17 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.build(); //
 	}
 
+	// Bildgröße anpassen
+	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
+		Image image = img.getImage();
+		// double ratio = (width/height);
+		// log.debug("Höhe " + img.getIconHeight() + "Breite " + img.getIconWidth());
+		// double widthratio = width * ratio;
+		// int height1 = (int) widthratio;
+		Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		return new ImageIcon(resizedImage);
+	}
+
 	private void refreshAufgabenview() {
 		if (i == 0) {
 			previousTaskButton.setEnabled(false);
@@ -159,7 +171,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 		if (model.getCurrentAufgabe().hasImage() == true) {
 			bild.setImage(model.getCurrentAufgabe().getImage());
-			aufgabenBild.setIcon(bild);
+			aufgabenBild.setIcon(resizeImage(bild, 750, 350));
 			log.debug("lade bild!");
 		} else {
 			aufgabenBild.setIcon(null);
