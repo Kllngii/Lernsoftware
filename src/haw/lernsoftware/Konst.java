@@ -1,7 +1,8 @@
 package haw.lernsoftware;
 
 /**
- * Speichert die Konstanten des Projekts, um einen <b>single-point-of-truth</b> zu garantieren.
+ * Speichert die Konstanten des Projekts, um einen <b>single-point-of-truth</b>
+ * zu garantieren.
  * 
  * Jede Konstante ist immer mit <code>public static final</code> zu versehen!
  */
@@ -9,7 +10,7 @@ public class Konst {
 	public static final String SO_HEISST_DAS_DING = "Lernsoftware";
 	public static final String PREFERENCES_ROOT_KEY = "/haw/lernsoftware";
 	public static final String MODEL_KEY = "model";
-	
+
 	public static final String ICON_PATH = "icon.png";
 	public static final String HILFE_ICON = "hilfe.png";
 	public static final String LINIENDIAGRAMM_ICON = "liniengraph.png";
@@ -30,7 +31,7 @@ public class Konst {
 	public static final String FOLGEN_EINFÜHRUNG_BILD_1 = "Folgen_Einfuehrung_Bild_1.jpeg";
 	public static final String EINFÜHRUNG_BEDINGTE_W = "Einfuehrung_bedingte_W.png";
 	public static final String Background_JPEG = "background.jpeg";
-	
+
 	public static final String PROPERTIES_STARTSEITE = "startseite.properties";
 	public static final String PROPERTIES_HILFE = "hilfe.properties";
 	public static final String PROPERTIES_AUFGABEN = "aufgaben.properties";
