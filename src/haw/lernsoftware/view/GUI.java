@@ -70,7 +70,7 @@ public class GUI implements ActionListener {
 		frame.setLocationByPlatform(true);
 		frame.setResizable(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//frame.setUndecorated(true);
+		//frame.setUndecorated(true);  // Für fullscreen auskommentieren
 		frame.getRootPane().setBorder(
 		        BorderFactory.createMatteBorder(10, 10, 10, 10, new Color(230, 230, 230))
 		);

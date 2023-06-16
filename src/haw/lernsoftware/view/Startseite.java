@@ -36,8 +36,8 @@ public class Startseite extends HAWView {
 	private JLabel functionText1 = new JLabel();
 	private JLabel functionText2 = new JLabel();
 	private JLabel functionText3 = new JLabel();
-	EmptyBorder emptyBorder = new EmptyBorder(12, 12, 12, 12); // oben, rechts, unten, links
-	EmptyBorder thickEmptyBorder = new EmptyBorder(15, 15, 15, 15);
+	EmptyBorder emptyBorder = new EmptyBorder(12, 100, 12, 12); // oben, rechts, unten, links
+	EmptyBorder thickEmptyBorder = new EmptyBorder(15, 100, 15, 15);
 	LineBorder lBorder = new LineBorder(new Color(100, 100, 100));
 	MatteBorder mBorder = new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY);
 
@@ -68,21 +68,21 @@ public class Startseite extends HAWView {
 
 		// Beschreibungstexte hinzufügen
 		// Tutorial
-		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
+		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial2"));
 		setNormalBorder(functionText1);
 		functionText1.addMouseListener(mL);
 		functionText1.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
 		functionText1.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
 
 		//Aufgaben
-		functionText2.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.aufgaben"));
+		functionText2.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.aufgaben2"));
 		setNormalBorder(functionText2);
 		functionText2.addMouseListener(mL);
 		functionText2.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
 		functionText2.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
 
 		//Sandbox 
-		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
+		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox2"));
 		setNormalBorder(functionText3);
 		functionText3.addMouseListener(mL);
 		functionText3.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));

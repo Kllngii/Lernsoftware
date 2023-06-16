@@ -49,6 +49,8 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton ButtonAufgaben = new CircleButton("Aufgaben");	
 	private JButton ButtonLiniengraph = new CircleButton("Liniengraph");
 	private JButton ButtonWeitereHilfe = new CircleButton("Weitere Hilfe");
+	private JButton ButtonTutorial = new CircleButton("Tutorial");
+	private JButton ButtonSandbox = new CircleButton("Sandbox");
 	private JButton ButtonFUN = new CircleButton(" ");
 	private JLabel Ueberschrift = new JLabel("Hilfe");
 	private JTextArea text = new JTextArea(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"),20,50);
@@ -88,6 +90,8 @@ public class Hilfe extends HAWView implements ActionListener{
 		ButtonLiniengraph.addActionListener(this);
 		ButtonWeitereHilfe.addActionListener(this);
 		ButtonFUN.addActionListener(this);
+		ButtonTutorial.addActionListener(this);
+		ButtonSandbox.addActionListener(this);
 		
 
 
@@ -144,7 +148,7 @@ public class Hilfe extends HAWView implements ActionListener{
 				//.debug(true)
 				.padding(Paddings.DIALOG)
 				.add(Ueberschrift) .xy(2, 1)
-				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph,ButtonWeitereHilfe,ButtonFUN) .xy(1, 2, "fill,top")
+				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph,ButtonWeitereHilfe,ButtonTutorial,ButtonSandbox,ButtonFUN) .xy(1, 2, "fill,top")
 				//.add(text) .xy(2, 2)
 				.addScrolled(text) .xy(2, 2)
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
@@ -236,7 +240,17 @@ public class Hilfe extends HAWView implements ActionListener{
 		}
 	    if(j > 4) {
 	    ButtonFUN.setVisible(true);
-	    }
+	    }if(e.getSource() == ButtonTutorial) {
+			Ueberschrift.setText("Tutorial");
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
+			text.setWrapStyleWord(true);
+			text.setLineWrap(true);
+		}if(e.getSource() == ButtonSandbox) {
+			Ueberschrift.setText("Sandbox");
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
+			text.setWrapStyleWord(true);
+			text.setLineWrap(true);
+		}
 		panel.repaint();
 	}
 }
