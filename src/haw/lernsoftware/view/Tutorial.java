@@ -112,7 +112,6 @@ public class Tutorial extends HAWView implements ActionListener {
 		//double widthratio = width * ratio;
 		//int height1 = (int) widthratio;
 		Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		
 		return new ImageIcon(resizedImage);
 	}
 
