@@ -164,16 +164,17 @@ public class SpeicherService {
 						"elementare_aufgabe7.em", "ereignisse_aufgabe7.em", "ereignisse_start_aufgabe7.em"),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe8.text"),
 						"Aufgabe8_LeeresDiagramm_Bild.png", "elementare_aufgabe8.em", "ereignisse_aufgabe8.em",
-						"ereignisse_start_aufgabe8.em")// ,
-//				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe9.text"),
-//						"Aufgabe9_LeeresDiagramm_Bild.png"),
-//				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe10.text"),
-//						"Aufgabe10_LeeresDiagramm_Bild.png"),
-//				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe11.text"),
-//						"Aufgabe11_LeeresDiagramm_Bild.png"),
-//				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe12.text"),
-//						"Aufgabe12_LeeresDiagramm_Bild.png")
-		);
+						"ereignisse_start_aufgabe8.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe9.text"),
+						"Aufgabe9_LeeresDiagramm.png"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe10.text"),
+						"Aufgabe10_LeeresDiagramm_Bild.png"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe11.text"),
+						"Aufgabe11_LeeresDiagramm_Bild.png"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe12.text"),
+						"Aufgabe12_LeeresDiagramm_Bild.png"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe13.text"),
+						"Aufgabe13_LeeresDiagramm_Bild.png"));
 		// new
 		// Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN,
 		// "aufgabe9.text")),

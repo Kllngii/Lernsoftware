@@ -2,12 +2,17 @@ package haw.lernsoftware.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -49,6 +54,8 @@ public class GUI implements ActionListener {
 	private JMenuItem menuItemMittel = new JMenuItem("Mittel");
 	private JMenuItem menuItemSchwer = new JMenuItem("Schwer");
 	private JButton hilfeButton = new JButton("Hilfe");
+	private JButton homeButton = new JButton("");
+	private JButton closeButton = new JButton("Fenster Schließen");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite(this);
@@ -59,11 +66,18 @@ public class GUI implements ActionListener {
 
 	public GUI(JFrame frame) {
 		this.frame = frame;
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationByPlatform(true);
 		frame.setResizable(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+		//frame.setUndecorated(true);
+		frame.getRootPane().setBorder(
+		        BorderFactory.createMatteBorder(10, 10, 10, 10, new Color(230, 230, 230))
+		);
+		
+		menuBar.setBackground(new Color(230, 230, 230));
+		menuBar.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		
 		constructMenubar();
 		frame.setJMenuBar(menuBar);
 		constructContentPanel();
@@ -77,17 +91,25 @@ public class GUI implements ActionListener {
 		JMenu dateiMenü = new JMenu("Datei");
 		JMenu fensterMenü = new JMenu("Fenster");
 		JMenu fensterAufgabentyp = new JMenu("Aufgaben");
-
+		
+		//menuBar.add(Box.createHorizontalGlue());
+		
+		menuBar.add(homeButton);
 		menuBar.add(dateiMenü);
 		menuBar.add(fensterMenü);
 		menuBar.add(fensterAufgabentyp);
 		menuBar.add(hilfeButton);
+		menuBar.add(closeButton);
+		
+		//closeButton.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		
 
 		dateiMenü.add(menuItemSpeichern);
 		dateiMenü.add(menuItemLaden);
 		menuItemSpeichern.addActionListener(this);
 		menuItemLaden.addActionListener(this);
 
+		Image iconImg = ResourceProvider.loadImage(Konst.ICON_PATH);
 		Image hilfeImg = ResourceProvider.loadImage(Konst.HILFE_ICON);
 		Image ldImg = ResourceProvider.loadImage(Konst.LINIENDIAGRAMM_ICON);
 		Image startseiteImg = ResourceProvider.loadImage(Konst.STARTSEITE_ICON);
@@ -112,6 +134,13 @@ public class GUI implements ActionListener {
 		hilfeButton.setOpaque(false);
 		hilfeButton.setContentAreaFilled(false);
 		hilfeButton.setBorderPainted(false);
+		homeButton.setIcon(new ImageIcon(iconImg.getScaledInstance(32, 32, 0)));	
+		homeButton.setOpaque(false);
+		homeButton.setContentAreaFilled(false);
+		homeButton.setBorderPainted(false);	
+		closeButton.setOpaque(false);
+		closeButton.setContentAreaFilled(false);
+		closeButton.setBorderPainted(false);
 
 		fensterMenü.add(menuItemStartseite);
 		fensterMenü.add(menuItemLiniendiagramm);
@@ -123,6 +152,8 @@ public class GUI implements ActionListener {
 		menuItemHilfe.addActionListener(this);
 
 		hilfeButton.addActionListener(this);
+		homeButton.addActionListener(this);
+		closeButton.addActionListener(this);
 		
 		fensterAufgabentyp.add(menuItemTutorial);
 		fensterAufgabentyp.add(menuItemLeicht);
@@ -188,6 +219,12 @@ public class GUI implements ActionListener {
 		}else if(e.getSource() == hilfeButton) {
 			log.info("Öffne das Hilfe-Fenster!");
 			new Hilfe();
+		}else if(e.getSource() == homeButton) {
+			log.info("Wechsle zur Startseite");
+			this.switchToView(WindowSelect.STARTSEITE);
+		}else if(e.getSource() == closeButton) {
+			log.info("Schließe Fenster");
+			frame.dispose();
 		}
 	}
 
