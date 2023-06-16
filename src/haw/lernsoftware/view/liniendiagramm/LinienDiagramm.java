@@ -70,8 +70,10 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	 * Ein Konstruktor nur für die Initialisierung des GUIs!
 	 */
 	public LinienDiagramm() {
-		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
-		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
+//		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
+//		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
+		eMenge = new Ereignismenge(new ArrayList<Elementarereignis>());
+		mengen = new ArrayList<Menge>();
 
 //		eMenge.getEreignisse().stream().forEach(log::info);
 //		mengen.stream().forEach(log::info);
