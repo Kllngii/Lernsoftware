@@ -25,6 +25,7 @@ import com.jgoodies.forms.factories.Paddings;
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.resources.ResourceProvider;
+import java.awt.Toolkit;
 
 
 /**
@@ -38,7 +39,7 @@ public class Tutorial extends HAWView implements ActionListener {
 	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
 	private JButton tutorialBack = new CircleButton("zurück");
 	private JLabel bild = new JLabel();
-	
+
 
 	// Skalierung für das ImageIcon
 	int x1 = 700; // Gewünschte Breite des Bildes
@@ -69,8 +70,8 @@ public class Tutorial extends HAWView implements ActionListener {
 		buttonAnordnung.add(tutorialBack);
 		tutorialBack.getModel().setEnabled(false);
 		buttonAnordnung.add(tutorialNext);
-		
-		
+
+
 		//Button konfigurieren
 		tutorialNext.addActionListener(this);
 
@@ -84,16 +85,20 @@ public class Tutorial extends HAWView implements ActionListener {
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_Ueberschrift.text")).xyw(1, 2, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 2) //
 				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1)), x1, y1) )).xyw(3,3,3) //
+				
+				// hier muss das wieder geändert werden
+				
+				//.add(new JLabel(new ImageIcon(ResourceProvider.loadImage("Aufgabe9_Gluecksrad.png")))).xyw(3,3,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz2.text")).xyw(1, 5, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz31.text")).xyw(1, 6, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz3.text")).xyw(1, 7, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD2)), x, y) )).xyw(3,7,3) //
+				//.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD2)), x, y) )).xyw(3,7,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz4.text")).xyw(1, 9, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD3)), x, y) )).xyw(3,9,3) //
+				//.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD3)), x, y) )).xyw(3,9,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz5.text")).xyw(1, 11, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)), x, y) )).xyw(3,11,3) //
+				//.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)), x, y) )).xyw(3,11,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 13, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)), x, y) )).xyw(3,13,3) //
+				//.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)), x, y) )).xyw(3,13,3) //
 				.build(); //
 		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einfügen und zurückgeben
 		return FormBuilder.create()
@@ -107,10 +112,12 @@ public class Tutorial extends HAWView implements ActionListener {
 	//Bildgröße anpassen
 	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
 		Image image = img.getImage();
-		//double ratio = (width/height);
-		//log.debug("Höhe " + img.getIconHeight() + "Breite " + img.getIconWidth());
-		//double widthratio = width * ratio;
-		//int height1 = (int) widthratio;
+		//Image image = Toolkit.getDefaultToolkit().getImage(img);
+		//int width1 = image.getWidth(null);
+		//int height1 = image.getHeight(null);
+		//double ratio = (width1 /height1);
+		//int height2 = (int) (width1*ratio);
+		//log.debug(ratio+"  "+ height2);
 		Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		return new ImageIcon(resizedImage);
 	}
