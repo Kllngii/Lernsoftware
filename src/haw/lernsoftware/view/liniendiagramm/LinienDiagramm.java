@@ -62,7 +62,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 		this.mengen.get(3).getEreignisse().stream().forEach(log::fatal);
 
-		log.info("Die Ereignismenge ist " + (eMenge.validate() ? "ok" : "fehlerhaft"));
 		if (eMenge.validate())
 			constructDiagramm(this.mengen, this.eMenge);
 	}
@@ -71,6 +70,14 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	 * Ein Konstruktor nur für die Initialisierung des GUIs!
 	 */
 	public LinienDiagramm() {
+		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
+		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
+
+//		eMenge.getEreignisse().stream().forEach(log::info);
+//		mengen.stream().forEach(log::info);
+
+		if (eMenge.validate())
+			constructDiagramm(mengen, eMenge);
 		//OK
 	}
 
@@ -147,11 +154,13 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private int offset(Graphics2D g2d) {
 		int maxlength = 0;
 		for (int j = 0; j < numberEreignisse; j++) {
-			if (Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName())) > maxlength) {
-				maxlength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
+			int leftLength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
+			int rightLength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getProbability()));
+			if (leftLength > maxlength) {
+				maxlength = leftLength;
 			}
-			if (Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getProbability())) > maxlength) {
-				maxlength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
+			if (rightLength > maxlength) {
+				maxlength = rightLength;
 			}
 		}
 		return maxlength + 30;
@@ -245,7 +254,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
 
 			// Wenn in Zeile mengen.get(j) die WSK berechnet werden soll
-			if (true) {
+			if (false) {
 				g2d.setFont(new Font("default", Font.BOLD, g2d.getFont().getSize()));
 				g2d.setColor(Color.RED);
 				g2d.drawString(mengen.get(j).getUserProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);

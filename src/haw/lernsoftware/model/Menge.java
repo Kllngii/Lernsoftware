@@ -18,6 +18,9 @@ public class Menge {
 	private List<Elementarereignis> ereignisse;
 	private int order;
 	private String userProb;
+	private boolean calculateProbability = true;
+	private boolean editable = true;
+	private boolean deleteable = true;
 
 	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> list, int order) {
 		super();
