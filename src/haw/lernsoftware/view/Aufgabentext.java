@@ -89,7 +89,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		aufgabenText.setText(model.getCurrentAufgabe().getText());
 		aufgabenText.setLineWrap(true);
 		aufgabenText.setWrapStyleWord(true);
-		aufgabenText.setPreferredSize(new Dimension(100, 50));
+		aufgabenText.setPreferredSize(new Dimension(100, 150));
 		aufgabenText.setEditable(false);
 		Color color = panel.getBackground();
 		aufgabenText.setBackground(color);
@@ -121,7 +121,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		// gibt einen JComponent zurück mit nur Text
 		return FormBuilder.create().debug(true) // Rote Linien zeichnen
 				.columns("100dlu, 5dlu, center:200dlu, 5dlu, 100dlu") //
-				.rows("p, 20dlu, p, $lg, top:40dlu, p, top:10dlu, p, top:50dlu") //
+				.rows("p, 20dlu, p, $lg, top:90dlu, p, top:10dlu, p, top:50dlu") //
 				.padding(Paddings.DIALOG) //
 				.add(titleTaskLabel).xy(3, 1) //
 				.add(toLiniendiagrammButton).xy(5, 1) //
