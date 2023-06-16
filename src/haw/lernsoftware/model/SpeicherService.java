@@ -48,28 +48,30 @@ public class SpeicherService {
 			return errors;
 		}
 	}
-	public class SkippingObjectOutputStream extends ObjectOutputStream {
-	    public SkippingObjectOutputStream(OutputStream out) throws IOException {
-	        super(out);
-	        enableReplaceObject(true);
-	    }
 
-	    @Override
-	    protected Object replaceObject(Object obj) throws IOException {
-	        if ((obj instanceof Serializable))
-	            return obj;
-	        log.debug(obj.toString() + " ist nicht Serializable!");
-	        return null;
-	    }
+	public class SkippingObjectOutputStream extends ObjectOutputStream {
+		public SkippingObjectOutputStream(OutputStream out) throws IOException {
+			super(out);
+			enableReplaceObject(true);
+		}
+
+		@Override
+		protected Object replaceObject(Object obj) throws IOException {
+			if ((obj instanceof Serializable))
+				return obj;
+			log.debug(obj.toString() + " ist nicht Serializable!");
+			return null;
+		}
 	}
 
 	private static Preferences getRoot() {
 		return Preferences.userRoot().node(Konst.PREFERENCES_ROOT_KEY);
 	}
-	
+
 	public static void speichereInPreferences(String key, String value) {
 		getRoot().put(key, value);
 	}
+
 	public static String ladeAusPreferences(String key) {
 		return getRoot().get(key, "{}");
 	}
@@ -98,10 +100,11 @@ public class SpeicherService {
 
 	public Model ladeModel() {
 		String jsonStr = ladeAusPreferences(Konst.MODEL_KEY);
-		if(!jsonStr.equals("{}")) {
+		if (!jsonStr.equals("{}")) {
 			Model m = Model.fromJSON(jsonStr);
-			if(m.getAufgaben().size() == ladeAufgaben().size()) {
-				//Nur wenn sich die Anzahl der Aufgaben nicht geändert hat wird der alte Stand geladen
+			if (m.getAufgaben().size() == ladeAufgaben().size()) {
+				// Nur wenn sich die Anzahl der Aufgaben nicht geändert hat wird der alte Stand
+				// geladen
 				m.setAufgaben(ladeAufgaben());
 				return m;
 			}
@@ -133,25 +136,50 @@ public class SpeicherService {
 	}
 
 	public static List<Aufgabe> ladeAufgaben() {
-		if(geladeneAufgaben.size() != 0)
-			return geladeneAufgaben; //Quick-return ohne Debugausgaben...
+		if (geladeneAufgaben.size() != 0)
+			return geladeneAufgaben; // Quick-return ohne Debugausgaben...
 		Logger.getLogger(SpeicherService.class).info("Lade Aufgaben!");
-		
+
 		// TODO Aufgaben hier hinzufügen
 		geladeneAufgaben = List.of(
-				//new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe1.text"), "aufgabentext_test.png"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe1.text"), "elementare_aufgabe1.em", "ereignisse_aufgabe1.em", "ereignisse_start_aufgabe1.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe2.text"), "elementare_aufgabe2.em", "ereignisse_aufgabe2.em", "ereignisse_start_aufgabe2.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe3.text"), "elementare_aufgabe3.em", "ereignisse_aufgabe3.em", "ereignisse_start_aufgabe3.em"),
-				//new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe2.text"), "elementare_aufgabe4.em", "ereignisse_aufgabe4.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe4.text"), "elementare_aufgabe4.em", "ereignisse_aufgabe4.em", "ereignisse_start_aufgabe4.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe5.text"), "elementare_aufgabe5.em", "ereignisse_aufgabe5.em", "ereignisse_start_aufgabe5.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe6.text"), "elementare_aufgabe6.em", "ereignisse_aufgabe6.em", "ereignisse_start_aufgabe6.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe7.text"), "elementare_aufgabe7.em", "ereignisse_aufgabe7.em", "ereignisse_start_aufgabe7.em"),
-				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe8.text"), "elementare_aufgabe8.em", "ereignisse_aufgabe8.em", "ereignisse_start_aufgabe8.em"));
-				//new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe9.text")),
-				//new Aufgabe("Zum Bearbeiten der nächsten Aufgabensammlung klicken Sie im Reiter auf 'Aufgaben'."));
-		
+				// new
+				// Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN,
+				// "aufgabe1.text"), "aufgabentext_test.png"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe1.text"),
+						"elementare_aufgabe1.em", "ereignisse_aufgabe1.em", "ereignisse_start_aufgabe1.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe2.text"),
+						"elementare_aufgabe2.em", "ereignisse_aufgabe2.em", "ereignisse_start_aufgabe2.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe3.text"),
+						"elementare_aufgabe3.em", "ereignisse_aufgabe3.em", "ereignisse_start_aufgabe3.em"),
+				// new
+				// Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN,
+				// "aufgabe2.text"), "elementare_aufgabe4.em", "ereignisse_aufgabe4.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe4.text"),
+						"elementare_aufgabe4.em", "ereignisse_aufgabe4.em", "ereignisse_start_aufgabe4.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe5.text"),
+						"elementare_aufgabe5.em", "ereignisse_aufgabe5.em", "ereignisse_start_aufgabe5.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe6.text"),
+						"elementare_aufgabe6.em", "ereignisse_aufgabe6.em", "ereignisse_start_aufgabe6.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe7.text"),
+						"elementare_aufgabe7.em", "ereignisse_aufgabe7.em", "ereignisse_start_aufgabe7.em"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe8.text"),
+						"Aufgabe8_LeeresDiagramm_Bild.png", "elementare_aufgabe8.em", "ereignisse_aufgabe8.em",
+						"ereignisse_start_aufgabe8.em")// ,
+//				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe9.text"),
+//						"Aufgabe9_LeeresDiagramm_Bild.png"),
+//				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe10.text"),
+//						"Aufgabe10_LeeresDiagramm_Bild.png"),
+//				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe11.text"),
+//						"Aufgabe11_LeeresDiagramm_Bild.png"),
+//				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe12.text"),
+//						"Aufgabe12_LeeresDiagramm_Bild.png")
+		);
+		// new
+		// Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN,
+		// "aufgabe9.text")),
+		// new Aufgabe("Zum Bearbeiten der nächsten Aufgabensammlung klicken Sie im
+		// Reiter auf 'Aufgaben'."));
+
 		return geladeneAufgaben;
 	}
 

@@ -44,6 +44,7 @@ public class Startseite extends HAWView {
 	public Startseite(GUI gui) {
 		this.gui = gui;				
 		
+		//Scrollbar hinzufügen
 		panel = new JScrollPane(view);
 		panel.setBorder(emptyBorder);
 		view.setBackground(new Color(230, 230, 230));
