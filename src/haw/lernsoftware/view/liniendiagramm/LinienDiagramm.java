@@ -111,7 +111,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		this.eMenge = e;
 		numberEreignisse = mengen.size();
 		numberElementare = e.getEreignisse().size();
-		log.debug("Neue Daten geladen!");
+		log.info("Neue Daten geladen!");
 		panel.repaint();
 	}
 	//
@@ -153,15 +153,11 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	}
 
 	private int offset(Graphics2D g2d) {
-		int maxlength = 0;
+		int maxlength = Integer.valueOf(g2d.getFontMetrics().stringWidth("P = 000/000"));
 		for (int j = 0; j < numberEreignisse; j++) {
 			int leftLength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getName()));
-			int rightLength = Integer.valueOf(g2d.getFontMetrics().stringWidth(mengen.get(j).getProbability()));
 			if (leftLength > maxlength) {
 				maxlength = leftLength;
-			}
-			if (rightLength > maxlength) {
-				maxlength = rightLength;
 			}
 		}
 		return maxlength + 30;
@@ -333,10 +329,17 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				else if (current.spalte() == eMenge.getEreignisse().size() && last.spalte() == eMenge.getEreignisse().size() && current.zeile() == last.zeile()) {
 					if (mengen.get(current.zeile()).isCalculateProbability()) {
 						log.debug("Zeile " + current.zeile() + " in der rechtesten Spalte wurde gewählt!");
-						String m = JOptionPane.showInputDialog("Wahrscheinlichkeit des Ereignisses " + mengen.get(current.zeile()).getName() + ":");
-						if (m != null) {
-							mengen.get(current.zeile()).setUserProb(m);
-							rebase(mengen, eMenge);
+						boolean accepted = false;
+						while(!accepted) {
+							String m = JOptionPane.showInputDialog("Wahrscheinlichkeit des Ereignisses " + mengen.get(current.zeile()).getName() + " (als gekürzter Bruch):");
+							if (m != null) {
+								if(m.matches("([0-9]+)/([0-9]+)") || m.equals("0") || m.equals("1")) {
+									mengen.get(current.zeile()).setUserProb(m);
+									rebase(mengen, eMenge);
+									accepted = true;
+								}
+							} else
+								accepted = true;
 						}
 					}
 					mouseInteractions.clear();

@@ -2,6 +2,7 @@ package haw.lernsoftware.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -88,7 +89,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		aufgabenText.setText(model.getCurrentAufgabe().getText());
 		aufgabenText.setLineWrap(true);
 		aufgabenText.setWrapStyleWord(true);
-		aufgabenText.setPreferredSize(new Dimension(100, 100));
+		aufgabenText.setPreferredSize(new Dimension(100, 50));
 		aufgabenText.setEditable(false);
 		Color color = panel.getBackground();
 		aufgabenText.setBackground(color);
@@ -118,9 +119,9 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		toLiniendiagrammButton.addActionListener(this);
 
 		// gibt einen JComponent zurück mit nur Text
-		return FormBuilder.create() // Rote Linien zeichnen
+		return FormBuilder.create().debug(true) // Rote Linien zeichnen
 				.columns("100dlu, 5dlu, center:200dlu, 5dlu, 100dlu") //
-				.rows("p, 20dlu, p, $lg, top:100dlu, p, p, top:50dlu") //
+				.rows("p, 20dlu, p, $lg, top:40dlu, p, top:10dlu, p, top:50dlu") //
 				.padding(Paddings.DIALOG) //
 				.add(titleTaskLabel).xy(3, 1) //
 				.add(toLiniendiagrammButton).xy(5, 1) //
@@ -130,9 +131,21 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.addSeparator("Aufgabentext").xyw(1, 3, 5) //
 				.add(aufgabenText).xyw(1, 5, 5) //
 				.add(aufgabenBild).xyw(1, 6, 5) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
-				.add(linienpanel).xyw(1, 7, 5) //
-				.add(loesungText).xyw(1, 8, 5) //
+				.add(linienpanel).xyw(1, 8, 5) //
+				.add(loesungText).xyw(1, 9, 5) //
 				.build(); //
+	}
+
+	// Bildgröße anpassen
+	private ImageIcon resizeImage(ImageIcon img, int width) {
+		float height = (float) width / (float) img.getIconWidth() * (float) img.getIconHeight();
+		Image image = img.getImage();
+		// double ratio = (width/height);
+		// log.debug("Höhe " + img.getIconHeight() + "Breite " + img.getIconWidth());
+		// double widthratio = width * ratio;
+		// int height1 = (int) widthratio;
+		Image resizedImage = image.getScaledInstance(width, Math.round(height), Image.SCALE_SMOOTH);
+		return new ImageIcon(resizedImage);
 	}
 
 	private void refreshAufgabenview() {
@@ -154,31 +167,16 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		titleTaskLabel.setText("Aufgabe: " + (i + 1));
 		progress.setValue(i);
 
-		log.debug(current.hasImage());
-		log.debug(current.hasImage());
-
 		if (model.getCurrentAufgabe().hasImage() == true) {
 			bild.setImage(model.getCurrentAufgabe().getImage());
-			aufgabenBild.setIcon(bild);
+			aufgabenBild.setIcon(resizeImage(bild, 750));
 			log.debug("lade bild!");
 		} else {
 			aufgabenBild.setIcon(null);
 			log.debug("kein Bild!");
 		}
 
-//		if (current.hasImage()) { // aktualisiert falls bild vorhanden...
-//			if (bild != null) {
-//			log.debug("lade bild!");
-//			bild.setImage(current.getImage());
-//			aufgabenBild.setIcon(bild);
-//			}
-//		} else {
-//			aufgabenBild.setIcon(null);
-//		}
-
-		if (current.hasLiniendiagramm())
-
-		{
+		if (current.hasLiniendiagramm()) {
 			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse(),
 					current.getStartEreignisse());
 			linienpanel = liniendiagramm.panel;
