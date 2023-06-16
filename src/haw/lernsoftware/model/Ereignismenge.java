@@ -111,8 +111,19 @@ public class Ereignismenge {
 		JSONObject json = new JSONObject(jsonString);
 		String elementareString = json.getString("elementare");
 		List<Elementarereignis> elementare = new ArrayList<>();
+		
+		boolean calculateProbability = true, editable = true, deleteable = true;
+		if(json.has("calculateProbability"))
+			calculateProbability = json.getBoolean("calculateProbability");
+		if(json.has("editable"))
+			editable = json.getBoolean("editable");
+		if(json.has("deleteable"))
+			deleteable = json.getBoolean("deleteable");
+		
+		
 		if (elementareString == "") {
-			return new Menge(json.getString("name"), eMenge, eMenge.getEreignisse().subList(0, 0), json.getInt("order"));
+			return new Menge(json.getString("name"), eMenge, eMenge.getEreignisse().subList(0, 0), json.getInt("order"),
+					calculateProbability, editable, deleteable);
 		} else {
 			String[] elementareArray = elementareString.split(",");
 			Arrays.stream(elementareArray).map(elem -> {
@@ -125,7 +136,8 @@ public class Ereignismenge {
 					if(elemEr != null)
 						elementare.add(elemEr);
 				});
-			return new Menge(json.getString("name"), eMenge, elementare, json.getInt("order"));
+			return new Menge(json.getString("name"), eMenge, elementare, json.getInt("order"),
+					calculateProbability, editable, deleteable);
 		}
 	}
 }

@@ -22,13 +22,18 @@ public class Menge {
 	private boolean editable = true;
 	private boolean deleteable = true;
 
-	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> list, int order) {
+	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> list, int order,
+			boolean calculateProbability, boolean editable, boolean deleteable) {
 		super();
 		this.name = name;
 		this.möglicheEreignisse = möglicheEreignisse;
 		this.ereignisse = list;
 		this.order = order;
 		this.userProb = "P = ";
+		
+		this.calculateProbability = calculateProbability;
+		this.editable = editable;
+		this.deleteable = deleteable;
 	}
 
 	public Menge vereinigt(Menge m) {
@@ -36,7 +41,7 @@ public class Menge {
 		for (Elementarereignis e : m.getEreignisse())
 			if (!vereinigteMenge.contains(e))
 				vereinigteMenge.add(e);
-		return new Menge("Beispielmenge", möglicheEreignisse, vereinigteMenge, order);
+		return new Menge("Beispielmenge", möglicheEreignisse, vereinigteMenge, order, m.isCalculateProbability(), m.isEditable(), m.isDeleteable());
 	}
 
 	public Menge geschnitten(Menge m) {
@@ -44,14 +49,14 @@ public class Menge {
 		for (Elementarereignis e : m.getEreignisse())
 			if (ereignisse.contains(e))
 				schnittMenge.add(e);
-		return new Menge("Beispielmenge", möglicheEreignisse, schnittMenge, order);
+		return new Menge("Beispielmenge", möglicheEreignisse, schnittMenge, order, m.isCalculateProbability(), m.isEditable(), m.isDeleteable());
 	}
 
 	public Menge negiert() {
 		List<Elementarereignis> negierteMenge = new ArrayList<>(möglicheEreignisse.getEreignisse());
 		for (Elementarereignis e : ereignisse)
 			negierteMenge.remove(e);
-		return new Menge("Beispielmenge", möglicheEreignisse, negierteMenge, order);
+		return new Menge("Beispielmenge", möglicheEreignisse, negierteMenge, order, isCalculateProbability(), isEditable(), isDeleteable());
 	}
 
 	public static Menge negiert(Menge m) {
@@ -232,4 +237,18 @@ public class Menge {
 	public void setUserProb(String m) {
 		this.userProb = "P = " + m;
 	}
+
+	public boolean isCalculateProbability() {
+		return calculateProbability;
+	}
+
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public boolean isDeleteable() {
+		return deleteable;
+	}
+	
+	
 }

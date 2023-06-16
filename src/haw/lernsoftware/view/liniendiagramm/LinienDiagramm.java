@@ -60,7 +60,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		this.mengen = startMengen;
 
 
-		this.mengen.get(3).getEreignisse().stream().forEach(log::fatal);
+//		this.mengen.get(3).getEreignisse().stream().forEach(log::fatal);
 
 		if (eMenge.validate())
 			constructDiagramm(this.mengen, this.eMenge);
@@ -343,7 +343,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 					log.debug("NEUES EREIGNIS HINZUFÜGEN");
 					String m = JOptionPane.showInputDialog("Name des neuen Ereignisses:");
 					if (m != null) {
-						mengen.add(new Menge(m, eMenge, new ArrayList<Elementarereignis>(), mengen.size() + 1));
+						mengen.add(new Menge(m, eMenge, new ArrayList<Elementarereignis>(), mengen.size() + 1, true, true, true));
 						rebase(mengen, eMenge);
 					}
 					mouseInteractions.clear();
