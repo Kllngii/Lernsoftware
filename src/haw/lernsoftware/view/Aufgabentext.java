@@ -108,6 +108,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			bild = new ImageIcon(model.getCurrentAufgabe().getImage());
 			aufgabenBild = new JLabel(bild);
 		} else {
+			bild = new ImageIcon();
 			aufgabenBild = new JLabel("");
 		}
 
@@ -153,16 +154,33 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		titleTaskLabel.setText("Aufgabe: " + (i + 1));
 		progress.setValue(i);
 
-		if (current.hasImage()) { // aktualisiert falls bild vorhanden...
-			if (bild != null) {
-				bild.setImage(current.getImage());
-				aufgabenBild.setIcon(bild);
-			}
-		} else
-			aufgabenBild.setIcon(null);
+		log.debug(current.hasImage());
+		log.debug(current.hasImage());
 
-		if (current.hasLiniendiagramm()) {
-			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse(), current.getStartEreignisse());
+		if (model.getCurrentAufgabe().hasImage() == true) {
+			bild.setImage(model.getCurrentAufgabe().getImage());
+			aufgabenBild.setIcon(bild);
+			log.debug("lade bild!");
+		} else {
+			aufgabenBild.setIcon(null);
+			log.debug("kein Bild!");
+		}
+
+//		if (current.hasImage()) { // aktualisiert falls bild vorhanden...
+//			if (bild != null) {
+//			log.debug("lade bild!");
+//			bild.setImage(current.getImage());
+//			aufgabenBild.setIcon(bild);
+//			}
+//		} else {
+//			aufgabenBild.setIcon(null);
+//		}
+
+		if (current.hasLiniendiagramm())
+
+		{
+			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse(),
+					current.getStartEreignisse());
 			linienpanel = liniendiagramm.panel;
 		} else
 			linienpanel = new JPanel();
