@@ -51,10 +51,13 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JButton toLiniendiagrammButton = new CircleButton("Liniendiagramm");
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
 	private JTextArea loesungText = new JTextArea("if you can read this, report a bug");
+	private JButton zeigeloesung = new JButton("Lösung");
 	private JComponent linienpanel;
 
 	private ImageIcon bild;
 	private JLabel aufgabenBild;
+	private ImageIcon bild2;
+	private JLabel aufgabenBild2;
 	private GUI gui;
 
 	// fügt dem Panel von Aufgabentext einen JComponent zu
@@ -107,21 +110,26 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		// TODO was ist wenn auch noch Liniendiagramme dazukommen
 		if (model.getCurrentAufgabe().hasImage() == true) {
 			bild = new ImageIcon(model.getCurrentAufgabe().getImage());
+			bild2 = new ImageIcon(model.getCurrentAufgabe().getImage2());
 			aufgabenBild = new JLabel(bild);
+			aufgabenBild2 = new JLabel(bild2);
 		} else {
 			bild = new ImageIcon();
 			aufgabenBild = new JLabel("");
+			bild2 = new ImageIcon();
+			aufgabenBild2 = new JLabel("");
 		}
 
 		// Button Listener
 		previousTaskButton.addActionListener(this);
 		nextTaskButton.addActionListener(this);
 		toLiniendiagrammButton.addActionListener(this);
+		zeigeloesung.addActionListener(this);
 
 		// gibt einen JComponent zurück mit nur Text
-		return FormBuilder.create().debug(true) // Rote Linien zeichnen
+		return FormBuilder.create() // Rote Linien zeichnen
 				.columns("100dlu, 5dlu, center:200dlu, 5dlu, 100dlu") //
-				.rows("p, 20dlu, p, $lg, top:90dlu, p, top:10dlu, p, top:50dlu") //
+				.rows("p, 20dlu, p, $lg, top:90dlu, p, top:10dlu, p, top:10dlu, p, top:50dlu") //
 				.padding(Paddings.DIALOG) //
 				.add(titleTaskLabel).xy(3, 1) //
 				.add(toLiniendiagrammButton).xy(5, 1) //
@@ -130,9 +138,11 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.add(nextTaskButton).xy(5, 2) //
 				.addSeparator("Aufgabentext").xyw(1, 3, 5) //
 				.add(aufgabenText).xyw(1, 5, 5) //
-				.add(aufgabenBild).xyw(1, 6, 5) // Muss noch als Funktion Variabel gemacht werden um Bilder zu laden
-				.add(linienpanel).xyw(1, 8, 5) //
-				.add(loesungText).xyw(1, 9, 5) //
+				.add(aufgabenBild).xyw(1, 6, 5) //
+				.add(zeigeloesung).xyw(1, 8, 5) //
+				.add(aufgabenBild2).xyw(1, 8, 5) //
+				.add(linienpanel).xyw(1, 10, 5) //
+				.add(loesungText).xyw(1, 11, 5) //
 				.build(); //
 	}
 
@@ -140,10 +150,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private ImageIcon resizeImage(ImageIcon img, int width) {
 		float height = (float) width / (float) img.getIconWidth() * (float) img.getIconHeight();
 		Image image = img.getImage();
-		// double ratio = (width/height);
-		// log.debug("Höhe " + img.getIconHeight() + "Breite " + img.getIconWidth());
-		// double widthratio = width * ratio;
-		// int height1 = (int) widthratio;
+		zeigeloesung.setPreferredSize(new Dimension(width, Math.round(height)));
 		Image resizedImage = image.getScaledInstance(width, Math.round(height), Image.SCALE_SMOOTH);
 		return new ImageIcon(resizedImage);
 	}
@@ -168,12 +175,19 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		progress.setValue(i);
 
 		if (model.getCurrentAufgabe().hasImage() == true) {
+			zeigeloesung.setVisible(true);
 			bild.setImage(model.getCurrentAufgabe().getImage());
 			aufgabenBild.setIcon(resizeImage(bild, 750));
 			log.debug("lade bild!");
+			bild2.setImage(model.getCurrentAufgabe().getImage2());
+			aufgabenBild2.setIcon(resizeImage(bild2, 750));
+			log.debug("lade bild!");
 		} else {
+			zeigeloesung.setVisible(false);
 			aufgabenBild.setIcon(null);
 			log.debug("kein Bild!");
+			aufgabenBild2.setIcon(null);
+			log.debug("kein Bild2!");
 		}
 
 		if (current.hasLiniendiagramm()) {
@@ -199,6 +213,10 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		}
 		if (e.getSource() == nextTaskButton) {
 			i++;
+		}
+		if (e.getSource() == zeigeloesung) {
+			zeigeloesung.setVisible(false);
+			return;
 		}
 		refreshAufgabenview();
 
