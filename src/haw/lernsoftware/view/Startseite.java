@@ -44,6 +44,7 @@ public class Startseite extends HAWView {
 	public Startseite(GUI gui) {
 		this.gui = gui;				
 		
+		//Scrollbar hinzufügen
 		panel = new JScrollPane(view);
 		view.add(constructStartseite());			
 		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -67,16 +68,22 @@ public class Startseite extends HAWView {
 		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
 		setNormalBorder(functionText1);
 		functionText1.addMouseListener(mL);
+		functionText1.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
+		functionText1.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
 
 		//Aufgaben
 		functionText2.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.aufgaben"));
 		setNormalBorder(functionText2);
 		functionText2.addMouseListener(mL);
+		functionText2.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
+		functionText2.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
 
 		//Sandbox 
 		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
 		setNormalBorder(functionText3);
 		functionText3.addMouseListener(mL);
+		functionText3.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
+		functionText3.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
 		
 		//FormBuilder hinzufügen
 		// gibt einen JComponent zurück, der .debug(true)
