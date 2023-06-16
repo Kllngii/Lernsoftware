@@ -15,6 +15,9 @@ import org.json.JSONObject;
  *
  */
 public class Ereignismenge {
+	
+	private Logger log = Logger.getLogger(getClass());
+	
 	private List<Elementarereignis> ereignisse = new ArrayList<>();
 
 	public Ereignismenge(List<Elementarereignis> ereignisse) {
@@ -30,15 +33,18 @@ public class Ereignismenge {
 	 * <li> eine Gesamtwahrscheinlichkeit >1 haben
 	 * @return true, wenn alle Checks erfolgreich waren
 	 */
-	public boolean vaildate() {
-		if(ereignisse == null)
+	public boolean validate() {
+		if(ereignisse == null) {
+			log.warn("Die Liste an Ereignissen ist null!");
 			return false;
-		
+		}
 		double gesamt = 0;
 		for(Elementarereignis e : ereignisse)
 			gesamt += e.getProbability();
-		if(gesamt > 1) //TODO floatingPoint-Fehler beachten
+		if(gesamt > (1.0+1e-2) && gesamt < 1.0-1e-2) {
+			log.warn("Die Gesamtwahrscheinlichkeit ist != 1");
 			return false;
+		}
 		
 		return true;
 	}

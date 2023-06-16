@@ -62,22 +62,16 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 		this.mengen.get(3).getEreignisse().stream().forEach(log::fatal);
 
-		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
-		if (eMenge.vaildate())
+		log.info("Die Ereignismenge ist " + (eMenge.validate() ? "ok" : "fehlerhaft"));
+		if (eMenge.validate())
 			constructDiagramm(this.mengen, this.eMenge);
 	}
 
-	@Deprecated(since = "26.05.2023")
+	/**
+	 * Ein Konstruktor nur für die Initialisierung des GUIs!
+	 */
 	public LinienDiagramm() {
-		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
-		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
-
-		eMenge.getEreignisse().stream().forEach(log::info);
-		mengen.stream().forEach(log::info);
-
-		log.info("Die Ereignismenge ist " + (eMenge.vaildate() ? "ok" : "fehlerhaft"));
-		if (eMenge.vaildate())
-			constructDiagramm(mengen, eMenge);
+		//OK
 	}
 
 	private void constructDiagramm(List<Menge> mengen, Ereignismenge e) {
