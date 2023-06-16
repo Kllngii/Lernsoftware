@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
+import org.json.JSONPropertyIgnore;
 
 /**
  * Eine Menge kennt sowohl alle möglichen Elemente als auch die enthaltenen Elemente.
@@ -21,6 +22,7 @@ public class Menge {
 	private boolean calculateProbability = true;
 	private boolean editable = true;
 	private boolean deleteable = true;
+	private boolean correct = false;
 
 	public Menge(String name, Ereignismenge möglicheEreignisse, List<Elementarereignis> list, int order,
 			boolean calculateProbability, boolean editable, boolean deleteable) {
@@ -105,8 +107,7 @@ public class Menge {
 	}
 
 	public String getUserProbability() {
-		String output = this.userProb;
-		return output;
+		return this.userProb;
 	}
 	
 	public String getProbability() {
@@ -235,7 +236,7 @@ public class Menge {
 	}
 
 	public void setUserProb(String m) {
-		this.userProb = "P = " + m;
+		this.userProb = m;
 	}
 
 	public boolean isCalculateProbability() {
@@ -249,6 +250,16 @@ public class Menge {
 	public boolean isDeleteable() {
 		return deleteable;
 	}
+
+	@JSONPropertyIgnore
+	public boolean isCorrect() {
+		return correct;
+	}
+
+	public void setCorrect(boolean correct) {
+		this.correct = correct;
+	}
+	
 	
 	
 }

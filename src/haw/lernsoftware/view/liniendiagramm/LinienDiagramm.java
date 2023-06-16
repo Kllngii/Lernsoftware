@@ -111,7 +111,8 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		this.eMenge = e;
 		numberEreignisse = mengen.size();
 		numberElementare = e.getEreignisse().size();
-		log.info("Neue Daten geladen!");
+		log.debug("Neue Daten geladen!");
+		
 		panel.repaint();
 	}
 	//
@@ -241,7 +242,22 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				}
 
 				if (linesegment(mengen.get(j), i+1)) {
+					boolean correct = false;
+					for(Menge ziel : zielMengen) {
+						if(ziel.getOrder() == mengen.get(j).getOrder()) {
+							correct = true; //Es gibt eine entsprechende Ordernummer-Übereinstimmung, daher potenziell korrekt
+							for(int k = 0; k < numberElementare; k++) {
+								if(linesegment(ziel, k+1) != linesegment(mengen.get(j), k+1))
+									correct = false;
+							}
+						}
+					}
+					if(correct && mengen.get(j).isEditable())
+						g2d.setColor(new Color(42, 112, 37));
+					else
+						g2d.setColor(Color.BLACK);
 					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + currentWidth, BORDER_Y + 10 + j*linewidth + linewidth/2);
+					g2d.setColor(Color.BLACK);
 				}
 				currentLeftBorder += currentWidth;
 			}
@@ -253,8 +269,14 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			// Wenn in Zeile mengen.get(j) die WSK berechnet werden soll
 			if (mengen.get(j).isCalculateProbability()) {
 				g2d.setFont(new Font("default", Font.BOLD, g2d.getFont().getSize()));
-				g2d.setColor(Color.RED);
-				g2d.drawString(mengen.get(j).getUserProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
+				boolean isCorrect = mengen.get(j).getFracProbability().equals(mengen.get(j).getUserProbability());
+				if(isCorrect)
+					g2d.setColor(new Color(42, 112, 37));
+				else
+					g2d.setColor(Color.RED);
+				
+				mengen.get(j).setCorrect(isCorrect);
+				g2d.drawString(mengen.get(j).getUserProbability() + (isCorrect ? (" = " + mengen.get(j).getDecimalProbability()) : ""), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
 				g2d.setFont(new Font("default", Font.PLAIN, g2d.getFont().getSize()));
 				g2d.setColor(Color.BLACK);
 			} else {
@@ -331,6 +353,8 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 						log.debug("Zeile " + current.zeile() + " in der rechtesten Spalte wurde gewählt!");
 						boolean accepted = false;
 						while(!accepted) {
+							if(mengen.get(current.zeile()).isCorrect())
+								break;
 							String m = JOptionPane.showInputDialog("Wahrscheinlichkeit des Ereignisses " + mengen.get(current.zeile()).getName() + " (als gekürzter Bruch):");
 							if (m != null) {
 								if(m.matches("([0-9]+)/([0-9]+)") || m.equals("0") || m.equals("1")) {
