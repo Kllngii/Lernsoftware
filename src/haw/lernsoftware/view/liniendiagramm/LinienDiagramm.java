@@ -254,7 +254,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
 
 			// Wenn in Zeile mengen.get(j) die WSK berechnet werden soll
-			if (false) {
+			if (mengen.get(j).isCalculateProbability()) {
 				g2d.setFont(new Font("default", Font.BOLD, g2d.getFont().getSize()));
 				g2d.setColor(Color.RED);
 				g2d.drawString(mengen.get(j).getUserProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
@@ -330,39 +330,45 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				}
 
 				else if (current.spalte() == eMenge.getEreignisse().size() && last.spalte() == eMenge.getEreignisse().size() && current.zeile() == last.zeile()) {
-					log.debug("Zeile " + current.zeile() + " in der rechtesten Spalte wurde gewählt!");
-					String m = JOptionPane.showInputDialog("Wahrscheinlichkeit des Ereignisses " + mengen.get(current.zeile()).getName() + ":");
-					if (m != null) {
-						mengen.get(current.zeile()).setUserProb(m);
-						rebase(mengen, eMenge);
+					if (mengen.get(current.zeile()).isCalculateProbability()) {
+						log.debug("Zeile " + current.zeile() + " in der rechtesten Spalte wurde gewählt!");
+						String m = JOptionPane.showInputDialog("Wahrscheinlichkeit des Ereignisses " + mengen.get(current.zeile()).getName() + ":");
+						if (m != null) {
+							mengen.get(current.zeile()).setUserProb(m);
+							rebase(mengen, eMenge);
+						}
 					}
 					mouseInteractions.clear();
 				}
 
 				else if (current.zeile() >= mengen.size() && current.zeile() == last.zeile() && current.spalte() == last.spalte() && enableNeueEreignisse) {
-					log.debug("NEUES EREIGNIS HINZUFÜGEN");
-					String m = JOptionPane.showInputDialog("Name des neuen Ereignisses:");
-					if (m != null) {
-						mengen.add(new Menge(m, eMenge, new ArrayList<Elementarereignis>(), mengen.size() + 1, true, true, true));
-						rebase(mengen, eMenge);
+					if (enableNeueEreignisse) {
+						log.debug("NEUES EREIGNIS HINZUFÜGEN");
+						String m = JOptionPane.showInputDialog("Name des neuen Ereignisses:");
+						if (m != null) {
+							mengen.add(new Menge(m, eMenge, new ArrayList<Elementarereignis>(), mengen.size() + 1));
+							rebase(mengen, eMenge);
+						}
 					}
 					mouseInteractions.clear();
 				}
 
 				else if (current.zeile() == last.zeile() && current.spalte() == last.spalte()) {
-					if (mengen.get(current.zeile()).getEreignisse().contains(eMenge.getEreignisse().get(current.spalte()))) {
-						mengen.get(current.zeile()).deleteElementar(eMenge.getEreignisse().get(current.spalte()));
-						log.debug("Von Ereignis " + mengen.get(current.zeile()).getName() + " wurde das Elementarereignis " + eMenge.getEreignisse().get(current.spalte()).getName() + " gelöscht!");
-					} else {
-						mengen.get(current.zeile()).addElementar(eMenge.getEreignisse().get(current.spalte()));
-						log.debug("Dem Ereignis " + mengen.get(current.zeile()).getName() + " wurde das Elementarereignis " + eMenge.getEreignisse().get(current.spalte()).getName() + " hinzugefügt!");
-					}
-
-					if (bedingtMode) {
-						// bedingt für alle auf false
-						eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
-						for (int i = 0; i < eingetreten.getEreignisse().size(); i++) {
-							eingetreten.getEreignisse().get(i).setBedingt(true);
+					if (mengen.get(current.zeile()).isEditable()) {
+						if (mengen.get(current.zeile()).getEreignisse().contains(eMenge.getEreignisse().get(current.spalte()))) {
+							mengen.get(current.zeile()).deleteElementar(eMenge.getEreignisse().get(current.spalte()));
+							log.debug("Von Ereignis " + mengen.get(current.zeile()).getName() + " wurde das Elementarereignis " + eMenge.getEreignisse().get(current.spalte()).getName() + " gelöscht!");
+						} else {
+							mengen.get(current.zeile()).addElementar(eMenge.getEreignisse().get(current.spalte()));
+							log.debug("Dem Ereignis " + mengen.get(current.zeile()).getName() + " wurde das Elementarereignis " + eMenge.getEreignisse().get(current.spalte()).getName() + " hinzugefügt!");
+						}
+	
+						if (bedingtMode) {
+							// bedingt für alle auf false
+							eMenge.getEreignisse().stream().forEach(ereignis -> ereignis.setBedingt(false));
+							for (int i = 0; i < eingetreten.getEreignisse().size(); i++) {
+								eingetreten.getEreignisse().get(i).setBedingt(true);
+							}
 						}
 					}
 					mouseInteractions.clear();
@@ -374,12 +380,14 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			int length = mouseInteractions.size();
 			Koordinate current = mouseInteractions.get(length-1).koord();
 			
-			if (current.zeile() >= 0 && current.zeile() < numberEreignisse) {	
-				log.debug("Ereignis " + mengen.get(current.zeile()).getName() + " wurde gelöscht!");
-				bedingtMode = false;
-				mengen.remove(current.zeile());
+			if (current.zeile() >= 0 && current.zeile() < numberEreignisse) {
+				if (mengen.get(current.zeile()).isDeleteable()) {
+					log.debug("Ereignis " + mengen.get(current.zeile()).getName() + " wurde gelöscht!");
+					bedingtMode = false;
+					mengen.remove(current.zeile());
 
-				rebase(mengen, eMenge);
+					rebase(mengen, eMenge);
+				}
 				mouseInteractions.clear();
 			}
 		}
