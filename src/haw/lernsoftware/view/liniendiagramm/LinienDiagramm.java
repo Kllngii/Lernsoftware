@@ -346,7 +346,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 						log.debug("NEUES EREIGNIS HINZUFÜGEN");
 						String m = JOptionPane.showInputDialog("Name des neuen Ereignisses:");
 						if (m != null) {
-							mengen.add(new Menge(m, eMenge, new ArrayList<Elementarereignis>(), mengen.size() + 1));
+							mengen.add(new Menge(m, eMenge, new ArrayList<Elementarereignis>(), mengen.size() + 1, true, true, true));
 							rebase(mengen, eMenge);
 						}
 					}
