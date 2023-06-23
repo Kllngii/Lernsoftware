@@ -148,7 +148,9 @@ public class SpeicherService {
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe12.text"),
 						"Aufgabe12_LeeresDiagramm_Bild.png", "Aufgabe12_Lösung_Bild.png"),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe13.text"),
-						"Aufgabe13_LeeresDiagramm_Bild.png", "Aufgabe13_Lösung_Bild.png"));
+						"Aufgabe13_LeeresDiagramm_Bild.png", "Aufgabe13_Lösung_Bild.png"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe14.text"),
+						"Aufgabe14_LeeresDiagramm_Bild.png", "Aufgabe14_Lösung_Bild.png"));
 		// new
 		// Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN,
 		// "aufgabe9.text")),
