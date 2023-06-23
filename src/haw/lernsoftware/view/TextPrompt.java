@@ -11,6 +11,7 @@ import javax.swing.text.*;
 import javax.swing.text.JTextComponent;
 
 /**
+ *  @author Moritz Koch
  *  The TextPrompt class will display a prompt over top of a text component when
  *  the Document of the text field is empty. The Show property is used to
  *  determine the visibility of the prompt.
