@@ -1,9 +1,7 @@
 package haw.lernsoftware.model;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -110,29 +108,6 @@ public class SpeicherService {
 			}
 		}
 		return new Model(ladeAufgaben());
-	}
-
-	/**
-	 * Lädt ein Model aus den Java-Preferences
-	 * 
-	 * @return
-	 */
-	@Deprecated(since = "02.06.2023")
-	private ModelWithErrors ladeAusPreferences() {
-		log.info("Lade aus den Prefs!");
-		ModelWithErrors fromPrefs = null;
-		byte[] bytes = getRoot().getByteArray(Konst.MODEL_KEY, null);
-		if (bytes != null) {
-			try (ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-					ObjectInputStream ois = new ObjectInputStream(bis)) {
-				fromPrefs = (ModelWithErrors) ois.readObject();
-			} catch (ClassNotFoundException | IOException e) {
-				log.error("Fehler beim Laden aus den Preferences!", e);
-			}
-		} else
-			log.info("Die Preferences enthalten noch kein gespeichertes Model!");
-
-		return fromPrefs;
 	}
 
 	public static List<Aufgabe> ladeAufgaben() {
