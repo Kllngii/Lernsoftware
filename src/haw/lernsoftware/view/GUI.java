@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.Lernsoftware;
+import haw.lernsoftware.view.HAWView;
 import haw.lernsoftware.model.Model;
 import haw.lernsoftware.model.SpeicherService;
 import haw.lernsoftware.model.WindowSelect;
@@ -43,7 +44,7 @@ public class GUI implements ActionListener {
 
 	private JFrame frame;
 	
-	private int i = 0;
+	private int i = 1;
 	
 
 	private JMenuBar menuBar = new JMenuBar();
@@ -60,6 +61,7 @@ public class GUI implements ActionListener {
 	private JButton hilfeButton = new JButton("Hilfe");
 	private JButton homeButton = new JButton("");
 	private JButton closeButton = new JButton("Fenster Schließen");
+	private JButton fullscreenButton = new JButton("Fullscreen");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite(this);
@@ -76,7 +78,9 @@ public class GUI implements ActionListener {
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		if(i  == 1) {
-		frame.setUndecorated(true);  // Auf true setzen für fullscreen
+			frame.setUndecorated(true);  // Auf true setzen für fullscreen
+		} if (i == 0){
+			frame.setUndecorated(false);
 		}
 		i = 1;
 		frame.getRootPane().setBorder(
@@ -106,6 +110,7 @@ public class GUI implements ActionListener {
 		menuBar.add(fensterAufgabentyp);
 		menuBar.add(hilfeButton);
 		menuBar.add(closeButton);
+		menuBar.add(fullscreenButton);
 		
 
 		dateiMenü.add(menuItemSpeichern);
@@ -145,6 +150,9 @@ public class GUI implements ActionListener {
 		closeButton.setOpaque(false);
 		closeButton.setContentAreaFilled(false);
 		closeButton.setBorderPainted(false);
+		fullscreenButton.setOpaque(false);
+		fullscreenButton.setContentAreaFilled(false);
+		fullscreenButton.setBorderPainted(false);
 
 
 		fensterMenü.add(menuItemStartseite);
@@ -159,6 +167,7 @@ public class GUI implements ActionListener {
 		hilfeButton.addActionListener(this);
 		homeButton.addActionListener(this);
 		closeButton.addActionListener(this);
+		fullscreenButton.addActionListener(this);
 		
 		fensterAufgabentyp.add(menuItemTutorial);
 		fensterAufgabentyp.add(menuItemLeicht);
@@ -230,6 +239,12 @@ public class GUI implements ActionListener {
 		}else if(e.getSource() == closeButton) {
 			log.info("Schließe Fenster");
 			frame.dispose();
+		}else if (e.getSource() == fullscreenButton) {
+			log.info("Fullscreen Button");
+			i = 1 ;
+			//frame.revalidate();
+			//panel.getContentPane().repaint();
+			//panel.repaint();
 		}
 	}
 
