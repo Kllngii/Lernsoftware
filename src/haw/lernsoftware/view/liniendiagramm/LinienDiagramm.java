@@ -160,7 +160,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		Dimension d = panel.getSize();
 		int diagWidth = d.width - 20;
 		int diagHeight = d.height - 20;
-		int linewidth = 1;					//40
+		int linewidth = 40;
 		int offsetlr = offset(g2d);
 		int currentLeftBorder = BORDER_X + offsetlr;
 
@@ -205,7 +205,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 		// Zeilen
 		g2d.setStroke(new BasicStroke(2));
-		linewidth = 2;
 		for (int j = 0; j < numberEreignisse; j++) {
 			// Name des Ereignisses
 			currentLeftBorder = BORDER_X + offsetlr;
