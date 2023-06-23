@@ -6,6 +6,7 @@ import java.awt.Container;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,6 +19,9 @@ import javax.swing.JMenuItem;
 import org.apache.log4j.Logger;
 
 import haw.lernsoftware.Konst;
+import haw.lernsoftware.model.Elementarereignis;
+import haw.lernsoftware.model.Ereignismenge;
+import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.model.Model;
 import haw.lernsoftware.model.SpeicherService;
 import haw.lernsoftware.model.WindowSelect;
@@ -35,7 +39,7 @@ public class GUI implements ActionListener {
 
 	private Logger log = Logger.getLogger(getClass());
 
-	private JFrame frame;
+	protected JFrame frame;
 
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
@@ -53,7 +57,7 @@ public class GUI implements ActionListener {
 	private JButton closeButton = new JButton("Fenster Schließen");
 	private JButton fullscreenButton = new JButton("Fullscreen");
 
-	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
+	private LinienDiagramm liniendiagrammView = new LinienDiagramm(this);
 	private Startseite startseitenView = new Startseite(this);
 	private Aufgabentext aufgabentextView = new Aufgabentext(model, this);
 	private Tutorial tutorialView = new Tutorial(this);
@@ -272,6 +276,7 @@ public class GUI implements ActionListener {
 			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL3.getIdentifier());
 			model.setSelectedWindow(WindowSelect.TUTORIAL3);
 		}
+		model.setSelectedWindow(ws);
 	}
 
 }

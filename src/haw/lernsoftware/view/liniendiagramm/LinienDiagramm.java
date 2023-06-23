@@ -10,18 +10,27 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 import org.apache.log4j.Logger;
 
 import haw.lernsoftware.model.Elementarereignis;
 import haw.lernsoftware.model.Ereignismenge;
 import haw.lernsoftware.model.Menge;
+import haw.lernsoftware.model.WindowSelect;
+import haw.lernsoftware.view.GUI;
 import haw.lernsoftware.view.HAWView;
 
 /**
@@ -52,7 +61,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private int selectedRow = -1;
 	private Menge eingetreten;
 
-	public LinienDiagramm(Ereignismenge eMenge, List<Menge> mengen, List<Menge> startMengen) {
+	public LinienDiagramm(Ereignismenge eMenge, List<Menge> mengen, List<Menge> startMengen, GUI gui) {
 		this.eMenge = eMenge;
 		this.zielMengen = mengen;
 		this.mengen = startMengen;
@@ -60,13 +69,13 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 //		this.mengen.get(3).getEreignisse().stream().forEach(log::fatal);
 
 		if (eMenge.validate())
-			constructDiagramm(this.mengen, this.eMenge);
+			constructDiagramm(this.mengen, this.eMenge, gui);
 	}
 
 	/**
 	 * Ein Konstruktor nur für die Initialisierung des GUIs!
 	 */
-	public LinienDiagramm() {
+	public LinienDiagramm(GUI gui) {
 //		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
 //		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
 		eMenge = new Ereignismenge(new ArrayList<Elementarereignis>());
@@ -76,16 +85,25 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 //		mengen.stream().forEach(log::info);
 
 		if (eMenge.validate())
-			constructDiagramm(mengen, eMenge);
+			constructDiagramm(mengen, eMenge, gui);
 		//OK
 	}
 
-	private void constructDiagramm(List<Menge> mengen, Ereignismenge e) {
+	private void constructDiagramm(List<Menge> mengen, Ereignismenge e, GUI gui) {
 		panel = new DrawingPanel(this);
 		numberEreignisse = mengen.size();
 		numberElementare = e.getEreignisse().size();
 
 		panel.addMouseListener(this);
+		InputMap im = panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_SHIFT, InputEvent.SHIFT_DOWN_MASK, false), "switch");
+		panel.getActionMap().put("switch", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				log.info("Wechsle das Fenster per Keybind!");
+				gui.switchToView(WindowSelect.AUFGABENTEXT);
+			}
+		});
 	}
 	/**
 	 * Führt einen Rebase aus und betrachtet fortan neue Daten. Nur für den externen Gebrauch - beispielsweise beim Aufgabenwechsel - bestimmt
@@ -170,7 +188,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		// Überschrift + Rahmen
 		g2d.setFont(new Font("default", Font.BOLD, STD_FONTSIZE * 3/2));
 		g2d.setColor(Color.GRAY);
-		g2d.drawString("Wechsel zur Aufgabe mit CTRL + G", d.width / 2 - g2d.getFontMetrics().stringWidth("Wechsel zur Aufgabe mit CTRL + G")/2, 30);
+		g2d.drawString("Wechsel zur Aufgabe mit SHIFT", d.width / 2 - g2d.getFontMetrics().stringWidth("Wechsel zur Aufgabe mit CTRL + G")/2, 30);
 		g2d.setFont(new Font("default", Font.PLAIN, STD_FONTSIZE));
 		g2d.setColor(Color.BLACK);
 		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + 10);
