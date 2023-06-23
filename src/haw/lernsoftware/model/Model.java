@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import org.json.JSONPropertyIgnore;
 
 import haw.lernsoftware.model.SpeicherService.ModelWithErrors;
-import haw.lernsoftware.resources.ResourceProvider;
 
 /**
  * Jeder Zustand, der im Fenster angezeigt wird ist hier gespeichert.

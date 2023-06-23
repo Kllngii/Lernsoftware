@@ -2,29 +2,22 @@ package haw.lernsoftware.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Image;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JButton;
 
 import org.apache.log4j.Logger;
 
 import haw.lernsoftware.Konst;
-import haw.lernsoftware.Lernsoftware;
-import haw.lernsoftware.view.HAWView;
 import haw.lernsoftware.model.Model;
 import haw.lernsoftware.model.SpeicherService;
 import haw.lernsoftware.model.WindowSelect;

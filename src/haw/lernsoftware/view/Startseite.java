@@ -2,14 +2,16 @@ package haw.lernsoftware.view;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.event.MouseAdapter;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
@@ -36,17 +38,15 @@ public class Startseite extends HAWView {
 	private JLabel functionText1 = new JLabel();
 	private JLabel functionText2 = new JLabel();
 	private JLabel functionText3 = new JLabel();
-	EmptyBorder emptyBorder = new EmptyBorder(12, 100, 12, 12); // oben, rechts, unten, links
-	EmptyBorder thickEmptyBorder = new EmptyBorder(15, 100, 15, 15);
-	LineBorder lBorder = new LineBorder(new Color(100, 100, 100));
-	MatteBorder mBorder = new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY);
+	
+	private CompoundBorder unselectedBorder = BorderFactory.createCompoundBorder(new LineBorder(new Color(100, 100, 100)), new EmptyBorder(15, 100, 15, 15));
+	private CompoundBorder selectedBorder = BorderFactory.createCompoundBorder(new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY), new EmptyBorder(12, 97, 12, 12));
 
 	public Startseite(GUI gui) {
 		this.gui = gui;				
 		
 		//Scrollbar hinzufügen
 		panel = new JScrollPane(view);
-		panel.setBorder(emptyBorder);
 		view.setBackground(new Color(230, 230, 230));
 		panel.setBackground(new Color(230, 230, 230));
 		view.add(constructStartseite());			
@@ -70,26 +70,23 @@ public class Startseite extends HAWView {
 		// Tutorial
 		functionText1.setText("Tutorial");
 		functionText1.setFont(new Font("Dialog", Font.BOLD, 40));
-		setNormalBorder(functionText1);
 		functionText1.addMouseListener(mL);
-		functionText1.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
-		functionText1.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
+		functionText1.setBorder(unselectedBorder);
+		functionText1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		//Aufgaben
 		functionText2.setText("Aufgaben");
 		functionText2.setFont(new Font("Dialog", Font.BOLD, 40));
-		setNormalBorder(functionText2);
 		functionText2.addMouseListener(mL);
-		functionText2.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
-		functionText2.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
+		functionText2.setBorder(unselectedBorder);
+		functionText2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		//Sandbox 
 		functionText3.setText("Sandbox");
 		functionText3.setFont(new Font("Dialog", Font.BOLD, 40));
-		setNormalBorder(functionText3);
 		functionText3.addMouseListener(mL);
-		functionText3.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
-		functionText3.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
+		functionText3.setBorder(unselectedBorder);
+		functionText3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		//FormBuilder hinzufügen
 		// gibt einen JComponent zurück, der .debug(true)
@@ -119,15 +116,11 @@ public class Startseite extends HAWView {
 		}
 		// Rahmenänderung, wenn der Mauszeiger auf das JLabel gerichtet ist 
 		public void mouseEntered(java.awt.event.MouseEvent e) {
-			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
+			((JComponent) e.getSource()).setBorder(selectedBorder);
+			
 		}
 		public void mouseExited(java.awt.event.MouseEvent e) {
-			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
+			((JComponent) e.getSource()).setBorder(unselectedBorder);
 		}
 	};
-	//Methode: Rahmen auf normal definierte Werte setzen 
-	public void setNormalBorder(JLabel textLabel) {
-		textLabel.setBorder(BorderFactory.createCompoundBorder(lBorder, emptyBorder));
-		textLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-	}
 }

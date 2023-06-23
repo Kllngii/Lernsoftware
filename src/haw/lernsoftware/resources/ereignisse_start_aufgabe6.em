@@ -20,7 +20,7 @@
       "elementare": "",
       "order": 3,
       "calculateProbability": true,
-      "editable": false,
+      "editable": true,
       "deleteable": false
    },
    {
@@ -28,7 +28,7 @@
       "elementare": "",
       "order": 4,
       "calculateProbability": true,
-      "editable": false,
+      "editable": true,
       "deleteable": false
    },
    {
@@ -36,7 +36,7 @@
       "elementare": "",
       "order": 5,
       "calculateProbability": true,
-      "editable": false,
+      "editable": true,
       "deleteable": false
    },
    {
@@ -44,7 +44,7 @@
       "elementare": "",
       "order": 6,
       "calculateProbability": true,
-      "editable": false,
+      "editable": true,
       "deleteable": false
    }
 ]}

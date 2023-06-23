@@ -1,10 +1,8 @@
 package haw.lernsoftware.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Taskbar;
 import java.awt.Taskbar.Feature;
@@ -204,14 +202,12 @@ public class Hilfe extends HAWView implements ActionListener{
 			try {
 				uri = new URI("https://gidf.help/");
 			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
 				log.error(e1);
 			}
 			Desktop dt = Desktop.getDesktop();
 			try {
 				dt.browse(uri.resolve(uri));
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				log.error(e1);
 			}
 		}if(e.getSource() == closeButton) {
