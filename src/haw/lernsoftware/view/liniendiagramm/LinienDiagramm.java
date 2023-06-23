@@ -223,19 +223,23 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 				if (linesegment(mengen.get(j), i+1)) {
 					boolean correct = false;
-					for(Menge ziel : zielMengen) {
-						if(ziel.getOrder() == mengen.get(j).getOrder()) {
-							correct = true; //Es gibt eine entsprechende Ordernummer-Übereinstimmung, daher potenziell korrekt
-							for(int k = 0; k < numberElementare; k++) {
-								if(linesegment(ziel, k+1) != linesegment(mengen.get(j), k+1))
-									correct = false;
+					for (Menge ziel : zielMengen) {
+						for (Menge test : mengen) {
+							if (ziel.getName().equals(test.getName())) {
+								correct = true; // Es gibt eine entsprechende Ordernummer-Übereinstimmung, daher potenziell korrekt
+								for (int k = 0; k < numberElementare; k++) {
+									if (linesegment(ziel, k+1) != linesegment(mengen.get(j), k+1))
+										correct = false;
+								}
 							}
 						}
 					}
-					if(correct && mengen.get(j).isEditable()) {
+					
+					if (correct && mengen.get(j).isEditable()) {
 						g2d.setColor(new Color(42, 112, 37));
 						g2d.setStroke(new BasicStroke(3));
 					}
+					
 					else {
 						g2d.setColor(Color.BLACK);
 						g2d.setStroke(new BasicStroke(1));
