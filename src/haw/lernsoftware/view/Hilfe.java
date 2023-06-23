@@ -148,7 +148,7 @@ public class Hilfe extends HAWView implements ActionListener{
 				//.debug(true)
 				.padding(Paddings.DIALOG)
 				.add(Ueberschrift) .xy(2, 1)
-				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph,ButtonWeitereHilfe,ButtonTutorial,ButtonSandbox,ButtonFUN) .xy(1, 2, "fill,top")
+				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph,ButtonTutorial,ButtonSandbox,ButtonWeitereHilfe,ButtonFUN) .xy(1, 2, "fill,top")
 				//.add(text) .xy(2, 2)
 				.addScrolled(text) .xy(2, 2)
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
@@ -242,12 +242,12 @@ public class Hilfe extends HAWView implements ActionListener{
 	    ButtonFUN.setVisible(true);
 	    }if(e.getSource() == ButtonTutorial) {
 			Ueberschrift.setText("Tutorial");
-			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial2"));
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
 		}if(e.getSource() == ButtonSandbox) {
 			Ueberschrift.setText("Sandbox");
-			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox2"));
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
 		}
