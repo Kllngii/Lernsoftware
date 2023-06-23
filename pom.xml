@@ -9,35 +9,55 @@
 	<description>0.0.1b</description>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>src</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</resource>
-			<resource>
-				<directory>src/haw/lernsoftware/resources</directory>
-				<includes>
-					<include>**/*.png</include>
-					<include>**/*.properties</include>
-					<include>**/*.em</include>
-				</includes>
-			</resource>
-		</resources>
 		<plugins>
+			<plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/</outputDirectory>
+                            <includeEmptyDirs>true</includeEmptyDirs>
+                            <resources>
+							<!--<resource>
+								<directory>src</directory>
+								<excludes>
+									<exclude>**/*.java</exclude>
+								</excludes>
+							</resource> -->
+							<resource>
+								<directory>src</directory>
+								<includes>
+									<include>**/*.png</include>
+									<include>**/*.properties</include>
+									<include>**/*.em</include>
+								</includes>
+								<excludes>
+									<exclude>**/*.java</exclude>
+								</excludes>
+							</resource>
+						</resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
+				<!--<executions>
 					<execution>
 						<phase>compile</phase>
 						<goals><goal>run</goal></goals>
 					</execution>
-				</executions>
+				</executions> -->
 				<configuration>
 					<mainClass>${mainClass}</mainClass>
-					<addResources>true</addResources>
+					<!-- <addResources>true</addResources> -->
 				</configuration>
 			</plugin>
 			<!--
