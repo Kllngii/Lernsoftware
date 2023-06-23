@@ -39,7 +39,7 @@ public class GUI implements ActionListener {
 
 	private Logger log = Logger.getLogger(getClass());
 
-	private JFrame frame;
+	protected JFrame frame;
 
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
@@ -57,7 +57,7 @@ public class GUI implements ActionListener {
 	private JButton closeButton = new JButton("Fenster Schließen");
 	private JButton fullscreenButton = new JButton("Fullscreen");
 
-	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
+	private LinienDiagramm liniendiagrammView = new LinienDiagramm(this);
 	private Startseite startseitenView = new Startseite(this);
 	private Aufgabentext aufgabentextView = new Aufgabentext(model, this);
 	private Tutorial tutorialView = new Tutorial(this);
