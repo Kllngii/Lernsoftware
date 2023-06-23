@@ -36,7 +36,7 @@ public class GUI implements ActionListener {
 	private Logger log = Logger.getLogger(getClass());
 
 	private JFrame frame;
-	
+
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
 	private JMenuItem menuItemLaden = new JMenuItem("Laden");
@@ -60,7 +60,7 @@ public class GUI implements ActionListener {
 	private Tutorial2 tutorial2View = new Tutorial2(this);
 	private Tutorial3 tutorial3View = new Tutorial3(this);
 
-	public GUI(JFrame frame) {
+	public GUI(JFrame frame, boolean enableFullscreen) {
 		this.frame = frame;
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationByPlatform(true);
@@ -68,34 +68,36 @@ public class GUI implements ActionListener {
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		frame.getRootPane().setBorder(
-		        BorderFactory.createMatteBorder(10, 10, 10, 10, new Color(230, 230, 230))
-		);
-		
+				BorderFactory.createMatteBorder(10, 10, 10, 10, new Color(230, 230, 230))
+				);
+
 		menuBar.setBackground(new Color(230, 230, 230));
 		menuBar.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		
-		constructMenubar();
+
+		constructMenubar(enableFullscreen);
 		frame.setJMenuBar(menuBar);
 		constructContentPanel();
 	}
 
 	/**
 	 * Erstellt die Menubar des Fensters.
+	 * @param enableFullscreen 
 	 */
-	private void constructMenubar() {
-		
+	private void constructMenubar(boolean enableFullscreen) {
+
 		JMenu dateiMenü = new JMenu("Datei");
 		JMenu fensterMenü = new JMenu("Fenster");
 		JMenu fensterAufgabentyp = new JMenu("Aufgaben");
-		
+
 		menuBar.add(homeButton);
 		menuBar.add(dateiMenü);
 		menuBar.add(fensterMenü);
 		menuBar.add(fensterAufgabentyp);
 		menuBar.add(hilfeButton);
 		menuBar.add(closeButton);
-		menuBar.add(fullscreenButton);
-		
+		if(enableFullscreen)
+			menuBar.add(fullscreenButton);
+
 
 		dateiMenü.add(menuItemSpeichern);
 		dateiMenü.add(menuItemLaden);
@@ -152,7 +154,7 @@ public class GUI implements ActionListener {
 		homeButton.addActionListener(this);
 		closeButton.addActionListener(this);
 		fullscreenButton.addActionListener(this);
-		
+
 		fensterAufgabentyp.add(menuItemTutorial);
 		fensterAufgabentyp.add(menuItemLeicht);
 		fensterAufgabentyp.add(menuItemMittel);
@@ -225,10 +227,20 @@ public class GUI implements ActionListener {
 			frame.dispose();
 		}else if (e.getSource() == fullscreenButton) {
 			log.info("Fullscreen Button");
+			//fullscreenEvent();
 			//frame.revalidate();
 			//panel.getContentPane().repaint();
 			//panel.repaint();
+			frame.getContentPane().repaint();
 		}
+	}
+
+	private void fullscreenEvent() {
+		frame.setVisible(false);
+		frame.setUndecorated(true);
+		frame.getContentPane().repaint();
+		frame.setVisible(true);
+		
 	}
 
 	public void switchToView(WindowSelect ws) {
@@ -261,5 +273,5 @@ public class GUI implements ActionListener {
 			model.setSelectedWindow(WindowSelect.TUTORIAL3);
 		}
 	}
-	
+
 }
