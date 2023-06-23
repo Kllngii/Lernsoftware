@@ -37,6 +37,5 @@ public class Konst {
 	public static final String PROPERTIES_AUFGABEN = "aufgaben.properties";
 	public static final int BORDER_X = 10;
 	public static final int BORDER_Y = 15;
-	public static final int STD_LINEWIDTH = 2;
 	public static final double DIGITS = 3.0;
 }
