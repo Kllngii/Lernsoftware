@@ -2,6 +2,7 @@ package haw.lernsoftware.view.liniendiagramm;
 
 import static haw.lernsoftware.Konst.BORDER_X;
 import static haw.lernsoftware.Konst.BORDER_Y;
+import static haw.lernsoftware.Konst.STD_FONTSIZE;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -166,7 +167,12 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		int offsetlr = offset(g2d);
 		int currentLeftBorder = BORDER_X + offsetlr;
 
-		// Rahmen
+		// Überschrift + Rahmen
+		g2d.setFont(new Font("default", Font.BOLD, STD_FONTSIZE * 3/2));
+		g2d.setColor(Color.GRAY);
+		g2d.drawString("Wechsel zur Aufgabe mit CTRL + G", d.width / 2 - g2d.getFontMetrics().stringWidth("Wechsel zur Aufgabe mit CTRL + G")/2, 30);
+		g2d.setFont(new Font("default", Font.PLAIN, STD_FONTSIZE));
+		g2d.setColor(Color.BLACK);
 		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + 10);
 		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + offsetlr, BORDER_Y + diagHeight);
 		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
@@ -211,10 +217,10 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			// Name des Ereignisses
 			currentLeftBorder = BORDER_X + offsetlr;
 			if (mengen.get(j).equals(eingetreten) && bedingtMode) {
-				g2d.setFont(new Font("default", Font.BOLD, g2d.getFont().getSize()));
+				g2d.setFont(new Font("default", Font.BOLD, STD_FONTSIZE));
 			}
 			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
-			g2d.setFont(new Font("default", Font.PLAIN, g2d.getFont().getSize()));
+			g2d.setFont(new Font("default", Font.PLAIN, STD_FONTSIZE));
 
 			// Liniensegmente
 			boolean correct = false;
@@ -258,7 +264,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 			// Wenn in Zeile mengen.get(j) die WSK berechnet werden soll
 			if (mengen.get(j).isCalculateProbability()) {
-				g2d.setFont(new Font("default", Font.BOLD, g2d.getFont().getSize()));
+				g2d.setFont(new Font("default", Font.BOLD, STD_FONTSIZE));
 				boolean isCorrect = mengen.get(j).getFracProbability().equals(mengen.get(j).getUserProbability());
 				if(isCorrect)
 					g2d.setColor(new Color(42, 112, 37));
@@ -267,7 +273,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 				
 				mengen.get(j).setCorrect(isCorrect);
 				g2d.drawString(mengen.get(j).getUserProbability() + (isCorrect ? (" = " + mengen.get(j).getDecimalProbability()) : ""), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
-				g2d.setFont(new Font("default", Font.PLAIN, g2d.getFont().getSize()));
+				g2d.setFont(new Font("default", Font.PLAIN, STD_FONTSIZE));
 				g2d.setColor(Color.BLACK);
 			} else {
 				if (bedingtMode) {

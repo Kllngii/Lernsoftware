@@ -1,12 +1,17 @@
 package haw.lernsoftware.view;
-import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
+import java.awt.BorderLayout;
 import javax.swing.text.*;
+import javax.swing.text.JTextComponent;
 
 /**
+ *  @author Moritz Koch
  *  The TextPrompt class will display a prompt over top of a text component when
  *  the Document of the text field is empty. The Show property is used to
  *  determine the visibility of the prompt.

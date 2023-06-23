@@ -78,8 +78,6 @@ public class Tutorial extends HAWView implements ActionListener {
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_Ueberschrift.text")).xyw(1, 2, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 2) //
 				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD1)), x1, y1) )).xyw(3,3,3) //
-				
-				//.add(new JLabel(new ImageIcon(ResourceProvider.loadImage("Aufgabe9_Gluecksrad.png")))).xyw(3,3,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz2.text")).xyw(1, 5, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz31.text")).xyw(1, 6, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz3.text")).xyw(1, 7, 2) //
@@ -103,12 +101,6 @@ public class Tutorial extends HAWView implements ActionListener {
 	//Bildgröße anpassen
 	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
 		Image image = img.getImage();
-		//Image image = Toolkit.getDefaultToolkit().getImage(img);
-		//int width1 = image.getWidth(null);
-		//int height1 = image.getHeight(null);
-		//double ratio = (width1 /height1);
-		//int height2 = (int) (width1*ratio);
-		//log.debug(ratio+"  "+ height2);
 		Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		return new ImageIcon(resizedImage);
 	}
@@ -120,5 +112,4 @@ public class Tutorial extends HAWView implements ActionListener {
 			gui.switchToView(WindowSelect.TUTORIAL2);
 		}
 	}
-
 }
