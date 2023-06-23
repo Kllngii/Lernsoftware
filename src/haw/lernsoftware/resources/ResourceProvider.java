@@ -2,6 +2,7 @@ package haw.lernsoftware.resources;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -108,11 +109,19 @@ public class ResourceProvider {
 	public static Image loadImage(String path) {
 		try {
 			Objects.requireNonNull(path);
-			URI pathURL = ResourceProvider.class.getResource(path).toURI();
-			Path p = Paths.get(pathURL);
-			log.debug("Einlesen der Datei " + path + " unter " + p.toAbsolutePath().toString());
+			
+			try {
+				URI pathURL = ResourceProvider.class.getResource(path).toURI();
+				
+				Path p = Paths.get(pathURL);
+				log.debug("Einlesen der Datei " + path + " unter " + p.toAbsolutePath().toString());
 
-			return Toolkit.getDefaultToolkit().getImage(ResourceProvider.class.getResource(path).toURI().toURL());
+				return Toolkit.getDefaultToolkit().getImage(ResourceProvider.class.getResource(path).toURI().toURL());
+			} catch(NullPointerException ex) {
+				log.error(path);
+				log.error(ex);
+				return new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_GRAY);
+			}
 		} catch (MalformedURLException | URISyntaxException e) {
 			log.error(e.getMessage());
 		}
