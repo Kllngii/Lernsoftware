@@ -26,7 +26,6 @@ public class Lernsoftware extends HAWView {
 	private final Logger log = Logger.getLogger(getClass());
 
 	private JFrame frame;
-
 	public GUI plotter;
 
 	public Lernsoftware() {
@@ -68,11 +67,11 @@ public class Lernsoftware extends HAWView {
 			}
 		} else if(System.getProperty("os.name").startsWith("Windows")) {
 			//XXX Windows-spezifisches Setup hier
-			frame.setUndecorated(true);
+			
 		} else {
 			//XXX Linux-spezifisches Setup hier
 		}
-		plotter = new GUI(frame);
+		plotter = new GUI(frame, System.getProperty("os.name").startsWith("Windows"));
 		
 		frame.setVisible(true);
 		log.info("Das Programm brauchte " + (System.currentTimeMillis()-timestart) + "ms zum Starten!");
