@@ -127,6 +127,8 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			aufgabenBild2 = new JLabel("");
 		}
 
+		zeigeloesung.setBackground(Color.LIGHT_GRAY);
+		
 		// Button Listener
 		previousTaskButton.addActionListener(this);
 		nextTaskButton.addActionListener(this);
