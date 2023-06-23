@@ -246,6 +246,7 @@ public class Menge {
 		if (num == 0)
 
 			return String.format("%d/%d", num, denum);
+		return ""; //FIXME Was muss hier hin?
 	}
 
 	public void setUserProb(String m) {

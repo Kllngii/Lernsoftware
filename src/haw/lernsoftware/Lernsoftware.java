@@ -33,7 +33,6 @@ public class Lernsoftware extends HAWView {
 
 	public Lernsoftware() {
 		initialize();
-		Thread.dumpStack();
 	}
 
 	private void initialize() {
