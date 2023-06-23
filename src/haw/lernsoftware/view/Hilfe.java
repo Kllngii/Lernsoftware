@@ -45,7 +45,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton ButtonAllgemein = new CircleButton("Allgemein");
 	private JButton ButtonLadenSpeichern = new CircleButton("Laden/Speichern");
 	private JButton ButtonAufgaben = new CircleButton("Aufgaben");	
-	private JButton ButtonLiniengraph = new CircleButton("Liniengraph");
+	private JButton ButtonLiniengraph = new CircleButton("Liniendiagramm");
 	private JButton ButtonWeitereHilfe = new CircleButton("Weitere Hilfe");
 	private JButton ButtonTutorial = new CircleButton("Tutorial");
 	private JButton ButtonShortcuts = new CircleButton("Shortcuts");
