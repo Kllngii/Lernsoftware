@@ -6,16 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import java.awt.image.BufferedImage;
-import java.lang.reflect.Method;
-import java.awt.Graphics;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import java.awt.Dimension;
 
 import org.apache.log4j.Logger;
 
@@ -25,7 +21,6 @@ import com.jgoodies.forms.factories.Paddings;
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.resources.ResourceProvider;
-import java.awt.Toolkit;
 
 
 /**
@@ -38,8 +33,6 @@ public class Tutorial extends HAWView implements ActionListener {
 	private JLabel ueberschrift = new JLabel("Tutorial 1");
 	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
 	private JButton tutorialBack = new CircleButton("zurück");
-	private JLabel bild = new JLabel();
-
 
 	// Skalierung für das ImageIcon
 	int x1 = 700; // Gewünschte Breite des Bildes

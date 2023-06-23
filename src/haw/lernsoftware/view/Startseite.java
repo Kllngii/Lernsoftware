@@ -1,9 +1,9 @@
 package haw.lernsoftware.view;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.MouseAdapter;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -71,18 +71,21 @@ public class Startseite extends HAWView {
 		functionText1.setFont(new Font("Dialog", Font.BOLD, 40));
 		functionText1.addMouseListener(mL);
 		functionText1.setBorder(unselectedBorder);
+		functionText1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		//Aufgaben
 		functionText2.setText("Aufgaben");
 		functionText2.setFont(new Font("Dialog", Font.BOLD, 40));
 		functionText2.addMouseListener(mL);
 		functionText2.setBorder(unselectedBorder);
+		functionText2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		//Sandbox 
 		functionText3.setText("Sandbox");
 		functionText3.setFont(new Font("Dialog", Font.BOLD, 40));
 		functionText3.addMouseListener(mL);
 		functionText3.setBorder(unselectedBorder);
+		functionText3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		//FormBuilder hinzufügen
 		// gibt einen JComponent zurück, der .debug(true)
@@ -113,6 +116,7 @@ public class Startseite extends HAWView {
 		// Rahmenänderung, wenn der Mauszeiger auf das JLabel gerichtet ist 
 		public void mouseEntered(java.awt.event.MouseEvent e) {
 			((JComponent) e.getSource()).setBorder(selectedBorder);
+			
 		}
 		public void mouseExited(java.awt.event.MouseEvent e) {
 			((JComponent) e.getSource()).setBorder(unselectedBorder);
