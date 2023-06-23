@@ -244,9 +244,11 @@ public class Menge {
 		denum = denum / gcf;
 
 		if (num == 0)
-
+			return "0";
+		else if (num == denum)
+			return "1";
+		else
 			return String.format("%d/%d", num, denum);
-		return ""; //FIXME Was muss hier hin?
 	}
 
 	public void setUserProb(String m) {
