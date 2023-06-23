@@ -188,7 +188,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		// Überschrift + Rahmen
 		g2d.setFont(new Font("default", Font.BOLD, STD_FONTSIZE * 3/2));
 		g2d.setColor(Color.GRAY);
-		g2d.drawString("Wechsel zur Aufgabe mit CTRL + G", d.width / 2 - g2d.getFontMetrics().stringWidth("Wechsel zur Aufgabe mit CTRL + G")/2, 30);
+		g2d.drawString("Wechsel zur Aufgabe mit SHIFT", d.width / 2 - g2d.getFontMetrics().stringWidth("Wechsel zur Aufgabe mit CTRL + G")/2, 30);
 		g2d.setFont(new Font("default", Font.PLAIN, STD_FONTSIZE));
 		g2d.setColor(Color.BLACK);
 		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + 10);
