@@ -82,7 +82,6 @@ public class GUI implements ActionListener {
 		} if (i == 0){
 			frame.setUndecorated(false);
 		}
-		i = 1;
 		frame.getRootPane().setBorder(
 		        BorderFactory.createMatteBorder(10, 10, 10, 10, new Color(230, 230, 230))
 		);
@@ -243,7 +242,7 @@ public class GUI implements ActionListener {
 			log.info("Fullscreen Button");
 			i = 1 ;
 			//frame.revalidate();
-			//panel.getContentPane().repaint();
+			frame.getContentPane().repaint();
 			//panel.repaint();
 		}
 	}
