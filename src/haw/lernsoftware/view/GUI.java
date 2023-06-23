@@ -44,9 +44,6 @@ public class GUI implements ActionListener {
 
 	private JFrame frame;
 	
-	private int i = 1;
-	
-
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
 	private JMenuItem menuItemLaden = new JMenuItem("Laden");
@@ -77,11 +74,6 @@ public class GUI implements ActionListener {
 		frame.setResizable(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-		if(i  == 1) {
-			frame.setUndecorated(true);  // Auf true setzen für fullscreen
-		} if (i == 0){
-			frame.setUndecorated(false);
-		}
 		frame.getRootPane().setBorder(
 		        BorderFactory.createMatteBorder(10, 10, 10, 10, new Color(230, 230, 230))
 		);
@@ -240,9 +232,8 @@ public class GUI implements ActionListener {
 			frame.dispose();
 		}else if (e.getSource() == fullscreenButton) {
 			log.info("Fullscreen Button");
-			i = 1 ;
 			//frame.revalidate();
-			frame.getContentPane().repaint();
+			//panel.getContentPane().repaint();
 			//panel.repaint();
 		}
 	}

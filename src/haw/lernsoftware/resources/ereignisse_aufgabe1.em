@@ -10,32 +10,32 @@
       "order": 2
    },
    {
-      "name": "A ohne B",
+      "name": "A WITHOUT B",
       "elementare": "1,2,3",
       "order": 3
    },
    {
-      "name": "B ohne A",
+      "name": "B WITHOUT A",
       "elementare": "8",
       "order": 4
    },
    {
-      "name": "A und B",
+      "name": "A AND B",
       "elementare": "4,5,6,7",
       "order": 5
    },
    {
-      "name": "A oder B",
+      "name": "A OR B",
       "elementare": "1,2,3,4,5,6,7,8",
       "order": 6
    },
    {
-      "name": "Nicht A",
+      "name": "NOT A",
       "elementare": "8,9",
       "order": 7
    },
    {
-      "name": "Nicht A und B",
+      "name": "(NOT A) AND B",
       "elementare": "8",
       "order": 8
    }

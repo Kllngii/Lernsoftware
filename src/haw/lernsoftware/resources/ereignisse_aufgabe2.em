@@ -15,7 +15,7 @@
       "order": 3
    },
    {
-      "name": "Nicht A",
+      "name": "NOT A",
       "elementare": "1,3,5,7,9",
       "order": 4
    },
@@ -25,7 +25,7 @@
       "order": 5
    },
    {
-      "name": "Nicht B",
+      "name": "NOT B",
       "elementare": "6,7,8,9",
       "order": 6
    },
@@ -35,7 +35,7 @@
       "order": 7
    },
    {
-      "name": "A und B",
+      "name": "A AND B",
       "elementare": "2,4",
       "order": 8
    }

@@ -16,7 +16,7 @@
       "deleteable": false
    },
    {
-      "name": "AnB",
+      "name": "A AND B",
       "elementare": "",
       "order": 3,
       "calculateProbability": true,
@@ -24,7 +24,7 @@
       "deleteable": false
    },
    {
-      "name": "AuB",
+      "name": "A OR B",
       "elementare": "",
       "order": 4,
       "calculateProbability": true,

@@ -70,6 +70,7 @@ public class Lernsoftware extends HAWView {
 			}
 		} else if(System.getProperty("os.name").startsWith("Windows")) {
 			//XXX Windows-spezifisches Setup hier
+			frame.setUndecorated(true);
 		} else {
 			//XXX Linux-spezifisches Setup hier
 		}
