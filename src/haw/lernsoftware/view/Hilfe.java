@@ -48,7 +48,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton ButtonLiniengraph = new CircleButton("Liniengraph");
 	private JButton ButtonWeitereHilfe = new CircleButton("Weitere Hilfe");
 	private JButton ButtonTutorial = new CircleButton("Tutorial");
-	private JButton ButtonSandbox = new CircleButton("Sandbox");
+	private JButton ButtonShortcuts = new CircleButton("Shortcuts");
 	private JButton ButtonFUN = new CircleButton(" ");
 	private JButton closeButton = new CircleButton("Fenster Schließen");
 	private JLabel Ueberschrift = new JLabel("Hilfe");
@@ -90,8 +90,8 @@ public class Hilfe extends HAWView implements ActionListener{
 		ButtonWeitereHilfe.addActionListener(this);
 		ButtonFUN.addActionListener(this);
 		ButtonTutorial.addActionListener(this);
-		ButtonSandbox.addActionListener(this);
 		closeButton.addActionListener(this);
+		ButtonShortcuts.addActionListener(this);
 		
 
 
@@ -148,7 +148,7 @@ public class Hilfe extends HAWView implements ActionListener{
 				//.debug(true)
 				.padding(Paddings.DIALOG)
 				.add(Ueberschrift) .xy(2, 1)
-				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph,ButtonTutorial,ButtonSandbox,ButtonWeitereHilfe,ButtonFUN,closeButton) .xy(1, 2, "fill,top")
+				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph,ButtonTutorial,ButtonShortcuts,ButtonWeitereHilfe,ButtonFUN,closeButton) .xy(1, 2, "fill,top")
 				//.add(text) .xy(2, 2)
 				.addScrolled(text) .xy(2, 2)
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
@@ -246,9 +246,9 @@ public class Hilfe extends HAWView implements ActionListener{
 			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial2"));
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
-		}if(e.getSource() == ButtonSandbox) {
-			Ueberschrift.setText("Sandbox");
-			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox2"));
+		}if(e.getSource() == ButtonShortcuts) {
+			Ueberschrift.setText("Shortcuts");
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.Shortcuts"));
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
 		}
