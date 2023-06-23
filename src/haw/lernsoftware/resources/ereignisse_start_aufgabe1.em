@@ -16,7 +16,7 @@
       "deleteable": false
    },
    {
-      "name": "A ohne B",
+      "name": "A WITHOUT B",
       "elementare": "",
       "order": 3,
       "calculateProbability": false,
@@ -24,7 +24,7 @@
       "deleteable": false
    },
    {
-      "name": "B ohne A",
+      "name": "B WITHOUT A",
       "elementare": "",
       "order": 4,
       "calculateProbability": false,
@@ -32,7 +32,7 @@
       "deleteable": false
    },
    {
-      "name": "A und B",
+      "name": "A AND B",
       "elementare": "",
       "order": 5,
       "calculateProbability": false,
@@ -40,7 +40,7 @@
       "deleteable": false
    },
    {
-      "name": "A oder B",
+      "name": "A OR B",
       "elementare": "",
       "order": 6,
       "calculateProbability": false,
@@ -48,7 +48,7 @@
       "deleteable": false
    },
    {
-      "name": "Nicht A",
+      "name": "NOT A",
       "elementare": "",
       "order": 7,
       "calculateProbability": false,
@@ -56,7 +56,7 @@
       "deleteable": false
    },
    {
-      "name": "Nicht A und B",
+      "name": "(NOT A) AND B",
       "elementare": "",
       "order": 8,
       "calculateProbability": false,
