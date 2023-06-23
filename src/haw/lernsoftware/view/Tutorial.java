@@ -84,19 +84,19 @@ public class Tutorial extends HAWView implements ActionListener {
 				.add(buttonAnordnung).xyw(5, 1, 1) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_Ueberschrift.text")).xyw(1, 2, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1)), x1, y1) )).xyw(3,3,3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD1)), x1, y1) )).xyw(3,3,3) //
 				
 				//.add(new JLabel(new ImageIcon(ResourceProvider.loadImage("Aufgabe9_Gluecksrad.png")))).xyw(3,3,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz2.text")).xyw(1, 5, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz31.text")).xyw(1, 6, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz3.text")).xyw(1, 7, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD2)), x, y) )).xyw(3,7,3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD2)), x, y) )).xyw(3,7,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz4.text")).xyw(1, 9, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD3)), x, y) )).xyw(3,9,3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD3)), x, y) )).xyw(3,9,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz5.text")).xyw(1, 11, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)), x, y) )).xyw(3,11,3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD4)), x, y) )).xyw(3,11,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 13, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)), x, y) )).xyw(3,13,3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD5)), x, y) )).xyw(3,13,3) //
 				.build(); //
 		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einfügen und zurückgeben
 		return FormBuilder.create()

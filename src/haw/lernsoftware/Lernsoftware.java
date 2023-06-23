@@ -74,7 +74,7 @@ public class Lernsoftware extends HAWView {
 			//XXX Linux-spezifisches Setup hier
 		}
 		plotter = new GUI(frame);
-
+		
 		frame.setVisible(true);
 		log.info("Das Programm brauchte " + (System.currentTimeMillis()-timestart) + "ms zum Starten!");
 	}

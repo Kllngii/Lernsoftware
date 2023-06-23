@@ -23,13 +23,13 @@ public class Konst {
 	public static final String MITTEL_ICON = "mittel.png";
 	public static final String SCHWER_ICON = "schwer.png";
 	public static final String FUN_BUTTON_PNG = "ButtonFUN.png";
-	public static final String EINFÜHRUNG_BILD1 = "Einfuehrung_Bild1.png";
-	public static final String EINFÜHRUNG_BILD2 = "Einfuehrung_Bild2.png";
-	public static final String EINFÜHRUNG_BILD3 = "Einfuehrung_Bild3.png";
-	public static final String EINFÜHRUNG_BILD4 = "Einfuehrung_Bild4.png";
-	public static final String EINFÜHRUNG_BILD5 = "Einfuehrung_Bild5.png";
-	public static final String FOLGEN_EINFÜHRUNG_BILD_1 = "Folgen_Einfuehrung_Bild_1.jpeg";
-	public static final String EINFÜHRUNG_BEDINGTE_W = "Einfuehrung_bedingte_W.png";
+	public static final String EINFUEHRUNG_BILD1 = "Einfuehrung_Bild1.png";
+	public static final String EINFUEHRUNG_BILD2 = "Einfuehrung_Bild2.png";
+	public static final String EINFUEHRUNG_BILD3 = "Einfuehrung_Bild3.png";
+	public static final String EINFUEHRUNG_BILD4 = "Einfuehrung_Bild4.png";
+	public static final String EINFUEHRUNG_BILD5 = "Einfuehrung_Bild5.png";
+	public static final String FOLGEN_EINFUEHRUNG_BILD_1 = "Folgen_Einfuehrung_Bild_1.jpeg";
+	public static final String EINFUEHRUNG_BEDINGTE_W = "Einfuehrung_bedingte_W.png";
 	public static final String Background_JPEG = "background.jpeg";
 
 	public static final String PROPERTIES_STARTSEITE = "startseite.properties";
