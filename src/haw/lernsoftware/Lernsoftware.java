@@ -16,8 +16,6 @@ import haw.lernsoftware.resources.ResourceProvider;
 import haw.lernsoftware.view.GUI;
 import haw.lernsoftware.view.HAWView;
 
-//TODO Liniendiagramm: JavaDoc Header einfügen
-
 /**
  * Die Hauptklasse und der Einstiegpunkt des Programms
  * @author Lasse Kelling

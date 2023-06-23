@@ -115,7 +115,6 @@ public class SpeicherService {
 			return geladeneAufgaben; // Quick-return ohne Debugausgaben...
 		Logger.getLogger(SpeicherService.class).info("Lade Aufgaben!");
 
-		// TODO Aufgaben hier hinzufügen
 		geladeneAufgaben = List.of(
 				// new
 				// Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN,

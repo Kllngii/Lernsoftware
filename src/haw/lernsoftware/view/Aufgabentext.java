@@ -208,8 +208,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
 		if (e.getSource() == toLiniendiagrammButton) {
 			log.debug("Wechsle zum Liniendiagramm");
 			gui.switchToView(WindowSelect.LINIENDIAGRAMM);

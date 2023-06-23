@@ -202,14 +202,12 @@ public class Hilfe extends HAWView implements ActionListener{
 			try {
 				uri = new URI("https://gidf.help/");
 			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
 				log.error(e1);
 			}
 			Desktop dt = Desktop.getDesktop();
 			try {
 				dt.browse(uri.resolve(uri));
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				log.error(e1);
 			}
 		}if(e.getSource() == closeButton) {

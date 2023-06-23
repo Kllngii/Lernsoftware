@@ -26,10 +26,12 @@ import haw.lernsoftware.view.HAWView;
 /**
  * Das Herzstück des Programms, wird verwendet um ein {@link Liniendiagramm} zu zeichen.
  * 
+ * @author Simon Fiebich
  * @see #rebase(List, Ereignismenge)
  * @see Ereignismenge
  * @see Menge
  */
+
 public class LinienDiagramm extends HAWView implements MouseListener {
 	private int numberEreignisse;
 	private int numberElementare;
