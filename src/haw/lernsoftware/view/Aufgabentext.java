@@ -26,6 +26,7 @@ import com.jgoodies.forms.factories.Paddings;
 import haw.lernsoftware.model.Aufgabe;
 import haw.lernsoftware.model.Model;
 import haw.lernsoftware.model.WindowSelect;
+import haw.lernsoftware.view.TextPrompt.Show;
 import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
 public class Aufgabentext extends HAWView implements ActionListener {
@@ -52,7 +53,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JButton previousTaskButton = new CircleButton("Zurück");
 	private JButton toLiniendiagrammButton = new CircleButton("Liniendiagramm");
 	private JTextArea aufgabenText = new JTextArea("if you can read this, report a bug");
-	private JTextArea loesungText = new JTextArea("if you can read this, report a bug");
+	private JTextArea loesungText = new JTextArea();
 	private JButton zeigeloesung = new JButton("Lösung");
 	private JComponent linienpanel;
 
@@ -103,12 +104,14 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		aufgabenText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
 
 		// Aufgabentext erstellen und formatieren
-		loesungText.setText("Hier die Lösung eingeben!");
+		//loesungText.setText("Hier die Lösung eingeben!");
+		TextPrompt tp = new TextPrompt("Hier die Lösung eingeben!", loesungText,Show.FOCUS_LOST);
 		loesungText.setLineWrap(true);
 		loesungText.setWrapStyleWord(true);
 		loesungText.setPreferredSize(new Dimension(100, 100));
 		loesungText.setEditable(true);
 		loesungText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
+		
 		// loesungText.setBackground(color);
 
 		// Wenn die Aufgabe ein Bild hat, wird dieses hinzugefügt
