@@ -24,7 +24,7 @@
       "deleteable": false
    },
    {
-      "name": "Nicht A",
+      "name": "NOT A",
       "elementare": "",
       "order": 4,
       "calculateProbability": false,
@@ -40,7 +40,7 @@
       "deleteable": false
    },
    {
-      "name": "Nicht B",
+      "name": "NOT B",
       "elementare": "",
       "order": 6,
       "calculateProbability": false,
@@ -56,7 +56,7 @@
       "deleteable": false
    },
    {
-      "name": "A und B",
+      "name": "A AND B",
       "elementare": "",
       "order": 8,
       "calculateProbability": false,
