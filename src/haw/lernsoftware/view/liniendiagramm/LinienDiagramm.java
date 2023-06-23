@@ -217,22 +217,20 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			g2d.setFont(new Font("default", Font.PLAIN, g2d.getFont().getSize()));
 
 			// Liniensegmente
+			boolean correct = false;
 			for (int i = 0; i < numberElementare; i++) {
 				int currentWidth = (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
 				if (mengen.get(j).equals(eingetreten) && bedingtMode) {
 					g2d.setColor(Color.BLUE);
 				}
-
+				
 				if (linesegment(mengen.get(j), i+1)) {
-					boolean correct = false;
 					for (Menge ziel : zielMengen) {
-						for (Menge test : mengen) {
-							if (ziel.getName().equals(test.getName())) {
-								correct = true; // Es gibt eine entsprechende Ordernummer-Übereinstimmung, daher potenziell korrekt
-								for (int k = 0; k < numberElementare; k++) {
-									if (linesegment(ziel, k+1) != linesegment(mengen.get(j), k+1))
-										correct = false;
-								}
+						if (ziel.getName().equals(mengen.get(j).getName())) {
+							correct = true; // Es gibt eine entsprechende Namens-Übereinstimmung, daher potenziell korrekt
+							for (int k = 0; k < numberElementare; k++) {
+								if (linesegment(ziel, k+1) != linesegment(mengen.get(j), k+1))
+									correct = false;
 							}
 						}
 					}
@@ -250,6 +248,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 					g2d.setColor(Color.BLACK);
 					g2d.setStroke(new BasicStroke(1));
 				}
+				
 				currentLeftBorder += currentWidth;
 			}
 
