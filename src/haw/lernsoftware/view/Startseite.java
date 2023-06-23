@@ -3,7 +3,7 @@ package haw.lernsoftware.view;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
-
+import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -52,7 +52,7 @@ public class Startseite extends HAWView {
 		view.add(constructStartseite());			
 		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
+		
 	}
 
 	private JComponent constructStartseite() {
@@ -68,21 +68,24 @@ public class Startseite extends HAWView {
 
 		// Beschreibungstexte hinzufügen
 		// Tutorial
-		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial2"));
+		functionText1.setText("Tutorial");
+		functionText1.setFont(new Font("Dialog", Font.BOLD, 40));
 		setNormalBorder(functionText1);
 		functionText1.addMouseListener(mL);
 		functionText1.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
 		functionText1.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
 
 		//Aufgaben
-		functionText2.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.aufgaben2"));
+		functionText2.setText("Aufgaben");
+		functionText2.setFont(new Font("Dialog", Font.BOLD, 40));
 		setNormalBorder(functionText2);
 		functionText2.addMouseListener(mL);
 		functionText2.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
 		functionText2.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
 
 		//Sandbox 
-		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox2"));
+		functionText3.setText("Sandbox");
+		functionText3.setFont(new Font("Dialog", Font.BOLD, 40));
 		setNormalBorder(functionText3);
 		functionText3.addMouseListener(mL);
 		functionText3.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
@@ -91,7 +94,7 @@ public class Startseite extends HAWView {
 		//FormBuilder hinzufügen
 		// gibt einen JComponent zurück, der .debug(true)
 		return FormBuilder.create() 
-				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//, center:200dlu, 200dlu") //
+				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//
 				.rows("100dlu, 160dlu, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 5) //
@@ -106,7 +109,6 @@ public class Startseite extends HAWView {
 	MouseAdapter mL = new MouseAdapter() {
 
 		public void mouseReleased(java.awt.event.MouseEvent e) {
-
 			if(e.getSource() == functionText1) {
 				gui.switchToView(WindowSelect.TUTORIAL);
 			} else if(e.getSource() == functionText2) {
@@ -128,5 +130,4 @@ public class Startseite extends HAWView {
 		textLabel.setBorder(BorderFactory.createCompoundBorder(lBorder, emptyBorder));
 		textLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
-
 }

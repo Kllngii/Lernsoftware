@@ -2,7 +2,6 @@ package haw.lernsoftware.view.liniendiagramm;
 
 import static haw.lernsoftware.Konst.BORDER_X;
 import static haw.lernsoftware.Konst.BORDER_Y;
-import static haw.lernsoftware.Konst.STD_LINEWIDTH;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -32,8 +31,6 @@ import haw.lernsoftware.view.HAWView;
  * @see Menge
  */
 public class LinienDiagramm extends HAWView implements MouseListener {
-
-	private int linewidth = STD_LINEWIDTH;
 	private int numberEreignisse;
 	private int numberElementare;
 	private boolean bedingtMode = false;
@@ -46,7 +43,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 	private List<Integer> spaltenCoord = new ArrayList<Integer>();
 	private List<Integer> zeilenCoord = new ArrayList<Integer>();
-
 	private List<MouseInteract> mouseInteractions = new ArrayList<MouseInteract>();
 
 	private int selectedColumn = -1;
@@ -57,7 +53,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		this.eMenge = eMenge;
 		this.zielMengen = mengen;
 		this.mengen = startMengen;
-
 
 //		this.mengen.get(3).getEreignisse().stream().forEach(log::fatal);
 
@@ -129,11 +124,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	//		});
 	//	}
 
-	private void setLinewidth(Graphics2D g2d, int newWidth) {
-		g2d.setStroke(new BasicStroke(newWidth));
-		linewidth = newWidth;
-	}
-
 	// Elementarereignis in Spalte "order" in der Menge enthalten?
 	private boolean linesegment(Menge menge, int order) {
 		for (int k = 0; k < menge.getEreignisse().size(); k++) {
@@ -166,8 +156,8 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 	public void paintPanel(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
+		g2d.setStroke(new BasicStroke(1));
 		Dimension d = panel.getSize();
-		setLinewidth(g2d, STD_LINEWIDTH);
 		int diagWidth = d.width - 20;
 		int diagHeight = d.height - 20;
 		int linewidth = 40;
@@ -183,7 +173,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		zeilenCoord.clear();
 
 		// Spalten
-		setLinewidth(g2d, 1);
 		currentLeftBorder = BORDER_X + offsetlr;
 		for (int i = 0; i < numberElementare; i++) {
 			int currentWidth = (int) (eMenge.getEreignisse().get(i).getProbability() * (double) (diagWidth-2*offsetlr));
@@ -215,7 +204,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		g2d.drawLine(BORDER_X + diagWidth - offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + diagHeight);
 
 		// Zeilen
-		setLinewidth(g2d, STD_LINEWIDTH);
+		g2d.setStroke(new BasicStroke(2));
 		for (int j = 0; j < numberEreignisse; j++) {
 			// Name des Ereignisses
 			currentLeftBorder = BORDER_X + offsetlr;
@@ -249,11 +238,11 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 					}
 					else {
 						g2d.setColor(Color.BLACK);
-						g2d.setStroke(new BasicStroke());
+						g2d.setStroke(new BasicStroke(1));
 					}
 					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + currentWidth, BORDER_Y + 10 + j*linewidth + linewidth/2);
 					g2d.setColor(Color.BLACK);
-					g2d.setStroke(new BasicStroke());
+					g2d.setStroke(new BasicStroke(1));
 				}
 				currentLeftBorder += currentWidth;
 			}

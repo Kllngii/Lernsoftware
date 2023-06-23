@@ -70,11 +70,12 @@ public class Lernsoftware extends HAWView {
 			}
 		} else if(System.getProperty("os.name").startsWith("Windows")) {
 			//XXX Windows-spezifisches Setup hier
+			frame.setUndecorated(true);
 		} else {
 			//XXX Linux-spezifisches Setup hier
 		}
 		plotter = new GUI(frame);
-
+		
 		frame.setVisible(true);
 		log.info("Das Programm brauchte " + (System.currentTimeMillis()-timestart) + "ms zum Starten!");
 	}

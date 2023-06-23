@@ -34,10 +34,12 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JProgressBar progress;
 	private int i;
 
+	// gibt i zurück
 	public int getI() {
 		return i;
 	}
 
+	// setzt i = dem gegebenen Wert (für leicht/mittel/schwer Aufgaben)
 	public void setI(int i) {
 		this.i = i;
 		refreshAufgabenview();
@@ -60,7 +62,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 	private JLabel aufgabenBild2;
 	private GUI gui;
 
-	// fügt dem Panel von Aufgabentext einen JComponent zu
+	// fügt dem Panel von Aufgabentext einen JComponent hinzu
 	public Aufgabentext(Model model, GUI gui) {
 		this.model = model;
 		this.gui = gui;
@@ -77,13 +79,15 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 	}
 
-	// erstellt einen JComponent
+	// erstellt einen JComponent (das Layout)
 	public JComponent buildContentText() {
 		i = aufgaben.indexOf(model.getCurrentAufgabe());
 
+		// Startbedingungen für Aufgabe 1 (Programmstart)
 		previousTaskButton.setEnabled(false);
 		titleTaskLabel.setText("Aufgabe: " + (i + 1));
 
+		// Fortschrittsanzeige
 		progress = new JProgressBar(0, aufgaben.size() - 1);
 		progress.setValue(aufgaben.indexOf(model.getCurrentAufgabe()));
 		progress.setStringPainted(true);
@@ -107,7 +111,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		loesungText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
 		// loesungText.setBackground(color);
 
-		// TODO was ist wenn auch noch Liniendiagramme dazukommen
+		// Wenn die Aufgabe ein Bild hat, wird dieses hinzugefügt
 		if (model.getCurrentAufgabe().hasImage() == true) {
 			bild = new ImageIcon(model.getCurrentAufgabe().getImage());
 			bild2 = new ImageIcon(model.getCurrentAufgabe().getImage2());
@@ -126,8 +130,8 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		toLiniendiagrammButton.addActionListener(this);
 		zeigeloesung.addActionListener(this);
 
-		// gibt einen JComponent zurück mit nur Text
-		return FormBuilder.create() // Rote Linien zeichnen
+		// gibt einen JComponent zurück mit den Komponenten in fertigem Layout
+		return FormBuilder.create() // .debug = Rote Linien zeichnen
 				.columns("100dlu, 5dlu, center:200dlu, 5dlu, 100dlu") //
 				.rows("p, 20dlu, p, $lg, top:90dlu, p, top:10dlu, p, top:10dlu, p, top:50dlu") //
 				.padding(Paddings.DIALOG) //
@@ -176,18 +180,20 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 		if (model.getCurrentAufgabe().hasImage() == true) {
 			zeigeloesung.setVisible(true);
+			toLiniendiagrammButton.setEnabled(false);
 			bild.setImage(model.getCurrentAufgabe().getImage());
 			aufgabenBild.setIcon(resizeImage(bild, 750));
-			log.debug("lade bild!");
+			// log.debug("lade bild!");
 			bild2.setImage(model.getCurrentAufgabe().getImage2());
 			aufgabenBild2.setIcon(resizeImage(bild2, 750));
-			log.debug("lade bild!");
+			// log.debug("lade bild!");
 		} else {
+			toLiniendiagrammButton.setEnabled(true);
 			zeigeloesung.setVisible(false);
 			aufgabenBild.setIcon(null);
-			log.debug("kein Bild!");
+			// log.debug("kein Bild!");
 			aufgabenBild2.setIcon(null);
-			log.debug("kein Bild2!");
+			// log.debug("kein Bild2!");
 		}
 
 		if (current.hasLiniendiagramm()) {
