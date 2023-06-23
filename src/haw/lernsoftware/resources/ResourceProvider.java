@@ -112,7 +112,7 @@ public class ResourceProvider {
 			Path p = Paths.get(pathURL);
 			log.debug("Einlesen der Datei " + path + " unter " + p.toAbsolutePath().toString());
 
-			return Toolkit.getDefaultToolkit().getImage(ResourceProvider.class.getResource(path).toURI().toURL());
+			return Toolkit.getDefaultToolkit().getImage(ResourceProvider.class.getResource("../../../" + path).toURI().toURL());
 		} catch (MalformedURLException | URISyntaxException e) {
 			log.error(e.getMessage());
 		}
