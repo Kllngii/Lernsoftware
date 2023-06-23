@@ -109,14 +109,14 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		aufgabenText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
 
 		// Aufgabentext erstellen und formatieren
-		//loesungText.setText("Hier die Lösung eingeben!");
-		TextPrompt tp = new TextPrompt("Hier die Lösung eingeben!", loesungText,Show.FOCUS_LOST);
+		// loesungText.setText("Hier die Lösung eingeben!");
+		TextPrompt tp = new TextPrompt("Hier die Lösung eingeben!", loesungText, Show.FOCUS_LOST);
 		loesungText.setLineWrap(true);
 		loesungText.setWrapStyleWord(true);
 		loesungText.setPreferredSize(new Dimension(100, 100));
 		loesungText.setEditable(true);
 		loesungText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
-		
+
 		// loesungText.setBackground(color);
 
 		// Wenn die Aufgabe ein Bild hat, wird dieses hinzugefügt
@@ -132,6 +132,8 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			aufgabenBild2 = new JLabel("");
 		}
 
+		zeigeloesung.setBackground(Color.LIGHT_GRAY);
+		
 		// Button Listener
 		previousTaskButton.addActionListener(this);
 		nextTaskButton.addActionListener(this);
@@ -177,7 +179,10 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		return new ImageIcon(resizedImage);
 	}
 
+	// auf die Inputs reagieren und das Bild anpassen
 	private void refreshAufgabenview() {
+
+		// Die vor und zurück Buttons werden am Anfang und Ende ausgegraut
 		if (i == 0) {
 			previousTaskButton.setEnabled(false);
 		} else if (i == aufgaben.size() - 1) {
@@ -192,10 +197,12 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 		Aufgabe current = model.getCurrentAufgabe();
 
+		// Aufgaben Nummer Beschriftung
 		aufgabenText.setText(current.getText());
 		titleTaskLabel.setText("Aufgabe: " + (i + 1));
 		progress.setValue(i);
 
+		// Bild einfügen / ändern beim Aufgaben wechsel
 		if (model.getCurrentAufgabe().hasImage() == true) {
 			zeigeloesung.setVisible(true);
 			toLiniendiagrammButton.setEnabled(false);
@@ -214,6 +221,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			// log.debug("kein Bild2!");
 		}
 
+		// Liniendiagramm aktualisieren
 		if (current.hasLiniendiagramm()) {
 			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse(),
 					current.getStartEreignisse(), gui);
@@ -224,6 +232,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		panel.repaint();
 	}
 
+	// Mit den Buttons zur vorherigen oder nächsten Aufgaben wechseln
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == toLiniendiagrammButton) {
