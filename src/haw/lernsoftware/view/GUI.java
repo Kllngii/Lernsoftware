@@ -43,7 +43,6 @@ public class GUI implements ActionListener {
 
 	private JFrame frame;
 	
-	private int i;
 
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
@@ -59,7 +58,6 @@ public class GUI implements ActionListener {
 	private JButton hilfeButton = new JButton("Hilfe");
 	private JButton homeButton = new JButton("");
 	private JButton closeButton = new JButton("Fenster Schließen");
-	private JButton fullscreenButton = new JButton("Fullscreen");
 
 	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
 	private Startseite startseitenView = new Startseite(this);
@@ -74,12 +72,7 @@ public class GUI implements ActionListener {
 		frame.setLocationByPlatform(true);
 		frame.setResizable(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		if (i>0) {
-			frame.setUndecorated(true);
-			i = 0;
-		}else {
-			frame.setUndecorated(false);
-		}
+
 		//frame.setUndecorated(true);  // Für fullscreen auskommentieren
 		frame.getRootPane().setBorder(
 		        BorderFactory.createMatteBorder(10, 10, 10, 10, new Color(230, 230, 230))
@@ -107,7 +100,6 @@ public class GUI implements ActionListener {
 		menuBar.add(fensterMenü);
 		menuBar.add(fensterAufgabentyp);
 		menuBar.add(hilfeButton);
-		menuBar.add(fullscreenButton);
 		menuBar.add(closeButton);
 		
 
@@ -148,9 +140,7 @@ public class GUI implements ActionListener {
 		closeButton.setOpaque(false);
 		closeButton.setContentAreaFilled(false);
 		closeButton.setBorderPainted(false);
-		fullscreenButton.setOpaque(false);
-		fullscreenButton.setContentAreaFilled(false);
-		fullscreenButton.setBorderPainted(false);
+
 
 		fensterMenü.add(menuItemStartseite);
 		fensterMenü.add(menuItemLiniendiagramm);
@@ -164,7 +154,6 @@ public class GUI implements ActionListener {
 		hilfeButton.addActionListener(this);
 		homeButton.addActionListener(this);
 		closeButton.addActionListener(this);
-		fullscreenButton.addActionListener(this);
 		
 		fensterAufgabentyp.add(menuItemTutorial);
 		fensterAufgabentyp.add(menuItemLeicht);
@@ -236,11 +225,6 @@ public class GUI implements ActionListener {
 		}else if(e.getSource() == closeButton) {
 			log.info("Schließe Fenster");
 			frame.dispose();
-		}else if(e.getSource() == fullscreenButton) {
-			log.info("Fullscreen");
-			i = 1;
-			frame.dispose();
-			new Lernsoftware();
 		}
 	}
 
