@@ -33,7 +33,7 @@ import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.view.GUI;
 import haw.lernsoftware.view.HAWView;
 
-/**
+/** 
  * Das Herzstück des Programms, wird verwendet um ein {@link Liniendiagramm} zu zeichen.
  * 
  * @author Simon Fiebich
@@ -66,8 +66,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		this.zielMengen = mengen;
 		this.mengen = startMengen;
 
-//		this.mengen.get(3).getEreignisse().stream().forEach(log::fatal);
-
 		if (eMenge.validate())
 			constructDiagramm(this.mengen, this.eMenge, gui);
 	}
@@ -76,17 +74,11 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	 * Ein Konstruktor nur für die Initialisierung des GUIs!
 	 */
 	public LinienDiagramm(GUI gui) {
-//		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
-//		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
 		eMenge = new Ereignismenge(new ArrayList<Elementarereignis>());
 		mengen = new ArrayList<Menge>();
 
-//		eMenge.getEreignisse().stream().forEach(log::info);
-//		mengen.stream().forEach(log::info);
-
 		if (eMenge.validate())
 			constructDiagramm(mengen, eMenge, gui);
-		//OK
 	}
 
 	private void constructDiagramm(List<Menge> mengen, Ereignismenge e, GUI gui) {
@@ -105,6 +97,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			}
 		});
 	}
+	
 	/**
 	 * Führt einen Rebase aus und betrachtet fortan neue Daten. Nur für den externen Gebrauch - beispielsweise beim Aufgabenwechsel - bestimmt
 	 * @param mengen
@@ -116,6 +109,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		this.zielMengen = mengen;
 		rebase(startMengen, e);
 	}
+	
 	/**
 	 * Führt einen Rebase aus und betrachtet fortan neue Daten. Für den internen Gebrauch innerhalb einer Aufgabe bestimmt
 	 * @param mengen
@@ -131,19 +125,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		
 		panel.repaint();
 	}
-	//
-	//	public static void main(String[] args) {
-	//		EventQueue.invokeLater(() -> {
-	//			LinienDiagramm d = new LinienDiagramm();
-	//			JFrame f = new JFrame();
-	//			f.setContentPane(d.panel);
-	//			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	////			f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	//			f.setResizable(true);
-	//			f.setSize(720,480);
-	//			f.setVisible(true);
-	//		});
-	//	}
 
 	// Elementarereignis in Spalte "order" in der Menge enthalten?
 	private boolean linesegment(Menge menge, int order) {
