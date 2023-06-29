@@ -5,6 +5,8 @@ package haw.lernsoftware;
  * zu garantieren.
  * 
  * Jede Konstante ist immer mit <code>public static final</code> zu versehen!
+ * 
+ * @author Lasse Kelling
  */
 public class Konst {
 	public static final String SO_HEISST_DAS_DING = "Lernsoftware";

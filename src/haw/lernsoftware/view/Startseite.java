@@ -27,6 +27,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 
 /**
  * Die Startseite des Programms.
+ * 
  * @author Moritz Koch
  */
 public class Startseite extends HAWView {

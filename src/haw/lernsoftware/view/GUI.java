@@ -6,7 +6,6 @@ import java.awt.Container;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -19,9 +18,6 @@ import javax.swing.JMenuItem;
 import org.apache.log4j.Logger;
 
 import haw.lernsoftware.Konst;
-import haw.lernsoftware.model.Elementarereignis;
-import haw.lernsoftware.model.Ereignismenge;
-import haw.lernsoftware.model.Menge;
 import haw.lernsoftware.model.Model;
 import haw.lernsoftware.model.SpeicherService;
 import haw.lernsoftware.model.WindowSelect;
@@ -30,8 +26,8 @@ import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
 /**
  * Die GUI-Klasse definiert den äußersten Container des Fensters
+ * 
  * @author Lasse Kelling
- *
  */
 public class GUI implements ActionListener {
 	private SpeicherService sp = new SpeicherService();
@@ -239,6 +235,7 @@ public class GUI implements ActionListener {
 		}
 	}
 
+	@Deprecated(since = "29.06.2023") //Wird nicht verwendet, sollte sich das nicht ändern -> entfernen
 	private void fullscreenEvent() {
 		frame.setVisible(false);
 		frame.setUndecorated(true);

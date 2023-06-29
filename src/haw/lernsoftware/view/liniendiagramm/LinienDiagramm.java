@@ -90,9 +90,10 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		InputMap im = panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_SHIFT, InputEvent.SHIFT_DOWN_MASK, false), "switch");
 		panel.getActionMap().put("switch", new AbstractAction() {
+			private static final long serialVersionUID = 524048390933185522L;
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				log.info("Wechsle das Fenster per Keybind!");
+				log.debug("Wechsle das Fenster per Keybind!");
 				gui.switchToView(WindowSelect.AUFGABENTEXT);
 			}
 		});
@@ -147,6 +148,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		return maxlength + 30;
 	}
 
+	//XXX Präsentations-Marker paintPanel() (die Hauptmagie)
 	/**
 	 * Fensterecken:        (BORDER_X, BORDER_Y) --------------------------- (BORDER_X + diagWidth,  BORDER_Y)
 	 * 								 |													 |
@@ -155,7 +157,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	 * 								 |													 |
 	 * 			     (BORDER_X, BORDER_Y + diagHeight) ----------------- (BORDER_X + diagWidth, BORDER_Y + diagHeight)
 	 */
-
 	public void paintPanel(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(new BasicStroke(1));

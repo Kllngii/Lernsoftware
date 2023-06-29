@@ -13,8 +13,8 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 /**
  * Oberklasse für alle anzeigbaren Klassen. Enthält viele praktische Funktionen für den Umgang mit Java.awt und Javax.swing GUIs
+ * 
  * @author Lasse Kelling
- *
  */
 public class HAWView {
 	protected JComponent panel = new JPanel();
