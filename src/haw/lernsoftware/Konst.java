@@ -38,5 +38,6 @@ public class Konst {
 	public static final int BORDER_X = 10;
 	public static final int BORDER_Y = 70;
 	public static final int STD_FONTSIZE = 12;
+	public static final int STD_LINEWIDTH = 40;
 	public static final double DIGITS = 3.0;
 }

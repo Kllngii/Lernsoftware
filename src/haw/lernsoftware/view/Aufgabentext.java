@@ -205,7 +205,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		// Bild einfügen / ändern beim Aufgaben wechsel
 		if (model.getCurrentAufgabe().hasImage() == true) {
 			zeigeloesung.setVisible(true);
-			toLiniendiagrammButton.setEnabled(false);
 			bild.setImage(model.getCurrentAufgabe().getImage());
 			aufgabenBild.setIcon(resizeImage(bild, 750));
 			// log.debug("lade bild!");
@@ -213,13 +212,17 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			aufgabenBild2.setIcon(resizeImage(bild2, 750));
 			// log.debug("lade bild!");
 		} else {
-			toLiniendiagrammButton.setEnabled(true);
 			zeigeloesung.setVisible(false);
 			aufgabenBild.setIcon(null);
 			// log.debug("kein Bild!");
 			aufgabenBild2.setIcon(null);
 			// log.debug("kein Bild2!");
 		}
+		
+		if (model.getCurrentAufgabe().hasLiniendiagramm())
+			toLiniendiagrammButton.setEnabled(true);
+		else
+			toLiniendiagrammButton.setEnabled(false);
 
 		// Liniendiagramm aktualisieren
 		if (current.hasLiniendiagramm()) {
