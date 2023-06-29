@@ -34,6 +34,11 @@ import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.view.TextPrompt.Show;
 import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
+/**
+ * Der Aufgabentext ist das {@link HAWView}, welches die Darstellung der aktuellen Aufgabe übernimmt.
+ * 
+ * @author Moritz Koch
+ */
 public class Aufgabentext extends HAWView implements ActionListener {
 	private Model model;
 	private List<Aufgabe> aufgaben;
@@ -110,6 +115,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 		// Aufgabentext erstellen und formatieren
 		// loesungText.setText("Hier die Lösung eingeben!");
+		//FIXME wenn man den TextPromt einbinden will, dann muss man ab hier tp statt loesungText schreiben!
 		TextPrompt tp = new TextPrompt("Hier die Lösung eingeben!", loesungText, Show.FOCUS_LOST);
 		loesungText.setLineWrap(true);
 		loesungText.setWrapStyleWord(true);
@@ -143,9 +149,10 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		InputMap im = panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_SHIFT, InputEvent.SHIFT_DOWN_MASK, false), "switch");
 		panel.getActionMap().put("switch", new AbstractAction() {
+			private static final long serialVersionUID = 7947985494429625517L;
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				log.info("Wechsle das Fenster per Keybind!");
+				log.debug("Wechsle das Fenster per Keybind!");
 				gui.switchToView(WindowSelect.LINIENDIAGRAMM);
 			}
 		});

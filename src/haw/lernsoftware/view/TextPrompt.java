@@ -1,30 +1,25 @@
 package haw.lernsoftware.view;
-import java.awt.event.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
-import java.awt.BorderLayout;
-import javax.swing.text.*;
 import javax.swing.text.JTextComponent;
 
 /**
- *  @author Moritz Koch
- *  The TextPrompt class will display a prompt over top of a text component when
- *  the Document of the text field is empty. The Show property is used to
- *  determine the visibility of the prompt.
- *
- *  The Font and foreground Color of the prompt will default to those properties
- *  of the parent text component. You are free to change the properties after
- *  class construction.
+ * Ein TextPrompt erweitert ein {@link JLabel}, um einen Hinweis-Text anzuzeigen solange das Textfeld leer ist.
+ * 
+ * @author Moritz Koch
  */
-public class TextPrompt extends JLabel
-	implements FocusListener, DocumentListener
-{
-	public enum Show
-	{
+public class TextPrompt extends JLabel implements FocusListener, DocumentListener {
+	private static final long serialVersionUID = -7638108192972169319L;
+
+	public enum Show {
 		ALWAYS,
 		FOCUS_GAINED,
 		FOCUS_LOST;
@@ -37,13 +32,11 @@ public class TextPrompt extends JLabel
 	private boolean showPromptOnce;
 	private int focusLost;
 
-	public TextPrompt(String text, JTextComponent component)
-	{
+	public TextPrompt(String text, JTextComponent component) {
 		this(text, component, Show.ALWAYS);
 	}
 
-	public TextPrompt(String text, JTextComponent component, Show show)
-	{
+	public TextPrompt(String text, JTextComponent component, Show show) {
 		this.component = component;
 		setShow( show );
 		document = component.getDocument();
@@ -68,8 +61,7 @@ public class TextPrompt extends JLabel
 	 *
 	 *  @param alpha value in the range of 0 - 1.0.
 	 */
-	public void changeAlpha(float alpha)
-	{
+	public void changeAlpha(float alpha) {
 		changeAlpha( (int)(alpha * 255) );
 	}
 
@@ -79,8 +71,7 @@ public class TextPrompt extends JLabel
 	 *
 	 *  @param alpha value in the range of 0 - 255.
 	 */
-	public void changeAlpha(int alpha)
-	{
+	public void changeAlpha(int alpha) {
 		alpha = alpha > 255 ? 255 : alpha < 0 ? 0 : alpha;
 
 		Color foreground = getForeground();
@@ -99,9 +90,8 @@ public class TextPrompt extends JLabel
 	 *
 	 *  @param style value representing the the new style of the Font.
 	 */
-	public void changeStyle(int style)
-	{
-		setFont( getFont().deriveFont( style ) );
+	public void changeStyle(int style) {
+		setFont(getFont().deriveFont(style));
 	}
 
 	/**
@@ -109,8 +99,7 @@ public class TextPrompt extends JLabel
 	 *
 	 *  @return the Show property.
 	 */
-	public Show getShow()
-	{
+	public Show getShow() {
 		return show;
 	}
 
@@ -126,8 +115,7 @@ public class TextPrompt extends JLabel
 	 *
 	 *  @param show a valid Show enum
 	 */
-	public void setShow(Show show)
-	{
+	public void setShow(Show show) {
 		this.show = show;
 	}
 
@@ -136,8 +124,7 @@ public class TextPrompt extends JLabel
 	 *
 	 *  @return the showPromptOnce property.
 	 */
-	public boolean getShowPromptOnce()
-	{
+	public boolean getShowPromptOnce() {
 		return showPromptOnce;
 	}
 
@@ -148,8 +135,7 @@ public class TextPrompt extends JLabel
 	 *  @param showPromptOnce  when true the prompt will only be shown once,
 	 *                         otherwise it will be shown repeatedly.
 	 */
-	public void setShowPromptOnce(boolean showPromptOnce)
-	{
+	public void setShowPromptOnce(boolean showPromptOnce) {
 		this.showPromptOnce = showPromptOnce;
 	}
 
@@ -157,20 +143,17 @@ public class TextPrompt extends JLabel
 	 *	Check whether the prompt should be visible or not. The visibility
 	 *  will change on updates to the Document and on focus changes.
 	 */
-	private void checkForPrompt()
-	{
+	private void checkForPrompt() {
 		//  Text has been entered, remove the prompt
 
-		if (document.getLength() > 0)
-		{
+		if (document.getLength() > 0) {
 			setVisible( false );
 			return;
 		}
 
 		//  Prompt has already been shown once, remove it
 
-		if (showPromptOnce && focusLost > 0)
-		{
+		if (showPromptOnce && focusLost > 0) {
 			setVisible(false);
 			return;
 		}
@@ -178,16 +161,14 @@ public class TextPrompt extends JLabel
 		//  Check the Show property and component focus to determine if the
 		//  prompt should be displayed.
 
-        if (component.hasFocus())
-        {
+        if (component.hasFocus()) {
         	if (show == Show.ALWAYS
         	||  show ==	Show.FOCUS_GAINED)
         		setVisible( true );
         	else
         		setVisible( false );
         }
-        else
-        {
+        else {
         	if (show == Show.ALWAYS
         	||  show ==	Show.FOCUS_LOST)
         		setVisible( true );
@@ -198,26 +179,22 @@ public class TextPrompt extends JLabel
 
 //  Implement FocusListener
 
-	public void focusGained(FocusEvent e)
-	{
+	public void focusGained(FocusEvent e) {
 		checkForPrompt();
 	}
 
-	public void focusLost(FocusEvent e)
-	{
+	public void focusLost(FocusEvent e) {
 		focusLost++;
 		checkForPrompt();
 	}
 
 //  Implement DocumentListener
 
-	public void insertUpdate(DocumentEvent e)
-	{
+	public void insertUpdate(DocumentEvent e) {
 		checkForPrompt();
 	}
 
-	public void removeUpdate(DocumentEvent e)
-	{
+	public void removeUpdate(DocumentEvent e) {
 		checkForPrompt();
 	}
 

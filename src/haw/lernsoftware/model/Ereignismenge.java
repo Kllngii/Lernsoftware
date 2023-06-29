@@ -103,6 +103,7 @@ public class Ereignismenge {
 		return eList;
 	}
 	
+	//XXX Präsentations-Marker fromJSON()
 	public static Menge fromJSON(String jsonString, Ereignismenge eMenge) {
 		JSONObject json = new JSONObject(jsonString);
 		String elementareString = json.getString("elementare");

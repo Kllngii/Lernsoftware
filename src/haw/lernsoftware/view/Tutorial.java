@@ -24,7 +24,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 
 
 /**
- * Die Tutorial des Programms.
+ * Das Tutorial des Programms.
  */
 public class Tutorial extends HAWView implements ActionListener {
 	//Definition und Init.

@@ -34,6 +34,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 
 /**
  * Die Hilfeseite des Programms.
+ * 
  * @author Sebastian Holz
  */
 public class Hilfe extends HAWView implements ActionListener{

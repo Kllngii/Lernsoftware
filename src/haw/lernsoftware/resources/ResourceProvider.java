@@ -30,6 +30,7 @@ import haw.lernsoftware.Konst;
 public class ResourceProvider {
 	private static Logger log = Logger.getLogger(ResourceProvider.class);
 
+	//XXX Präsentations-Marker getFileContentAsString()
 	/**
 	 * Liest eine Datei ein und gibt den Inhalt <b>aller Zeilen</b> zu einem String
 	 * verbunden aus
