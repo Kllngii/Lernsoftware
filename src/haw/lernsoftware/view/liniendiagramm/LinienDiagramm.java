@@ -345,7 +345,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 				else if (current.spalte() == eMenge.getEreignisse().size() && last.spalte() == eMenge.getEreignisse().size() && current.zeile() == last.zeile()) {
 					if (mengen.get(current.zeile()).isCalculateProbability()) {
-						log.debug("Zeile " + current.zeile() + " in der rechtesten Spalte wurde gewählt!");
+						log.debug("Wahrscheinlichkeitsfeld in Zeile " + current.zeile() + " gewählt!");
 						boolean accepted = false;
 						while(!accepted) {
 							if(mengen.get(current.zeile()).isCorrect())
