@@ -42,7 +42,7 @@ public class Lernsoftware extends HAWView {
 		frame.setLocation((screensize.width - size.width) / 2, (screensize.height - size.height) / 2);
 		log.info("Baue jetzt den Frame");
 		long timestart = System.currentTimeMillis();
-		log.info("Ich werde heute auf " + System.getProperty("os.name") + " ausgeführt. " + (System.getProperty("os.name").startsWith("Mac") ? "Welch eine Freude!" : "Ist ganz ok..."));
+		log.info("Ich werde heute auf " + System.getProperty("os.name") + " ausgeführt. " + (System.getProperty("os.name").startsWith("Mac") ? "Welch eine Freude! 😀😎" : "Ist ganz ok..."));
 
 		Image icon = ResourceProvider.loadImage(Konst.ICON_PATH);
 		if(icon != null)
