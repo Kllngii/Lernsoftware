@@ -5,6 +5,8 @@ package haw.lernsoftware;
  * zu garantieren.
  * 
  * Jede Konstante ist immer mit <code>public static final</code> zu versehen!
+ * 
+ * @author Lasse Kelling
  */
 public class Konst {
 	public static final String SO_HEISST_DAS_DING = "Lernsoftware";
@@ -35,8 +37,10 @@ public class Konst {
 	public static final String PROPERTIES_STARTSEITE = "startseite.properties";
 	public static final String PROPERTIES_HILFE = "hilfe.properties";
 	public static final String PROPERTIES_AUFGABEN = "aufgaben.properties";
+	
 	public static final int BORDER_X = 10;
 	public static final int BORDER_Y = 70;
 	public static final int STD_FONTSIZE = 12;
+	public static final int STD_LINEWIDTH = 40;
 	public static final double DIGITS = 3.0;
 }

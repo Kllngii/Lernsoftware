@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,6 +30,7 @@ import haw.lernsoftware.Konst;
 public class ResourceProvider {
 	private static Logger log = Logger.getLogger(ResourceProvider.class);
 
+	//XXX Präsentations-Marker getFileContentAsString()
 	/**
 	 * Liest eine Datei ein und gibt den Inhalt <b>aller Zeilen</b> zu einem String
 	 * verbunden aus
@@ -117,7 +119,7 @@ public class ResourceProvider {
 				log.debug("Einlesen der Datei " + path + " unter " + p.toAbsolutePath().toString());
 
 				return Toolkit.getDefaultToolkit().getImage(ResourceProvider.class.getResource(path).toURI().toURL());
-			} catch(NullPointerException ex) {
+			} catch(NullPointerException | FileSystemNotFoundException ex) {
 				log.error(path);
 				log.error(ex);
 				return new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_GRAY);

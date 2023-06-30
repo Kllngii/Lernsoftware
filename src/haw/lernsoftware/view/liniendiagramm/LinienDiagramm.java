@@ -3,6 +3,7 @@ package haw.lernsoftware.view.liniendiagramm;
 import static haw.lernsoftware.Konst.BORDER_X;
 import static haw.lernsoftware.Konst.BORDER_Y;
 import static haw.lernsoftware.Konst.STD_FONTSIZE;
+import static haw.lernsoftware.Konst.STD_LINEWIDTH;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -10,21 +11,30 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 import org.apache.log4j.Logger;
 
 import haw.lernsoftware.model.Elementarereignis;
 import haw.lernsoftware.model.Ereignismenge;
 import haw.lernsoftware.model.Menge;
+import haw.lernsoftware.model.WindowSelect;
+import haw.lernsoftware.view.GUI;
 import haw.lernsoftware.view.HAWView;
 
-/**
+/** 
  * Das Herzstück des Programms, wird verwendet um ein {@link Liniendiagramm} zu zeichen.
  * 
  * @author Simon Fiebich
@@ -38,55 +48,57 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	private int numberElementare;
 	private boolean bedingtMode = false;
 	private boolean enableNeueEreignisse = true;
-
-	private Logger log = Logger.getLogger(getClass());
+	private Ereignismenge eMenge;
 	private List<Menge> mengen;
 	private List<Menge> zielMengen;
-	private Ereignismenge eMenge;
-
+	private Menge eingetreten;
+	
+	private int selectedColumn = -1;
+	private int selectedRow = -1;
 	private List<Integer> spaltenCoord = new ArrayList<Integer>();
 	private List<Integer> zeilenCoord = new ArrayList<Integer>();
 	private List<MouseInteract> mouseInteractions = new ArrayList<MouseInteract>();
+	
+	private Logger log = Logger.getLogger(getClass());
 
-	private int selectedColumn = -1;
-	private int selectedRow = -1;
-	private Menge eingetreten;
-
-	public LinienDiagramm(Ereignismenge eMenge, List<Menge> mengen, List<Menge> startMengen) {
+	public LinienDiagramm(Ereignismenge eMenge, List<Menge> mengen, List<Menge> startMengen, GUI gui) {
 		this.eMenge = eMenge;
 		this.zielMengen = mengen;
 		this.mengen = startMengen;
 
-//		this.mengen.get(3).getEreignisse().stream().forEach(log::fatal);
-
 		if (eMenge.validate())
-			constructDiagramm(this.mengen, this.eMenge);
+			constructDiagramm(this.mengen, this.eMenge, gui);
 	}
 
 	/**
 	 * Ein Konstruktor nur für die Initialisierung des GUIs!
 	 */
-	public LinienDiagramm() {
-//		eMenge = Ereignismenge.elementareFromJSON(ResourceProvider.getFileContentAsString("elementare_würfel.em"));
-//		mengen = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString("ereignisse_würfel.em"), eMenge);
+	public LinienDiagramm(GUI gui) {
 		eMenge = new Ereignismenge(new ArrayList<Elementarereignis>());
 		mengen = new ArrayList<Menge>();
 
-//		eMenge.getEreignisse().stream().forEach(log::info);
-//		mengen.stream().forEach(log::info);
-
 		if (eMenge.validate())
-			constructDiagramm(mengen, eMenge);
-		//OK
+			constructDiagramm(mengen, eMenge, gui);
 	}
 
-	private void constructDiagramm(List<Menge> mengen, Ereignismenge e) {
+	private void constructDiagramm(List<Menge> mengen, Ereignismenge e, GUI gui) {
 		panel = new DrawingPanel(this);
 		numberEreignisse = mengen.size();
 		numberElementare = e.getEreignisse().size();
 
 		panel.addMouseListener(this);
+		InputMap im = panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_SHIFT, InputEvent.SHIFT_DOWN_MASK, false), "switch");
+		panel.getActionMap().put("switch", new AbstractAction() {
+			private static final long serialVersionUID = 524048390933185522L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				log.debug("Wechsle das Fenster per Keybind!");
+				gui.switchToView(WindowSelect.AUFGABENTEXT);
+			}
+		});
 	}
+	
 	/**
 	 * Führt einen Rebase aus und betrachtet fortan neue Daten. Nur für den externen Gebrauch - beispielsweise beim Aufgabenwechsel - bestimmt
 	 * @param mengen
@@ -98,6 +110,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		this.zielMengen = mengen;
 		rebase(startMengen, e);
 	}
+	
 	/**
 	 * Führt einen Rebase aus und betrachtet fortan neue Daten. Für den internen Gebrauch innerhalb einer Aufgabe bestimmt
 	 * @param mengen
@@ -113,19 +126,6 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		
 		panel.repaint();
 	}
-	//
-	//	public static void main(String[] args) {
-	//		EventQueue.invokeLater(() -> {
-	//			LinienDiagramm d = new LinienDiagramm();
-	//			JFrame f = new JFrame();
-	//			f.setContentPane(d.panel);
-	//			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	////			f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	//			f.setResizable(true);
-	//			f.setSize(720,480);
-	//			f.setVisible(true);
-	//		});
-	//	}
 
 	// Elementarereignis in Spalte "order" in der Menge enthalten?
 	private boolean linesegment(Menge menge, int order) {
@@ -148,6 +148,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 		return maxlength + 30;
 	}
 
+	//XXX Präsentations-Marker paintPanel() (die Hauptmagie)
 	/**
 	 * Fensterecken:        (BORDER_X, BORDER_Y) --------------------------- (BORDER_X + diagWidth,  BORDER_Y)
 	 * 								 |													 |
@@ -156,21 +157,19 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 	 * 								 |													 |
 	 * 			     (BORDER_X, BORDER_Y + diagHeight) ----------------- (BORDER_X + diagWidth, BORDER_Y + diagHeight)
 	 */
-
 	public void paintPanel(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(new BasicStroke(1));
 		Dimension d = panel.getSize();
 		int diagWidth = d.width - 20;
 		int diagHeight = d.height - 20;
-		int linewidth = 40;
 		int offsetlr = offset(g2d);
 		int currentLeftBorder = BORDER_X + offsetlr;
 
 		// Überschrift + Rahmen
 		g2d.setFont(new Font("default", Font.BOLD, STD_FONTSIZE * 3/2));
 		g2d.setColor(Color.GRAY);
-		g2d.drawString("Wechsel zur Aufgabe mit CTRL + G", d.width / 2 - g2d.getFontMetrics().stringWidth("Wechsel zur Aufgabe mit CTRL + G")/2, 30);
+		g2d.drawString("Wechsel zur Aufgabe mit SHIFT", d.width / 2 - g2d.getFontMetrics().stringWidth("Wechsel zur Aufgabe mit SHIFT")/2, 30);
 		g2d.setFont(new Font("default", Font.PLAIN, STD_FONTSIZE));
 		g2d.setColor(Color.BLACK);
 		g2d.drawLine(BORDER_X + offsetlr, BORDER_Y + 10, BORDER_X + diagWidth - offsetlr, BORDER_Y + 10);
@@ -189,19 +188,19 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			spaltenCoord.add(currentLeftBorder);
 			if (eMenge.getEreignisse().get(i).isBedingt() && bedingtMode) {
 				g2d.setColor(Color.CYAN);
-				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, currentWidth - 1, numberEreignisse*linewidth - 2);
+				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, currentWidth - 1, numberEreignisse*STD_LINEWIDTH - 2);
 			}
 
 			g2d.setColor(Color.BLACK);
 			g2d.drawString(eMenge.getEreignisse().get(i).getName(), currentLeftBorder + currentWidth / 2  - g2d.getFontMetrics().stringWidth(eMenge.getEreignisse().get(i).getName()) / 2, BORDER_Y);
 			g2d.setColor(Color.GRAY);
-			g2d.drawString(eMenge.getEreignisse().get(i).getProbString(), currentLeftBorder + currentWidth / 2  - g2d.getFontMetrics().stringWidth(eMenge.getEreignisse().get(i).getProbString()) / 2, BORDER_Y + linewidth * numberEreignisse + 30);
+			g2d.drawString(eMenge.getEreignisse().get(i).getProbString(), currentLeftBorder + currentWidth / 2  - g2d.getFontMetrics().stringWidth(eMenge.getEreignisse().get(i).getProbString()) / 2, BORDER_Y + STD_LINEWIDTH * numberEreignisse + 30);
 			g2d.setColor(Color.BLACK);
 
 			if(selectedColumn == i) {
 				g2d.setColor(new Color(0.85f, 1f, 1f, 0.8f));
-				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, currentWidth - 1, numberEreignisse*linewidth - 2);
-				log.info("Zeichne bei (" + currentLeftBorder + currentWidth / 2 + ", " + BORDER_Y + 10 + linewidth + ")");
+				g2d.fillRect(currentLeftBorder + 1, BORDER_Y + 12, currentWidth - 1, numberEreignisse*STD_LINEWIDTH - 2);
+				log.info("Zeichne bei (" + currentLeftBorder + currentWidth / 2 + ", " + BORDER_Y + 10 + STD_LINEWIDTH + ")");
 			}
 
 			g2d.setColor(Color.BLACK);
@@ -219,7 +218,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 			if (mengen.get(j).equals(eingetreten) && bedingtMode) {
 				g2d.setFont(new Font("default", Font.BOLD, STD_FONTSIZE));
 			}
-			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*linewidth + linewidth*4/7);
+			g2d.drawString(mengen.get(j).getName(), BORDER_X, BORDER_Y + 10 + j*STD_LINEWIDTH + STD_LINEWIDTH*4/7);
 			g2d.setFont(new Font("default", Font.PLAIN, STD_FONTSIZE));
 
 			// Liniensegmente
@@ -250,7 +249,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 						g2d.setColor(Color.BLACK);
 						g2d.setStroke(new BasicStroke(1));
 					}
-					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*linewidth + linewidth/2, currentLeftBorder + currentWidth, BORDER_Y + 10 + j*linewidth + linewidth/2);
+					g2d.drawLine(currentLeftBorder, BORDER_Y + 10 + j*STD_LINEWIDTH + STD_LINEWIDTH/2, currentLeftBorder + currentWidth, BORDER_Y + 10 + j*STD_LINEWIDTH + STD_LINEWIDTH/2);
 					g2d.setColor(Color.BLACK);
 					g2d.setStroke(new BasicStroke(1));
 				}
@@ -260,7 +259,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 			// Wahrscheinlichkeiten am rechten Rand
 			g2d.setColor(Color.BLACK);
-			zeilenCoord.add(BORDER_Y + 10 + j*linewidth + linewidth/2 - 2*BORDER_X);
+			zeilenCoord.add(BORDER_Y + 10 + j*STD_LINEWIDTH + STD_LINEWIDTH/2 - 2*BORDER_X);
 
 			// Wenn in Zeile mengen.get(j) die WSK berechnet werden soll
 			if (mengen.get(j).isCalculateProbability()) {
@@ -272,21 +271,21 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 					g2d.setColor(Color.RED);
 				
 				mengen.get(j).setCorrect(isCorrect);
-				g2d.drawString(mengen.get(j).getUserProbability() + (isCorrect ? (" = " + mengen.get(j).getDecimalProbability()) : ""), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
+				g2d.drawString(mengen.get(j).getUserProbability() + (isCorrect ? (" = " + mengen.get(j).getDecimalProbability()) : ""), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*STD_LINEWIDTH + STD_LINEWIDTH*6/10);
 				g2d.setFont(new Font("default", Font.PLAIN, STD_FONTSIZE));
 				g2d.setColor(Color.BLACK);
 			} else {
 				if (bedingtMode) {
-					g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*4/10);
+					g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*STD_LINEWIDTH + STD_LINEWIDTH*4/10);
 					g2d.setColor(Color.BLUE);
-					g2d.drawString(mengen.get(j).getConditionalProbability(eingetreten), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*8/10);
+					g2d.drawString(mengen.get(j).getConditionalProbability(eingetreten), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*STD_LINEWIDTH + STD_LINEWIDTH*8/10);
 					g2d.setColor(Color.BLACK);
 				} else {
-					g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*linewidth + linewidth*6/10);
+					g2d.drawString(mengen.get(j).getProbability(), BORDER_X + diagWidth - offsetlr + 10, BORDER_Y + 10 + j*STD_LINEWIDTH + STD_LINEWIDTH*6/10);
 				}
 			}
 		}
-		zeilenCoord.add(BORDER_Y + 10 + numberEreignisse*linewidth + linewidth/2 - 2*BORDER_X);
+		zeilenCoord.add(BORDER_Y + 10 + numberEreignisse*STD_LINEWIDTH + STD_LINEWIDTH/2 - 2*BORDER_X);
 	}
 
 	public Koordinate getPosition(MouseEvent e) {
@@ -346,7 +345,7 @@ public class LinienDiagramm extends HAWView implements MouseListener {
 
 				else if (current.spalte() == eMenge.getEreignisse().size() && last.spalte() == eMenge.getEreignisse().size() && current.zeile() == last.zeile()) {
 					if (mengen.get(current.zeile()).isCalculateProbability()) {
-						log.debug("Zeile " + current.zeile() + " in der rechtesten Spalte wurde gewählt!");
+						log.debug("Wahrscheinlichkeitsfeld in Zeile " + current.zeile() + " gewählt!");
 						boolean accepted = false;
 						while(!accepted) {
 							if(mengen.get(current.zeile()).isCorrect())

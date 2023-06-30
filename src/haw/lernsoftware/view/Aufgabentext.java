@@ -5,10 +5,14 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -17,6 +21,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 
 import org.apache.log4j.Logger;
 
@@ -29,6 +34,11 @@ import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.view.TextPrompt.Show;
 import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
+/**
+ * Der Aufgabentext ist das {@link HAWView}, welches die Darstellung der aktuellen Aufgabe übernimmt.
+ * 
+ * @author Moritz Koch
+ */
 public class Aufgabentext extends HAWView implements ActionListener {
 	private Model model;
 	private List<Aufgabe> aufgaben;
@@ -105,6 +115,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 		// Aufgabentext erstellen und formatieren
 		// loesungText.setText("Hier die Lösung eingeben!");
+		//FIXME wenn man den TextPromt einbinden will, dann muss man ab hier tp statt loesungText schreiben!
 		TextPrompt tp = new TextPrompt("Hier die Lösung eingeben!", loesungText, Show.FOCUS_LOST);
 		loesungText.setLineWrap(true);
 		loesungText.setWrapStyleWord(true);
@@ -134,7 +145,18 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		nextTaskButton.addActionListener(this);
 		toLiniendiagrammButton.addActionListener(this);
 		zeigeloesung.addActionListener(this);
-
+		
+		InputMap im = panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_SHIFT, InputEvent.SHIFT_DOWN_MASK, false), "switch");
+		panel.getActionMap().put("switch", new AbstractAction() {
+			private static final long serialVersionUID = 7947985494429625517L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				log.debug("Wechsle das Fenster per Keybind!");
+				gui.switchToView(WindowSelect.LINIENDIAGRAMM);
+			}
+		});
+		
 		// gibt einen JComponent zurück mit den Komponenten in fertigem Layout
 		return FormBuilder.create() // .debug = Rote Linien zeichnen
 				.columns("100dlu, 5dlu, center:200dlu, 5dlu, 100dlu") //
@@ -151,7 +173,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.add(zeigeloesung).xyw(1, 8, 5) //
 				.add(aufgabenBild2).xyw(1, 8, 5) //
 				.add(linienpanel).xyw(1, 10, 5) //
-				.add(loesungText).xyw(1, 11, 5) //
+//				.add(loesungText).xyw(1, 11, 5) //
 				.build(); //
 	}
 
@@ -190,7 +212,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		// Bild einfügen / ändern beim Aufgaben wechsel
 		if (model.getCurrentAufgabe().hasImage() == true) {
 			zeigeloesung.setVisible(true);
-			toLiniendiagrammButton.setEnabled(false);
 			bild.setImage(model.getCurrentAufgabe().getImage());
 			aufgabenBild.setIcon(resizeImage(bild, 750));
 			// log.debug("lade bild!");
@@ -198,18 +219,22 @@ public class Aufgabentext extends HAWView implements ActionListener {
 			aufgabenBild2.setIcon(resizeImage(bild2, 750));
 			// log.debug("lade bild!");
 		} else {
-			toLiniendiagrammButton.setEnabled(true);
 			zeigeloesung.setVisible(false);
 			aufgabenBild.setIcon(null);
 			// log.debug("kein Bild!");
 			aufgabenBild2.setIcon(null);
 			// log.debug("kein Bild2!");
 		}
+		
+		if (model.getCurrentAufgabe().hasLiniendiagramm())
+			toLiniendiagrammButton.setEnabled(true);
+		else
+			toLiniendiagrammButton.setEnabled(false);
 
 		// Liniendiagramm aktualisieren
 		if (current.hasLiniendiagramm()) {
 			LinienDiagramm liniendiagramm = new LinienDiagramm(current.geteMenge(), current.getEreignisse(),
-					current.getStartEreignisse());
+					current.getStartEreignisse(), gui);
 			linienpanel = liniendiagramm.panel;
 		} else
 			linienpanel = new JPanel();

@@ -27,6 +27,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 
 /**
  * Die Startseite des Programms.
+ * 
  * @author Moritz Koch
  */
 public class Startseite extends HAWView {
@@ -39,9 +40,6 @@ public class Startseite extends HAWView {
 	private JLabel functionText2 = new JLabel();
 	private JLabel functionText3 = new JLabel();
 	
-	private CompoundBorder unselectedBorder = BorderFactory.createCompoundBorder(new LineBorder(new Color(100, 100, 100)), new EmptyBorder(15, 100, 15, 15));
-	private CompoundBorder selectedBorder = BorderFactory.createCompoundBorder(new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY), new EmptyBorder(12, 97, 12, 12));
-
 	public Startseite(GUI gui) {
 		this.gui = gui;				
 		
@@ -71,21 +69,21 @@ public class Startseite extends HAWView {
 		functionText1.setText("Tutorial");
 		functionText1.setFont(new Font("Dialog", Font.BOLD, 40));
 		functionText1.addMouseListener(mL);
-		functionText1.setBorder(unselectedBorder);
+		functionText1.setBorder(unselectedBorder(functionText1));
 		functionText1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		//Aufgaben
 		functionText2.setText("Aufgaben");
 		functionText2.setFont(new Font("Dialog", Font.BOLD, 40));
 		functionText2.addMouseListener(mL);
-		functionText2.setBorder(unselectedBorder);
+		functionText2.setBorder(unselectedBorder(functionText2));
 		functionText2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		//Sandbox 
-		functionText3.setText("Sandbox");
+		functionText3.setText("Liniendiagramm");
 		functionText3.setFont(new Font("Dialog", Font.BOLD, 40));
 		functionText3.addMouseListener(mL);
-		functionText3.setBorder(unselectedBorder);
+		functionText3.setBorder(unselectedBorder(functionText3));
 		functionText3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		//FormBuilder hinzufügen
@@ -116,11 +114,20 @@ public class Startseite extends HAWView {
 		}
 		// Rahmenänderung, wenn der Mauszeiger auf das JLabel gerichtet ist 
 		public void mouseEntered(java.awt.event.MouseEvent e) {
-			((JComponent) e.getSource()).setBorder(selectedBorder);
+			((JComponent) e.getSource()).setBorder(selectedBorder(((JLabel) e.getSource())));
 			
 		}
 		public void mouseExited(java.awt.event.MouseEvent e) {
-			((JComponent) e.getSource()).setBorder(unselectedBorder);
+			((JComponent) e.getSource()).setBorder(unselectedBorder(((JLabel) e.getSource())));
 		}
 	};
+	private CompoundBorder unselectedBorder(JLabel label) {
+		int leftBorder = (350 - label.getFontMetrics(label.getFont()).stringWidth(label.getText())) / 2 + 20;
+		return BorderFactory.createCompoundBorder(new LineBorder(new Color(100, 100, 100)), new EmptyBorder(15, leftBorder, 15, 0));
+	}
+	private CompoundBorder selectedBorder(JLabel label) {
+		int leftBorder = (350 - label.getFontMetrics(label.getFont()).stringWidth(label.getText())) / 2 + 20;
+		return BorderFactory.createCompoundBorder(new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY), new EmptyBorder(12, leftBorder - 3, 12, 0));
+
+	}
 }

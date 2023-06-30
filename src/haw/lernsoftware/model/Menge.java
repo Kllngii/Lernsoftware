@@ -203,6 +203,7 @@ public class Menge {
 		return String.format("%d/%d", num, denum);
 	}
 
+	// Teile Bruch frac1 durch frac2 (jeweils gegeben im Format "x/y" bzw. "z")
 	public String divideFracProbability(String frac1, String frac2) {
 		int num;
 		int denum;
