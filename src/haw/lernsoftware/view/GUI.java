@@ -95,8 +95,8 @@ public class GUI implements ActionListener {
 		menuBar.add(fensterAufgabentyp);
 		menuBar.add(hilfeButton);
 		menuBar.add(closeButton);
-		if(enableFullscreen)
-			menuBar.add(fullscreenButton);
+		//if(enableFullscreen)				// Funktioniert noch nicht
+			//menuBar.add(fullscreenButton);
 
 
 		dateiMenü.add(menuItemSpeichern);
