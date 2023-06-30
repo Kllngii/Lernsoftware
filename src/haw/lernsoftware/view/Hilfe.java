@@ -158,7 +158,6 @@ public class Hilfe extends HAWView implements ActionListener{
 						.columns("p")
 						  .rows("p")
 						  .addScrolled(inhalt) .xy(1, 1)
-						  .debug(true)
 						  .build();
 	}
 
