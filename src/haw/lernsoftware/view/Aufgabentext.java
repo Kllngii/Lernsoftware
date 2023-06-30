@@ -147,12 +147,36 @@ public class Aufgabentext extends HAWView implements ActionListener {
 		
 		InputMap im = panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_SHIFT, InputEvent.SHIFT_DOWN_MASK, false), "switch");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false), "left");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, false), "right");
 		panel.getActionMap().put("switch", new AbstractAction() {
 			private static final long serialVersionUID = 7947985494429625517L;
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(!toLiniendiagrammButton.isEnabled())
+					return;
 				log.debug("Wechsle das Fenster per Keybind!");
 				gui.switchToView(WindowSelect.LINIENDIAGRAMM);
+			}
+		});
+		panel.getActionMap().put("left", new AbstractAction() {
+			private static final long serialVersionUID = 7947985494429625517L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				log.debug("Wechsle Aufgabe per Keybind");
+				if(!previousTaskButton.isEnabled())
+					return;
+				previousTaskButton.doClick();
+			}
+		});
+		panel.getActionMap().put("right", new AbstractAction() {
+			private static final long serialVersionUID = 7947985494429625517L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				log.debug("Wechsle Aufgabe per Keybind");
+				if(!nextTaskButton.isEnabled())
+					return;
+				nextTaskButton.doClick();
 			}
 		});
 		
