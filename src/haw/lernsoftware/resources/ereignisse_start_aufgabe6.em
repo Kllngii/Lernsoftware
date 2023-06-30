@@ -35,7 +35,7 @@
       "name": "A|B",
       "elementare": "",
       "order": 5,
-      "calculateProbability": true,
+      "calculateProbability": false,
       "editable": true,
       "deleteable": false
    },
@@ -43,7 +43,7 @@
       "name": "B|A",
       "elementare": "",
       "order": 6,
-      "calculateProbability": true,
+      "calculateProbability": false,
       "editable": true,
       "deleteable": false
    }
