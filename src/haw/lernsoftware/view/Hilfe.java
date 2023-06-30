@@ -172,7 +172,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == ButtonAllgemein) {
-			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text2"));
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.wir"));
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
 			Ueberschrift.setText("Allgemein");
