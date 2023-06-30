@@ -11,22 +11,22 @@
    },
    {
       "name": "A AND B",
-      "elementare": "",
+      "elementare": "1,3",
       "order": 3
    },
    {
       "name": "A OR B",
-      "elementare": "",
+      "elementare": "1,2,3,4,5",
       "order": 4
    },
    {
       "name": "A|B",
-      "elementare": "",
+      "elementare": "1,3",
       "order": 5
    },
    {
       "name": "B|A",
-      "elementare": "",
+      "elementare": "1,3",
       "order": 6
    }
 ]}
