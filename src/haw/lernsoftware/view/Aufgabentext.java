@@ -115,7 +115,6 @@ public class Aufgabentext extends HAWView implements ActionListener {
 
 		// Aufgabentext erstellen und formatieren
 		// loesungText.setText("Hier die Lösung eingeben!");
-		//FIXME wenn man den TextPromt einbinden will, dann muss man ab hier tp statt loesungText schreiben!
 		TextPrompt tp = new TextPrompt("Hier die Lösung eingeben!", loesungText, Show.FOCUS_LOST);
 		loesungText.setLineWrap(true);
 		loesungText.setWrapStyleWord(true);
@@ -171,7 +170,7 @@ public class Aufgabentext extends HAWView implements ActionListener {
 				.add(aufgabenText).xyw(1, 5, 5) //
 				.add(aufgabenBild).xyw(1, 6, 5) //
 				.add(zeigeloesung).xyw(1, 8, 5) //
-				.add(aufgabenBild2).xyw(1, 8, 5) //
+				.add(aufgabenBild2).xyw(1, 8, 5)
 				.add(linienpanel).xyw(1, 10, 5) //
 //				.add(loesungText).xyw(1, 11, 5) //
 				.build(); //

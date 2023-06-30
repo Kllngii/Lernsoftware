@@ -71,17 +71,18 @@ public class Aufgabe implements Serializable {
 	
 	public Aufgabe(String text, String pathToImage, String pathToLiniendiagrammElementare,
 			String pathToEreignisse, String pathToStartEreignisse) {
-		this.text = text;
-		this.img = ResourceProvider.loadImage("Aufgabe7_Platzhalter_Bild.png");
-		this.img2 = ResourceProvider.loadImage(pathToImage);
-		this.eMenge = Ereignismenge
-				.elementareFromJSON(ResourceProvider.getFileContentAsString(pathToLiniendiagrammElementare));
-		this.ereignisse = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString(pathToEreignisse),
-				eMenge);
-		this.startEreignisse = Ereignismenge
-				.ereignisseFromJSON(ResourceProvider.getFileContentAsString(pathToStartEreignisse), eMenge);
-
-		hasImage = true;
+		this(text, "Aufgabe7_Platzhalter_Bild.png", pathToImage, pathToLiniendiagrammElementare, pathToEreignisse, pathToStartEreignisse);
+//		this.text = text;
+//		this.img = ResourceProvider.loadImage("Aufgabe7_Platzhalter_Bild.png");
+//		this.img2 = ResourceProvider.loadImage(pathToImage);
+//		this.eMenge = Ereignismenge
+//				.elementareFromJSON(ResourceProvider.getFileContentAsString(pathToLiniendiagrammElementare));
+//		this.ereignisse = Ereignismenge.ereignisseFromJSON(ResourceProvider.getFileContentAsString(pathToEreignisse),
+//				eMenge);
+//		this.startEreignisse = Ereignismenge
+//				.ereignisseFromJSON(ResourceProvider.getFileContentAsString(pathToStartEreignisse), eMenge);
+//
+//		hasImage = true;
 		hasLiniendiagramm = true;
 	}
 
