@@ -2,28 +2,22 @@ package haw.lernsoftware.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Image;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JButton;
 
 import org.apache.log4j.Logger;
 
 import haw.lernsoftware.Konst;
-import haw.lernsoftware.Lernsoftware;
 import haw.lernsoftware.model.Model;
 import haw.lernsoftware.model.SpeicherService;
 import haw.lernsoftware.model.WindowSelect;
@@ -32,8 +26,8 @@ import haw.lernsoftware.view.liniendiagramm.LinienDiagramm;
 
 /**
  * Die GUI-Klasse definiert den äußersten Container des Fensters
+ * 
  * @author Lasse Kelling
- *
  */
 public class GUI implements ActionListener {
 	private SpeicherService sp = new SpeicherService();
@@ -41,9 +35,7 @@ public class GUI implements ActionListener {
 
 	private Logger log = Logger.getLogger(getClass());
 
-	private JFrame frame;
-	
-	private int i;
+	protected JFrame frame;
 
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenuItem menuItemSpeichern = new JMenuItem("Speichern");
@@ -61,55 +53,51 @@ public class GUI implements ActionListener {
 	private JButton closeButton = new JButton("Fenster Schließen");
 	private JButton fullscreenButton = new JButton("Fullscreen");
 
-	private LinienDiagramm liniendiagrammView = new LinienDiagramm();
+	private LinienDiagramm liniendiagrammView = new LinienDiagramm(this);
 	private Startseite startseitenView = new Startseite(this);
 	private Aufgabentext aufgabentextView = new Aufgabentext(model, this);
 	private Tutorial tutorialView = new Tutorial(this);
 	private Tutorial2 tutorial2View = new Tutorial2(this);
 	private Tutorial3 tutorial3View = new Tutorial3(this);
 
-	public GUI(JFrame frame) {
+	public GUI(JFrame frame, boolean enableFullscreen) {
 		this.frame = frame;
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationByPlatform(true);
 		frame.setResizable(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		if (i>0) {
-			frame.setUndecorated(true);
-			i = 0;
-		}else {
-			frame.setUndecorated(false);
-		}
-		//frame.setUndecorated(true);  // Für fullscreen auskommentieren
+
 		frame.getRootPane().setBorder(
-		        BorderFactory.createMatteBorder(10, 10, 10, 10, new Color(230, 230, 230))
-		);
-		
+				BorderFactory.createMatteBorder(10, 10, 10, 10, new Color(230, 230, 230))
+				);
+
 		menuBar.setBackground(new Color(230, 230, 230));
 		menuBar.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		
-		constructMenubar();
+
+		constructMenubar(enableFullscreen);
 		frame.setJMenuBar(menuBar);
 		constructContentPanel();
 	}
 
 	/**
 	 * Erstellt die Menubar des Fensters.
+	 * @param enableFullscreen 
 	 */
-	private void constructMenubar() {
-		
+	private void constructMenubar(boolean enableFullscreen) {
+
 		JMenu dateiMenü = new JMenu("Datei");
 		JMenu fensterMenü = new JMenu("Fenster");
 		JMenu fensterAufgabentyp = new JMenu("Aufgaben");
-		
+
 		menuBar.add(homeButton);
 		menuBar.add(dateiMenü);
 		menuBar.add(fensterMenü);
 		menuBar.add(fensterAufgabentyp);
 		menuBar.add(hilfeButton);
-		menuBar.add(fullscreenButton);
 		menuBar.add(closeButton);
-		
+		//if(enableFullscreen)				// Funktioniert noch nicht
+			//menuBar.add(fullscreenButton);
+
 
 		dateiMenü.add(menuItemSpeichern);
 		dateiMenü.add(menuItemLaden);
@@ -152,6 +140,7 @@ public class GUI implements ActionListener {
 		fullscreenButton.setContentAreaFilled(false);
 		fullscreenButton.setBorderPainted(false);
 
+
 		fensterMenü.add(menuItemStartseite);
 		fensterMenü.add(menuItemLiniendiagramm);
 		fensterMenü.add(menuItemAufgabentext);
@@ -165,7 +154,7 @@ public class GUI implements ActionListener {
 		homeButton.addActionListener(this);
 		closeButton.addActionListener(this);
 		fullscreenButton.addActionListener(this);
-		
+
 		fensterAufgabentyp.add(menuItemTutorial);
 		fensterAufgabentyp.add(menuItemLeicht);
 		fensterAufgabentyp.add(menuItemMittel);
@@ -236,12 +225,23 @@ public class GUI implements ActionListener {
 		}else if(e.getSource() == closeButton) {
 			log.info("Schließe Fenster");
 			frame.dispose();
-		}else if(e.getSource() == fullscreenButton) {
-			log.info("Fullscreen");
-			i = 1;
-			frame.dispose();
-			new Lernsoftware();
+		}else if (e.getSource() == fullscreenButton) {
+			log.info("Fullscreen Button");
+			//fullscreenEvent();
+			//frame.revalidate();
+			//panel.getContentPane().repaint();
+			//panel.repaint();
+			frame.getContentPane().repaint();
 		}
+	}
+
+	@Deprecated(since = "29.06.2023") //Wird nicht verwendet, sollte sich das nicht ändern -> entfernen
+	private void fullscreenEvent() {
+		frame.setVisible(false);
+		frame.setUndecorated(true);
+		frame.getContentPane().repaint();
+		frame.setVisible(true);
+		
 	}
 
 	public void switchToView(WindowSelect ws) {
@@ -273,6 +273,7 @@ public class GUI implements ActionListener {
 			layout.show(frame.getContentPane(), WindowSelect.TUTORIAL3.getIdentifier());
 			model.setSelectedWindow(WindowSelect.TUTORIAL3);
 		}
+		model.setSelectedWindow(ws);
 	}
-	
+
 }

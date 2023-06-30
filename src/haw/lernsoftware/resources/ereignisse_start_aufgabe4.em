@@ -24,7 +24,7 @@
       "deleteable": false
    },
    {
-      "name": "Nicht A := ?",
+      "name": "NOT A",
       "elementare": "",
       "order": 4,
       "calculateProbability": true,
@@ -32,7 +32,7 @@
       "deleteable": false
    },
    {
-      "name": "B oder C := ?",
+      "name": "B OR C",
       "elementare": "",
       "order": 5,
       "calculateProbability": true,
@@ -40,7 +40,7 @@
       "deleteable": false
    },
    {
-      "name": "Nicht A ohne B oder C :?",
+      "name": "(NOT A) WITHOUT (B OR C)",
       "elementare": "",
       "order": 6,
       "calculateProbability": true,

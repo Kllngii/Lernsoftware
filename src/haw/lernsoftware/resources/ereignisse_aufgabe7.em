@@ -5,17 +5,17 @@
       "order": 1
    },
    {
-      "name": "Grün",
+      "name": "grün",
       "elementare": "3,4",
       "order": 2
    },
    {
-      "name": "nicht Gelb",
+      "name": "nicht gelb",
       "elementare": "1,2,3,4,7,8",
       "order": 3
    },
    {
-      "name": "Blau oder Rot",
+      "name": "blau oder rot",
       "elementare": "1,2,7,8",
       "order": 4
    }

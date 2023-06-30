@@ -1,10 +1,8 @@
 package haw.lernsoftware.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Taskbar;
 import java.awt.Taskbar.Feature;
@@ -36,6 +34,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 
 /**
  * Die Hilfeseite des Programms.
+ * 
  * @author Sebastian Holz
  */
 public class Hilfe extends HAWView implements ActionListener{
@@ -47,11 +46,12 @@ public class Hilfe extends HAWView implements ActionListener{
 	private JButton ButtonAllgemein = new CircleButton("Allgemein");
 	private JButton ButtonLadenSpeichern = new CircleButton("Laden/Speichern");
 	private JButton ButtonAufgaben = new CircleButton("Aufgaben");	
-	private JButton ButtonLiniengraph = new CircleButton("Liniengraph");
+	private JButton ButtonLiniengraph = new CircleButton("Liniendiagramm");
 	private JButton ButtonWeitereHilfe = new CircleButton("Weitere Hilfe");
 	private JButton ButtonTutorial = new CircleButton("Tutorial");
-	private JButton ButtonSandbox = new CircleButton("Sandbox");
+	private JButton ButtonShortcuts = new CircleButton("Shortcuts");
 	private JButton ButtonFUN = new CircleButton(" ");
+	private JButton closeButton = new CircleButton("Fenster Schließen");
 	private JLabel Ueberschrift = new JLabel("Hilfe");
 	private JTextArea text = new JTextArea(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.text"),20,50);
 	private int i = 0;
@@ -65,7 +65,7 @@ public class Hilfe extends HAWView implements ActionListener{
 	
 	public  Hilfe() {
 		
-		
+		//fenster.setUndecorated(true);
 		panel = new JScrollPane(view);
 		view.add(buildContentText());			
 		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -91,7 +91,8 @@ public class Hilfe extends HAWView implements ActionListener{
 		ButtonWeitereHilfe.addActionListener(this);
 		ButtonFUN.addActionListener(this);
 		ButtonTutorial.addActionListener(this);
-		ButtonSandbox.addActionListener(this);
+		closeButton.addActionListener(this);
+		ButtonShortcuts.addActionListener(this);
 		
 
 
@@ -132,8 +133,8 @@ public class Hilfe extends HAWView implements ActionListener{
 	    fenster.setLocation(x, y);
 	    // Fenster zeige dich
 	    ButtonFUN.setVisible(false);
+	    closeButton.setVisible(false);
 
-	    
 		fenster.setVisible(true);
 		
 		
@@ -148,7 +149,7 @@ public class Hilfe extends HAWView implements ActionListener{
 				//.debug(true)
 				.padding(Paddings.DIALOG)
 				.add(Ueberschrift) .xy(2, 1)
-				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph,ButtonWeitereHilfe,ButtonTutorial,ButtonSandbox,ButtonFUN) .xy(1, 2, "fill,top")
+				.addStack(ButtonAllgemein,ButtonLadenSpeichern,ButtonAufgaben,ButtonLiniengraph,ButtonTutorial,ButtonShortcuts,ButtonWeitereHilfe,ButtonFUN,closeButton) .xy(1, 2, "fill,top")
 				//.add(text) .xy(2, 2)
 				.addScrolled(text) .xy(2, 2)
 				.border(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.DARK_GRAY))
@@ -158,7 +159,6 @@ public class Hilfe extends HAWView implements ActionListener{
 						.columns("p")
 						  .rows("p")
 						  .addScrolled(inhalt) .xy(1, 1)
-						  .debug(true)
 						  .build();
 	}
 
@@ -202,16 +202,17 @@ public class Hilfe extends HAWView implements ActionListener{
 			try {
 				uri = new URI("https://gidf.help/");
 			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
 				log.error(e1);
 			}
 			Desktop dt = Desktop.getDesktop();
 			try {
 				dt.browse(uri.resolve(uri));
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				log.error(e1);
 			}
+		}if(e.getSource() == closeButton) {
+			log.info("Schließe Fenster");
+			fenster.dispose();
 		}
 		if(e.getSource() == ButtonFUN) {
 			i++;
@@ -242,12 +243,12 @@ public class Hilfe extends HAWView implements ActionListener{
 	    ButtonFUN.setVisible(true);
 	    }if(e.getSource() == ButtonTutorial) {
 			Ueberschrift.setText("Tutorial");
-			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial"));
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial2"));
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
-		}if(e.getSource() == ButtonSandbox) {
-			Ueberschrift.setText("Sandbox");
-			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox"));
+		}if(e.getSource() == ButtonShortcuts) {
+			Ueberschrift.setText("Shortcuts");
+			text.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_HILFE, "hilfe.Shortcuts"));
 			text.setWrapStyleWord(true);
 			text.setLineWrap(true);
 		}

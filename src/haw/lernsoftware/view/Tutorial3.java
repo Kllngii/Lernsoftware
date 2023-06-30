@@ -1,6 +1,5 @@
 package haw.lernsoftware.view;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -25,7 +24,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 
 
 /**
- * Die Tutorial des Programms.
+ * Das Tutorial des Programms.
  */
 public class Tutorial3 extends HAWView implements ActionListener{
 	//Definition und Init.
@@ -90,7 +89,7 @@ public class Tutorial3 extends HAWView implements ActionListener{
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_zwischenUeberschrift.text")).xyw(1, 13, 5) //
 				.add(new JLabel(" ")).xy(1, 14) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial3_absatz6.text")).xyw(1, 15, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BEDINGTE_W)), x, y) )).xyw(3, 15, 3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BEDINGTE_W)), x, y) )).xyw(3, 15, 3) //
 				.build(); //
 		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einf�gen und zur�ckgeben
 		return FormBuilder.create()

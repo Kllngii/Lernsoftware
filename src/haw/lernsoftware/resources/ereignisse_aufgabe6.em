@@ -10,12 +10,12 @@
       "order": 2
    },
    {
-      "name": "AnB",
+      "name": "A AND B",
       "elementare": "",
       "order": 3
    },
    {
-      "name": "AuB",
+      "name": "A OR B",
       "elementare": "",
       "order": 4
    },

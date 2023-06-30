@@ -1,9 +1,7 @@
 package haw.lernsoftware.model;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -112,35 +110,11 @@ public class SpeicherService {
 		return new Model(ladeAufgaben());
 	}
 
-	/**
-	 * Lädt ein Model aus den Java-Preferences
-	 * 
-	 * @return
-	 */
-	@Deprecated(since = "02.06.2023")
-	private ModelWithErrors ladeAusPreferences() {
-		log.info("Lade aus den Prefs!");
-		ModelWithErrors fromPrefs = null;
-		byte[] bytes = getRoot().getByteArray(Konst.MODEL_KEY, null);
-		if (bytes != null) {
-			try (ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-					ObjectInputStream ois = new ObjectInputStream(bis)) {
-				fromPrefs = (ModelWithErrors) ois.readObject();
-			} catch (ClassNotFoundException | IOException e) {
-				log.error("Fehler beim Laden aus den Preferences!", e);
-			}
-		} else
-			log.info("Die Preferences enthalten noch kein gespeichertes Model!");
-
-		return fromPrefs;
-	}
-
 	public static List<Aufgabe> ladeAufgaben() {
 		if (geladeneAufgaben.size() != 0)
 			return geladeneAufgaben; // Quick-return ohne Debugausgaben...
 		Logger.getLogger(SpeicherService.class).info("Lade Aufgaben!");
 
-		// TODO Aufgaben hier hinzufügen
 		geladeneAufgaben = List.of(
 				// new
 				// Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN,
@@ -161,20 +135,23 @@ public class SpeicherService {
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe6.text"),
 						"elementare_aufgabe6.em", "ereignisse_aufgabe6.em", "ereignisse_start_aufgabe6.em"),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe7.text"),
-						"elementare_aufgabe7.em", "ereignisse_aufgabe7.em", "ereignisse_start_aufgabe7.em"),
+						"Aufgabe7_Lösung_Bild.png", "elementare_aufgabe7.em",
+						"ereignisse_aufgabe7.em", "ereignisse_start_aufgabe7.em"),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe8.text"),
-						"Aufgabe8_LeeresDiagramm_Bild.png", "elementare_aufgabe8.em", "ereignisse_aufgabe8.em",
-						"ereignisse_start_aufgabe8.em"),
+						"Aufgabe8_LeeresDiagramm_Bild.png", "Aufgabe8_Lösung_Bild.png", "elementare_aufgabe8.em",
+						"ereignisse_aufgabe8.em", "ereignisse_start_aufgabe8.em"),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe9.text"),
-						"Aufgabe9_LeeresDiagramm.png"),
+						"Aufgabe9_LeeresDiagramm.png", "Aufgabe9_Lösung.png"),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe10.text"),
-						"Aufgabe10_LeeresDiagramm_Bild.png"),
+						"Aufgabe10_LeeresDiagramm_Bild.png", "Aufgabe10_Lösung_Bild.png"),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe11.text"),
-						"Aufgabe11_LeeresDiagramm_Bild.png"),
+						"Aufgabe11_LeeresDiagramm_Bild.png", "Aufgabe11_Lösung_Bild.png"),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe12.text"),
-						"Aufgabe12_LeeresDiagramm_Bild.png"),
+						"Aufgabe12_LeeresDiagramm_Bild.png", "Aufgabe12_Lösung_Bild.png"),
 				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe13.text"),
-						"Aufgabe13_LeeresDiagramm_Bild.png"));
+						"Aufgabe13_LeeresDiagramm_Bild.png", "Aufgabe13_Lösung_Bild.png"),
+				new Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "aufgabe14.text"),
+						"Aufgabe14_LeeresDiagramm_Bild.png", "Aufgabe14_Lösung_Bild.png"));
 		// new
 		// Aufgabe(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN,
 		// "aufgabe9.text")),

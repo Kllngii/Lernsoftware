@@ -2,6 +2,7 @@ package haw.lernsoftware.view;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.BorderFactory;
@@ -10,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
@@ -25,6 +27,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 
 /**
  * Die Startseite des Programms.
+ * 
  * @author Moritz Koch
  */
 public class Startseite extends HAWView {
@@ -36,23 +39,18 @@ public class Startseite extends HAWView {
 	private JLabel functionText1 = new JLabel();
 	private JLabel functionText2 = new JLabel();
 	private JLabel functionText3 = new JLabel();
-	EmptyBorder emptyBorder = new EmptyBorder(12, 100, 12, 12); // oben, rechts, unten, links
-	EmptyBorder thickEmptyBorder = new EmptyBorder(15, 100, 15, 15);
-	LineBorder lBorder = new LineBorder(new Color(100, 100, 100));
-	MatteBorder mBorder = new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY);
-
+	
 	public Startseite(GUI gui) {
 		this.gui = gui;				
 		
 		//Scrollbar hinzufügen
 		panel = new JScrollPane(view);
-		panel.setBorder(emptyBorder);
 		view.setBackground(new Color(230, 230, 230));
 		panel.setBackground(new Color(230, 230, 230));
 		view.add(constructStartseite());			
 		((JScrollPane)panel).setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		((JScrollPane)panel).setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
+		
 	}
 
 	private JComponent constructStartseite() {
@@ -68,30 +66,30 @@ public class Startseite extends HAWView {
 
 		// Beschreibungstexte hinzufügen
 		// Tutorial
-		functionText1.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.tutorial2"));
-		setNormalBorder(functionText1);
+		functionText1.setText("Tutorial");
+		functionText1.setFont(new Font("Dialog", Font.BOLD, 40));
 		functionText1.addMouseListener(mL);
-		functionText1.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
-		functionText1.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
+		functionText1.setBorder(unselectedBorder(functionText1));
+		functionText1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		//Aufgaben
-		functionText2.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.aufgaben2"));
-		setNormalBorder(functionText2);
+		functionText2.setText("Aufgaben");
+		functionText2.setFont(new Font("Dialog", Font.BOLD, 40));
 		functionText2.addMouseListener(mL);
-		functionText2.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
-		functionText2.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
+		functionText2.setBorder(unselectedBorder(functionText2));
+		functionText2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		//Sandbox 
-		functionText3.setText(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_STARTSEITE, "startseite.sandbox2"));
-		setNormalBorder(functionText3);
+		functionText3.setText("Liniendiagramm");
+		functionText3.setFont(new Font("Dialog", Font.BOLD, 40));
 		functionText3.addMouseListener(mL);
-		functionText3.setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
-		functionText3.setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
+		functionText3.setBorder(unselectedBorder(functionText3));
+		functionText3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		//FormBuilder hinzufügen
 		// gibt einen JComponent zurück, der .debug(true)
 		return FormBuilder.create() 
-				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//, center:200dlu, 200dlu") //
+				.columns("200dlu, 10dlu ,200dlu, 10dlu, 200dlu")//
 				.rows("100dlu, 160dlu, p") //
 				.padding(Paddings.DIALOG) //
 				.add(ueberschrift).xyw(1, 1, 5) //
@@ -106,7 +104,6 @@ public class Startseite extends HAWView {
 	MouseAdapter mL = new MouseAdapter() {
 
 		public void mouseReleased(java.awt.event.MouseEvent e) {
-
 			if(e.getSource() == functionText1) {
 				gui.switchToView(WindowSelect.TUTORIAL);
 			} else if(e.getSource() == functionText2) {
@@ -117,16 +114,20 @@ public class Startseite extends HAWView {
 		}
 		// Rahmenänderung, wenn der Mauszeiger auf das JLabel gerichtet ist 
 		public void mouseEntered(java.awt.event.MouseEvent e) {
-			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(mBorder, emptyBorder));
+			((JComponent) e.getSource()).setBorder(selectedBorder(((JLabel) e.getSource())));
+			
 		}
 		public void mouseExited(java.awt.event.MouseEvent e) {
-			((JComponent) e.getSource()).setBorder(BorderFactory.createCompoundBorder(lBorder, thickEmptyBorder));
+			((JComponent) e.getSource()).setBorder(unselectedBorder(((JLabel) e.getSource())));
 		}
 	};
-	//Methode: Rahmen auf normal definierte Werte setzen 
-	public void setNormalBorder(JLabel textLabel) {
-		textLabel.setBorder(BorderFactory.createCompoundBorder(lBorder, emptyBorder));
-		textLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	private CompoundBorder unselectedBorder(JLabel label) {
+		int leftBorder = (350 - label.getFontMetrics(label.getFont()).stringWidth(label.getText())) / 2 + 20;
+		return BorderFactory.createCompoundBorder(new LineBorder(new Color(100, 100, 100)), new EmptyBorder(15, leftBorder, 15, 0));
 	}
+	private CompoundBorder selectedBorder(JLabel label) {
+		int leftBorder = (350 - label.getFontMetrics(label.getFont()).stringWidth(label.getText())) / 2 + 20;
+		return BorderFactory.createCompoundBorder(new MatteBorder(4, 4, 4, 4, Color.DARK_GRAY), new EmptyBorder(12, leftBorder - 3, 12, 0));
 
+	}
 }

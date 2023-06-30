@@ -6,16 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import java.awt.image.BufferedImage;
-import java.lang.reflect.Method;
-import java.awt.Graphics;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import java.awt.Dimension;
 
 import org.apache.log4j.Logger;
 
@@ -25,11 +21,10 @@ import com.jgoodies.forms.factories.Paddings;
 import haw.lernsoftware.Konst;
 import haw.lernsoftware.model.WindowSelect;
 import haw.lernsoftware.resources.ResourceProvider;
-import java.awt.Toolkit;
 
 
 /**
- * Die Tutorial des Programms.
+ * Das Tutorial des Programms.
  */
 public class Tutorial extends HAWView implements ActionListener {
 	//Definition und Init.
@@ -38,8 +33,6 @@ public class Tutorial extends HAWView implements ActionListener {
 	private JLabel ueberschrift = new JLabel("Tutorial 1");
 	private JButton tutorialNext = new CircleButton("nächstes Tutorial");
 	private JButton tutorialBack = new CircleButton("zurück");
-	private JLabel bild = new JLabel();
-
 
 	// Skalierung für das ImageIcon
 	int x1 = 700; // Gewünschte Breite des Bildes
@@ -84,21 +77,17 @@ public class Tutorial extends HAWView implements ActionListener {
 				.add(buttonAnordnung).xyw(5, 1, 1) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_Ueberschrift.text")).xyw(1, 2, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz1.text")).xyw(1, 3, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD1)), x1, y1) )).xyw(3,3,3) //
-				
-				// hier muss das wieder geändert werden
-				
-				//.add(new JLabel(new ImageIcon(ResourceProvider.loadImage("Aufgabe9_Gluecksrad.png")))).xyw(3,3,3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD1)), x1, y1) )).xyw(3,3,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz2.text")).xyw(1, 5, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz31.text")).xyw(1, 6, 5) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz3.text")).xyw(1, 7, 2) //
-				//.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD2)), x, y) )).xyw(3,7,3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD2)), x, y) )).xyw(3,7,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz4.text")).xyw(1, 9, 2) //
-				//.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD3)), x, y) )).xyw(3,9,3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD3)), x, y) )).xyw(3,9,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz5.text")).xyw(1, 11, 2) //
-				//.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD4)), x, y) )).xyw(3,11,3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD4)), x, y) )).xyw(3,11,3) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial1_absatz6.text")).xyw(1, 13, 2) //
-				//.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFÜHRUNG_BILD5)), x, y) )).xyw(3,13,3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.EINFUEHRUNG_BILD5)), x, y) )).xyw(3,13,3) //
 				.build(); //
 		// Formbuilder "inhalt" in einen neuen Formbuilder mit ScrollBar einfügen und zurückgeben
 		return FormBuilder.create()
@@ -112,12 +101,6 @@ public class Tutorial extends HAWView implements ActionListener {
 	//Bildgröße anpassen
 	private ImageIcon resizeImage(ImageIcon img, int width, int height) {
 		Image image = img.getImage();
-		//Image image = Toolkit.getDefaultToolkit().getImage(img);
-		//int width1 = image.getWidth(null);
-		//int height1 = image.getHeight(null);
-		//double ratio = (width1 /height1);
-		//int height2 = (int) (width1*ratio);
-		//log.debug(ratio+"  "+ height2);
 		Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		return new ImageIcon(resizedImage);
 	}
@@ -129,5 +112,4 @@ public class Tutorial extends HAWView implements ActionListener {
 			gui.switchToView(WindowSelect.TUTORIAL2);
 		}
 	}
-
 }

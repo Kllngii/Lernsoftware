@@ -15,17 +15,17 @@
       "order": 3
    },
    {
-      "name": "Nicht A",
+      "name": "NOT A",
       "elementare": "1,3,4,6,7,9,10,12",
       "order": 4
    },
    {
-      "name": "B oder C",
+      "name": "B OR C",
       "elementare": "1,2,3,4,5,6,7,8,9,10",
       "order": 5
    },
    {
-      "name": "Nicht A ohne B oder C := X",
+      "name": "(NOT A) WITHOUT (B OR C)",
       "elementare": "12",
       "order": 6
    }

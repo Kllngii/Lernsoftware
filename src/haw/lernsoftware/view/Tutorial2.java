@@ -24,7 +24,7 @@ import haw.lernsoftware.resources.ResourceProvider;
 
 
 /**
- * Die Tutorial des Programms.
+ * Das Tutorial des Programms.
  */
 public class Tutorial2 extends HAWView implements ActionListener {
 	//Definition und Init.
@@ -77,7 +77,7 @@ public class Tutorial2 extends HAWView implements ActionListener {
 				.add(new JLabel(" ")).xy(1, 4) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_zwischenUeberschrift.text")).xyw(1,5,2) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_absatz2.text")).xyw(1, 6, 2) //
-				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.FOLGEN_EINFÜHRUNG_BILD_1)), x, y) )).xyw(3, 6, 3) //
+				.add(new JLabel(resizeImage(new ImageIcon(ResourceProvider.loadImage(Konst.FOLGEN_EINFUEHRUNG_BILD_1)), x, y) )).xyw(3, 6, 3) //
 				.add(new JLabel(" ")).xy(1, 7) //
 				.add(ResourceProvider.loadStringFromProperties(Konst.PROPERTIES_AUFGABEN, "tutorial2_absatz3.text")).xyw(1, 8, 5) //
 				.add(new JLabel(" ")).xy(1, 9) //

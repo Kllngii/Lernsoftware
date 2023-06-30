@@ -77,13 +77,11 @@ public class Ereignismenge {
 	}
 
 	public static Ereignismenge elementareFromJSON(String jsonString) {
-		Logger log = Logger.getLogger(Ereignismenge.class);
 		JSONObject json = new JSONObject(jsonString);
 		JSONArray arr = json.getJSONArray("ereignisse");
 		List<Elementarereignis> eList = new ArrayList<>();
 		
 		arr.forEach(a -> {
-//			log.debug("Lese ein: " + a);
 			if(a instanceof JSONObject j) {
 				eList.add(Elementarereignis.fromJSON(j.toString()));
 			}
@@ -92,13 +90,11 @@ public class Ereignismenge {
 	}
 	
 	public static List<Menge> ereignisseFromJSON(String jsonString, Ereignismenge eMenge) {
-		Logger log = Logger.getLogger(Ereignismenge.class);
 		JSONObject json = new JSONObject(jsonString);
 		JSONArray arr = json.getJSONArray("ereignisse");
 		List<Menge> eList = new ArrayList<>();
 		
 		arr.forEach(a -> {
-//			log.debug("Lese Ereignisse ein: " + a);
 			if(a instanceof JSONObject j) {
 				eList.add(fromJSON(j.toString(), eMenge));
 			}
@@ -107,6 +103,7 @@ public class Ereignismenge {
 		return eList;
 	}
 	
+	//XXX Präsentations-Marker fromJSON()
 	public static Menge fromJSON(String jsonString, Ereignismenge eMenge) {
 		JSONObject json = new JSONObject(jsonString);
 		String elementareString = json.getString("elementare");
@@ -122,7 +119,7 @@ public class Ereignismenge {
 		
 		
 		if (elementareString == "") {
-			return new Menge(json.getString("name"), eMenge, eMenge.getEreignisse().subList(0, 0), json.getInt("order"),
+			return new Menge(json.getString("name"), eMenge, new ArrayList<Elementarereignis>(), json.getInt("order"),
 					calculateProbability, editable, deleteable);
 		} else {
 			String[] elementareArray = elementareString.split(",");
